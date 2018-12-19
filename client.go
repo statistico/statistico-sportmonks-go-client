@@ -4,9 +4,7 @@ import (
 	"errors"
 	"net/http"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
-	"strconv"
 )
 
 type Client struct {
@@ -31,10 +29,8 @@ func (c *Client) SetHTTPClient(client *http.Client) {
 	c.Client = client
 }
 
-func (c *Client) Countries() (*CountryResponse, error) {
-	url := c.BaseURL + "/api/v2.0/countries?api_token=" + c.ApiKey
-
-	req, err := http.NewRequest("GET", url, nil)
+func (c *Client) doRequest(method string, url string, body interface{}) (*http.Response, error) {
+	req, err := http.NewRequest(method, url, nil)
 
 	if err != nil {
 		return nil, err
@@ -46,57 +42,29 @@ func (c *Client) Countries() (*CountryResponse, error) {
 		return nil, err
 	}
 
-	defer res.Body.Close()
+	return res, nil
+}
 
-	body, err := ioutil.ReadAll(res.Body)
+// Add includes struct and pull body parsing into struct into own private method
+func (c *Client) Countries(page int) (*CountryResponse, error) {
+	url := c.BaseURL + "/api/v2.0/countries?api_token=" + c.ApiKey + "&include=continent,leagues"
 
-	r := new(ResponseMetaData)
-
-	err = json.Unmarshal([]byte(body), &r)
+	res, err := c.doRequest("GET", url, nil)
 
 	if err != nil {
-		return nil, errors.New("error when parsing request body")
+		return nil, err
 	}
 
+	defer res.Body.Close()
+
 	countries := new(CountryResponse)
+
+	body, err := ioutil.ReadAll(res.Body)
 
 	err = json.Unmarshal([]byte(body), &countries)
 
 	if err != nil {
 		return nil, errors.New("error when parsing request body")
-	}
-
-	for _, country := range countries.CountryList {
-		fmt.Printf("%+v\n", country)
-	}
-
-	if r.Meta.Pagination.Count > 0 {
-		page := r.Meta.Pagination.CurrentPage
-		total := r.Meta.Pagination.TotalPages
-
-		for i := page; i <= total; i++ {
-			fmt.Printf("%+v\n", url + "&Page=" + strconv.Itoa(i))
-
-			req, err := http.NewRequest("GET", url + "&page=" + strconv.Itoa(i), nil)
-
-			if err != nil {
-				return nil, err
-			}
-
-			res, err := c.Client.Do(req)
-
-			if err != nil {
-				return nil, err
-			}
-
-			body, err := ioutil.ReadAll(res.Body)
-
-			err = json.Unmarshal([]byte(body), &countries)
-
-			for _, country := range countries.CountryList {
-				fmt.Printf("%+v\n", country)
-			}
-		}
 	}
 
 	return countries, err

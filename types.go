@@ -11,7 +11,7 @@ type (
 	Country struct {
 		ID int `json:"id"`
 		Name string `json:"name"`
-		Data struct {
+		Extra struct {
 			Continent string `json:"continent"`
 			SubRegion string `json:"sub_region"`
 			WorldRegion string `json:"world_region"`
@@ -20,23 +20,36 @@ type (
 			Longitude string `json:"longitude"`
 			Latitude string `json:"latitude"`
 		} `json:"extra"`
+		Continent struct {
+			Data Continent `json:"data"`
+		} `json:"continent"`
+		Leagues struct {
+			Data []League `json:"data"`
+		} `json:"leagues"`
 	}
 
-	CountryResponse struct {
-		CountryList []Country `json:"data"`
+	// League Struct
+	League struct {
+		ID              int    `json:"id"`
+		LegacyID        int    `json:"legacy_id"`
+		CountryID       int    `json:"country_id"`
+		Name            string `json:"name"`
+		IsCup           bool   `json:"is_cup"`
+		CurrentSeasonID int    `json:"current_season_id"`
+		CurrentRoundID  int    `json:"current_round_id"`
+		CurrentStageID  int    `json:"current_stage_id"`
+		LiveStandings   bool   `json:"live_standings"`
+		Coverage        struct {
+			TopscorerGoals   bool `json:"topscorer_goals"`
+			TopscorerAssists bool `json:"topscorer_assists"`
+			TopscorerCards   bool `json:"topscorer_cards"`
+		} `json:"coverage"`
 	}
 
-	ResponseMetaData struct {
-		Meta struct {
-			Pagination struct {
-				Total int `json:"total"`
-				Count int `json:"count"`
-				PerPage int `json:"per_page"`
-				CurrentPage int `json:"current_page"`
-				TotalPages int `json:"total_pages"`
-			} `json:"pagination"`
-		} `json:"meta"`
+	// Sport struct
+	Sport struct {
+		ID int `json:"id"`
+		Name string `json:"name"`
+		Current bool `json:"current"`
 	}
-
-
 )
