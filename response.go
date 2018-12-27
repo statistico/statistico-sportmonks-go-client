@@ -1,11 +1,13 @@
 package sportmonks
 
 type (
-	CountryResponse struct {
+	// CountriesResponse struct
+	CountriesResponse struct {
 		Data []Country `json:"data"`
 		Meta Meta `json:"meta"`
 	}
 
+	// Meta struct
 	Meta struct {
 		Pagination struct {
 			Total int `json:"total"`
@@ -14,6 +16,7 @@ type (
 			CurrentPage int `json:"current_page"`
 			TotalPages int `json:"total_pages"`
 			Links struct {
+				Previous string `json:"previous"`
 				Next string `json:"next"`
 			}
 		}

@@ -1,24 +1,22 @@
 package sportmonks
 
-import "testing"
-import "fmt"
-
-var BaseURL = "https://soccer.sportmonks.com"
-var ApiKey = "hMNoq0c2fMjipNWEeG7IMmDF9bMNKeVoRi8lJ0qZDhg125U1IormejZKfwua"
+import (
+	"testing"
+)
 
 func TestNewClient(t *testing.T) {
-	c, _ := NewClient(BaseURL, ApiKey)
-	//
+	base := "https://example.com"
+	api := "api-key"
+	c, _ := NewClient(base, api)
 
-	if c.BaseURL == "" {
-		t.Errorf("Unexpected error %s", c.BaseURL)
+	uri := c.BaseURL
+	key := c.ApiKey
+
+	if uri != base {
+		t.Errorf("expected %s got %s", base, uri)
 	}
 
-	res, _ := c.Countries(1)
-
-	for i, country := range res.Data {
-		if i == 0 {
-			fmt.Printf("%+v\n", country)
-		}
+	if key != api {
+		t.Errorf("expected %s got %s", api, key)
 	}
 }

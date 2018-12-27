@@ -3,9 +3,14 @@ package sportmonks
 import (
 	"errors"
 	"net/http"
-	"encoding/json"
+	"io"
 	"io/ioutil"
+	"encoding/json"
+	"strings"
+	"strconv"
 )
+
+var clientCreationError = errors.New("base URL and API Key are both required to create a Client")
 
 type Client struct {
 	Client   *http.Client
@@ -15,7 +20,7 @@ type Client struct {
 
 func NewClient(baseURL string, apiKey string) (*Client, error) {
 	if baseURL == "" || apiKey == "" {
-		return &Client{}, errors.New("base URL and API Key are both required to create a Client")
+		return &Client{}, clientCreationError
 	}
 
 	return &Client{
@@ -29,43 +34,49 @@ func (c *Client) SetHTTPClient(client *http.Client) {
 	c.Client = client
 }
 
-func (c *Client) doRequest(method string, url string, body interface{}) (*http.Response, error) {
-	req, err := http.NewRequest(method, url, nil)
 
-	if err != nil {
-		return nil, err
-	}
-
+func (c *Client) sendRequest(req *http.Request, v interface{}) (error) {
 	res, err := c.Client.Do(req)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	return res, nil
+	if err := parseRequestBody(res.Body, &v); err != nil {
+		return err
+	}
+
+	return nil
 }
 
-// Add includes struct and pull body parsing into struct into own private method
-func (c *Client) Countries(page int) (*CountryResponse, error) {
-	url := c.BaseURL + "/api/v2.0/countries?api_token=" + c.ApiKey + "&include=continent,leagues"
+func buildRequest(method string, url string, body io.Reader, page int, includes []string) (*http.Request, error) {
+	if page > 0 {
+		url = url + "&page=" + strconv.Itoa(page)
+	}
 
-	res, err := c.doRequest("GET", url, nil)
+	if len(includes) > 0 {
+		url = url + "&include=" + strings.Join(includes, ",")
+	}
+
+	req, err := http.NewRequest(method, url, body)
 
 	if err != nil {
 		return nil, err
 	}
 
-	defer res.Body.Close()
+	return req, nil
+}
 
-	countries := new(CountryResponse)
+func parseRequestBody(body io.ReadCloser, v interface{}) error {
+	defer body.Close()
 
-	body, err := ioutil.ReadAll(res.Body)
+	b, err := ioutil.ReadAll(body)
 
-	err = json.Unmarshal([]byte(body), &countries)
+	err = json.Unmarshal([]byte(b), &v)
 
 	if err != nil {
-		return nil, errors.New("error when parsing request body")
+		return err
 	}
 
-	return countries, err
+	return nil
 }

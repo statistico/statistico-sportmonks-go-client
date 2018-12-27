@@ -15,17 +15,17 @@ type (
 			Continent string `json:"continent"`
 			SubRegion string `json:"sub_region"`
 			WorldRegion string `json:"world_region"`
-			Fifa string `json:"fifa"`
+			Fifa interface{} `json:"fifa,string"`
 			ISO string `json:"iso"`
 			Longitude string `json:"longitude"`
 			Latitude string `json:"latitude"`
 		} `json:"extra"`
 		Continent struct {
 			Data Continent `json:"data"`
-		} `json:"continent"`
+		} `json:"continent, omitempty"`
 		Leagues struct {
 			Data []League `json:"data"`
-		} `json:"leagues"`
+		} `json:"leagues, omitempty"`
 	}
 
 	// League Struct
