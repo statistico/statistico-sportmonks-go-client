@@ -21,10 +21,6 @@ type (
 			PerPage int `json:"per_page"`
 			CurrentPage int `json:"current_page"`
 			TotalPages int `json:"total_pages"`
-			Links struct {
-				Previous string `json:"previous, omitempty"`
-				Next string `json:"next, omitempty"`
-			} `json:"links, omitempty"`
 		}
 	}
 )
