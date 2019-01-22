@@ -3,8 +3,14 @@ package sportmonks
 type (
 	// CountriesResponse struct
 	CountriesResponse struct {
-		Data []Country `json:"data"`
-		Meta Meta `json:"meta"`
+		Data []Country  `json:"data"`
+		Meta Meta 		`json:"meta"`
+	}
+
+	// LeaguesResponse
+	LeaguesResponse struct {
+		Data []League  `json:"data"`
+		Meta Meta      `json:"meta"`
 	}
 
 	// Meta struct
