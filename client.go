@@ -12,8 +12,6 @@ import (
 
 var clientCreationError = errors.New("base URL and API Key are both required to create a Client")
 
-const IncludeLeague = "league"
-
 type Client struct {
 	Client   *http.Client
 	BaseURL  string
