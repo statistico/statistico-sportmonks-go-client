@@ -28,7 +28,7 @@ type (
 		} `json:"leagues, omitempty"`
 	}
 
-	// League Struct
+	// League struct
 	League struct {
 		ID              int    `json:"id"`
 		LegacyID        int    `json:"legacy_id"`
@@ -44,6 +44,19 @@ type (
 			TopscorerAssists bool `json:"topscorer_assists"`
 			TopscorerCards   bool `json:"topscorer_cards"`
 		} `json:"coverage"`
+		Seasons struct {
+			Data []Season `json:"data"`
+		} `json:"seasons"`
+	}
+
+	// Season struct
+	Season struct {
+		ID              int    `json:"id"`
+		Name            string `json:"name"`
+		LeagueID        int    `json:"league_id"`
+		CurrentSeason   bool   `json:"is_current_season"`
+		CurrentRoundID  int    `json:"current_round_id"`
+		CurrentStageID  int    `json:"current_stage_id"`
 	}
 
 	// Sport struct
