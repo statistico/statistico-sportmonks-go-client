@@ -23,4 +23,10 @@ type (
 			TotalPages int `json:"total_pages"`
 		}
 	}
+
+	// SeasonsResponse
+	SeasonsResponse struct {
+		Data []Season  `json:"data"`
+		Meta Meta      `json:"meta"`
+	}
 )
