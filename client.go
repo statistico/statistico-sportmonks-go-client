@@ -1,21 +1,21 @@
 package sportmonks
 
 import (
+	"encoding/json"
 	"errors"
-	"net/http"
 	"io"
 	"io/ioutil"
-	"encoding/json"
-	"strings"
+	"net/http"
 	"strconv"
+	"strings"
 )
 
 var clientCreationError = errors.New("base URL and API Key are both required to create a Client")
 
 type Client struct {
-	Client   *http.Client
-	BaseURL  string
-	ApiKey   string
+	Client  *http.Client
+	BaseURL string
+	ApiKey  string
 }
 
 func NewClient(baseURL string, apiKey string) (*Client, error) {
@@ -34,8 +34,7 @@ func (c *Client) SetHTTPClient(client *http.Client) {
 	c.Client = client
 }
 
-
-func (c *Client) sendRequest(req *http.Request, v interface{}) (error) {
+func (c *Client) sendRequest(req *http.Request, v interface{}) error {
 	res, err := c.Client.Do(req)
 
 	if err != nil {
