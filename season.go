@@ -2,7 +2,7 @@ package sportmonks
 
 const seasonUri = "/api/v2.0/seasons"
 const IncludeFixtures = "fixtures"
-const IncludeResults  = "results"
+const IncludeResults = "results"
 
 func (c *Client) Seasons(page int, includes []string) (*SeasonsResponse, error) {
 	url := c.BaseURL + seasonUri + "?api_token=" + c.ApiKey
