@@ -29,4 +29,9 @@ type (
 		Data []Season  `json:"data"`
 		Meta Meta      `json:"meta"`
 	}
+
+	// SeasonResponse
+	SeasonResponse struct {
+		Data Season   `json:"data"`
+	}
 )
