@@ -56,6 +56,16 @@ type (
 			FullTimeScore    *string `json:"ft_score"`
 			ExtraTimeScore   *string `json:"et_score"`
 		} `json:"scores"`
+		Time *struct {
+			Status     *string `json:"status"`
+			StartingAt *struct {
+				DateTime  string `json:"date_time"`
+				Date      string `json:"date"`
+				Time      string `json:"time"`
+				Timestamp int    `json:"timestamp"`
+				Timezone  string `json:"timezone"`
+			} `json:"starting_at"`
+		} `json:"time"`
 		Minute      *int `json:"minute"`
 		Second      *int `json:"second"`
 		AddedTime   *int `json:"added_time"`
