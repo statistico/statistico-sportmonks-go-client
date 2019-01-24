@@ -62,7 +62,7 @@ type (
 				DateTime  string `json:"date_time"`
 				Date      string `json:"date"`
 				Time      string `json:"time"`
-				Timestamp int    `json:"timestamp"`
+				Timestamp int64  `json:"timestamp"`
 				Timezone  string `json:"timezone"`
 			} `json:"starting_at"`
 		} `json:"time"`
