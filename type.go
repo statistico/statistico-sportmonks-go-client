@@ -53,7 +53,7 @@ type (
 			Humidity string `json:"humidity"`
 			Wind     struct {
 				Speed  string `json:"speed"`
-				Degree int    `json:"degree"`
+				Degree float64    `json:"degree"`
 			} `json:"wind"`
 		} `json:"weather_report"`
 		Commentaries          bool    `json:"commentaries"`
