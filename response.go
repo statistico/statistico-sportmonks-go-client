@@ -34,4 +34,5 @@ type (
 	SeasonResponse struct {
 		Data Season `json:"data"`
 	}
+
 )
