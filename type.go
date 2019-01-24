@@ -56,16 +56,7 @@ type (
 			FullTimeScore    *string `json:"ft_score"`
 			ExtraTimeScore   *string `json:"et_score"`
 		} `json:"scores"`
-		Time struct {
-			Status     *string `json:"status"`
-			StartingAt struct {
-				DateTime  string `json:"date_time"`
-				Date      string `json:"date"`
-				Time      string `json:"time"`
-				Timestamp int64  `json:"timestamp"`
-				Timezone  string `json:"timezone"`
-			} `json:"starting_at"`
-		} `json:"time"`
+		Time        FixtureTime `json:"time"`
 		Minute      *int `json:"minute"`
 		Second      *int `json:"second"`
 		AddedTime   *int `json:"added_time"`
@@ -119,5 +110,16 @@ type (
 		ID      int    `json:"id"`
 		Name    string `json:"name"`
 		Current bool   `json:"current"`
+	}
+
+	FixtureTime struct {
+		Status     *string `json:"status"`
+		StartingAt struct {
+			DateTime  string `json:"date_time"`
+			Date      string `json:"date"`
+			Time      string `json:"time"`
+			Timestamp int64  `json:"timestamp"`
+			Timezone  string `json:"timezone"`
+		} `json:"starting_at"`
 	}
 )
