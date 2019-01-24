@@ -102,8 +102,6 @@ type (
 			FourthOfficialID  *int `json:"fourth_official_id"`
 		} `json:"assistants"`
 		Leg     string  `json:"leg"`
-		Colors  *string `json:"colors"`
-		Deleted bool    `json:"deleted"`
 	}
 
 	// League struct
