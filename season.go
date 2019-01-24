@@ -1,5 +1,7 @@
 package sportmonks
 
+import "strconv"
+
 const seasonUri = "/api/v2.0/seasons"
 const IncludeFixtures = "fixtures"
 const IncludeResults = "results"
@@ -23,7 +25,7 @@ func (c *Client) Seasons(page int, includes []string) (*SeasonsResponse, error) 
 }
 
 func (c *Client) SeasonById(id int, includes []string) (*SeasonResponse, error) {
-	url := c.BaseURL + seasonUri + "/" + string(id) + "?api_token=" + c.ApiKey
+	url := c.BaseURL + seasonUri + "/" + strconv.Itoa(id) + "?api_token=" + c.ApiKey
 
 	req, err := buildRequest("GET", url, nil, 0, includes)
 
