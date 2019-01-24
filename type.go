@@ -30,17 +30,17 @@ type (
 
 	// Fixture struct
 	Fixture struct {
-		ID            int         `json:"id"`
-		LeagueID      int         `json:"league_id"`
-		SeasonID      int         `json:"season_id"`
-		StageID       int         `json:"stage_id"`
-		RoundID       int         `json:"round_id"`
-		GroupID       interface{} `json:"group_id"`
-		AggregateID   interface{} `json:"aggregate_id"`
-		VenueID       int         `json:"venue_id"`
-		RefereeID     int         `json:"referee_id"`
-		LocalteamID   int         `json:"localteam_id"`
-		VisitorteamID int         `json:"visitorteam_id"`
+		ID            int  `json:"id"`
+		LeagueID      int  `json:"league_id"`
+		SeasonID      int  `json:"season_id"`
+		StageID       *int `json:"stage_id"`
+		RoundID       *int `json:"round_id"`
+		GroupID       *int `json:"group_id"`
+		AggregateID   *int `json:"aggregate_id"`
+		VenueID       *int `json:"venue_id"`
+		RefereeID     *int `json:"referee_id"`
+		LocalteamID   int  `json:"localteam_id"`
+		VisitorteamID int  `json:"visitorteam_id"`
 		WeatherReport struct {
 			Code        string `json:"code"`
 			Type        string `json:"type"`
@@ -56,22 +56,22 @@ type (
 				Degree int    `json:"degree"`
 			} `json:"wind"`
 		} `json:"weather_report"`
-		Commentaries          bool        `json:"commentaries"`
-		Attendance            int         `json:"attendance"`
-		Pitch                 interface{} `json:"pitch"`
-		WinningOddsCalculated bool        `json:"winning_odds_calculated"`
+		Commentaries          bool    `json:"commentaries"`
+		Attendance            int     `json:"attendance"`
+		Pitch                 *string `json:"pitch"`
+		WinningOddsCalculated bool    `json:"winning_odds_calculated"`
 		Formations            struct {
 			LocalteamFormation   string `json:"localteam_formation"`
 			VisitorteamFormation string `json:"visitorteam_formation"`
 		} `json:"formations"`
 		Scores struct {
-			LocalteamScore      int         `json:"localteam_score"`
-			VisitorteamScore    int         `json:"visitorteam_score"`
-			LocalteamPenScore   interface{} `json:"localteam_pen_score"`
-			VisitorteamPenScore interface{} `json:"visitorteam_pen_score"`
-			HtScore             string      `json:"ht_score"`
-			FtScore             string      `json:"ft_score"`
-			EtScore             interface{} `json:"et_score"`
+			LocalteamScore      int     `json:"localteam_score"`
+			VisitorteamScore    int     `json:"visitorteam_score"`
+			LocalteamPenScore   *int    `json:"localteam_pen_score"`
+			VisitorteamPenScore *int    `json:"visitorteam_pen_score"`
+			HtScore             *string `json:"ht_score"`
+			FtScore             *string `json:"ft_score"`
+			EtScore             *string `json:"et_score"`
 		} `json:"scores"`
 		Time struct {
 			Status     string `json:"status"`
@@ -82,11 +82,11 @@ type (
 				Timestamp int    `json:"timestamp"`
 				Timezone  string `json:"timezone"`
 			} `json:"starting_at"`
-			Minute      int         `json:"minute"`
-			Second      interface{} `json:"second"`
-			AddedTime   interface{} `json:"added_time"`
-			ExtraMinute interface{} `json:"extra_minute"`
-			InjuryTime  interface{} `json:"injury_time"`
+			Minute      int  `json:"minute"`
+			Second      *int `json:"second"`
+			AddedTime   *int `json:"added_time"`
+			ExtraMinute *int `json:"extra_minute"`
+			InjuryTime  *int `json:"injury_time"`
 		} `json:"time"`
 		Coaches struct {
 			LocalteamCoachID   int `json:"localteam_coach_id"`
@@ -97,15 +97,14 @@ type (
 			VisitorteamPosition int `json:"visitorteam_position"`
 		} `json:"standings"`
 		Assistants struct {
-			FirstAssistantID  interface{} `json:"first_assistant_id"`
-			SecondAssistantID interface{} `json:"second_assistant_id"`
-			FourthOfficialID  interface{} `json:"fourth_official_id"`
+			FirstAssistantID  *int `json:"first_assistant_id"`
+			SecondAssistantID *int `json:"second_assistant_id"`
+			FourthOfficialID  *int `json:"fourth_official_id"`
 		} `json:"assistants"`
-		Leg     string      `json:"leg"`
-		Colors  interface{} `json:"colors"`
-		Deleted bool        `json:"deleted"`
+		Leg     string  `json:"leg"`
+		Colors  *string `json:"colors"`
+		Deleted bool    `json:"deleted"`
 	}
-
 
 	// League struct
 	League struct {
@@ -147,12 +146,12 @@ type (
 	}
 
 	Season struct {
-		ID              int         `json:"id"`
-		Name            string      `json:"name"`
-		LeagueID        int         `json:"league_id"`
-		IsCurrentSeason bool        `json:"is_current_season"`
-		CurrentRoundID  interface{} `json:"current_round_id"`
-		CurrentStageID  interface{} `json:"current_stage_id"`
+		ID              int    `json:"id"`
+		Name            string `json:"name"`
+		LeagueID        int    `json:"league_id"`
+		IsCurrentSeason bool   `json:"is_current_season"`
+		CurrentRoundID  *int   `json:"current_round_id"`
+		CurrentStageID  *int   `json:"current_stage_id"`
 		Fixtures        struct {
 			Data []Fixture `json:"data"`
 		} `json:"fixtures"`
