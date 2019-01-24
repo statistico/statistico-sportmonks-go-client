@@ -43,11 +43,11 @@ type (
 		VisitorTeamID int     `json:"visitorteam_id"`
 		Attendance    *int    `json:"attendance"`
 		Pitch         *string `json:"pitch"`
-		Formations    *struct {
+		Formations    struct {
 			LocalTeam   *string `json:"localteam_formation"`
 			VisitorTeam *string `json:"visitorteam_formation"`
 		} `json:"formations"`
-		Scores *struct {
+		Scores struct {
 			LocalTeamScore   *int    `json:"localteam_score"`
 			VisitorTeamScore *int    `json:"visitorteam_score"`
 			LocalPenScore    *int    `json:"localteam_pen_score"`
@@ -56,9 +56,9 @@ type (
 			FullTimeScore    *string `json:"ft_score"`
 			ExtraTimeScore   *string `json:"et_score"`
 		} `json:"scores"`
-		Time *struct {
+		Time struct {
 			Status     *string `json:"status"`
-			StartingAt *struct {
+			StartingAt struct {
 				DateTime  string `json:"date_time"`
 				Date      string `json:"date"`
 				Time      string `json:"time"`
@@ -71,7 +71,7 @@ type (
 		AddedTime   *int `json:"added_time"`
 		ExtraMinute *int `json:"extra_minute"`
 		InjuryTime  *int `json:"injury_time"`
-		Standings   *struct {
+		Standings   struct {
 			LocalTeam   *int `json:"localteam_position"`
 			VisitorTeam *int `json:"visitorteam_position"`
 		} `json:"standings"`
