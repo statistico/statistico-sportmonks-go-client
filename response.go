@@ -34,4 +34,9 @@ type (
 	SeasonResponse struct {
 		Data Season `json:"data"`
 	}
+
+	// VenueResponse
+	VenuesResponse struct {
+		Data []Venue `json:"data"`
+	}
 )

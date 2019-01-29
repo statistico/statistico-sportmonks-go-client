@@ -83,6 +83,7 @@ type (
 		Current bool   `json:"current"`
 	}
 
+	// Season struct
 	Season struct {
 		ID              int    `json:"id"`
 		Name            string `json:"name"`
@@ -93,5 +94,16 @@ type (
 		Fixtures        struct {
 			Data []Fixture `json:"data"`
 		} `json:"fixtures"`
+	}
+
+	// Venue struct
+	Venue struct {
+		ID       int     `json:"id"`
+		Name     string  `json:"name"`
+		Surface  string  `json:"surface"`
+		Address  *string `json:"address"`
+		City     string  `json:"city"`
+		Capacity int     `json:"capacity"`
+		Image    string  `json:"image_path"`
 	}
 )
