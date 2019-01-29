@@ -2,7 +2,7 @@ package sportmonks
 
 import "strconv"
 
-const venueSeasonUri = "/api/v2.0/venues/seasons"
+const venueSeasonUri = "/api/v2.0/venues/season/"
 
 func (c *Client) BySeasonId(seasonId int) (*VenuesResponse, error) {
 	url := c.BaseURL + venueSeasonUri + strconv.Itoa(seasonId) + "?api_token=" + c.ApiKey
