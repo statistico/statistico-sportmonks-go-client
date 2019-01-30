@@ -107,7 +107,7 @@ type (
 		} `json:"fixtures"`
 		Rounds struct {
 			Data []Round `json:"data"`
-		} `json:"results"`
+		} `json:"rounds"`
 	}
 
 	// Venue struct
