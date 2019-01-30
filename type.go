@@ -76,6 +76,17 @@ type (
 		} `json:"seasons"`
 	}
 
+	// Round struct {
+	Round struct {
+		ID       int    `json:"id"`
+		Name     int    `json:"name"`
+		LeagueID int    `json:"league_id"`
+		SeasonID int    `json:"season_id"`
+		StageID  int    `json:"stage_id"`
+		Start    string `json:"start"`
+		End      string `json:"end"`
+	}
+
 	// Sport struct
 	Sport struct {
 		ID      int    `json:"id"`
@@ -94,6 +105,9 @@ type (
 		Fixtures        struct {
 			Data []Fixture `json:"data"`
 		} `json:"fixtures"`
+		Rounds struct {
+			Data []Round `json:"data"`
+		} `json:"results"`
 	}
 
 	// Venue struct
