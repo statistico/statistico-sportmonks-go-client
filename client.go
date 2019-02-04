@@ -17,10 +17,10 @@ type Client struct {
 	Client  *http.Client
 	BaseURL string
 	ApiKey  string
-	Logger  log.Logger
+	Logger  *log.Logger
 }
 
-func NewClient(baseURL string, apiKey string) (*Client, error) {
+func NewClient(baseURL, apiKey string, logger *log.Logger) (*Client, error) {
 	if baseURL == "" || apiKey == "" {
 		return &Client{}, clientCreationError
 	}
@@ -29,6 +29,7 @@ func NewClient(baseURL string, apiKey string) (*Client, error) {
 		Client:  &http.Client{},
 		BaseURL: baseURL,
 		ApiKey:  apiKey,
+		Logger:  logger,
 	}, nil
 }
 
