@@ -4,7 +4,7 @@ import "strconv"
 
 const venueSeasonUri = "/api/v2.0/venues/season/"
 
-func (c *Client) VenuesBySeasonId(seasonId int) (*VenuesResponse, error) {
+func (c *Client) VenuesBySeasonId(seasonId int, retries int) (*VenuesResponse, error) {
 	url := c.BaseURL + venueSeasonUri + strconv.Itoa(seasonId) + "?api_token=" + c.ApiKey
 
 	req, err := buildRequest("GET", url, nil, 0, []string{})
@@ -15,7 +15,7 @@ func (c *Client) VenuesBySeasonId(seasonId int) (*VenuesResponse, error) {
 
 	r := new(VenuesResponse)
 
-	err = c.sendRequest(req, &r)
+	err = c.sendRequest(req, &r, retries)
 
 	return r, err
 }
