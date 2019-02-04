@@ -13,6 +13,12 @@ import (
 	"time"
 )
 
+const backOffStart = 1
+const backOffExponent = 2
+
+var backOffTotal = 1
+var backOffLimit = 120
+
 var clientCreationError = errors.New("base URL and API Key are both required to create a Client")
 
 type Client struct {
@@ -49,10 +55,14 @@ func (c *Client) SetHTTPClient(client *http.Client) {
 	c.Client = client
 }
 
-func (c *Client) sendRequest(req *http.Request, v interface{}) error {
+func (c *Client) sendRequest(req *http.Request, v interface{}, retries int) error {
 	res, err := c.Client.Do(req)
 
 	if err != nil {
+		if retries > 0 {
+			backOff()
+			return c.sendRequest(req, v, retries-1)
+		}
 		c.Logger.Printf("Error when sending request in client: Message %s", err.Error())
 		return err
 	}
@@ -61,6 +71,8 @@ func (c *Client) sendRequest(req *http.Request, v interface{}) error {
 		c.Logger.Printf("Error when parsing response in client: Message %s", err.Error())
 		return err
 	}
+
+	resetBackOff()
 
 	return nil
 }
@@ -97,4 +109,17 @@ func parseRequestBody(body io.ReadCloser, v interface{}) error {
 	}
 
 	return nil
+}
+
+func backOff() {
+	time.Sleep(time.Duration(backOffTotal))
+	backOffTotal = backOffTotal * backOffExponent
+
+	if backOffTotal > backOffLimit {
+		backOffTotal = backOffLimit
+	}
+}
+
+func resetBackOff() {
+	backOffTotal = backOffStart
 }
