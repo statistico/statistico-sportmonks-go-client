@@ -35,6 +35,11 @@ type (
 		Data Season `json:"data"`
 	}
 
+	// TeamsResponse
+	TeamsResponse struct {
+		Data []Team `json:"data"`
+	}
+
 	// VenueResponse
 	VenuesResponse struct {
 		Data []Venue `json:"data"`
