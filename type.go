@@ -110,6 +110,20 @@ type (
 		} `json:"rounds"`
 	}
 
+	// Team struct
+	Team struct {
+		ID           int     `json:"id"`
+		LegacyID     int     `json:"legacy_id"`
+		Name         string  `json:"name"`
+		ShortCode    string  `json:"short_code"`
+		Twitter      *string `json:"twitter"`
+		CountryID    int     `json:"country_id"`
+		NationalTeam bool    `json:"national_team"`
+		Founded      int     `json:"founded"`
+		LogoPath     *string `json:"logo_path"`
+		VenueID      int     `json:"venue_id"`
+	}
+
 	// Venue struct
 	Venue struct {
 		ID       int     `json:"id"`
