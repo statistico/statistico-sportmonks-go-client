@@ -5,6 +5,7 @@ import (
 	"errors"
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strconv"
 	"strings"
@@ -16,6 +17,7 @@ type Client struct {
 	Client  *http.Client
 	BaseURL string
 	ApiKey  string
+	Logger  log.Logger
 }
 
 func NewClient(baseURL string, apiKey string) (*Client, error) {
@@ -38,10 +40,12 @@ func (c *Client) sendRequest(req *http.Request, v interface{}) error {
 	res, err := c.Client.Do(req)
 
 	if err != nil {
+		c.Logger.Printf("Error when sending request in client: Message %s", err.Error())
 		return err
 	}
 
 	if err := parseRequestBody(res.Body, &v); err != nil {
+		c.Logger.Printf("Error when parsing response in client: Message %s", err.Error())
 		return err
 	}
 
