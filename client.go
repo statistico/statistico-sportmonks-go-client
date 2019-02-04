@@ -6,9 +6,11 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+	"net"
 	"net/http"
 	"strconv"
 	"strings"
+	"time"
 )
 
 var clientCreationError = errors.New("base URL and API Key are both required to create a Client")
@@ -25,8 +27,18 @@ func NewClient(baseURL, apiKey string, logger *log.Logger) (*Client, error) {
 		return &Client{}, clientCreationError
 	}
 
+	trans := &http.Transport{
+		Dial: (&net.Dialer{
+			Timeout:   60 * time.Second,
+			KeepAlive: 30 * time.Second,
+		}).Dial,
+		TLSHandshakeTimeout: 60 * time.Second,
+	}
+
 	return &Client{
-		Client:  &http.Client{},
+		Client: &http.Client{
+			Transport: trans,
+		},
 		BaseURL: baseURL,
 		ApiKey:  apiKey,
 		Logger:  logger,
