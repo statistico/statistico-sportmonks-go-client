@@ -80,6 +80,8 @@ func buildRequest(method string, url string, body io.Reader, page int, includes 
 		return nil, err
 	}
 
+	req.Close = true
+
 	return req, nil
 }
 
