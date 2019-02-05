@@ -85,7 +85,7 @@ type (
 		CommonName   string `json:"common_name"`
 		FullName     string `json:"fullname"`
 		FirstName    string `json:"firstname"`
-		LastNme     string `json:"lastname"`
+		LastName     string `json:"lastname"`
 		Nationality  string `json:"nationality"`
 		BirthDate    string `json:"birthdate"`
 		BirthCountry string `json:"birthcountry"`
