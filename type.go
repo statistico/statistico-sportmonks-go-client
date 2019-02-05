@@ -76,6 +76,25 @@ type (
 		} `json:"seasons"`
 	}
 
+	// Player struct
+	Player struct {
+		PlayerID     int    `json:"player_id"`
+		TeamID       int    `json:"team_id"`
+		CountryID    int    `json:"country_id"`
+		PositionID   int    `json:"position_id"`
+		CommonName   string `json:"common_name"`
+		FullName     string `json:"fullname"`
+		FirstName    string `json:"firstname"`
+		LastNme     string `json:"lastname"`
+		Nationality  string `json:"nationality"`
+		BirthDate    string `json:"birthdate"`
+		BirthCountry string `json:"birthcountry"`
+		Birthplace   string `json:"birthplace"`
+		Height       string `json:"height"`
+		Weight       string `json:"weight"`
+		ImagePath    string `json:"image_path"`
+	}
+
 	// Round struct {
 	Round struct {
 		ID       int    `json:"id"`
@@ -146,7 +165,6 @@ type (
 		Founded      int     `json:"founded"`
 		LogoPath     *string `json:"logo_path"`
 		VenueID      int     `json:"venue_id"`
-		Squad        Squad   `json:"squad"`
 	}
 
 	// Venue struct

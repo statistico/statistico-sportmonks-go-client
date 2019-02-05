@@ -24,6 +24,11 @@ type (
 		}
 	}
 
+	// PlayerResponse struct
+	PlayerResponse struct {
+		Data Player `json:"data"`
+	}
+
 	// SeasonsResponse
 	SeasonsResponse struct {
 		Data []Season `json:"data"`
@@ -33,6 +38,11 @@ type (
 	// SeasonResponse
 	SeasonResponse struct {
 		Data Season `json:"data"`
+	}
+
+	//SquadResponse
+	SquadResponse struct {
+		Data Squad `json:"data"`
 	}
 
 	// TeamsResponse
