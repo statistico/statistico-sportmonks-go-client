@@ -42,7 +42,7 @@ type (
 
 	//SquadResponse
 	SquadResponse struct {
-		Data Squad `json:"data"`
+		Data []SquadPlayer `json:"data"`
 	}
 
 	// TeamsResponse
