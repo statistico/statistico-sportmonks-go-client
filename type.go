@@ -110,6 +110,30 @@ type (
 		} `json:"rounds"`
 	}
 
+	// Squad struct
+	Squad struct {
+		Data []SquadPlayer `json:"data"`
+	}
+
+	// SquadPlayer struct
+	SquadPlayer struct {
+		PlayerID           int  `json:"player_id"`
+		PositionID         int  `json:"position_id"`
+		Number             int  `json:"number"`
+		Injured            bool `json:"injured"`
+		Minutes            int  `json:"minutes"`
+		Appearances        int  `json:"appearences"`
+		Lineups            int  `json:"lineups"`
+		SubstituteIn       int  `json:"substitute_in"`
+		SubstituteOut      int  `json:"substitute_out"`
+		SubstitutesOnBench int  `json:"substitutes_on_bench"`
+		Goals              int  `json:"goals"`
+		Assists            int  `json:"assists"`
+		Yellowcards        int  `json:"yellowcards"`
+		Yellowred          int  `json:"yellowred"`
+		Redcards           int  `json:"redcards"`
+	}
+
 	// Team struct
 	Team struct {
 		ID           int     `json:"id"`
@@ -122,6 +146,7 @@ type (
 		Founded      int     `json:"founded"`
 		LogoPath     *string `json:"logo_path"`
 		VenueID      int     `json:"venue_id"`
+		Squad        Squad   `json:"squad"`
 	}
 
 	// Venue struct
