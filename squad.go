@@ -2,7 +2,7 @@ package sportmonks
 
 import "strconv"
 
-const squadUri = "api/v2.0/squad/season/"
+const squadUri = "/api/v2.0/squad/season/"
 
 func (c Client) SquadBySeasonAndTeam(seasonId, teamId int, includes []string, retries int) (*SquadResponse, error) {
 	url := c.BaseURL + squadUri + strconv.Itoa(seasonId) + "/team/" + strconv.Itoa(teamId) + "?api_token=" + c.ApiKey
