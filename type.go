@@ -128,12 +128,7 @@ type (
 			Data []Round `json:"data"`
 		} `json:"rounds"`
 	}
-
-	// Squad struct
-	Squad struct {
-		Data []SquadPlayer `json:"data"`
-	}
-
+	
 	// SquadPlayer struct
 	SquadPlayer struct {
 		PlayerID           int  `json:"player_id"`
