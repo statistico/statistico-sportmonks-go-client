@@ -66,8 +66,8 @@ type (
 		FixtureID        int     `json:"fixture_id"`
 		PlayerID         int     `json:"player_id"`
 		PlayerName       string  `json:"player_name"`
-		PlayerAssistID   int     `json:"player_assist_id"`
-		PlayerAssistName string  `json:"player_assist_name"`
+		PlayerAssistID   *int     `json:"player_assist_id"`
+		PlayerAssistName *string  `json:"player_assist_name"`
 		Minute           int     `json:"minute"`
 		ExtraMinute      *int    `json:"extra_minute"`
 		Reason           *string `json:"reason"`

@@ -72,6 +72,12 @@ type (
 		PassesAccuracy  *int `json:"passes_accuracy"`
 	}
 
+
+	PlayerShots struct {
+		ShotsTotal  *int `json:"shots_total"`
+		ShotsOnGoal *int `json:"shots_on_goal"`
+	}
+
 	PlayerStats struct {
 		Shots             PlayerShots      `json:"shots"`
 		Goals             PlayerGoals      `json:"goals"`
@@ -89,11 +95,6 @@ type (
 		HtScore             *string `json:"ht_score"`
 		FtScore             *string `json:"ft_score"`
 		EtScore             *string `json:"et_score"`
-	}
-
-	PlayerShots struct {
-		ShotsTotal  int `json:"shots_total"`
-		ShotsOnGoal int `json:"shots_on_goal"`
 	}
 
 	Standings struct {
