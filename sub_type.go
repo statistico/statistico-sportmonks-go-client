@@ -8,8 +8,25 @@ type (
 	}
 
 	Coaches struct {
-		LocalteamCoachID   int `json:"localteam_coach_id"`
-		VisitorteamCoachID int `json:"visitorteam_coach_id"`
+		LocalTeamCoachID   int `json:"localteam_coach_id"`
+		VisitorTeamCoachID int `json:"visitorteam_coach_id"`
+	}
+
+	ExtraPlayerStats struct {
+		Assists       *int `json:"assists"`
+		Offsides      *int `json:"offsides"`
+		Saves         *int `json:"saves"`
+		PenScored     *int `json:"pen_scored"`
+		PenMissed     *int `json:"pen_missed"`
+		PenSaved      *int `json:"pen_saved"`
+		PenCommitted  *int `json:"pen_committed"`
+		PenWon        *int `json:"pen_won"`
+		HitWoodwork   *int `json:"hit_woodwork"`
+		Tackles       *int `json:"tackles"`
+		Blocks        *int `json:"blocks"`
+		Interceptions *int `json:"interceptions"`
+		Clearances    *int `json:"clearances"`
+		MinutesPlayed *int `json:"minutes_played"`
 	}
 
 	FixtureTime struct {
@@ -33,6 +50,37 @@ type (
 		VisitorteamFormation string `json:"visitorteam_formation"`
 	}
 
+	PlayerCards struct {
+		YellowCards *int `json:"yellowcards"`
+		RedCards    *int `json:"redcards"`
+	}
+
+	PlayerFouls struct {
+		Drawn     *int `json:"drawn"`
+		Committed *int `json:"committed"`
+	}
+
+	PlayerGoals struct {
+		Scored   *int `json:"scored"`
+		Conceded *int `json:"conceded"`
+	}
+
+	PlayerPasses struct {
+		TotalCrosses    *int `json:"total_crosses"`
+		CrossesAccuracy *int `json:"crosses_accuracy"`
+		Passes          *int `json:"passes"`
+		PassesAccuracy  *int `json:"passes_accuracy"`
+	}
+
+	PlayerStats struct {
+		Shots             PlayerShots      `json:"shots"`
+		Goals             PlayerGoals      `json:"goals"`
+		Fouls             PlayerFouls      `json:"fouls"`
+		Cards             PlayerCards      `json:"cards"`
+		Passes            PlayerPasses     `json:"passing"`
+		ExtraPlayersStats ExtraPlayerStats `json:"other"`
+	}
+
 	Scores struct {
 		LocalteamScore      int     `json:"localteam_score"`
 		VisitorteamScore    int     `json:"visitorteam_score"`
@@ -43,9 +91,34 @@ type (
 		EtScore             *string `json:"et_score"`
 	}
 
+	PlayerShots struct {
+		ShotsTotal  int `json:"shots_total"`
+		ShotsOnGoal int `json:"shots_on_goal"`
+	}
+
 	Standings struct {
 		LocalteamPosition   int `json:"localteam_position"`
 		VisitorteamPosition int `json:"visitorteam_position"`
+	}
+
+	TeamAttacks struct {
+		Attacks          *int `json:"attacks"`
+		DangerousAttacks *int `json:"dangerous_attacks"`
+	}
+
+	TeamPasses struct {
+		Total      *int `json:"total"`
+		Accurate   *int `json:"accurate"`
+		Percentage *int `json:"percentage"`
+	}
+
+	TeamShots struct {
+		Total      *int `json:"total"`
+		Ongoal     *int `json:"ongoal"`
+		Offgoal    *int `json:"offgoal"`
+		Blocked    *int `json:"blocked"`
+		Insidebox  *int `json:"insidebox"`
+		Outsidebox *int `json:"outsidebox"`
 	}
 
 	WeatherReport struct {

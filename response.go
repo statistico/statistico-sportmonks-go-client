@@ -7,6 +7,10 @@ type (
 		Meta Meta      `json:"meta"`
 	}
 
+	FixtureResponse struct {
+		Data Fixture `json:"data"`
+	}
+
 	// LeaguesResponse
 	LeaguesResponse struct {
 		Data []League `json:"data"`
