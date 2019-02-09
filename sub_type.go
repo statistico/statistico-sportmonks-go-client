@@ -72,7 +72,6 @@ type (
 		PassesAccuracy  *int `json:"passes_accuracy"`
 	}
 
-
 	PlayerShots struct {
 		ShotsTotal  *int `json:"shots_total"`
 		ShotsOnGoal *int `json:"shots_on_goal"`
