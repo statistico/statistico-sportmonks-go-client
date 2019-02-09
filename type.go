@@ -54,7 +54,7 @@ type (
 		Assistants            Assistants         `json:"assistants"`
 		Leg                   *string            `json:"leg"`
 		Lineup                Lineup             `json:"lineup"`
-		Bench                 Lineup			 `json:"bench"`
+		Bench                 Lineup             `json:"bench"`
 		TeamStats             TeamsStats         `json:"stats"`
 		Goals                 GoalEvents         `json:"goals"`
 		Subs                  SubstitutionEvents `json:"substitutions"`
@@ -67,8 +67,8 @@ type (
 		FixtureID        int     `json:"fixture_id"`
 		PlayerID         int     `json:"player_id"`
 		PlayerName       string  `json:"player_name"`
-		PlayerAssistID   *int     `json:"player_assist_id"`
-		PlayerAssistName *string  `json:"player_assist_name"`
+		PlayerAssistID   *int    `json:"player_assist_id"`
+		PlayerAssistName *string `json:"player_assist_name"`
 		Minute           int     `json:"minute"`
 		ExtraMinute      *int    `json:"extra_minute"`
 		Reason           *string `json:"reason"`
@@ -109,12 +109,12 @@ type (
 		FixtureID          int         `json:"fixture_id"`
 		PlayerID           int         `json:"player_id"`
 		PlayerName         string      `json:"player_name"`
-		Number             int         `json:"number"`
-		Position           string      `json:"position"`
-		AdditionalPosition interface{} `json:"additional_position"`
-		FormationPosition  int         `json:"formation_position"`
-		Posx               interface{} `json:"posx"`
-		Posy               interface{} `json:"posy"`
+		Number             *int        `json:"number"`
+		Position           *string     `json:"position"`
+		AdditionalPosition *string     `json:"additional_position"`
+		FormationPosition  *int        `json:"formation_position"`
+		Posx               *int        `json:"posx"`
+		Posy               *int        `json:"posy"`
 		Stats              PlayerStats `json:"stats"`
 	}
 
