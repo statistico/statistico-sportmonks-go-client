@@ -54,6 +54,7 @@ type (
 		Assistants            Assistants         `json:"assistants"`
 		Leg                   *string            `json:"leg"`
 		Lineup                Lineup             `json:"lineup"`
+		Bench                 Lineup			 `json:"bench"`
 		TeamStats             TeamsStats         `json:"stats"`
 		Goals                 GoalEvents         `json:"goals"`
 		Subs                  SubstitutionEvents `json:"substitutions"`
