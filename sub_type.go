@@ -102,7 +102,7 @@ type (
 	}
 
 	TeamAttacks struct {
-		Attacks          *int `json:"attacks"`
+		Attacks          *int `json:"attacks,string"`
 		DangerousAttacks *int `json:"dangerous_attacks"`
 	}
 
