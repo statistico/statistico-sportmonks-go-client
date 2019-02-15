@@ -101,9 +101,10 @@ type (
 		VisitorteamPosition int `json:"visitorteam_position"`
 	}
 
+	// API has been inconsistent with types returned for these 2 fields
 	TeamAttacks struct {
-		Attacks          *int `json:"attacks,string"`
-		DangerousAttacks *int `json:"dangerous_attacks,string"`
+		Attacks          interface{} `json:"attacks"`
+		DangerousAttacks interface{} `json:"dangerous_attacks"`
 	}
 
 	TeamPasses struct {
