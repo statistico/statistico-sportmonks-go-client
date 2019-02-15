@@ -228,19 +228,19 @@ type (
 		Shots          TeamShots   `json:"shots"`
 		Passes         TeamPasses  `json:"passes"`
 		Attacks        TeamAttacks `json:"attacks"`
-		Fouls          *int        `json:"fouls"`
-		Corners        *int        `json:"corners"`
-		Offsides       *int        `json:"offsides"`
-		Possessiontime *int        `json:"possessiontime"`
-		Yellowcards    *int        `json:"yellowcards"`
-		Redcards       *int        `json:"redcards"`
-		Saves          *int        `json:"saves"`
-		Substitutions  *int        `json:"substitutions"`
-		GoalKick       *int        `json:"goal_kick"`
-		GoalAttempts   *int        `json:"goal_attempts"`
-		FreeKick       *int        `json:"free_kick"`
-		ThrowIn        *int        `json:"throw_in"`
-		BallSafe       *int        `json:"ball_safe"`
+		Fouls          interface{} `json:"fouls"`
+		Corners        interface{} `json:"corners"`
+		Offsides       interface{} `json:"offsides"`
+		Possessiontime interface{} `json:"possessiontime"`
+		Yellowcards    interface{} `json:"yellowcards"`
+		Redcards       interface{} `json:"redcards"`
+		Saves          interface{} `json:"saves"`
+		Substitutions  interface{} `json:"substitutions"`
+		GoalKick       interface{} `json:"goal_kick"`
+		GoalAttempts   interface{} `json:"goal_attempts"`
+		FreeKick       interface{} `json:"free_kick"`
+		ThrowIn        interface{} `json:"throw_in"`
+		BallSafe       interface{} `json:"ball_safe"`
 	}
 
 	TeamsStats struct {

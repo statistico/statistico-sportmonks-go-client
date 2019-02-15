@@ -101,25 +101,24 @@ type (
 		VisitorteamPosition int `json:"visitorteam_position"`
 	}
 
-	// API has been inconsistent with types returned for these 2 fields
 	TeamAttacks struct {
 		Attacks          interface{} `json:"attacks"`
 		DangerousAttacks interface{} `json:"dangerous_attacks"`
 	}
 
 	TeamPasses struct {
-		Total      *int `json:"total"`
-		Accurate   *int `json:"accurate"`
-		Percentage *int `json:"percentage"`
+		Total      interface{} `json:"total"`
+		Accurate   interface{} `json:"accurate"`
+		Percentage interface{} `json:"percentage"`
 	}
 
 	TeamShots struct {
-		Total      *int `json:"total"`
-		Ongoal     *int `json:"ongoal"`
-		Offgoal    *int `json:"offgoal"`
-		Blocked    *int `json:"blocked"`
-		Insidebox  *int `json:"insidebox"`
-		Outsidebox *int `json:"outsidebox"`
+		Total      interface{} `json:"total"`
+		Ongoal     interface{} `json:"ongoal"`
+		Offgoal    interface{} `json:"offgoal"`
+		Blocked    interface{} `json:"blocked"`
+		Insidebox  interface{} `json:"insidebox"`
+		Outsidebox interface{} `json:"outsidebox"`
 	}
 
 	WeatherReport struct {
