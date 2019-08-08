@@ -39,7 +39,6 @@ type (
 			Timezone  string `json:"timezone"`
 		} `json:"starting_at"`
 		Minute      int  `json:"minute"`
-		Second      *int `json:"second"`
 		AddedTime   *int `json:"added_time"`
 		ExtraMinute *int `json:"extra_minute"`
 		InjuryTime  *int `json:"injury_time"`
