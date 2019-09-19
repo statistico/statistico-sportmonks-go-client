@@ -12,7 +12,7 @@ type Country struct {
 		Continent   string      `json:"continent"`
 		SubRegion   string      `json:"sub_region"`
 		WorldRegion string      `json:"world_region"`
-		Fifa        *string 	`json:"fifa,string"`
+		FIFA        *string 	`json:"fifa,string"`
 		ISO         string      `json:"iso"`
 		Longitude   string      `json:"longitude"`
 		Latitude    string      `json:"latitude"`
@@ -42,13 +42,11 @@ type CountryResponse struct {
 // - continent
 // - leagues
 func (c *Client) Countries(includes []string, page int) (*CountriesResponse, error) {
-	str := c.BaseURL + countryUri + "?api_token=" + c.ApiKey
-
-	url := buildUrl(str, includes, page)
+	url := c.BaseURL + countryUri + "?api_token=" + c.ApiKey
 
 	response := new(CountriesResponse)
 
-	err := c.sendRequest(url, response)
+	err := c.sendRequest(url, includes, page, response)
 
 	return response, err
 }
@@ -57,13 +55,11 @@ func (c *Client) Countries(includes []string, page int) (*CountriesResponse, err
 // for this endpoint are:
 // - countries
 func (c *Client) CountryById(id int, includes []string) (*CountryResponse, error) {
-	str := c.BaseURL + countryUri + strconv.Itoa(id) + "?api_token=" + c.ApiKey
-
-	url := buildUrl(str, includes, 0)
+	url := c.BaseURL + countryUri + strconv.Itoa(id) + "?api_token=" + c.ApiKey
 
 	response := new(CountryResponse)
 
-	err := c.sendRequest(url, &response)
+	err := c.sendRequest(url, includes, 0, response)
 
 	return response, err
 }

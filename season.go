@@ -74,13 +74,11 @@ type SeasonResponse struct {
 // - stages
 // - upcoming
 func (c *Client) Seasons(page int, includes []string, retries int) (*SeasonsResponse, error) {
-	str := c.BaseURL + seasonUri + "?api_token=" + c.ApiKey
-
-	url := buildUrl(str, includes, page)
+	url := c.BaseURL + seasonUri + "?api_token=" + c.ApiKey
 
 	response := new(SeasonsResponse)
 
-	err := c.sendRequest(url, response)
+	err := c.sendRequest(url, includes, page, response)
 
 	return response, err
 }
@@ -99,13 +97,11 @@ func (c *Client) Seasons(page int, includes []string, retries int) (*SeasonsResp
 // - stages
 // - upcoming
 func (c *Client) SeasonById(id int, includes []string) (*SeasonResponse, error) {
-	str := c.BaseURL + seasonUri + strconv.Itoa(id) + "?api_token=" + c.ApiKey
-
-	url := buildUrl(str, includes, 0)
+	url := c.BaseURL + seasonUri + strconv.Itoa(id) + "?api_token=" + c.ApiKey
 
 	response := new(SeasonResponse)
 
-	err := c.sendRequest(url, &response)
+	err := c.sendRequest(url, includes, 0, response)
 
 	return response, err
 }

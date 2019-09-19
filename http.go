@@ -27,8 +27,6 @@ type Client struct {
 	Retries int
 }
 
-type Response interface {}
-
 func NewClient(url, key string, retries int) (*Client, error) {
 	if url == "" || key == "" {
 		return &Client{}, clientCreationError
@@ -62,14 +60,16 @@ func (c *Client) SetRetries(retries int) {
 	c.Retries = retries
 }
 
-func (c *Client) sendRequest(url string, response interface{}) error {
+func (c *Client) sendRequest(url string, includes []string, page int, response interface{}) error {
+	uri := buildUrl(url, includes, page)
+
 	res, err := http.Get(url)
 
 	if err != nil {
 		if c.Retries > 0 {
 			backOff()
 			c.Retries--
-			return c.sendRequest(url, response)
+			return c.sendRequest(uri, includes, page, response)
 		}
 
 		return err

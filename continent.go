@@ -32,13 +32,11 @@ type ContinentResponse struct {
 // Use the includes slice to enrich the response data, includes for this endpoint are:
 // - countries
 func (c *Client) Continent(includes []string, page int) (*ContinentsResponse, error) {
-	str := c.BaseURL + continentUri + "?api_token=" + c.ApiKey
-
-	url := buildUrl(str, includes, page)
+	url := c.BaseURL + continentUri + "?api_token=" + c.ApiKey
 
 	response := new(ContinentsResponse)
 
-	err := c.sendRequest(url, response)
+	err := c.sendRequest(url, includes, page, response)
 
 	return response, err
 }
@@ -47,13 +45,11 @@ func (c *Client) Continent(includes []string, page int) (*ContinentsResponse, er
 // for this endpoint are:
 // - countries
 func (c *Client) ContinentById(id int, includes []string) (*ContinentResponse, error) {
-	str := c.BaseURL + continentUri + strconv.Itoa(id) + "?api_token=" + c.ApiKey
-
-	url := buildUrl(str, includes, 0)
+	url := c.BaseURL + continentUri + strconv.Itoa(id) + "?api_token=" + c.ApiKey
 
 	response := new(ContinentResponse)
 
-	err := c.sendRequest(url, &response)
+	err := c.sendRequest(url, includes, 0, response)
 
 	return response, err
 }

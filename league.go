@@ -51,13 +51,11 @@ type LeagueResponse struct {
 // - season
 // - seasons
 func (c *Client) Leagues(page int, includes []string, retries int) (*LeaguesResponse, error) {
-	str := c.BaseURL + leagueUri + "?api_token=" + c.ApiKey
-
-	url := buildUrl(str, includes, page)
+	url := c.BaseURL + leagueUri + "?api_token=" + c.ApiKey
 
 	response := new(LeaguesResponse)
 
-	err := c.sendRequest(url, response)
+	err := c.sendRequest(url, includes, page, response)
 
 	return response, err
 }
@@ -68,13 +66,11 @@ func (c *Client) Leagues(page int, includes []string, retries int) (*LeaguesResp
 // - season
 // - seasons
 func (c *Client) LeagueById(id int, includes []string) (*LeagueResponse, error) {
-	str := c.BaseURL + leagueUri + strconv.Itoa(id) + "?api_token=" + c.ApiKey
-
-	url := buildUrl(str, includes, 0)
+	url := c.BaseURL + leagueUri + strconv.Itoa(id) + "?api_token=" + c.ApiKey
 
 	response := new(LeagueResponse)
 
-	err := c.sendRequest(url, &response)
+	err := c.sendRequest(url, includes, 0, response)
 
 	return response, err
 }
