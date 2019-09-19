@@ -52,27 +52,6 @@ type (
 		Data []GoalEvent `json:"data"`
 	}
 
-	// League struct
-	League struct {
-		ID              int    `json:"id"`
-		LegacyID        int    `json:"legacy_id"`
-		CountryID       int    `json:"country_id"`
-		Name            string `json:"name"`
-		IsCup           bool   `json:"is_cup"`
-		CurrentSeasonID int    `json:"current_season_id"`
-		CurrentRoundID  int    `json:"current_round_id"`
-		CurrentStageID  int    `json:"current_stage_id"`
-		LiveStandings   bool   `json:"live_standings"`
-		Coverage        struct {
-			TopscorerGoals   bool `json:"topscorer_goals"`
-			TopscorerAssists bool `json:"topscorer_assists"`
-			TopscorerCards   bool `json:"topscorer_cards"`
-		} `json:"coverage"`
-		Seasons struct {
-			Data []Season `json:"data"`
-		} `json:"seasons"`
-	}
-
 	Lineup struct {
 		Data []LineupPlayer `json:"data"`
 	}

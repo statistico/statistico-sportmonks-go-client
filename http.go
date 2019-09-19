@@ -101,9 +101,7 @@ func parseRequestBody(body io.ReadCloser, response interface{}) error {
 
 	b, err := ioutil.ReadAll(body)
 
-	err = json.Unmarshal([]byte(b), &response)
-
-	if err != nil {
+	if err = json.Unmarshal([]byte(b), &response); err != nil {
 		return err
 	}
 

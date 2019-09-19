@@ -1,5 +1,7 @@
 package sportmonks
 
+import "strconv"
+
 const countryUri = "/api/v2.0/countries"
 
 // Country struct
@@ -10,11 +12,11 @@ type Country struct {
 		Continent   string      `json:"continent"`
 		SubRegion   string      `json:"sub_region"`
 		WorldRegion string      `json:"world_region"`
-		Fifa        interface{} `json:"fifa,string"`
+		Fifa        *string 	`json:"fifa,string"`
 		ISO         string      `json:"iso"`
 		Longitude   string      `json:"longitude"`
 		Latitude    string      `json:"latitude"`
-	} `json:"extra"`
+	} `json:"extra, omitempty"`
 	Continent struct {
 		Data Continent `json:"data"`
 	} `json:"continent, omitempty"`
@@ -29,20 +31,39 @@ type CountriesResponse struct {
 	Meta Meta      `json:"meta"`
 }
 
-func (c *Client) Countries(page int, includes []string, retries int) (*CountriesResponse, error) {
-	url := c.BaseURL + countryUri + "?api_token=" + c.ApiKey
+type CountryResponse struct {
+	Data Country 	`json:"data"`
+	Meta Meta       `json:"meta"`
+}
 
-	req, err := buildRequest("GET", url, nil, page, includes)
+// Make a request to retrieve multiple country resources. The request endpoint executed within this method
+// is paginated, the second argument to this method allows the consumer to specify a page to request.
+// Use the includes slice to enrich the response data, includes for this endpoint are:
+// - continent
+// - leagues
+func (c *Client) Countries(includes []string, page int) (*CountriesResponse, error) {
+	str := c.BaseURL + countryUri + "?api_token=" + c.ApiKey
 
-	if err != nil {
-		return nil, err
-	}
+	url := buildUrl(str, includes, page)
 
-	countries := new(CountriesResponse)
+	response := new(CountriesResponse)
 
-	if err := c.sendRequest(req, &countries, retries); err != nil {
-		return nil, err
-	}
+	err := c.sendRequest(url, response)
 
-	return countries, err
+	return response, err
+}
+
+// Retrieve a single continent resource by ID. Use the includes slice to enrich the response data, includes
+// for this endpoint are:
+// - countries
+func (c *Client) CountryById(id int, includes []string) (*CountryResponse, error) {
+	str := c.BaseURL + countryUri + strconv.Itoa(id) + "?api_token=" + c.ApiKey
+
+	url := buildUrl(str, includes, 0)
+
+	response := new(CountryResponse)
+
+	err := c.sendRequest(url, &response)
+
+	return response, err
 }
