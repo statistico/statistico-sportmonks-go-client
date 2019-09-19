@@ -1,4 +1,4 @@
-package sportmonks
+package sportmonks_client
 
 const countryUri = "/api/v2.0/countries"
 

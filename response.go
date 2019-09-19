@@ -1,4 +1,4 @@
-package sportmonks
+package sportmonks_client
 
 type (
 	// CountriesResponse struct
