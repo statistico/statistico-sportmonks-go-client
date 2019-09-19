@@ -1,6 +1,29 @@
 package sportmonks
 
 type (
+	// Assist Scorer struct
+	AssistScorer struct {
+		Position int    `json:"position"`
+		SeasonID int    `json:"season_id"`
+		PlayerID int    `json:"player_id"`
+		TeamID   int    `json:"team_id"`
+		StageID  int    `json:"stage_id"`
+		Assists  int    `json:"assists"`
+		Type     string `json:"type"`
+	}
+
+	// CardScorer struct
+	CardScorer struct {
+		Position    int    `json:"position"`
+		SeasonID    int    `json:"season_id"`
+		PlayerID    int    `json:"player_id"`
+		TeamID      int    `json:"team_id"`
+		StageID     int    `json:"stage_id"`
+		YellowCards int    `json:"yellowcards"`
+		RedCards    int    `json:"redcards"`
+		Type        string `json:"type"`
+	}
+
 	// Fixture struct
 	Fixture struct {
 		ID                    int                `json:"id"`
@@ -51,6 +74,29 @@ type (
 	GoalEvents struct {
 		Data []GoalEvent `json:"data"`
 	}
+
+	GoalScorer struct {
+		Position     int    `json:"position"`
+		SeasonID     int    `json:"season_id"`
+		PlayerID     int    `json:"player_id"`
+		TeamID       int    `json:"team_id"`
+		StageID      int    `json:"stage_id"`
+		Goals        int    `json:"goals"`
+		PenaltyGoals int    `json:"penalty_goals"`
+		Type         string `json:"type"`
+	}
+
+ 	Group struct {
+		ID        int    `json:"id"`
+		Name      string `json:"name"`
+		LeagueID  int    `json:"league_id"`
+		SeasonID  int    `json:"season_id"`
+		RoundID   int    `json:"round_id"`
+		RoundName int    `json:"round_name"`
+		StageID   int    `json:"stage_id"`
+		StageName string `json:"stage_name"`
+		Resource  string `json:"resource"`
+ 	}
 
 	Lineup struct {
 		Data []LineupPlayer `json:"data"`
@@ -105,22 +151,6 @@ type (
 		ID      int    `json:"id"`
 		Name    string `json:"name"`
 		Current bool   `json:"current"`
-	}
-
-	// Season struct
-	Season struct {
-		ID              int    `json:"id"`
-		Name            string `json:"name"`
-		LeagueID        int    `json:"league_id"`
-		IsCurrentSeason bool   `json:"is_current_season"`
-		CurrentRoundID  *int   `json:"current_round_id"`
-		CurrentStageID  *int   `json:"current_stage_id"`
-		Fixtures        struct {
-			Data []Fixture `json:"data"`
-		} `json:"fixtures"`
-		Rounds struct {
-			Data []Round `json:"data"`
-		} `json:"rounds"`
 	}
 
 	// SquadPlayer struct

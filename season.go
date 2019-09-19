@@ -4,38 +4,108 @@ import "strconv"
 
 const seasonUri = "/api/v2.0/seasons"
 
-func (c *Client) Seasons(page int, includes []string, retries int) (*SeasonsResponse, error) {
-	url := c.BaseURL + seasonUri + "?api_token=" + c.ApiKey
-
-	req, err := buildRequest("GET", url, nil, page, includes)
-
-	if err != nil {
-		return nil, err
-	}
-
-	s := new(SeasonsResponse)
-
-	if err := c.sendRequest(req, &s, retries); err != nil {
-		return nil, err
-	}
-
-	return s, err
+// Season struct
+type Season struct {
+	ID              int    `json:"id"`
+	Name            string `json:"name"`
+	LeagueID        int    `json:"league_id"`
+	IsCurrentSeason bool   `json:"is_current_season"`
+	CurrentRoundID  *int   `json:"current_round_id"`
+	CurrentStageID  *int   `json:"current_stage_id"`
+	AggregatedGoalScorers struct {
+		Data []GoalScorer `json:"data"`
+	} `json:"aggregatedGoalscorers, omitempty"`
+	AssistScorers struct {
+		Data []AssistScorer `json:"data"`
+	} `json:"assistscorers, omitempty"`
+	CardScorers struct {
+		Data []CardScorer `json:"data"`
+	} `json:"cardscorers, omitempty"`
+	Fixtures        struct {
+		Data []Fixture `json:"data"`
+	} `json:"fixtures, omitempty"`
+	GoalScorers struct {
+		Data []GoalScorer `json:"data"`
+	} `json:"goalscorers, omitempty"`
+	Groups struct {
+		Data []Group `json:"data"`
+	} `json:"groups, omitempty"`
+	League struct {
+		Data League `json:"data"`
+	} `json:"league, omitempty"`
+	Results struct {
+		Data []Fixture `json:"data"`
+	} `json:"results, omitempty"`
+	Rounds struct {
+		Data []Round `json:"data"`
+	} `json:"rounds, omitempty"`
+	Stages struct {
+		Data []Stage `json:"data"`
+	} `json:"stages, omitempty"`
+	Upcoming struct {
+		Data []Fixture `json:"data"`
+	} `json:"upcoming, omitempty"`
 }
 
-func (c *Client) SeasonById(id int, includes []string, retries int) (*SeasonResponse, error) {
-	url := c.BaseURL + seasonUri + "/" + strconv.Itoa(id) + "?api_token=" + c.ApiKey
+// Seasons Response
+type SeasonsResponse struct {
+	Data []Season `json:"data"`
+	Meta Meta     `json:"meta"`
+}
 
-	req, err := buildRequest("GET", url, nil, 0, includes)
+// Season Response
+type SeasonResponse struct {
+	Data Season `json:"data"`
+	Meta Meta     `json:"meta"`
+}
 
-	if err != nil {
-		return nil, err
-	}
+// Make a request to retrieve multiple season resources. The request endpoint executed within this method
+// is paginated, the second argument to this method allows the consumer to specify a page to request.
+// Use the includes slice to enrich the response data, includes for this endpoint are:
+// - aggregatedGoalscorers
+// - assistscorers
+// - cardscorers
+// - fixtures
+// - goalscorers
+// - groups
+// - league
+// - results
+// - rounds
+// - stages
+// - upcoming
+func (c *Client) Seasons(page int, includes []string, retries int) (*SeasonsResponse, error) {
+	str := c.BaseURL + seasonUri + "?api_token=" + c.ApiKey
 
-	s := new(SeasonResponse)
+	url := buildUrl(str, includes, page)
 
-	if err := c.sendRequest(req, &s, retries); err != nil {
-		return nil, err
-	}
+	response := new(SeasonsResponse)
 
-	return s, err
+	err := c.sendRequest(url, response)
+
+	return response, err
+}
+
+// Retrieve a single continent season by ID. Use the includes slice to enrich the response data, includes
+// for this endpoint are:
+// - aggregatedGoalscorers
+// - assistscorers
+// - cardscorers
+// - fixtures
+// - goalscorers
+// - groups
+// - league
+// - results
+// - rounds
+// - stages
+// - upcoming
+func (c *Client) SeasonById(id int, includes []string) (*SeasonResponse, error) {
+	str := c.BaseURL + seasonUri + strconv.Itoa(id) + "?api_token=" + c.ApiKey
+
+	url := buildUrl(str, includes, 0)
+
+	response := new(SeasonResponse)
+
+	err := c.sendRequest(url, &response)
+
+	return response, err
 }

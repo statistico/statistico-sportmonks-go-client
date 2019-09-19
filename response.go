@@ -10,17 +10,6 @@ type (
 		Data Player `json:"data"`
 	}
 
-	// SeasonsResponse
-	SeasonsResponse struct {
-		Data []Season `json:"data"`
-		Meta Meta     `json:"meta"`
-	}
-
-	// SeasonResponse
-	SeasonResponse struct {
-		Data Season `json:"data"`
-	}
-
 	//SquadResponse
 	SquadResponse struct {
 		Data []SquadPlayer `json:"data"`
