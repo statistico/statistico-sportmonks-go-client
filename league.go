@@ -1,4 +1,4 @@
-package sportmonks_client
+package sportmonks
 
 const leagueUri = "/api/v2.0/leagues"
 

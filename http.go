@@ -1,11 +1,10 @@
-package sportmonks_client
+package sportmonks
 
 import (
 	"encoding/json"
 	"errors"
 	"io"
 	"io/ioutil"
-	"log"
 	"net"
 	"net/http"
 	"strconv"
@@ -25,11 +24,13 @@ type Client struct {
 	Client  *http.Client
 	BaseURL string
 	ApiKey  string
-	Logger  *log.Logger
+	Retries int
 }
 
-func NewClient(baseURL, apiKey string, logger *log.Logger) (*Client, error) {
-	if baseURL == "" || apiKey == "" {
+type Response interface {}
+
+func NewClient(url, key string, retries int) (*Client, error) {
+	if url == "" || key == "" {
 		return &Client{}, clientCreationError
 	}
 
@@ -41,43 +42,49 @@ func NewClient(baseURL, apiKey string, logger *log.Logger) (*Client, error) {
 		TLSHandshakeTimeout: 60 * time.Second,
 	}
 
-	return &Client{
+	client := Client{
 		Client: &http.Client{
 			Transport: trans,
 		},
-		BaseURL: baseURL,
-		ApiKey:  apiKey,
-		Logger:  logger,
-	}, nil
+		BaseURL: url,
+		ApiKey:  key,
+		Retries: retries,
+	}
+
+	return &client, nil
 }
 
 func (c *Client) SetHTTPClient(client *http.Client) {
 	c.Client = client
 }
 
-func (c *Client) sendRequest(req *http.Request, v interface{}, retries int) error {
-	res, err := c.Client.Do(req)
+func (c *Client) SetRetries(retries int) {
+	c.Retries = retries
+}
+
+func (c *Client) sendRequest(url string, response interface{}) error {
+	res, err := http.Get(url)
 
 	if err != nil {
-		if retries > 0 {
+		if c.Retries > 0 {
 			backOff()
-			return c.sendRequest(req, v, retries-1)
+			c.Retries--
+			return c.sendRequest(url, response)
 		}
-		c.Logger.Printf("Error when sending request in client: Message %s", err.Error())
+
 		return err
 	}
 
-	if err := parseRequestBody(res.Body, &v); err != nil {
-		c.Logger.Printf("Error when parsing response in client: Message %s", err.Error())
+	if err := parseRequestBody(res.Body, &response); err != nil {
 		return err
 	}
 
-	resetBackOff()
+	backOffTotal = backOffStart
 
 	return nil
 }
 
-func buildRequest(method string, url string, body io.Reader, page int, includes []string) (*http.Request, error) {
+func buildUrl(url string, includes []string, page int) string {
 	if page > 0 {
 		url = url + "&page=" + strconv.Itoa(page)
 	}
@@ -86,23 +93,15 @@ func buildRequest(method string, url string, body io.Reader, page int, includes 
 		url = url + "&include=" + strings.Join(includes, ",")
 	}
 
-	req, err := http.NewRequest(method, url, body)
-
-	if err != nil {
-		return nil, err
-	}
-
-	req.Close = true
-
-	return req, nil
+	return url
 }
 
-func parseRequestBody(body io.ReadCloser, v interface{}) error {
+func parseRequestBody(body io.ReadCloser, response interface{}) error {
 	defer body.Close()
 
 	b, err := ioutil.ReadAll(body)
 
-	err = json.Unmarshal([]byte(b), &v)
+	err = json.Unmarshal([]byte(b), &response)
 
 	if err != nil {
 		return err
@@ -118,8 +117,4 @@ func backOff() {
 	if backOffTotal > backOffLimit {
 		backOffTotal = backOffLimit
 	}
-}
-
-func resetBackOff() {
-	backOffTotal = backOffStart
 }

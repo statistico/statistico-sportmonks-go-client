@@ -1,4 +1,4 @@
-package sportmonks_client
+package sportmonks
 
 type (
 	Assistants struct {
