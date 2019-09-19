@@ -38,9 +38,8 @@ type CountryResponse struct {
 
 // Make a request to retrieve multiple country resources. The request endpoint executed within this method
 // is paginated, the second argument to this method allows the consumer to specify a page to request.
-// Use the includes slice to enrich the response data, includes for this endpoint are:
-// - continent
-// - leagues
+//
+// Use the includes slice to enrich the response data.
 func (c *Client) Countries(includes []string, page int) (*CountriesResponse, error) {
 	url := c.BaseURL + countryUri + "?api_token=" + c.ApiKey
 
@@ -51,9 +50,7 @@ func (c *Client) Countries(includes []string, page int) (*CountriesResponse, err
 	return response, err
 }
 
-// Retrieve a single continent resource by ID. Use the includes slice to enrich the response data, includes
-// for this endpoint are:
-// - countries
+// Retrieve a single continent resource by ID. Use the includes slice to enrich the response data.
 func (c *Client) CountryById(id int, includes []string) (*CountryResponse, error) {
 	url := c.BaseURL + countryUri + strconv.Itoa(id) + "?api_token=" + c.ApiKey
 

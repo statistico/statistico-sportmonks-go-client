@@ -46,10 +46,8 @@ type LeagueResponse struct {
 
 // Make a request to retrieve multiple league resources. The request endpoint executed within this method
 // is paginated, the second argument to this method allows the consumer to specify a page to request.
-// Use the includes slice to enrich the response data, includes for this endpoint are:
-// - country
-// - season
-// - seasons
+
+// Use the includes slice to enrich the response data.
 func (c *Client) Leagues(page int, includes []string, retries int) (*LeaguesResponse, error) {
 	url := c.BaseURL + leagueUri + "?api_token=" + c.ApiKey
 
@@ -60,10 +58,7 @@ func (c *Client) Leagues(page int, includes []string, retries int) (*LeaguesResp
 	return response, err
 }
 
-// Retrieve a single continent resource by ID. Use the includes slice to enrich the response data, includes
-// for this endpoint are:
-// - country
-// - season
+// Retrieve a single continent resource by ID. Use the includes slice to enrich the response data.
 // - seasons
 func (c *Client) LeagueById(id int, includes []string) (*LeagueResponse, error) {
 	url := c.BaseURL + leagueUri + strconv.Itoa(id) + "?api_token=" + c.ApiKey

@@ -29,8 +29,8 @@ type ContinentResponse struct {
 
 // Make a request to retrieve multiple continent resources. The request endpoint executed within this method
 // is paginated, the second argument to this method allows the consumer to specify a page to request.
-// Use the includes slice to enrich the response data, includes for this endpoint are:
-// - countries
+//
+// Use the includes slice to enrich the response data.
 func (c *Client) Continent(includes []string, page int) (*ContinentsResponse, error) {
 	url := c.BaseURL + continentUri + "?api_token=" + c.ApiKey
 
@@ -41,9 +41,7 @@ func (c *Client) Continent(includes []string, page int) (*ContinentsResponse, er
 	return response, err
 }
 
-// Retrieve a single continent resource by ID. Use the includes slice to enrich the response data, includes
-// for this endpoint are:
-// - countries
+// Retrieve a single continent resource by ID. Use the includes slice to enrich the response data.
 func (c *Client) ContinentById(id int, includes []string) (*ContinentResponse, error) {
 	url := c.BaseURL + continentUri + strconv.Itoa(id) + "?api_token=" + c.ApiKey
 
