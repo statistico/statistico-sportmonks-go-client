@@ -1,4 +1,4 @@
-package statistico
+package sportmonks
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 )
 
 func TestContinents(t *testing.T) {
-	client, _ := NewSportMonksClient(
+	client, _ := NewApiClient(
 		"https://soccer.sportmonks.com",
 		"M8ouHby0xb5ADsIji9EXlg3wQQqIXH1OQaYGiqZ84o0u7sehm2rnS08Y99Ag",
 		)

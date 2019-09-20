@@ -1,4 +1,4 @@
-package statistico
+package sportmonks
 
 const playerUri = "/api/v2.0/players/"
 

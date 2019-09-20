@@ -1,4 +1,4 @@
-package statistico
+package sportmonks
 
 const fixtureUri = "/api/v2.0/fixtures/"
 

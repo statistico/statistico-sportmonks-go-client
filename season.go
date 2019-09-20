@@ -1,4 +1,4 @@
-package statistico
+package sportmonks
 
 import "strconv"
 
@@ -50,7 +50,7 @@ type Season struct {
 // Make a request to retrieve multiple season resources. The request endpoint executed within this method
 // is paginated, the first argument to this method allows the consumer to specify a page to request.
 // Use the includes slice to enrich the response data.
-func (c *SportMonksClient) Seasons(page int, includes []string) ([]Season, *Meta, error) {
+func (c *ApiClient) Seasons(page int, includes []string) ([]Season, *Meta, error) {
 	response := new(SeasonsResponse)
 
 	err := c.handlePaginatedRequest(seasonUri, includes, page, response)
@@ -63,7 +63,7 @@ func (c *SportMonksClient) Seasons(page int, includes []string) ([]Season, *Meta
 }
 
 // Retrieve a single continent season by ID. Use the includes slice to enrich the response data.
-func (c *SportMonksClient) SeasonById(id int, includes []string) (*Season, *Meta, error) {
+func (c *ApiClient) SeasonById(id int, includes []string) (*Season, *Meta, error) {
 	url := seasonUri + "/" + strconv.Itoa(id)
 
 	response := new(SeasonResponse)

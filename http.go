@@ -1,4 +1,4 @@
-package statistico
+package sportmonks
 
 import (
 	"encoding/json"
@@ -20,14 +20,14 @@ var backOffLimit = 120
 
 var clientCreationError = errors.New("base URL and API Key are both required to create a Client")
 
-type SportMonksClient struct {
+type ApiClient struct {
 	Client  *http.Client
 	BaseURL string
 	ApiKey  string
 	Retries int
 }
 
-func NewSportMonksClient(url, key string) (*SportMonksClient, error) {
+func NewApiClient(url, key string) (*ApiClient, error) {
 	if url == "" || key == "" {
 		return nil, clientCreationError
 	}
@@ -40,7 +40,7 @@ func NewSportMonksClient(url, key string) (*SportMonksClient, error) {
 		TLSHandshakeTimeout: 60 * time.Second,
 	}
 
-	client := SportMonksClient{
+	client := ApiClient{
 		Client: &http.Client{
 			Transport: trans,
 		},
@@ -52,27 +52,27 @@ func NewSportMonksClient(url, key string) (*SportMonksClient, error) {
 	return &client, nil
 }
 
-func (c *SportMonksClient) SetHTTPClient(client *http.Client) {
+func (c *ApiClient) SetHTTPClient(client *http.Client) {
 	c.Client = client
 }
 
-func (c *SportMonksClient) SetRetries(retries int) {
+func (c *ApiClient) SetRetries(retries int) {
 	c.Retries = retries
 }
 
-func (c *SportMonksClient) handleRequest(path string, includes []string, response interface{}) error {
+func (c *ApiClient) handleRequest(path string, includes []string, response interface{}) error {
 	built := c.buildUrl(path, includes, 0)
 
 	return c.sendRequest(built, response)
 }
 
-func (c *SportMonksClient) handlePaginatedRequest(path string, includes []string, page int, response interface{}) error {
+func (c *ApiClient) handlePaginatedRequest(path string, includes []string, page int, response interface{}) error {
 	built := c.buildUrl(path, includes, page)
 
 	return c.sendRequest(built, response)
 }
 
-func (c *SportMonksClient) sendRequest(url string, response interface{}) error {
+func (c *ApiClient) sendRequest(url string, response interface{}) error {
 	res, err := http.Get(url)
 
 	if err != nil {
@@ -94,7 +94,7 @@ func (c *SportMonksClient) sendRequest(url string, response interface{}) error {
 	return nil
 }
 
-func (c *SportMonksClient) buildUrl(path string, includes []string, page int) string {
+func (c *ApiClient) buildUrl(path string, includes []string, page int) string {
 	url := c.BaseURL + path + "?api_token=" + c.ApiKey
 
 	if page > 0 {
