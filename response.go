@@ -25,6 +25,16 @@ type (
 		Data Fixture `json:"data"`
 	}
 
+	LeaguesResponse struct {
+		Data []League `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
+
+ 	LeagueResponse struct {
+		Data League `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
+
 	// PlayerResponse struct
 	PlayerResponse struct {
 		Data Player `json:"data"`
