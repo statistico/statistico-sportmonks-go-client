@@ -33,7 +33,7 @@ type League struct {
 }
 
 // Make a request to retrieve multiple league resources. The request endpoint executed within this method
-// is paginated, the second argument to this method allows the consumer to specify a page to request.
+// is paginated, the first argument to this method allows the consumer to specify a page to request.
 // Use the includes slice to enrich the response data.
 func (c *SportMonksClient) Leagues(page int, includes []string) ([]League, *Meta, error) {
 	response := new(LeaguesResponse)

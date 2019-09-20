@@ -29,8 +29,7 @@ type Country struct {
 }
 
 // Make a request to retrieve multiple country resources. The request endpoint executed within this method
-// is paginated, the second argument to this method allows the consumer to specify a page to request.
-//
+// is paginated, the first argument to this method allows the consumer to specify a page to request.
 // Use the includes slice to enrich the response data.
 func (c *SportMonksClient) Countries(page int, includes []string, ) ([]Country, *Meta, error) {
 	response := new(CountriesResponse)

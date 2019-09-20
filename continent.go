@@ -16,7 +16,7 @@ type Continent struct {
 }
 
 // Make a request to retrieve multiple continent resources. The request endpoint executed within this method
-// is paginated, the second argument to this method allows the consumer to specify a page to request.
+// is paginated, the first argument to this method allows the consumer to specify a page to request.
 // Use the includes slice to enrich the response data.
 func (c *SportMonksClient) Continents(page int, includes []string) ([]Continent, *Meta, error) {
 	response := new(ContinentsResponse)

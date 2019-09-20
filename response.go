@@ -35,9 +35,18 @@ type (
 		Meta Meta     `json:"meta"`
 	}
 
-	// PlayerResponse struct
 	PlayerResponse struct {
 		Data Player `json:"data"`
+	}
+
+ 	SeasonsResponse struct {
+		Data []Season `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
+
+ 	SeasonResponse struct {
+		Data Season `json:"data"`
+		Meta Meta     `json:"meta"`
 	}
 
 	//SquadResponse
