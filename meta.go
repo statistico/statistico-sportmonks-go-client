@@ -1,12 +1,12 @@
-package sportmonks
+package statistico
 
 type (
 	// Meta struct
 	Meta struct {
-		Pagination Pagination `json:"pagination, omitempty"`
-		Plan Plan `json:"plan, omitempty"`
-		Sports Sports `json:"sports, omitempty"`
-		Subscription Subscription `json:"subscription, omitempty"`
+		Pagination *Pagination `json:"pagination, omitempty"`
+		Plan *Plan `json:"plan, omitempty"`
+		Sports *Sports `json:"sports, omitempty"`
+		Subscription *Subscription `json:"subscription, omitempty"`
 	}
 
 	// Pagination struct

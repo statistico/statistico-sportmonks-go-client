@@ -1,6 +1,26 @@
-package sportmonks
+package statistico
 
 type (
+	ContinentsResponse struct {
+		Data []Continent `json:"data"`
+		Meta Meta `json:"meta"`
+	}
+
+	ContinentResponse struct {
+		Data Continent `json:"data"`
+		Meta Meta `json:"meta"`
+	}
+
+	CountriesResponse struct {
+		Data []Country `json:"data"`
+		Meta Meta      `json:"meta"`
+	}
+
+ 	CountryResponse struct {
+		Data Country 	`json:"data"`
+		Meta Meta       `json:"meta"`
+	}
+
 	FixtureResponse struct {
 		Data Fixture `json:"data"`
 	}

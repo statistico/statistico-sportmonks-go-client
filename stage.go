@@ -1,4 +1,4 @@
-package sportmonks
+package statistico
 
 // Stage struct
 type Stage struct {

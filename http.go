@@ -1,4 +1,4 @@
-package sportmonks
+package statistico
 
 import (
 	"encoding/json"
@@ -20,16 +20,16 @@ var backOffLimit = 120
 
 var clientCreationError = errors.New("base URL and API Key are both required to create a Client")
 
-type Client struct {
+type SportMonksClient struct {
 	Client  *http.Client
 	BaseURL string
 	ApiKey  string
 	Retries int
 }
 
-func NewClient(url, key string, retries int) (*Client, error) {
+func NewSportMonksClient(url, key string) (*SportMonksClient, error) {
 	if url == "" || key == "" {
-		return &Client{}, clientCreationError
+		return nil, clientCreationError
 	}
 
 	trans := &http.Transport{
@@ -40,42 +40,52 @@ func NewClient(url, key string, retries int) (*Client, error) {
 		TLSHandshakeTimeout: 60 * time.Second,
 	}
 
-	client := Client{
+	client := SportMonksClient{
 		Client: &http.Client{
 			Transport: trans,
 		},
 		BaseURL: url,
 		ApiKey:  key,
-		Retries: retries,
+		Retries: 5,
 	}
 
 	return &client, nil
 }
 
-func (c *Client) SetHTTPClient(client *http.Client) {
+func (c *SportMonksClient) SetHTTPClient(client *http.Client) {
 	c.Client = client
 }
 
-func (c *Client) SetRetries(retries int) {
+func (c *SportMonksClient) SetRetries(retries int) {
 	c.Retries = retries
 }
 
-func (c *Client) sendRequest(url string, includes []string, page int, response interface{}) error {
-	uri := buildUrl(url, includes, page)
+func (c *SportMonksClient) handleRequest(path string, includes []string, response interface{}) error {
+	built := c.buildUrl(path, includes, 0)
 
+	return c.sendRequest(built, response)
+}
+
+func (c *SportMonksClient) handlePaginatedRequest(path string, includes []string, page int, response interface{}) error {
+	built := c.buildUrl(path, includes, page)
+
+	return c.sendRequest(built, response)
+}
+
+func (c *SportMonksClient) sendRequest(url string, response interface{}) error {
 	res, err := http.Get(url)
 
 	if err != nil {
 		if c.Retries > 0 {
 			backOff()
 			c.Retries--
-			return c.sendRequest(uri, includes, page, response)
+			return c.sendRequest(url, response)
 		}
 
 		return err
 	}
 
-	if err := parseRequestBody(res.Body, &response); err != nil {
+	if err := parseResponseBody(res.Body, &response); err != nil {
 		return err
 	}
 
@@ -84,7 +94,9 @@ func (c *Client) sendRequest(url string, includes []string, page int, response i
 	return nil
 }
 
-func buildUrl(url string, includes []string, page int) string {
+func (c *SportMonksClient) buildUrl(path string, includes []string, page int) string {
+	url := c.BaseURL + path + "?api_token=" + c.ApiKey
+
 	if page > 0 {
 		url = url + "&page=" + strconv.Itoa(page)
 	}
@@ -96,10 +108,14 @@ func buildUrl(url string, includes []string, page int) string {
 	return url
 }
 
-func parseRequestBody(body io.ReadCloser, response interface{}) error {
+func parseResponseBody(body io.ReadCloser, response interface{}) error {
 	defer body.Close()
 
 	b, err := ioutil.ReadAll(body)
+
+	if err != nil {
+		return nil
+	}
 
 	if err = json.Unmarshal([]byte(b), &response); err != nil {
 		return err

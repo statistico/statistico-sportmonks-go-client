@@ -1,4 +1,4 @@
-package sportmonks
+package statistico
 
 import (
 	"testing"
@@ -7,7 +7,7 @@ import (
 func TestNewClient(t *testing.T) {
 	base := "https://example.com"
 	api := "api-key"
-	c, _ := NewClient(base, api)
+	c, _ := NewSportMonksClient(base, api)
 
 	uri := c.BaseURL
 	key := c.ApiKey

@@ -1,4 +1,4 @@
-package sportmonks
+package statistico
 
 type (
 	Assistants struct {

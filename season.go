@@ -1,9 +1,9 @@
-package sportmonks
+package statistico
 
-import "strconv"
-
-const seasonUri = "/api/v2.0/seasons"
-
+//import "strconv"
+//
+//const seasonUri = "/api/v2.0/seasons"
+//
 // Season struct
 type Season struct {
 	ID              int    `json:"id"`
@@ -31,7 +31,7 @@ type Season struct {
 		Data []Group `json:"data"`
 	} `json:"groups, omitempty"`
 	League struct {
-		Data League `json:"data"`
+		Data *League `json:"data"`
 	} `json:"league, omitempty"`
 	Results struct {
 		Data []Fixture `json:"data"`
@@ -46,40 +46,40 @@ type Season struct {
 		Data []Fixture `json:"data"`
 	} `json:"upcoming, omitempty"`
 }
-
-// Seasons Response
-type SeasonsResponse struct {
-	Data []Season `json:"data"`
-	Meta Meta     `json:"meta"`
-}
-
-// Season Response
-type SeasonResponse struct {
-	Data Season `json:"data"`
-	Meta Meta     `json:"meta"`
-}
-
-// Make a request to retrieve multiple season resources. The request endpoint executed within this method
-// is paginated, the second argument to this method allows the consumer to specify a page to request.
 //
-// Use the includes slice to enrich the response data.
-func (c *Client) Seasons(page int, includes []string, retries int) (*SeasonsResponse, error) {
-	url := c.BaseURL + seasonUri + "?api_token=" + c.ApiKey
-
-	response := new(SeasonsResponse)
-
-	err := c.sendRequest(url, includes, page, response)
-
-	return response, err
-}
-
-// Retrieve a single continent season by ID. Use the includes slice to enrich the response data.
-func (c *Client) SeasonById(id int, includes []string) (*SeasonResponse, error) {
-	url := c.BaseURL + seasonUri + strconv.Itoa(id) + "?api_token=" + c.ApiKey
-
-	response := new(SeasonResponse)
-
-	err := c.sendRequest(url, includes, 0, response)
-
-	return response, err
-}
+//// Seasons Response
+//type SeasonsResponse struct {
+//	Data []Season `json:"data"`
+//	Meta Meta     `json:"meta"`
+//}
+//
+//// Season Response
+//type SeasonResponse struct {
+//	Data Season `json:"data"`
+//	Meta Meta     `json:"meta"`
+//}
+//
+//// Make a request to retrieve multiple season resources. The request endpoint executed within this method
+//// is paginated, the second argument to this method allows the consumer to specify a page to request.
+////
+//// Use the includes slice to enrich the response data.
+//func (c *Client) Seasons(page int, includes []string, retries int) (*SeasonsResponse, error) {
+//	url := c.BaseURL + seasonUri + "?api_token=" + c.ApiKey
+//
+//	response := new(SeasonsResponse)
+//
+//	err := c.sendRequest(url, includes, page, response)
+//
+//	return response, err
+//}
+//
+//// Retrieve a single continent season by ID. Use the includes slice to enrich the response data.
+//func (c *Client) SeasonById(id int, includes []string) (*SeasonResponse, error) {
+//	url := c.BaseURL + seasonUri + strconv.Itoa(id) + "?api_token=" + c.ApiKey
+//
+//	response := new(SeasonResponse)
+//
+//	err := c.sendRequest(url, includes, 0, response)
+//
+//	return response, err
+//}
