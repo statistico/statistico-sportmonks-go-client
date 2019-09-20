@@ -49,6 +49,22 @@ type (
 		VisitorteamFormation string `json:"visitorteam_formation"`
 	}
 
+	PlayerCrosses struct {
+		Total    *int `json:"total"`
+		Accurate *int `json:"accurate"`
+	}
+
+	PlayerDribbles struct {
+		Attempts     *int `json:"attempts"`
+		Success      *int `json:"success"`
+		DribbledPast *int `json:"dribbled_past"`
+	}
+
+	PlayerDuels struct {
+		Total *int `json:"total"`
+		Won   *int `json:"won"`
+	}
+
 	PlayerCards struct {
 		YellowCards *int `json:"yellowcards"`
 		RedCards    *int `json:"redcards"`
@@ -64,11 +80,18 @@ type (
 		Conceded *int `json:"conceded"`
 	}
 
+	PlayerPenalties struct {
+		Won       *int `json:"won"`
+		Scores    *int `json:"scores"`
+		Missed    *int `json:"missed"`
+		Committed *int `json:"committed"`
+		Saves     *int `json:"saves"`
+	}
+
 	PlayerPasses struct {
-		TotalCrosses    *int `json:"total_crosses"`
-		CrossesAccuracy *int `json:"crosses_accuracy"`
-		Passes          *int `json:"passes"`
-		PassesAccuracy  *int `json:"passes_accuracy"`
+		Total     *int `json:"total"`
+		Accuracy  *int `json:"accuracy"`
+		KeyPasses *int `json:"key_passes"`
 	}
 
 	PlayerShots struct {
