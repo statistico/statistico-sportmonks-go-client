@@ -12,6 +12,12 @@ type Season struct {
 	IsCurrentSeason bool   `json:"is_current_season"`
 	CurrentRoundID  *int   `json:"current_round_id"`
 	CurrentStageID  *int   `json:"current_stage_id"`
+	AggregatedAssistScorers struct {
+		Data []AssistScorer `json:"data"`
+	} `json:"aggregatedAssistscorers, omitempty"`
+	AggregatedCardScorers struct {
+		Data []CardScorer `json:"data"`
+	} `json:"aggregatedCardscorers, omitempty"`
 	AggregatedGoalScorers struct {
 		Data []GoalScorer `json:"data"`
 	} `json:"aggregatedGoalscorers, omitempty"`

@@ -120,6 +120,17 @@ type (
 		Outsidebox interface{} `json:"outsidebox"`
 	}
 
+	Transfer struct {
+		PlayerID   int         `json:"player_id"`
+		FromTeamID int         `json:"from_team_id"`
+		ToTeamID   int         `json:"to_team_id"`
+		SeasonID   *int         `json:"season_id"`
+		Transfer   string      `json:"transfer"`
+		Type       string      `json:"type"`
+		Date       string      `json:"date"`
+		Amount     *string		`json:"amount"`
+	}
+
 	WeatherReport struct {
 		Code        string `json:"code"`
 		Type        string `json:"type"`
