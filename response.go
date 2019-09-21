@@ -111,6 +111,11 @@ type (
 		Meta Meta     `json:"meta"`
 	}
 
+	TVStationResponse struct {
+		Data []TVStation `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
+
 	VenueResponse struct {
 		Data Venue    `json:"data"`
 		Meta Meta     `json:"meta"`
