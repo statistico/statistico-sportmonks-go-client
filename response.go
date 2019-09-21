@@ -106,6 +106,11 @@ type (
 		Meta Meta     `json:"meta"`
 	}
 
+	TeamSquadResponse struct {
+		Data []PlayerSeasonStats `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
+
 	VenueResponse struct {
 		Data Venue    `json:"data"`
 		Meta Meta     `json:"meta"`

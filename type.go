@@ -139,6 +139,9 @@ type (
 		Duels 				PlayerDuels `json:"duels"`
 		Passes            PlayerSeasonPasses `json:"passes"`
 		Penalties  		PlayerPenalties `json:"penalties"`
+		Player struct {
+			Data Player `json:"data"`
+		} `json:"player, omitempty"`
 	}
 
  	Position struct {
