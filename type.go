@@ -155,17 +155,6 @@ type (
 		PositionWonOrLost int     `json:"position_won_or_lost"`
 	}
 
-	// Round struct {
-	Round struct {
-		ID       int    `json:"id"`
-		Name     int    `json:"name"`
-		LeagueID int    `json:"league_id"`
-		SeasonID int    `json:"season_id"`
-		StageID  int    `json:"stage_id"`
-		Start    string `json:"start"`
-		End      string `json:"end"`
-	}
-
  	Sidelined struct {
 		PlayerID    int    `json:"player_id"`
 		SeasonID    int    `json:"season_id"`

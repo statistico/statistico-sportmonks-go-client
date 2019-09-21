@@ -17,12 +17,12 @@ type Venue struct {
 }
 
 // Retrieve a single venue resource by ID.
-func (c *ApiClient) VenueById(id int, includes []string) (*Venue, *Meta, error) {
+func (c *ApiClient) VenueById(id int) (*Venue, *Meta, error) {
 	url := venueUri + "/" + strconv.Itoa(id)
 
 	response := new(VenueResponse)
 
-	err := c.handleRequest(url, includes, response)
+	err := c.handleRequest(url, []string{}, response)
 
 	if err != nil {
 		return nil, nil, err
@@ -32,12 +32,12 @@ func (c *ApiClient) VenueById(id int, includes []string) (*Venue, *Meta, error) 
 }
 
 // Make a request to retrieve multiple venue resources for a given season.
-func (c *ApiClient) VenuesBySeasonId(id int, includes []string) ([]Venue, *Meta, error) {
+func (c *ApiClient) VenuesBySeasonId(id int) ([]Venue, *Meta, error) {
 	url := venueSeasonUri + "/" + strconv.Itoa(id)
 
 	response := new(VenuesResponse)
 
-	err := c.handleRequest(url, includes, response)
+	err := c.handleRequest(url, []string{}, response)
 
 	if err != nil {
 		return nil, nil, err

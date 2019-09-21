@@ -41,6 +41,16 @@ type (
 		Meta Meta     `json:"meta"`
 	}
 
+	RoundResponse struct {
+		Data Round `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
+
+	RoundsResponse struct {
+		Data []Round `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
+
  	SeasonsResponse struct {
 		Data []Season `json:"data"`
 		Meta Meta     `json:"meta"`

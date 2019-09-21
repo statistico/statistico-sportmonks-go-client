@@ -63,8 +63,8 @@ type (
 	}
 
 	Formations struct {
-		LocalteamFormation   string `json:"localteam_formation"`
-		VisitorteamFormation string `json:"visitorteam_formation"`
+		LocalTeamFormation   string `json:"localteam_formation"`
+		VisitorTeamFormation string `json:"visitorteam_formation"`
 	}
 
 	PlayerCrosses struct {
