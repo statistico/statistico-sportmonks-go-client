@@ -1,6 +1,16 @@
 package sportmonks
 
 type (
+	BookmakerResponse struct {
+		Data Bookmaker `json:"data"`
+		Meta Meta `json:"meta"`
+	}
+
+	BookmakersResponse struct {
+		Data []Bookmaker `json:"data"`
+		Meta Meta `json:"meta"`
+	}
+
 	CoachResponse struct {
 		Data Coach `json:"data"`
 		Meta Meta `json:"meta"`
@@ -81,7 +91,6 @@ type (
 		Meta Meta     `json:"meta"`
 	}
 
-	// TeamsResponse
 	TeamsResponse struct {
 		Data []Team `json:"data"`
 		Meta Meta     `json:"meta"`
