@@ -38,6 +38,7 @@ type (
 
 	PlayerResponse struct {
 		Data Player `json:"data"`
+		Meta Meta     `json:"meta"`
 	}
 
  	SeasonsResponse struct {

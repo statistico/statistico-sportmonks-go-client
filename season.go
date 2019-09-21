@@ -68,7 +68,7 @@ func (c *ApiClient) Seasons(page int, includes []string) ([]Season, *Meta, error
 	return response.Data, &response.Meta, err
 }
 
-// Retrieve a single continent season by ID. Use the includes slice to enrich the response data.
+// Retrieve a single season resource by ID. Use the includes slice to enrich the response data.
 func (c *ApiClient) SeasonById(id int, includes []string) (*Season, *Meta, error) {
 	url := seasonUri + "/" + strconv.Itoa(id)
 

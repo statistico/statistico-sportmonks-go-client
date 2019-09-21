@@ -29,6 +29,24 @@ type (
 		MinutesPlayed *int `json:"minutes_played"`
 	}
 
+	AdditionalPlayerMatchStats struct {
+		Offsides       *int `json:"offsides"`
+		Saves          *int `json:"saves"`
+		InsideBoxSaves *int `json:"inside_box_saves"`
+		PenScored      *int `json:"pen_scored"`
+		PenMissed      *int `json:"pen_missed"`
+		PenSaved       *int `json:"pen_saved"`
+		PenCommitted   *int `json:"pen_committed"`
+		PenWon         *int `json:"pen_won"`
+		HitWoodwork    *int `json:"hit_woodwork"`
+		Tackles        *int `json:"tackles"`
+		Blocks         *int `json:"blocks"`
+		Interceptions  *int `json:"interceptions"`
+		Clearances     *int `json:"clearances"`
+		Dispossessed    *int `json:"dispossesed"`
+		MinutesPlayed  *int `json:"minutes_played"`
+	}
+
 	FixtureTime struct {
 		Status     string `json:"status"`
 		StartingAt struct {
@@ -77,6 +95,7 @@ type (
 
 	PlayerGoals struct {
 		Scored   *int `json:"scored"`
+		Assist   *int `json:"assists"`
 		Conceded *int `json:"conceded"`
 	}
 
@@ -88,7 +107,15 @@ type (
 		Saves     *int `json:"saves"`
 	}
 
-	PlayerPasses struct {
+	PlayerMatchPasses struct {
+		TotalCrosses    *int `json:"total_crosses"`
+		CrossesAccuracy *int `json:"crosses_accuracy"`
+		Passes          *int `json:"passes"`
+		PassesAccuracy  *int `json:"passes_accuracy"`
+		KeyPasses       *int `json:"key_passes"`
+	}
+
+	PlayerSeasonPasses struct {
 		Total     *int `json:"total"`
 		Accuracy  *int `json:"accuracy"`
 		KeyPasses *int `json:"key_passes"`
@@ -99,14 +126,14 @@ type (
 		ShotsOnGoal *int `json:"shots_on_goal"`
 	}
 
-	PlayerStats struct {
-		Shots             PlayerShots      `json:"shots"`
-		Goals             PlayerGoals      `json:"goals"`
-		Fouls             PlayerFouls      `json:"fouls"`
-		Cards             PlayerCards      `json:"cards"`
-		Passes            PlayerPasses     `json:"passing"`
-		ExtraPlayersStats ExtraPlayerStats `json:"other"`
-	}
+	//PlayerStats struct {
+	//	Shots             PlayerShots      `json:"shots"`
+	//	Goals             PlayerGoals      `json:"goals"`
+	//	Fouls             PlayerFouls      `json:"fouls"`
+	//	Cards             PlayerCards      `json:"cards"`
+	//	Passes            PlayerPasses     `json:"passing"`
+	//	ExtraPlayersStats ExtraPlayerStats `json:"other"`
+	//}
 
 	Scores struct {
 		LocalteamScore      int     `json:"localteam_score"`
