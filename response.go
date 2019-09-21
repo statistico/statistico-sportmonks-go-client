@@ -71,6 +71,16 @@ type (
 		Data []SquadPlayer `json:"data"`
 	}
 
+	StageResponse struct {
+		Data Stage `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
+
+	StagesSeasonResponse struct {
+		Data []Stage `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
+
 	// TeamsResponse
 	TeamsResponse struct {
 		Data []Team `json:"data"`
