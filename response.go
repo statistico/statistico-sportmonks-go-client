@@ -115,4 +115,9 @@ type (
 		Data []Venue `json:"data"`
 		Meta Meta     `json:"meta"`
 	}
+
+	VideoHighlightsResponse struct {
+		Data []VideoHighlights `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
 )
