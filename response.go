@@ -1,6 +1,11 @@
 package sportmonks
 
 type (
+	CoachResponse struct {
+		Data Coach `json:"data"`
+		Meta Meta `json:"meta"`
+	}
+
 	ContinentsResponse struct {
 		Data []Continent `json:"data"`
 		Meta Meta `json:"meta"`
