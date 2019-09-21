@@ -56,6 +56,11 @@ type (
 		Meta Meta     `json:"meta"`
 	}
 
+	LeagueStandingsResponse struct {
+		Data LeagueStandings `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
+
 	PlayerResponse struct {
 		Data Player `json:"data"`
 		Meta Meta     `json:"meta"`

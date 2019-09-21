@@ -210,6 +210,43 @@ type (
 		Data []SubstitutionEvent `json:"data"`
 	}
 
+ 	TeamColors struct {
+		Color     string `json:"color"`
+		KitColors string `json:"kit_colors"`
+	}
+
+	TeamLeagueStanding struct {
+		Position  int         `json:"position"`
+		TeamID    int         `json:"team_id"`
+		TeamName  string      `json:"team_name"`
+		RoundID   int         `json:"round_id"`
+		RoundName int         `json:"round_name"`
+		GroupID   *int 		   `json:"group_id"`
+		GroupName *int `json:"group_name"`
+		Overall  	TeamLeagueStats `json:"overall"`
+		Home 		TeamLeagueStats `json:"home"`
+		Away 		TeamLeagueStats `json:"away"`
+		Total 		TeamLeagueTotalStats `json:"total"`
+		Result     string `json:"result"`
+		Points     int    `json:"points"`
+		RecentForm string `json:"recent_form"`
+		Status     string `json:"status"`
+	}
+
+	TeamLeagueStats struct {
+		GamesPlayed  int `json:"games_played"`
+		Won          int `json:"won"`
+		Draw         int `json:"draw"`
+		Lost         int `json:"lost"`
+		GoalsScored  int `json:"goals_scored"`
+		GoalsAgainst int `json:"goals_against"`
+	}
+
+	TeamLeagueTotalStats struct {
+		GoalDifference int `json:"goal_difference"`
+		Points         int `json:"points"`
+	}
+
  	TeamSeasonStats struct {
 		TeamID   int         `json:"team_id"`
 		SeasonID int         `json:"season_id"`

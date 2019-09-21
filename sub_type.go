@@ -146,8 +146,8 @@ type (
 	}
 
 	Standings struct {
-		LocalteamPosition   int `json:"localteam_position"`
-		VisitorteamPosition int `json:"visitorteam_position"`
+		LocalTeamPosition   int `json:"localteam_position"`
+		VisitorTeamPosition int `json:"visitorteam_position"`
 	}
 
 	TeamAttacks struct {

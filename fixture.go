@@ -26,6 +26,34 @@ type Fixture struct {
 	Standings             Standings          `json:"standings"`
 	Assistants            Assistants         `json:"assistants"`
 	Leg                   *string            `json:"leg"`
+	Colors                []TeamColors       `json:"colors"`
+	Deleted               bool			     `json:"deleted"`
+	// localTeam
+	// visitorTeam
+	// substitutions
+	// goals
+	// cards
+	// other
+	// events
+	// corners
+	// lineup
+	// bench
+	// sidelined
+	// comments
+	// tvstations
+	// highlights
+	// round
+	// stage
+	// referee
+	// venue
+	// odds
+	// inplayOdds
+	// flatOdds
+	// localCoach
+	// visitorCoach
+	// group
+	// trends
+	// stats
 	Lineup                Lineup             `json:"lineup"`
 	Bench                 Lineup             `json:"bench"`
 	TeamStats             TeamsStats         `json:"stats"`
