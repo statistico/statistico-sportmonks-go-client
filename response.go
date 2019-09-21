@@ -67,8 +67,13 @@ type (
 		Meta Meta     `json:"meta"`
 	}
 
-	// VenueResponse
+	VenueResponse struct {
+		Data Venue    `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
+
 	VenuesResponse struct {
 		Data []Venue `json:"data"`
+		Meta Meta     `json:"meta"`
 	}
 )

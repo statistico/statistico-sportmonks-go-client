@@ -1,21 +1,47 @@
 package sportmonks
 
-//import "strconv"
-//
-//const venueSeasonUri = "/api/v2.0/venues/season/"
-//
-//func (c *Client) VenuesBySeasonId(seasonId int, retries int) (*VenuesResponse, error) {
-//	url := c.BaseURL + venueSeasonUri + strconv.Itoa(seasonId) + "?api_token=" + c.ApiKey
-//
-//	req, err := buildRequest("GET", url, nil, 0, []string{})
-//
-//	if err != nil {
-//		return nil, err
-//	}
-//
-//	r := new(VenuesResponse)
-//
-//	err = c.sendRequest(req, &r, retries)
-//
-//	return r, err
-//}
+import "strconv"
+
+const venueUri = "/api/v2.0/venues/"
+const venueSeasonUri = "/api/v2.0/venues/season/"
+
+type Venue struct {
+	ID       int     `json:"id"`
+	Name     string  `json:"name"`
+	Surface  string  `json:"surface"`
+	Address  *string `json:"address"`
+	City     string  `json:"city"`
+	Capacity int     `json:"capacity"`
+	ImagePath    string  `json:"image_path"`
+	Coordinates *string `json:"coordinates"`
+}
+
+// Retrieve a single venue resource by ID.
+func (c *ApiClient) VenueById(id int, includes []string) (*Venue, *Meta, error) {
+	url := venueUri + "/" + strconv.Itoa(id)
+
+	response := new(VenueResponse)
+
+	err := c.handleRequest(url, includes, response)
+
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return &response.Data, &response.Meta, err
+}
+
+// Make a request to retrieve multiple venue resources for a given season.
+func (c *ApiClient) VenuesBySeasonId(id int, includes []string) ([]Venue, *Meta, error) {
+	url := venueSeasonUri + "/" + strconv.Itoa(id)
+
+	response := new(VenuesResponse)
+
+	err := c.handleRequest(url, includes, response)
+
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return response.Data, &response.Meta, err
+}

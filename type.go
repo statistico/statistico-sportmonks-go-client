@@ -336,16 +336,4 @@ type (
 			Data []Season `json:"data"`
 		} `json:"seasons"`
 	}
-
-	// Venue struct
-	Venue struct {
-		ID       int     `json:"id"`
-		Name     string  `json:"name"`
-		Surface  string  `json:"surface"`
-		Address  *string `json:"address"`
-		City     string  `json:"city"`
-		Capacity int     `json:"capacity"`
-		ImagePath    string  `json:"image_path"`
-		Coordinates *string `json:"coordinates"`
-	}
 )
