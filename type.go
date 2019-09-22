@@ -12,15 +12,6 @@ type (
 		Type     string `json:"type"`
 	}
 
-	BookmakerOdds struct {
-		ID    int `json:"id"`
-		Name string `json:"name"`
-		Suspended int `json:"suspended"`
-		Odds struct {
-			Data []Odds `json:"data"`
-		} `json:"bookmaker"`
-	}	
-
 	// CardScorer struct
 	CardScorer struct {
 		Position    int    `json:"position"`
@@ -79,14 +70,6 @@ type (
 		Data []LineupPlayer `json:"data"`
 	}
 
-	MatchOdds struct {
-		ID    int `json:"id"`
-		Name string `json:"name"`
-		Bookmaker struct {
-			Data []BookmakerOdds `json:"data"`
-		} `json:"bookmaker"`
-	}
-
 	//LineupPlayer struct {
 	//	TeamID             int         `json:"team_id"`
 	//	FixtureID          int         `json:"fixture_id"`
@@ -100,25 +83,6 @@ type (
 	//	Posy               *int        `json:"posy"`
 	//	Stats              PlayerStats `json:"stats"`
 	//}
-
- 	Odds struct {
-		Value            string      `json:"value"`
-		Handicap         *string `json:"handicap"`
-		Total            string      `json:"total"`
-		Label            string      `json:"label"`
-		Probability      string      `json:"probability"`
-		Dp3              string      `json:"dp3"`
-		American         int         `json:"american"`
-		Fractional       *string `json:"factional"`
-		Winning          *string `json:"winning"`
-		Stop             bool        `json:"stop"`
-		BookmakerEventID int         `json:"bookmaker_event_id"`
-		LastUpdate       struct {
-			Date         string `json:"date"`
-			TimezoneType int    `json:"timezone_type"`
-			Timezone     string `json:"timezone"`
-		} `json:"last_update"`
- 	}
 
  	PlayerMatchStats struct {
 		TeamID             int         `json:"team_id"`

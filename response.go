@@ -71,6 +71,11 @@ type (
 		Meta Meta     `json:"meta"`
 	}
 
+	MatchOddsResponse struct {
+		Data []MatchOdds `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
+
 	PlayerResponse struct {
 		Data Player `json:"data"`
 		Meta Meta     `json:"meta"`
