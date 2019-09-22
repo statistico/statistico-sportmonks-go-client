@@ -61,6 +61,16 @@ type (
 		Meta Meta     `json:"meta"`
 	}
 
+	MarketResponse struct {
+		Data Market `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
+
+	MarketsResponse struct {
+		Data []Market `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
+
 	PlayerResponse struct {
 		Data Player `json:"data"`
 		Meta Meta     `json:"meta"`
