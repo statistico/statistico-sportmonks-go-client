@@ -3,24 +3,24 @@ package sportmonks
 import "fmt"
 
 const fixtureOddsUri = "/api/v2.0/odds/fixture"
-const inplayFixtureOddsUri = "/api/v2.0/odds/inplay/fixture"
+const inPlayFixtureOddsUri = "/api/v2.0/odds/inplay/fixture"
 
 type (
 	MatchOdds struct {
 		ID    int `json:"id"`
 		Name string `json:"name"`
+		Suspended int `json:"suspended"`
 		Bookmaker struct {
-			Data []BookmakerOdds `json:"data"`
+			Data [] BookmakerOdds`json:"data"`
 		} `json:"bookmaker"`
 	}
 
 	BookmakerOdds struct {
 		ID    int `json:"id"`
 		Name string `json:"name"`
-		Suspended int `json:"suspended"`
-		Odds struct {
+		Bookmaker struct {
 			Data []Odds `json:"data"`
-		} `json:"bookmaker"`
+		} `json:"odds"`
 	}
 
 	Odds struct {
@@ -61,7 +61,7 @@ func (c *ApiClient) OddsByFixtureId(fixtureId int) ([]MatchOdds, *Meta, error) {
 
 // Retrieve a multiple match odds resources by fixture ID.
 func (c *ApiClient) InPlayOddsByFixtureId(fixtureId int) ([]MatchOdds, *Meta, error) {
-	url := fmt.Sprintf(inplayFixtureOddsUri + "/%d", fixtureId)
+	url := fmt.Sprintf(inPlayFixtureOddsUri + "/%d", fixtureId)
 
 	response := new(MatchOddsResponse)
 

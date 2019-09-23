@@ -46,6 +46,11 @@ type (
 		Meta Meta       `json:"meta"`
 	}
 
+	FixturesResponse struct {
+		Data []Fixture `json:"data"`
+		Meta Meta       `json:"meta"`
+	}
+
 	LeaguesResponse struct {
 		Data []League `json:"data"`
 		Meta Meta     `json:"meta"`

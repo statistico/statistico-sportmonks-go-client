@@ -136,10 +136,10 @@ type (
 	//}
 
 	Scores struct {
-		LocalteamScore      int     `json:"localteam_score"`
-		VisitorteamScore    int     `json:"visitorteam_score"`
-		LocalteamPenScore   *int    `json:"localteam_pen_score"`
-		VisitorteamPenScore *int    `json:"visitorteam_pen_score"`
+		LocalTeamScore      int     `json:"localteam_score"`
+		VisitorTeamScore    int     `json:"visitorteam_score"`
+		LocalTeamPenScore   *int    `json:"localteam_pen_score"`
+		VisitorTeamPenScore *int    `json:"visitorteam_pen_score"`
 		HtScore             *string `json:"ht_score"`
 		FtScore             *string `json:"ft_score"`
 		EtScore             *string `json:"et_score"`
@@ -195,5 +195,10 @@ type (
 			Speed  string  `json:"speed"`
 			Degree float64 `json:"degree"`
 		} `json:"wind"`
+		Coordinates struct {
+			Lat *float64 `json:"lat"`
+			Lon *float64 `json:"lon"`
+		}
+		UpdatedAt *string `json:"updated_at"`
 	}
 )

@@ -12,6 +12,22 @@ type (
 		Type     string `json:"type"`
 	}
 
+ 	CardEvent struct {
+		ID          int64       `json:"id"`
+		TeamID      string      `json:"team_id"`
+		Type        string      `json:"type"`
+		FixtureID   int         `json:"fixture_id"`
+		PlayerID    int         `json:"player_id"`
+		PlayerName  string      `json:"player_name"`
+		Minute      int         `json:"minute"`
+		ExtraMinute *int `json:"extra_minute"`
+		Reason      *string `json:"reason"`
+	}
+
+	CardEvents struct {
+		Data []CardEvent `json:"data"`
+	}
+
 	// CardScorer struct
 	CardScorer struct {
 		Position    int    `json:"position"`
@@ -22,6 +38,19 @@ type (
 		YellowCards int    `json:"yellowcards"`
 		RedCards    int    `json:"redcards"`
 		Type        string `json:"type"`
+	}
+
+ 	CornerEvent struct {
+		ID          int         `json:"id"`
+		TeamID      int         `json:"team_id"`
+		FixtureID   int         `json:"fixture_id"`
+		Minute      int         `json:"minute"`
+		ExtraMinute *int `json:"extra_minute"`
+		Comment     string      `json:"comment"`
+	}
+
+	CornerEvents struct {
+		Data []CornerEvent `json:"data"`
 	}
 
 	GoalEvent struct {
@@ -67,7 +96,27 @@ type (
  	}
 
 	Lineup struct {
-		Data []LineupPlayer `json:"data"`
+		Data []PlayerMatchStats `json:"data"`
+	}
+
+ 	MatchEvent struct {
+		ID                int64       `json:"id"`
+		TeamID            string      `json:"team_id"`
+		Type              string      `json:"type"`
+		FixtureID         int         `json:"fixture_id"`
+		PlayerID          int         `json:"player_id"`
+		PlayerName        string      `json:"player_name"`
+		RelatedPlayerID   int         `json:"related_player_id"`
+		RelatedPlayerName string      `json:"related_player_name"`
+		Minute            int         `json:"minute"`
+		ExtraMinute       *int `json:"extra_minute"`
+		Reason            *string `json:"reason"`
+		Injured           *bool       `json:"injuried"`
+		Result            string      `json:"result"`
+	}
+
+	MatchEvents struct {
+		Data []MatchEvent `json:"data"`
 	}
 
 	//LineupPlayer struct {
@@ -156,6 +205,14 @@ type (
 		Position          int     `json:"position"`
 		PositionStatus    string  `json:"position_status"`
 		PositionWonOrLost int     `json:"position_won_or_lost"`
+	}
+
+ 	Referee struct {
+		ID         int    `json:"id"`
+		CommonName string `json:"common_name"`
+		FullName   string `json:"fullname"`
+		FirstName  string `json:"firstname"`
+		LastName   string `json:"lastname"`
 	}
 
  	Sidelined struct {
@@ -349,6 +406,9 @@ type (
 		FreeKick       *int `json:"free_kick"`
 		ThrowIn        *int `json:"throw_in"`
 		BallSafe       *int `json:"ball_safe"`
+		Goals          *int `json:"goals"`
+		Penalties          *int `json:"penalties"`
+		Injuries          *int `json:"injuries"`
 	}
 
 	TeamsStats struct {
