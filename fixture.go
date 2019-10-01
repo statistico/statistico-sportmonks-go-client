@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-const fixtureUri = "/api/v2.0/fixtures/"
+const fixtureUri = "/api/v2.0/fixtures"
 const fixtureDateUri = "/api/v2.0/fixtures/date"
 const fixtureBetweenUri = "/api/v2.0/fixtures/between"
 const fixtureMultiUri = "/api/v2.0/fixtures/between"

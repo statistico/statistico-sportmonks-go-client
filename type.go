@@ -10,6 +10,12 @@ type (
 		StageID  int    `json:"stage_id"`
 		Assists  int    `json:"assists"`
 		Type     string `json:"type"`
+		Player struct {
+			Data Player `json:"data"`
+		} `json:"player"`
+		Team struct {
+			Data Team `json:"data"`
+		} `json:"team"`
 	}
 
  	CardEvent struct {
@@ -38,6 +44,12 @@ type (
 		YellowCards int    `json:"yellowcards"`
 		RedCards    int    `json:"redcards"`
 		Type        string `json:"type"`
+		Player struct {
+			Data Player `json:"data"`
+		} `json:"player"`
+		Team struct {
+			Data Team `json:"data"`
+		} `json:"team"`
 	}
 
  	CornerEvent struct {
@@ -81,6 +93,12 @@ type (
 		Goals        int    `json:"goals"`
 		PenaltyGoals int    `json:"penalty_goals"`
 		Type         string `json:"type"`
+		Player struct {
+			Data Player `json:"data"`
+		} `json:"player"`
+		Team struct {
+			Data Team `json:"data"`
+		} `json:"team"`
 	}
 
  	Group struct {

@@ -163,11 +163,11 @@ type (
 
 	TeamShots struct {
 		Total      interface{} `json:"total"`
-		Ongoal     interface{} `json:"ongoal"`
-		Offgoal    interface{} `json:"offgoal"`
+		OnGoal     interface{} `json:"ongoal"`
+		OffGoal    interface{} `json:"offgoal"`
 		Blocked    interface{} `json:"blocked"`
-		Insidebox  interface{} `json:"insidebox"`
-		Outsidebox interface{} `json:"outsidebox"`
+		InsideBox  interface{} `json:"insidebox"`
+		OutsideBox interface{} `json:"outsidebox"`
 	}
 
 	Transfer struct {

@@ -1,6 +1,11 @@
 package sportmonks
 
 type (
+	AggregatedTopScorersResponse struct {
+		Data AggregatedTopScorers `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
+
 	BookmakerResponse struct {
 		Data Bookmaker `json:"data"`
 		Meta Meta `json:"meta"`
@@ -133,6 +138,11 @@ type (
 
 	TeamSquadResponse struct {
 		Data []PlayerSeasonStats `json:"data"`
+		Meta Meta     `json:"meta"`
+	}
+
+	TopScorersResponse struct {
+		Data TopScorers `json:"data"`
 		Meta Meta     `json:"meta"`
 	}
 
