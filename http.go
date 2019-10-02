@@ -1,101 +1,104 @@
 package sportmonks
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"io"
 	"io/ioutil"
-	"net"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
 )
 
-const backOffStart = 1
-const backOffExponent = 2
+const baseUri = "https://soccer.sportmonks.com"
+const defaultRetries = 5
 
-var backOffTotal = 1
-var backOffLimit = 120
+var clientCreationError = errors.New("api key is required to instantiate an api client")
 
-var clientCreationError = errors.New("base URL and API Key are both required to create a Client")
-
+// ApiClient is a HTTP request builder and sender
 type ApiClient struct {
-	Client  *http.Client
-	BaseURL string
-	ApiKey  string
-	Retries int
+	client  *http.Client
+	baseURL string
+	apiKey  string
+	retries int
+	backOffExponent int
+	backOffLimit int
+	backOffTotal int
 }
 
-func NewApiClient(url, key string) (*ApiClient, error) {
-	if url == "" || key == "" {
+func NewApiClient(key string) (*ApiClient, error) {
+	if key == "" {
 		return nil, clientCreationError
 	}
 
-	trans := &http.Transport{
-		Dial: (&net.Dialer{
-			Timeout:   60 * time.Second,
-			KeepAlive: 30 * time.Second,
-		}).Dial,
-		TLSHandshakeTimeout: 60 * time.Second,
-	}
-
 	client := ApiClient{
-		Client: &http.Client{
-			Transport: trans,
-		},
-		BaseURL: url,
-		ApiKey:  key,
-		Retries: 5,
+		client: http.DefaultClient,
+		apiKey:  key,
+		retries: 5,
 	}
 
 	return &client, nil
 }
 
-func (c *ApiClient) SetHTTPClient(client *http.Client) {
-	c.Client = client
+func (c *ApiClient) BaseUrl(url string) {
+	c.baseURL = url
+
+	if c.client == nil {
+		c.client = http.DefaultClient
+	}
 }
 
-func (c *ApiClient) SetRetries(retries int) {
-	c.Retries = retries
+func (c *ApiClient) HTTPClient(client *http.Client) {
+	c.client = client
+
+	if c.client == nil {
+		c.client = http.DefaultClient
+	}
 }
 
-func (c *ApiClient) handleRequest(path string, includes []string, response interface{}) error {
-	built := c.buildUrl(path, includes, 0)
+// Retries sets the maximum number of request retries to attempt upon request failure
+func (c *ApiClient) Retries(retries int) {
+	c.retries = retries
 
-	return c.sendRequest(built, response)
+	if c.retries == 0 {
+		c.retries = defaultRetries
+	}
 }
 
-func (c *ApiClient) handlePaginatedRequest(path string, includes []string, page int, response interface{}) error {
-	built := c.buildUrl(path, includes, page)
-
-	return c.sendRequest(built, response)
+func (c *ApiClient) createRequest(ctx context.Context, path string, includes []string) (*http.Request, error) {
+	return c.buildRequest(ctx, path, includes, 0)
 }
 
-func (c *ApiClient) sendRequest(url string, response interface{}) error {
-	res, err := http.Get(url)
+func (c *ApiClient) createPaginatedRequest(ctx context.Context, path string, includes []string, page int) (*http.Request, error) {
+	return c.buildRequest(ctx, path, includes, page)
+}
+
+func (c *ApiClient) sendRequest(req *http.Request, response interface{}) error {
+	res, err := c.client.Do(req)
 
 	if err != nil {
-		if c.Retries > 0 {
-			backOff()
-			c.Retries--
-			return c.sendRequest(url, response)
+		if c.retries > 0 {
+			c.backOff()
+			c.retries--
+			return c.sendRequest(req, response)
 		}
 
 		return err
 	}
 
-	if err := parseResponseBody(res.Body, &response); err != nil {
+	if err := decodeResponseBody(res.Body, &response); err != nil {
 		return err
 	}
 
-	backOffTotal = backOffStart
+	// Reset Client here
 
 	return nil
 }
 
-func (c *ApiClient) buildUrl(path string, includes []string, page int) string {
-	url := c.BaseURL + path + "?api_token=" + c.ApiKey
+func (c *ApiClient) buildRequest(ctx context.Context, path string, includes []string, page int) (*http.Request, error) {
+	url := c.baseURL + path + "?api_token=" + c.apiKey
 
 	if page > 0 {
 		url = url + "&page=" + strconv.Itoa(page)
@@ -105,10 +108,18 @@ func (c *ApiClient) buildUrl(path string, includes []string, page int) string {
 		url = url + "&include=" + strings.Join(includes, ",")
 	}
 
-	return url
+	req, err := http.NewRequest("GET", url, nil)
+
+	if err != nil {
+		return nil, err
+	}
+
+	req = req.WithContext(ctx)
+
+	return req, nil
 }
 
-func parseResponseBody(body io.ReadCloser, response interface{}) error {
+func decodeResponseBody(body io.ReadCloser, response interface{}) error {
 	defer body.Close()
 
 	b, err := ioutil.ReadAll(body)
@@ -124,11 +135,11 @@ func parseResponseBody(body io.ReadCloser, response interface{}) error {
 	return nil
 }
 
-func backOff() {
-	time.Sleep(time.Duration(backOffTotal))
-	backOffTotal = backOffTotal * backOffExponent
+func (c *ApiClient) backOff() {
+	time.Sleep(time.Duration(c.backOffTotal))
+	c.backOffTotal = c.backOffTotal * c.backOffExponent
 
-	if backOffTotal > backOffLimit {
-		backOffTotal = backOffLimit
+	if c.backOffTotal > c.backOffLimit {
+		c.backOffTotal = c.backOffLimit
 	}
 }
