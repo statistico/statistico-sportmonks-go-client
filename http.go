@@ -3,7 +3,6 @@ package sportmonks
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -12,59 +11,45 @@ import (
 	"time"
 )
 
-const baseUri = "https://soccer.sportmonks.com"
+const defaultBaseUri = "https://soccer.sportmonks.com"
 const defaultRetries = 5
-
-var clientCreationError = errors.New("api key is required to instantiate an api client")
+const defaultBackOffExponent = 2
+const defaultBackOffLimit = 120
+const defaultBackOffTotal = 1
 
 // ApiClient is a HTTP request builder and sender
 type ApiClient struct {
 	client  *http.Client
 	baseURL string
 	apiKey  string
-	retries int
+	maxRetries int
 	backOffExponent int
 	backOffLimit int
 	backOffTotal int
 }
 
-func NewApiClient(key string) (*ApiClient, error) {
-	if key == "" {
-		return nil, clientCreationError
+func (c *ApiClient) baseUrl() string {
+	if c.baseURL == "" {
+		c.baseURL = defaultBaseUri
 	}
 
-	client := ApiClient{
-		client: http.DefaultClient,
-		apiKey:  key,
-		retries: 5,
-	}
-
-	return &client, nil
+	return c.baseURL
 }
 
-func (c *ApiClient) BaseUrl(url string) {
-	c.baseURL = url
-
+func (c *ApiClient) httpClient(client *http.Client) *http.Client {
 	if c.client == nil {
 		c.client = http.DefaultClient
 	}
+
+	return c.client
 }
 
-func (c *ApiClient) HTTPClient(client *http.Client) {
-	c.client = client
-
-	if c.client == nil {
-		c.client = http.DefaultClient
+func (c *ApiClient) retries() int {
+	if c.maxRetries == 0 {
+		c.maxRetries = defaultRetries
 	}
-}
 
-// Retries sets the maximum number of request retries to attempt upon request failure
-func (c *ApiClient) Retries(retries int) {
-	c.retries = retries
-
-	if c.retries == 0 {
-		c.retries = defaultRetries
-	}
+	return c.maxRetries
 }
 
 func (c *ApiClient) createRequest(ctx context.Context, path string, includes []string) (*http.Request, error) {
@@ -79,9 +64,9 @@ func (c *ApiClient) sendRequest(req *http.Request, response interface{}) error {
 	res, err := c.client.Do(req)
 
 	if err != nil {
-		if c.retries > 0 {
+		if c.maxRetries > 0 {
 			c.backOff()
-			c.retries--
+			c.maxRetries--
 			return c.sendRequest(req, response)
 		}
 
