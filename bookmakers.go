@@ -20,7 +20,7 @@ func (c *HTTPClient) Bookmakers(ctx context.Context) ([]Bookmaker, *Meta, error)
 		Meta *Meta `json:"meta"`
 	}{}
 
-	err := c.getResource(ctx, bookmakersUri, url.Values{}, response)
+	err := c.getResource(ctx, bookmakersUri, url.Values{}, &response)
 
 	if err != nil {
 		return nil, nil, err

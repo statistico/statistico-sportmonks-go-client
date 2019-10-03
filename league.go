@@ -1,6 +1,6 @@
 package sportmonks
 
-import "strconv"
+//import "strconv"
 
 const leagueUri = "/api/v2.0/leagues"
 
@@ -32,32 +32,32 @@ type League struct {
 	} `json:"seasons"`
 }
 
-// Make a request to retrieve multiple league resources. The request endpoint executed within this method
-// is paginated, the first argument to this method allows the consumer to specify a page to request.
-// Use the includes slice to enrich the response data.
-func (c *ApiClient) Leagues(page int, includes []string) ([]League, *Meta, error) {
-	response := new(LeaguesResponse)
-
-	err := c.handlePaginatedRequest(leagueUri, includes, page, response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return response.Data, &response.Meta, err
-}
-
-// Retrieve a single league resource by ID. Use the includes slice to enrich the response data.
-func (c *ApiClient) LeagueById(id int, includes []string) (*League, *Meta, error) {
-	url := leagueUri + "/" + strconv.Itoa(id)
-
-	response := new(LeagueResponse)
-
-	err := c.handleRequest(url, includes, response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return &response.Data, &response.Meta, err
-}
+//// Make a request to retrieve multiple league resources. The request endpoint executed within this method
+//// is paginated, the first argument to this method allows the consumer to specify a page to request.
+//// Use the includes slice to enrich the response data.
+//func (c *HTTPClient) Leagues(page int, includes []string) ([]League, *Meta, error) {
+//	response := new(LeaguesResponse)
+//
+//	err := c.handlePaginatedRequest(leagueUri, includes, page, response)
+//
+//	if err != nil {
+//		return nil, nil, err
+//	}
+//
+//	return response.Data, &response.Meta, err
+//}
+//
+//// Retrieve a single league resource by ID. Use the includes slice to enrich the response data.
+//func (c *HTTPClient) LeagueById(id int, includes []string) (*League, *Meta, error) {
+//	url := leagueUri + "/" + strconv.Itoa(id)
+//
+//	response := new(LeagueResponse)
+//
+//	err := c.handleRequest(url, includes, response)
+//
+//	if err != nil {
+//		return nil, nil, err
+//	}
+//
+//	return &response.Data, &response.Meta, err
+//}

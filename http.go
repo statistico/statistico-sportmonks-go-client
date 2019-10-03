@@ -3,6 +3,7 @@ package sportmonks
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -27,6 +28,8 @@ func NewHTTPClient(key string) *HTTPClient {
 }
 
 func (c *HTTPClient) getResource(ctx context.Context, url string, query url.Values, response interface {}) error {
+	url = fmt.Sprintf(c.BaseURL + url + "?api_token=%s", c.Key)
+
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 
 	if err != nil {
@@ -52,21 +55,32 @@ func (c *HTTPClient) do(ctx context.Context, req *http.Request, intf interface{}
 		return err
 	}
 
-	return parseResponseBody(resp.Body, intf)
+	return parseJsonResponseBody(resp.Body, intf)
 }
 
 func checkStatusCode(resp *http.Response) error {
 	if resp.StatusCode != http.StatusOK {
-		return parseResponseBody(resp.Body, ErrBadStatusCode{})
-	}
+		err := new(ErrBadStatusCode)
 
-	return nil
-}
+		e := parseJsonResponseBody(resp.Body, &err)
 
-func parseResponseBody(body io.ReadCloser, response interface{}) error {
-	if err := json.NewDecoder(body).Decode(response); err != nil {
+		// Parse string response into non JSON error
+		if e != nil {
+			return e
+		}
+
 		return err
 	}
 
 	return nil
 }
+
+func parseJsonResponseBody(body io.ReadCloser, response interface{}) error {
+	if err := json.NewDecoder(body).Decode(&response); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+

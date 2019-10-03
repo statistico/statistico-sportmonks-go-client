@@ -1,7 +1,5 @@
 package sportmonks
 
-import "strconv"
-
 const topScorersSeasonUri = "/api/v2.0/topscorers/season"
 
 type TopScorers struct {
@@ -40,32 +38,32 @@ type AggregatedTopScorers struct {
 	} `json:"aggregatedCardscorers"`
 }
 
-// Retrieve a single top scorers resource by season ID. Use the includes slice to enrich the response data.
-func (c *ApiClient) TopScorersBySeasonId(seasonId int, includes []string) (*TopScorers, *Meta, error) {
-	url := topScorersSeasonUri + "/" + strconv.Itoa(seasonId)
-
-	response := new(TopScorersResponse)
-
-	err := c.handleRequest(url, includes, response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return &response.Data, &response.Meta, err
-}
-
-// Retrieve a single aggregated top scorers resource by season ID. Use the includes slice to enrich the response data.
-func (c *ApiClient) AggregatedTopScorersBySeasonId(seasonId int, includes []string) (*AggregatedTopScorers, *Meta, error) {
-	url := topScorersSeasonUri + "/" + strconv.Itoa(seasonId) + "/aggregated"
-
-	response := new(AggregatedTopScorersResponse)
-
-	err := c.handleRequest(url, includes, response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return &response.Data, &response.Meta, err
-}
+//// Retrieve a single top scorers resource by season ID. Use the includes slice to enrich the response data.
+//func (c *HTTPClient) TopScorersBySeasonId(seasonId int, includes []string) (*TopScorers, *Meta, error) {
+//	url := topScorersSeasonUri + "/" + strconv.Itoa(seasonId)
+//
+//	response := new(TopScorersResponse)
+//
+//	err := c.handleRequest(url, includes, response)
+//
+//	if err != nil {
+//		return nil, nil, err
+//	}
+//
+//	return &response.Data, &response.Meta, err
+//}
+//
+//// Retrieve a single aggregated top scorers resource by season ID. Use the includes slice to enrich the response data.
+//func (c *HTTPClient) AggregatedTopScorersBySeasonId(seasonId int, includes []string) (*AggregatedTopScorers, *Meta, error) {
+//	url := topScorersSeasonUri + "/" + strconv.Itoa(seasonId) + "/aggregated"
+//
+//	response := new(AggregatedTopScorersResponse)
+//
+//	err := c.handleRequest(url, includes, response)
+//
+//	if err != nil {
+//		return nil, nil, err
+//	}
+//
+//	return &response.Data, &response.Meta, err
+//}

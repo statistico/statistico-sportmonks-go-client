@@ -1,7 +1,5 @@
 package sportmonks
 
-import "strconv"
-
 const teamUri = "/api/v2.0/teams/"
 const teamSeasonUri = "/api/v2.0/teams/season/"
 
@@ -81,34 +79,34 @@ type Team struct {
 	} `json:"visitorResults, omitempty"`
 }
 
-// Retrieve a single team resource by ID. Use the includes slice to enrich the response data.
-func (c *ApiClient) TeamById(id int, includes []string) (*Team, *Meta, error) {
-	url := teamUri + "/" + strconv.Itoa(id)
-
-	response := new(TeamResponse)
-
-	err := c.handleRequest(url, includes, response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return &response.Data, &response.Meta, err
-}
-
-// Make a request to retrieve multiple team resources for a given season. The request endpoint executed within this
-// method is paginated, the second argument to this method allows the consumer to specify a page to request.
-// Use the includes slice to enrich the response data.
-func (c *ApiClient) TeamsBySeasonId(seasonId int, page int, includes []string) ([]Team, *Meta, error) {
-	url := teamSeasonUri + "/" + strconv.Itoa(seasonId)
-
-	response := new(TeamsResponse)
-
-	err := c.handlePaginatedRequest(url, includes, page, response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return response.Data, &response.Meta, err
-}
+//// Retrieve a single team resource by ID. Use the includes slice to enrich the response data.
+//func (c *HTTPClient) TeamById(id int, includes []string) (*Team, *Meta, error) {
+//	url := teamUri + "/" + strconv.Itoa(id)
+//
+//	response := new(TeamResponse)
+//
+//	err := c.handleRequest(url, includes, response)
+//
+//	if err != nil {
+//		return nil, nil, err
+//	}
+//
+//	return &response.Data, &response.Meta, err
+//}
+//
+//// Make a request to retrieve multiple team resources for a given season. The request endpoint executed within this
+//// method is paginated, the second argument to this method allows the consumer to specify a page to request.
+//// Use the includes slice to enrich the response data.
+//func (c *HTTPClient) TeamsBySeasonId(seasonId int, page int, includes []string) ([]Team, *Meta, error) {
+//	url := teamSeasonUri + "/" + strconv.Itoa(seasonId)
+//
+//	response := new(TeamsResponse)
+//
+//	err := c.handlePaginatedRequest(url, includes, page, response)
+//
+//	if err != nil {
+//		return nil, nil, err
+//	}
+//
+//	return response.Data, &response.Meta, err
+//}

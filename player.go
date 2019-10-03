@@ -1,7 +1,5 @@
 package sportmonks
 
-import "strconv"
-
 const playerUri = "/api/v2.0/players/"
 
 type Player struct {
@@ -44,17 +42,17 @@ type Player struct {
 	} `json:"trophies, omitempty"`
 }
 
-// Retrieve a single player resource by ID. Use the includes slice to enrich the response data.
-func (c *ApiClient) PlayerById(id int, includes []string) (*Player, *Meta, error) {
-	url := playerUri + "/" + strconv.Itoa(id)
-
-	response := new(PlayerResponse)
-
-	err := c.handleRequest(url, includes, response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return &response.Data, &response.Meta, err
-}
+//// Retrieve a single player resource by ID. Use the includes slice to enrich the response data.
+//func (c *HTTPClient) PlayerById(id int, includes []string) (*Player, *Meta, error) {
+//	url := playerUri + "/" + strconv.Itoa(id)
+//
+//	response := new(PlayerResponse)
+//
+//	err := c.handleRequest(url, includes, response)
+//
+//	if err != nil {
+//		return nil, nil, err
+//	}
+//
+//	return &response.Data, &response.Meta, err
+//}

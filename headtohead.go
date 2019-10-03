@@ -1,9 +1,5 @@
 package sportmonks
 
-import (
-	"fmt"
-)
-
 type HeadToHead struct {
 	ID                    int                `json:"id"`
 	LeagueID              int                `json:"league_id"`
@@ -74,20 +70,20 @@ type HeadToHead struct {
 	TeamStats             TeamsStats         `json:"stats"`
 }
 
-const headToHeadUri = "/api/v2.0/head2head"
-
-// Retrieve a multiple fixture resources linked to fixtures between two teams. Use the includes slice to enrich
-// the response data.
-func (c *ApiClient) HeadToHead(teamOne, teamTwo int, includes []string) ([]HeadToHead, *Meta, error) {
-	url := fmt.Sprintf(headToHeadUri + "/%d/%d", teamOne, teamTwo)
-
-	response := new(HeadToHeadResponse)
-
-	err := c.handleRequest(url, includes, response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return response.Data, &response.Meta, err
-}
+//const headToHeadUri = "/api/v2.0/head2head"
+//
+//// Retrieve a multiple fixture resources linked to fixtures between two teams. Use the includes slice to enrich
+//// the response data.
+//func (c *HTTPClient) HeadToHead(teamOne, teamTwo int, includes []string) ([]HeadToHead, *Meta, error) {
+//	url := fmt.Sprintf(headToHeadUri + "/%d/%d", teamOne, teamTwo)
+//
+//	response := new(HeadToHeadResponse)
+//
+//	err := c.handleRequest(url, includes, response)
+//
+//	if err != nil {
+//		return nil, nil, err
+//	}
+//
+//	return response.Data, &response.Meta, err
+//}

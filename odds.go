@@ -1,6 +1,6 @@
 package sportmonks
 
-import "fmt"
+//import "fmt"
 
 const fixtureOddsUri = "/api/v2.0/odds/fixture"
 const inPlayFixtureOddsUri = "/api/v2.0/odds/inplay/fixture"
@@ -43,63 +43,63 @@ type (
 	}
 )
 
-
-// Retrieve a multiple match odds resources by fixture ID.
-func (c *ApiClient) OddsByFixtureId(fixtureId int) ([]MatchOdds, *Meta, error) {
-	url := fmt.Sprintf(fixtureOddsUri + "/%d", fixtureId)
-
-	response := new(MatchOddsResponse)
-
-	err := c.handleRequest(url, []string{}, response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return response.Data, &response.Meta, err
-}
-
-// Retrieve a multiple match odds resources by fixture ID.
-func (c *ApiClient) InPlayOddsByFixtureId(fixtureId int) ([]MatchOdds, *Meta, error) {
-	url := fmt.Sprintf(inPlayFixtureOddsUri + "/%d", fixtureId)
-
-	response := new(MatchOddsResponse)
-
-	err := c.handleRequest(url, []string{}, response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return response.Data, &response.Meta, err
-}
-
-// Retrieve a multiple match odds resources by fixture and bookmaker ID.
-func (c *ApiClient) OddsByFixtureAndBookmaker(fixtureId, bookmakerId int) ([]MatchOdds, *Meta, error) {
-	url := fmt.Sprintf(fixtureOddsUri + "/%d/bookmaker/%d", fixtureId, bookmakerId)
-
-	response := new(MatchOddsResponse)
-
-	err := c.handleRequest(url, []string{}, response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return response.Data, &response.Meta, err
-}
-
-// Retrieve a multiple match odds resources by fixture and bookmaker ID.
-func (c *ApiClient) OddsByFixtureAndMarket(fixtureId, marketId int) ([]MatchOdds, *Meta, error) {
-	url := fmt.Sprintf(fixtureOddsUri + "/%d/market/%d", fixtureId, marketId)
-
-	response := new(MatchOddsResponse)
-
-	err := c.handleRequest(url, []string{}, response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return response.Data, &response.Meta, err
-}
+//
+//// Retrieve a multiple match odds resources by fixture ID.
+//func (c *HTTPClient) OddsByFixtureId(fixtureId int) ([]MatchOdds, *Meta, error) {
+//	url := fmt.Sprintf(fixtureOddsUri + "/%d", fixtureId)
+//
+//	response := new(MatchOddsResponse)
+//
+//	err := c.handleRequest(url, []string{}, response)
+//
+//	if err != nil {
+//		return nil, nil, err
+//	}
+//
+//	return response.Data, &response.Meta, err
+//}
+//
+//// Retrieve a multiple match odds resources by fixture ID.
+//func (c *HTTPClient) InPlayOddsByFixtureId(fixtureId int) ([]MatchOdds, *Meta, error) {
+//	url := fmt.Sprintf(inPlayFixtureOddsUri + "/%d", fixtureId)
+//
+//	response := new(MatchOddsResponse)
+//
+//	err := c.handleRequest(url, []string{}, response)
+//
+//	if err != nil {
+//		return nil, nil, err
+//	}
+//
+//	return response.Data, &response.Meta, err
+//}
+//
+//// Retrieve a multiple match odds resources by fixture and bookmaker ID.
+//func (c *HTTPClient) OddsByFixtureAndBookmaker(fixtureId, bookmakerId int) ([]MatchOdds, *Meta, error) {
+//	url := fmt.Sprintf(fixtureOddsUri + "/%d/bookmaker/%d", fixtureId, bookmakerId)
+//
+//	response := new(MatchOddsResponse)
+//
+//	err := c.handleRequest(url, []string{}, response)
+//
+//	if err != nil {
+//		return nil, nil, err
+//	}
+//
+//	return response.Data, &response.Meta, err
+//}
+//
+//// Retrieve a multiple match odds resources by fixture and bookmaker ID.
+//func (c *HTTPClient) OddsByFixtureAndMarket(fixtureId, marketId int) ([]MatchOdds, *Meta, error) {
+//	url := fmt.Sprintf(fixtureOddsUri + "/%d/market/%d", fixtureId, marketId)
+//
+//	response := new(MatchOddsResponse)
+//
+//	err := c.handleRequest(url, []string{}, response)
+//
+//	if err != nil {
+//		return nil, nil, err
+//	}
+//
+//	return response.Data, &response.Meta, err
+//}

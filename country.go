@@ -2,7 +2,6 @@ package sportmonks
 
 import (
 	"encoding/json"
-	"strconv"
 )
 
 const countryUri = "/api/v2.0/countries"
@@ -28,32 +27,32 @@ type Country struct {
 	} `json:"leagues, omitempty"`
 }
 
-// Make a request to retrieve multiple country resources. The request endpoint executed within this method
-// is paginated, the first argument to this method allows the consumer to specify a page to request.
-// Use the includes slice to enrich the response data.
-func (c *ApiClient) Countries(page int, includes []string, ) ([]Country, *Meta, error) {
-	response := new(CountriesResponse)
-
-	err := c.handlePaginatedRequest(countryUri, includes, page, response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return response.Data, &response.Meta, err
-}
-
-// Retrieve a single country resource by ID. Use the includes slice to enrich the response data.
-func (c *ApiClient) CountryById(id int, includes []string) (*Country, *Meta, error) {
-	url := continentUri + "/" + strconv.Itoa(id)
-
-	response := new(CountryResponse)
-
-	err := c.handleRequest(url, includes, response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return &response.Data, &response.Meta, err
-}
+//// Make a request to retrieve multiple country resources. The request endpoint executed within this method
+//// is paginated, the first argument to this method allows the consumer to specify a page to request.
+//// Use the includes slice to enrich the response data.
+//func (c *HTTPClient) Countries(page int, includes []string, ) ([]Country, *Meta, error) {
+//	response := new(CountriesResponse)
+//
+//	err := c.handlePaginatedRequest(countryUri, includes, page, response)
+//
+//	if err != nil {
+//		return nil, nil, err
+//	}
+//
+//	return response.Data, &response.Meta, err
+//}
+//
+//// Retrieve a single country resource by ID. Use the includes slice to enrich the response data.
+//func (c *HTTPClient) CountryById(id int, includes []string) (*Country, *Meta, error) {
+//	url := continentsUri + "/" + strconv.Itoa(id)
+//
+//	response := new(CountryResponse)
+//
+//	err := c.handleRequest(url, includes, response)
+//
+//	if err != nil {
+//		return nil, nil, err
+//	}
+//
+//	return &response.Data, &response.Meta, err
+//}

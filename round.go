@@ -1,7 +1,5 @@
 package sportmonks
 
-import "strconv"
-
 const roundUri = "/api/v2.0/rounds/"
 const roundSeasonUri = "/api/v2.0/rounds/season/"
 
@@ -23,33 +21,33 @@ type Round struct {
 	Season *Season `json:"season"`
 }
 
-// Retrieve a single round resource by ID. Use the includes slice to enrich the response data.
-func (c *ApiClient) RoundById(id int, includes []string) (*Round, *Meta, error) {
-	url := roundUri + "/" + strconv.Itoa(id)
-
-	response := new(RoundResponse)
-
-	err := c.handleRequest(url, includes, response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return &response.Data, &response.Meta, err
-}
-
-// Make a request to retrieve multiple round resources for a given season. Use the includes slice to enrich the
-// response data.
-func (c *ApiClient) RoundsBySeasonId(id int, includes []string) ([]Round, *Meta, error) {
-	url := roundSeasonUri + "/" + strconv.Itoa(id)
-
-	response := new(RoundsResponse)
-
-	err := c.handleRequest(url, includes, response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return response.Data, &response.Meta, err
-}
+//// Retrieve a single round resource by ID. Use the includes slice to enrich the response data.
+//func (c *HTTPClient) RoundById(id int, includes []string) (*Round, *Meta, error) {
+//	url := roundUri + "/" + strconv.Itoa(id)
+//
+//	response := new(RoundResponse)
+//
+//	err := c.handleRequest(url, includes, response)
+//
+//	if err != nil {
+//		return nil, nil, err
+//	}
+//
+//	return &response.Data, &response.Meta, err
+//}
+//
+//// Make a request to retrieve multiple round resources for a given season. Use the includes slice to enrich the
+//// response data.
+//func (c *HTTPClient) RoundsBySeasonId(id int, includes []string) ([]Round, *Meta, error) {
+//	url := roundSeasonUri + "/" + strconv.Itoa(id)
+//
+//	response := new(RoundsResponse)
+//
+//	err := c.handleRequest(url, includes, response)
+//
+//	if err != nil {
+//		return nil, nil, err
+//	}
+//
+//	return response.Data, &response.Meta, err
+//}
