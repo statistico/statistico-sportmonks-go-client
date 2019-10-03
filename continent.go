@@ -1,46 +1,60 @@
 package sportmonks
 
 import (
+	"context"
+	"fmt"
+	"net/url"
 	"strconv"
+	"strings"
 )
 
-const continentUri = "/api/v2.0/continents"
+const continentsUri = "/continents"
 
 // Continent struct
 type Continent struct {
-	ID   int64    `json:"id"`
-	Name string `json:"name"`
-	Countries struct {
-		Data []Country `json:"data"`
-	} `json:"countries, omitempty"`
+	ID        int64     `json:"id"`
+	Name      string    `json:"name"`
+	Countries Countries `json:"countries, omitempty"`
 }
 
-// Make a request to retrieve multiple continent resources. The request endpoint executed within this method
-// is paginated, the first argument to this method allows the consumer to specify a page to request.
-// Use the includes slice to enrich the response data.
-func (c *ApiClient) Continents(page int, includes []string) ([]Continent, *Meta, error) {
-	response := new(ContinentsResponse)
+// CountryData returns a Country slice
+func (c *Continent) CountryData() []Country {
+	return c.Countries.Data
+}
 
-	err := c.handlePaginatedRequest(continentUri, includes, page, response)
+func (c *HTTPClient) Continents(ctx context.Context, page int, includes []string) ([]Continent, *Meta, error) {
+	values := url.Values{
+		"include": {strings.Join(includes, ",")},
+		"page":    {strconv.Itoa(page)},
+	}
+
+	response := struct {
+		Data []Continent `json:"data"`
+		Meta *Meta       `json:"meta"`
+	}{}
+
+	err := c.getResource(ctx, continentsUri, values, response)
 
 	if err != nil {
 		return nil, nil, err
 	}
 
-	return response.Data, &response.Meta, err
+	return response.Data, response.Meta, err
 }
 
-// Retrieve a single continent resource by ID. Use the includes slice to enrich the response data.
-func (c *ApiClient) ContinentById(id int, includes []string) (*Continent, *Meta, error) {
-	url := continentUri + "/" + strconv.Itoa(id)
+func (c *HTTPClient) ContinentById(ctx context.Context, id int, includes []string) (*Continent, *Meta, error) {
+	path := fmt.Sprintf(continentsUri+"/%d", id)
 
-	response := new(ContinentResponse)
+	response := struct {
+		Data *Continent `json:"data"`
+		Meta *Meta      `json:"meta"`
+	}{}
 
-	err := c.handleRequest(url, includes, response)
+	err := c.getResource(ctx, path, url.Values{}, response)
 
 	if err != nil {
 		return nil, nil, err
 	}
 
-	return &response.Data, &response.Meta, err
+	return response.Data, response.Meta, err
 }

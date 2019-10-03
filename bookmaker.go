@@ -1,10 +1,12 @@
 package sportmonks
 
 import (
+	"context"
 	"fmt"
+	"net/url"
 )
 
-const bookmakerUri = "/api/v2.0/bookmakers"
+const bookmakersUri = "/bookmakers"
 
 type Bookmaker struct {
 	ID   int         `json:"id"`
@@ -12,30 +14,34 @@ type Bookmaker struct {
 	Logo *string     `json:"logo"`
 }
 
-// Make a request to retrieve multiple bookmaker resources.
-func (c *ApiClient) Bookmaker(page int, includes []string) ([]Continent, *Meta, error) {
-	response := new(ContinentsResponse)
+func (c *HTTPClient) Bookmakers(ctx context.Context) ([]Bookmaker, *Meta, error) {
+	response := struct {
+		Data []Bookmaker `json:"data"`
+		Meta *Meta `json:"meta"`
+	}{}
 
-	err := c.handlePaginatedRequest(bookmakerUri, includes, page, response)
+	err := c.getResource(ctx, bookmakersUri, url.Values{}, response)
 
 	if err != nil {
 		return nil, nil, err
 	}
 
-	return response.Data, &response.Meta, err
+	return response.Data, response.Meta, err
 }
 
-// Retrieve a single bookmaker resource by ID. Use the includes slice to enrich the response data.
-func (c *ApiClient) BookmakerById(id int, includes []string) (*Bookmaker, *Meta, error) {
-	url := fmt.Sprintf(bookmakerUri +"/%d", id)
+func (c *HTTPClient) BookmakerById(ctx context.Context, id int) (*Bookmaker, *Meta, error) {
+	path := fmt.Sprintf(bookmakersUri +"/%d", id)
 
-	response := new(BookmakerResponse)
+	response := struct {
+		Data *Bookmaker `json:"data"`
+		Meta *Meta `json:"meta"`
+	}{}
 
-	err := c.handleRequest(url, includes, response)
+	err := c.getResource(ctx, path, url.Values{}, response)
 
 	if err != nil {
 		return nil, nil, err
 	}
 
-	return &response.Data, &response.Meta, err
+	return response.Data, response.Meta, err
 }

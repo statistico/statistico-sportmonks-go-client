@@ -65,6 +65,10 @@ type (
 		Data []CornerEvent `json:"data"`
 	}
 
+	Countries struct {
+		Data []Country `json:"data"`
+	}
+
 	GoalEvent struct {
 		ID               int     `json:"id"`
 		TeamID           string  `json:"team_id"`
