@@ -7,20 +7,18 @@ const leagueUri = "/api/v2.0/leagues"
 // League struct
 type League struct {
 	ID              int    `json:"id"`
+	Active          bool   `json:"active"`
+	Type            string  `json:"type"`
 	LegacyID        int    `json:"legacy_id"`
 	CountryID       int    `json:"country_id"`
+	LogoPath        string  `json:"logo_path"`
 	Name            string `json:"name"`
 	IsCup           bool   `json:"is_cup"`
 	CurrentSeasonID int    `json:"current_season_id"`
 	CurrentRoundID  int    `json:"current_round_id"`
 	CurrentStageID  int    `json:"current_stage_id"`
 	LiveStandings   bool   `json:"live_standings"`
-	Coverage        struct {
-		Predictions      bool `json:"predications"`
-		TopScorerGoals   bool `json:"topscorer_goals"`
-		TopScorerAssists bool `json:"topscorer_assists"`
-		TopScorerCards   bool `json:"topscorer_cards"`
-	} `json:"coverage"`
+	Coverage        LeagueCoverage `json:"coverage"`
 	Country struct {
 		Data *Country `json:"data"`
 	} `json:"country, omitempty"`

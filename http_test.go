@@ -2,6 +2,7 @@ package sportmonks
 
 import (
 	"bytes"
+	"context"
 	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"net/http"
@@ -32,6 +33,25 @@ func TestNewHTTPClient(t *testing.T) {
 
 		assert.Equal(t, "https://example.com", client.BaseURL)
 		assert.Equal(t, "new-key", client.Key)
+	})
+
+	t.Run("url is parsed as expected", func(t *testing.T) {
+		server := newTestClient(func(req *http.Request) *http.Response {
+			assert.Equal(
+				t,
+				req.URL.String(),
+				"https://soccer.sportmonks.com/api/v2.0/continents/10?api_token=api-key&include=countries",
+			)
+
+			return &http.Response{
+				StatusCode: 200,
+				Body:       ioutil.NopCloser(bytes.NewBuffer([]byte(""))),
+			}
+		})
+
+		client := newTestHTTPClient(server)
+
+		_, _, _ = client.ContinentById(context.Background(), 10, []string{"countries"})
 	})
 }
 

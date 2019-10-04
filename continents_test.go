@@ -22,7 +22,7 @@ var continentsResponse = `{
 	]
 }`
 
-var continentsCountriesResponse = `{
+var continentsIncludesResponse = `{
 	"data": [
 		{
 		  "id": 1,
@@ -59,7 +59,7 @@ var continentResponse = `{
 }
 `
 
-var continentCountriesResponse = `{
+var continentIncludesResponse = `{
 	"data": {
 		"id": 1,
 		"name": "Europe",
@@ -106,7 +106,7 @@ func TestContinents(t *testing.T) {
 	})
 
 	t.Run("returns Continent struct slice with country includes data", func(t *testing.T) {
-		server := mockResponseServer(continentsCountriesResponse, 200)
+		server := mockResponseServer(continentsIncludesResponse, 200)
 
 		client := newTestHTTPClient(server)
 
@@ -188,7 +188,7 @@ func TestContinentById(t *testing.T) {
 	})
 
 	t.Run("returns Continent struct with country includes data", func(t *testing.T) {
-		server := mockResponseServer(continentCountriesResponse, 200)
+		server := mockResponseServer(continentIncludesResponse, 200)
 
 		client := newTestHTTPClient(server)
 
@@ -231,24 +231,5 @@ func TestContinentById(t *testing.T) {
 			"Request failed with message: The requested endpoint does not exists!, code: 404",
 			err.Error(),
 		)
-	})
-
-	t.Run("url is parsed as expected", func(t *testing.T) {
-		server := newTestClient(func(req *http.Request) *http.Response {
-			assert.Equal(
-				t,
-				req.URL.String(),
-				"https://soccer.sportmonks.com/api/v2.0/continents/10?api_token=api-key&include=countries",
-			)
-
-			return &http.Response{
-				StatusCode: 200,
-				Body:       ioutil.NopCloser(bytes.NewBuffer([]byte(""))),
-			}
-		})
-
-		client := newTestHTTPClient(server)
-
-		_, _, _ = client.ContinentById(context.Background(), 10, []string{"countries"})
 	})
 }

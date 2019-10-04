@@ -69,6 +69,33 @@ type (
 		Data []Country `json:"data"`
 	}
 
+	ContinentData struct {
+		Data *Continent `json:"data"`
+	}
+
+	CountryExtra struct {
+		Continent   string      `json:"continent"`
+		SubRegion   string      `json:"sub_region"`
+		WorldRegion string      `json:"world_region"`
+		FIFA        string      `json:"fifa, string"`
+		ISO         string      `json:"iso, string"`
+		ISO2        string      `json:"iso2, string"`
+		Longitude   string      `json:"longitude"`
+		Latitude    string      `json:"latitude"`
+		Flag        string      `json:"flag"`
+	}
+
+	Leagues struct {
+		Data []League `json:"data"`
+	}
+
+	LeagueCoverage struct {
+		Predictions      int `json:"predictions"`
+		TopScorerGoals   bool `json:"topscorer_goals"`
+		TopScorerAssists bool `json:"topscorer_assists"`
+		TopScorerCards   bool `json:"topscorer_cards"`
+	}
+
 	GoalEvent struct {
 		ID               int     `json:"id"`
 		TeamID           string  `json:"team_id"`

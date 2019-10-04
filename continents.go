@@ -17,7 +17,7 @@ type Continent struct {
 	Countries Countries `json:"countries, omitempty"`
 }
 
-// CountryData returns a Country slice
+// CountryData returns a Country struct slice associated to a Continent
 func (c *Continent) CountryData() []Country {
 	return c.Countries.Data
 }
@@ -26,7 +26,7 @@ func (c *Continent) CountryData() []Country {
 // is paginated, to select the required page use the 'page' method argument. Page information including current page
 // and total page are included within the Meta response.
 
-// Use the includes string slice to enrich the response data.
+// Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) Continents(ctx context.Context, page int, includes []string) ([]Continent, *Meta, error) {
 	values := url.Values{
 		"page":    {strconv.Itoa(page)},
@@ -49,7 +49,7 @@ func (c *HTTPClient) Continents(ctx context.Context, page int, includes []string
 
 // ContinentById sends a request and returns a single Continent struct.
 
-// Use the includes string slice to enrich the response data.
+// Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) ContinentById(ctx context.Context, id int, includes []string) (*Continent, *Meta, error) {
 	path := fmt.Sprintf(continentsUri+"/%d", id)
 
