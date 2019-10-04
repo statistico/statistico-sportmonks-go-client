@@ -1,6 +1,10 @@
 package sportmonks
 
 type (
+	AggregatedMatchOdds struct {
+		Data []MatchOdds `json:"data"`
+	}
+
 	// Assist Scorer struct
 	AssistScorer struct {
 		Position int    `json:"position"`
@@ -148,6 +152,10 @@ type (
 		Data []PlayerMatchStats `json:"data"`
 	}
 
+	MatchCommentary struct {
+		Data []Commentary `json:"data"`
+	}
+
  	MatchEvent struct {
 		ID                int64       `json:"id"`
 		TeamID            string      `json:"team_id"`
@@ -166,6 +174,14 @@ type (
 
 	MatchEvents struct {
 		Data []MatchEvent `json:"data"`
+	}
+
+	MatchHighlights struct {
+		Data []VideoHighlights `json:"data"`
+	}
+
+	MatchTVStations struct {
+		Data []TVStation `json:"data"`
 	}
 
 	//LineupPlayer struct {
@@ -272,6 +288,10 @@ type (
 		StartDate   string `json:"start_date"`
 	}
 
+	SidelinedData struct {
+		Data []Sidelined `json:"data"`
+	}
+
 	// Sport struct
 	Sport struct {
 		ID      int    `json:"id"`
@@ -319,6 +339,10 @@ type (
  	TeamColors struct {
 		Color     string `json:"color"`
 		KitColors string `json:"kit_colors"`
+	}
+
+	TeamData struct {
+		Data Team `json:"data"`
 	}
 
 	TeamLeagueStanding struct {

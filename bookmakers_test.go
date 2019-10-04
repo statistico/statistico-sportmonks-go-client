@@ -43,9 +43,7 @@ func TestBookmakers(t *testing.T) {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
 		}
 
-		assert.Equal(t, 1, bookmakers[0].ID)
-		assert.Equal(t, "10Bet", bookmakers[0].Name)
-		assert.Nil(t, bookmakers[0].Logo)
+		assertBookmaker(t, &bookmakers[0])
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
@@ -79,9 +77,7 @@ func TestBookMakerById(t *testing.T) {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
 		}
 
-		assert.Equal(t, 1, bookmaker.ID)
-		assert.Equal(t, "10Bet", bookmaker.Name)
-		assert.Nil(t, bookmaker.Logo)
+		assertBookmaker(t, bookmaker)
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
@@ -101,4 +97,10 @@ func TestBookMakerById(t *testing.T) {
 			err.Error(),
 		)
 	})
+}
+
+func assertBookmaker(t *testing.T, bookmaker *Bookmaker) {
+	assert.Equal(t, 1, bookmaker.ID)
+	assert.Equal(t, "10Bet", bookmaker.Name)
+	assert.Nil(t, bookmaker.Logo)
 }

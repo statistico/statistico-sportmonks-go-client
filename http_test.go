@@ -55,6 +55,14 @@ func TestNewHTTPClient(t *testing.T) {
 	})
 }
 
+func assertError(t *testing.T, err error) {
+	assert.Equal(
+		t,
+		"Request failed with message: The requested endpoint does not exists!, code: 404",
+		err.Error(),
+	)
+}
+
 func newTestHTTPClient(server *http.Client) *HTTPClient {
 	return &HTTPClient{
 		HTTPClient: server,

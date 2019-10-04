@@ -35,17 +35,7 @@ func TestCoachById(t *testing.T) {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
 		}
 
-		assert.Equal(t, 2, coach.ID)
-		assert.Equal(t, 1238, coach.TeamID)
-		assert.Equal(t, 462, coach.CountryID)
-		assert.Equal(t, "R. Fowler", coach.CommonName)
-		assert.Equal(t, "Robbie", coach.FirstName)
-		assert.Equal(t, "Fowler", coach.LastName)
-		assert.Equal(t, "England", coach.Nationality)
-		assert.Equal(t, "09/04/1975", coach.BirthDate)
-		assert.Equal(t, "England", coach.BirthCountry)
-		assert.Nil(t, coach.BirthPlace)
-		assert.Equal(t, "https://cdn.sportmonks.com/images/soccer/players/2/2.png", coach.ImagePath)
+		assertCoach(t, coach)
 	})
 
 	t.Run("returns a bad status code error", func(t *testing.T) {
@@ -65,4 +55,18 @@ func TestCoachById(t *testing.T) {
 			err.Error(),
 		)
 	})
+}
+
+func assertCoach(t *testing.T, coach *Coach) {
+	assert.Equal(t, 2, coach.ID)
+	assert.Equal(t, 1238, coach.TeamID)
+	assert.Equal(t, 462, coach.CountryID)
+	assert.Equal(t, "R. Fowler", coach.CommonName)
+	assert.Equal(t, "Robbie", coach.FirstName)
+	assert.Equal(t, "Fowler", coach.LastName)
+	assert.Equal(t, "England", coach.Nationality)
+	assert.Equal(t, "09/04/1975", coach.BirthDate)
+	assert.Equal(t, "England", coach.BirthCountry)
+	assert.Nil(t, coach.BirthPlace)
+	assert.Equal(t, "https://cdn.sportmonks.com/images/soccer/players/2/2.png", coach.ImagePath)
 }

@@ -1,11 +1,8 @@
 package sportmonks
 
 import (
-	"bytes"
 	"context"
 	"github.com/stretchr/testify/assert"
-	"io/ioutil"
-	"net/http"
 	"testing"
 )
 
@@ -14,10 +11,6 @@ var continentsResponse = `{
 		{
 		  "id": 1,
 		  "name": "Europe"
-		},
-		{
-		  "id": 2,
-		  "name": "Asia"
 		}
 	]
 }`
@@ -30,18 +23,18 @@ var continentsIncludesResponse = `{
           "countries": {
 			 "data": [
 				{
-					"id": 2,
-					"name": "Poland",
+					"id": 11,
+					"name": "Germany",
 					"extra": {
-					  "continent": "Europe",
-					  "sub_region": "Eastern Europe",
-					  "world_region": "EMEA",
-					  "fifa": "POL",
-					  "iso": "POL",
-					  "iso2": "PL",
-					  "longitude": "19.37775993347168",
-					  "latitude": "52.147850036621094",
-					  "flag": "http:\/\/www.w3.org\/2000\/svg"
+						"continent": "Europe",
+						"sub_region": "Western Europe",
+						"world_region": "EMEA",
+						"fifa": "GER",
+						"iso": "DEU",
+						"iso2": "DE",
+						"longitude": "19.37775993347168",
+						"latitude": "52.147850036621094",
+						"flag": "http:\/\/www.w3.org\/2000\/svg"
 					}
          		}
 		     ]
@@ -66,18 +59,18 @@ var continentIncludesResponse = `{
         "countries": {
 			 "data": [
 				{
-					"id": 2,
-					"name": "Poland",
+					"id": 11,
+					"name": "Germany",
 					"extra": {
-					  "continent": "Europe",
-					  "sub_region": "Eastern Europe",
-					  "world_region": "EMEA",
-					  "fifa": "POL",
-					  "iso": "POL",
-					  "iso2": "PL",
-					  "longitude": "19.37775993347168",
-					  "latitude": "52.147850036621094",
-					  "flag": "http:\/\/www.w3.org\/2000\/svg"
+						"continent": "Europe",
+						"sub_region": "Western Europe",
+						"world_region": "EMEA",
+						"fifa": "GER",
+						"iso": "DEU",
+						"iso2": "DE",
+						"longitude": "19.37775993347168",
+						"latitude": "52.147850036621094",
+						"flag": "http:\/\/www.w3.org\/2000\/svg"
 					}
          		}
 		     ]
@@ -98,11 +91,7 @@ func TestContinents(t *testing.T) {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
 		}
 
-		assert.Equal(t, 1, continents[0].ID)
-		assert.Equal(t, "Europe", continents[0].Name)
-
-		assert.Equal(t, 2, continents[1].ID)
-		assert.Equal(t, "Asia", continents[1].Name)
+		assertContinent(t, &continents[0])
 	})
 
 	t.Run("returns Continent struct slice with country includes data", func(t *testing.T) {
@@ -118,19 +107,8 @@ func TestContinents(t *testing.T) {
 
 		country := continents[0].CountryData()[0]
 
-		assert.Equal(t, 1, continents[0].ID)
-		assert.Equal(t, "Europe", continents[0].Name)
-		assert.Equal(t, 2, country.ID)
-		assert.Equal(t, "Poland", country.Name)
-		assert.Equal(t, "Europe", country.Extra.Continent)
-		assert.Equal(t, "Eastern Europe", country.Extra.SubRegion)
-		assert.Equal(t, "EMEA", country.Extra.WorldRegion)
-		assert.Equal(t, "POL", country.Extra.FIFA)
-		assert.Equal(t, "POL", country.Extra.ISO)
-		assert.Equal(t, "PL", country.Extra.ISO2)
-		assert.Equal(t, "19.37775993347168", country.Extra.Longitude)
-		assert.Equal(t, "52.147850036621094", country.Extra.Latitude)
-		assert.Equal(t, "http://www.w3.org/2000/svg", country.Extra.Flag)
+		assertContinent(t, &continents[0])
+		assertCountry(t, &country)
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
@@ -144,30 +122,7 @@ func TestContinents(t *testing.T) {
 			t.Fatalf("Test failed, expected nil, got %+v", continents)
 		}
 
-		assert.Equal(
-			t,
-			"Request failed with message: The requested endpoint does not exists!, code: 404",
-			err.Error(),
-		)
-	})
-
-	t.Run("url is parsed as expected", func(t *testing.T) {
-		server := newTestClient(func(req *http.Request) *http.Response {
-			assert.Equal(
-				t,
-				req.URL.String(),
-				"https://soccer.sportmonks.com/api/v2.0/continents?api_token=api-key&include=countries&page=1",
-			)
-
-			return &http.Response{
-				StatusCode: 200,
-				Body:       ioutil.NopCloser(bytes.NewBuffer([]byte(""))),
-			}
-		})
-
-		client := newTestHTTPClient(server)
-
-		_, _, _ = client.Continents(context.Background(), 1, []string{"countries"})
+		assertError(t, err)
 	})
 }
 
@@ -183,8 +138,7 @@ func TestContinentById(t *testing.T) {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
 		}
 
-		assert.Equal(t, 1, continent.ID)
-		assert.Equal(t, "Europe", continent.Name)
+		assertContinent(t, continent)
 	})
 
 	t.Run("returns Continent struct with country includes data", func(t *testing.T) {
@@ -200,19 +154,8 @@ func TestContinentById(t *testing.T) {
 
 		country := continent.CountryData()[0]
 
-		assert.Equal(t, 1, continent.ID)
-		assert.Equal(t, "Europe", continent.Name)
-		assert.Equal(t, 2, country.ID)
-		assert.Equal(t, "Poland", country.Name)
-		assert.Equal(t, "Europe", country.Extra.Continent)
-		assert.Equal(t, "Eastern Europe", country.Extra.SubRegion)
-		assert.Equal(t, "EMEA", country.Extra.WorldRegion)
-		assert.Equal(t, "POL", country.Extra.FIFA)
-		assert.Equal(t, "POL", country.Extra.ISO)
-		assert.Equal(t, "PL", country.Extra.ISO2)
-		assert.Equal(t, "19.37775993347168", country.Extra.Longitude)
-		assert.Equal(t, "52.147850036621094", country.Extra.Latitude)
-		assert.Equal(t, "http://www.w3.org/2000/svg", country.Extra.Flag)
+		assertContinent(t, continent)
+		assertCountry(t, &country)
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
@@ -226,10 +169,11 @@ func TestContinentById(t *testing.T) {
 			t.Fatalf("Test failed, expected nil, got %+v", continent)
 		}
 
-		assert.Equal(
-			t,
-			"Request failed with message: The requested endpoint does not exists!, code: 404",
-			err.Error(),
-		)
+		assertError(t, err)
 	})
+}
+
+func assertContinent(t *testing.T, continent *Continent) {
+	assert.Equal(t, 1, continent.ID)
+	assert.Equal(t, "Europe", continent.Name)
 }
