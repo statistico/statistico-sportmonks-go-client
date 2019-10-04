@@ -85,13 +85,6 @@ var bookmakerResponse = `{
 }
 `
 
-var bookmakerErrorResponse = `{
-	"error": {
-		"message": "The requested endpoint does not exists!",
-		"code": 404
-	}
-}`
-
 func TestBookmakers(t *testing.T) {
 	t.Run("returns bookmaker struct slice", func(t *testing.T) {
 		server := mockResponseServer(bookmakersResponse, 200)
@@ -116,7 +109,7 @@ func TestBookmakers(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		server := mockResponseServer(bookmakerErrorResponse, 400)
+		server := mockResponseServer(errorResponse, 400)
 
 		client := newTestHTTPClient(server)
 
@@ -152,7 +145,7 @@ func TestBookMakerById(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		server := mockResponseServer(bookmakerErrorResponse, 400)
+		server := mockResponseServer(errorResponse, 400)
 
 		client := newTestHTTPClient(server)
 

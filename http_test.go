@@ -8,6 +8,13 @@ import (
 	"testing"
 )
 
+var errorResponse = `{
+	"error": {
+		"message": "The requested endpoint does not exists!",
+		"code": 404
+	}
+}`
+
 func TestNewHTTPClient(t *testing.T) {
 	t.Run("instantiates with default properties", func(t *testing.T) {
 		client := NewHTTPClient("api-key")

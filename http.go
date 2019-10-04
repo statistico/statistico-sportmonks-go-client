@@ -14,21 +14,21 @@ const defaultBaseUrl = "https://soccer.sportmonks.com/api/v2.0"
 // Client is a HTTP request builder and sender
 type HTTPClient struct {
 	HTTPClient *http.Client
-	BaseURL string
-	Key  string
+	BaseURL    string
+	Key        string
 }
 
 // NewClient creates a new Client with default settings. A key is required to instantiate the Client
 func NewHTTPClient(key string) *HTTPClient {
 	return &HTTPClient{
 		HTTPClient: &http.Client{},
-		BaseURL: defaultBaseUrl,
-		Key: key,
+		BaseURL:    defaultBaseUrl,
+		Key:        key,
 	}
 }
 
-func (c *HTTPClient) getResource(ctx context.Context, url string, query url.Values, response interface {}) error {
-	url = fmt.Sprintf(c.BaseURL + url + "?api_token=%s", c.Key)
+func (c *HTTPClient) getResource(ctx context.Context, url string, query url.Values, response interface{}) error {
+	url = fmt.Sprintf(c.BaseURL+url+"?api_token=%s", c.Key)
 
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 
@@ -81,5 +81,3 @@ func parseJsonResponseBody(body io.ReadCloser, response interface{}) error {
 
 	return nil
 }
-
-

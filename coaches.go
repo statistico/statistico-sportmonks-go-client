@@ -23,7 +23,7 @@ type Coach struct {
 	ImagePath    string  `json:"image_path"`
 }
 
-// CoachById sends a request and returns a single Coach resource.
+// CoachById returns a single Coach resource.
 func (c *HTTPClient) CoachById(ctx context.Context, id int) (*Coach, *Meta, error) {
 	path := fmt.Sprintf(coachesUri+"/%d", id)
 

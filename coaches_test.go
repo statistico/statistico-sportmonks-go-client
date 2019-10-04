@@ -23,13 +23,6 @@ var coachResponse = `{
   	}
 }`
 
-var coachErrorResponse = `{
-	"error": {
-		"message": "The requested endpoint does not exists!",
-		"code": 404
-	}
-}`
-
 func TestCoachById(t *testing.T) {
 	t.Run("returns a single coach struct", func(t *testing.T) {
 		server := mockResponseServer(coachResponse, 200)
@@ -56,7 +49,7 @@ func TestCoachById(t *testing.T) {
 	})
 
 	t.Run("returns a bad status code error", func(t *testing.T) {
-		server := mockResponseServer(coachErrorResponse, 404)
+		server := mockResponseServer(errorResponse, 404)
 
 		client := newTestHTTPClient(server)
 
