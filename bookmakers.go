@@ -14,9 +14,9 @@ type Bookmaker struct {
 	Logo *string     `json:"logo"`
 }
 
-func (c *HTTPClient) Bookmakers(ctx context.Context) ([]Bookmaker, *Meta, error) {
+func (c *HTTPClient) Bookmakers(ctx context.Context) ([]*Bookmaker, *Meta, error) {
 	response := struct {
-		Data []Bookmaker `json:"data"`
+		Data []*Bookmaker `json:"data"`
 		Meta *Meta `json:"meta"`
 	}{}
 
@@ -37,7 +37,7 @@ func (c *HTTPClient) BookmakerById(ctx context.Context, id int) (*Bookmaker, *Me
 		Meta *Meta `json:"meta"`
 	}{}
 
-	err := c.getResource(ctx, path, url.Values{}, response)
+	err := c.getResource(ctx, path, url.Values{}, &response)
 
 	if err != nil {
 		return nil, nil, err

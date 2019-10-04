@@ -64,7 +64,6 @@ func checkStatusCode(resp *http.Response) error {
 
 		e := parseJsonResponseBody(resp.Body, &err)
 
-		// Parse string response into non JSON error
 		if e != nil {
 			return e
 		}
