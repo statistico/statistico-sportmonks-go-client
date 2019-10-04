@@ -53,10 +53,11 @@ type (
 			DateTime  string `json:"date_time"`
 			Date      string `json:"date"`
 			Time      string `json:"time"`
-			Timestamp int64  `json:"timestamp"`
+			Timestamp int  `json:"timestamp"`
 			Timezone  string `json:"timezone"`
 		} `json:"starting_at"`
 		Minute      int  `json:"minute"`
+		Second      *int  `json:"second"`
 		AddedTime   *int `json:"added_time"`
 		ExtraMinute *int `json:"extra_minute"`
 		InjuryTime  *int `json:"injury_time"`
@@ -65,6 +66,11 @@ type (
 	Formations struct {
 		LocalTeamFormation   string `json:"localteam_formation"`
 		VisitorTeamFormation string `json:"visitorteam_formation"`
+	}
+
+	KitColors struct {
+		Color *string `json:"color"`
+		KitColor *string `json:"kit_colors"`
 	}
 
 	PlayerCrosses struct {
@@ -140,9 +146,10 @@ type (
 		VisitorTeamScore    int     `json:"visitorteam_score"`
 		LocalTeamPenScore   *int    `json:"localteam_pen_score"`
 		VisitorTeamPenScore *int    `json:"visitorteam_pen_score"`
-		HtScore             *string `json:"ht_score"`
-		FtScore             *string `json:"ft_score"`
-		EtScore             *string `json:"et_score"`
+		HTScore             *string `json:"ht_score"`
+		FTScore             *string `json:"ft_score"`
+		ETScore             *string `json:"et_score"`
+		PSScore             *string `json:"ps_score"`
 	}
 
 	Standings struct {
@@ -153,6 +160,11 @@ type (
 	TeamAttacks struct {
 		Attacks          interface{} `json:"attacks"`
 		DangerousAttacks interface{} `json:"dangerous_attacks"`
+	}
+
+	TeamColors struct {
+		LocalTeam 	KitColors `json:"localteam"`
+		VisitorTeam KitColors `json:"visitorteam"`
 	}
 
 	TeamPasses struct {
@@ -189,11 +201,16 @@ type (
 			Temp float64 `json:"temp"`
 			Unit string  `json:"unit"`
 		} `json:"temperature"`
+		TemperatureCelcius struct {
+			Temp float64 `json:"temp"`
+			Unit string  `json:"unit"`
+		} `json:"temperature_celcius"`
 		Clouds   string `json:"clouds"`
 		Humidity string `json:"humidity"`
+		Pressure *int `json:"pressure"`
 		Wind     struct {
 			Speed  string  `json:"speed"`
-			Degree float64 `json:"degree"`
+			Degree int `json:"degree"`
 		} `json:"wind"`
 		Coordinates struct {
 			Lat *float64 `json:"lat"`

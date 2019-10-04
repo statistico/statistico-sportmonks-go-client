@@ -336,11 +336,6 @@ type (
 		Data []SubstitutionEvent `json:"data"`
 	}
 
- 	TeamColors struct {
-		Color     string `json:"color"`
-		KitColors string `json:"kit_colors"`
-	}
-
 	TeamData struct {
 		Data Team `json:"data"`
 	}

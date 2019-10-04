@@ -1,9 +1,16 @@
 package sportmonks
 
-const fixtureUri = "/api/v2.0/fixtures"
+import (
+	"context"
+	"fmt"
+	"net/url"
+	"strings"
+)
+
+const fixturesUri = "/fixtures"
 const fixtureDateUri = "/api/v2.0/fixtures/date"
 const fixtureBetweenUri = "/api/v2.0/fixtures/between"
-const fixtureMultiUri = "/api/v2.0/fixtures/between"
+const fixturesMultiUri = "/fixtures/multi"
 const fixtureUpdatesUri = "/api/v2.0/fixtures/between"
 
 type Fixture struct {
@@ -18,10 +25,12 @@ type Fixture struct {
 	RefereeID             *int                `json:"referee_id"`
 	LocalTeamID           int                 `json:"localteam_id"`
 	VisitorTeamID         int                 `json:"visitorteam_id"`
+	WinnerTeamID          *int                `json:"winner_team_id"`
 	WeatherReport         WeatherReport       `json:"weather_report"`
 	Commentaries          *bool               `json:"commentaries"`
 	Attendance            *int                `json:"attendance"`
 	Pitch                 *string             `json:"pitch"`
+	Details                 *string             `json:"details"`
 	NeutralVenue          *bool               `json:"neutral_venue"`
 	WinningOddsCalculated bool                `json:"winning_odds_calculated"`
 	Formations            Formations          `json:"formations"`
@@ -29,9 +38,8 @@ type Fixture struct {
 	Time                  FixtureTime         `json:"time"`
 	Coaches               Coaches             `json:"coaches"`
 	Standings             Standings           `json:"standings"`
-	Assistants            Assistants          `json:"assistants"`
 	Leg                   *string             `json:"leg"`
-	Colors                []TeamColors        `json:"colors"`
+	Colors                TeamColors        	`json:"colors"`
 	Deleted               bool                `json:"deleted"`
 	Cards                 CardEvents          `json:"cards"`
 	Corners               CornerEvents        `json:"corners"`
@@ -44,50 +52,71 @@ type Fixture struct {
 	Substitutions         SubstitutionEvents  `json:"substitutions"`
 	Sidelined             SidelinedData       `json:"sidelined"`
 	Comments              MatchCommentary     `json:"comments, omitempty"`
-	TvStations            MatchTVStations     `json:"tvstations"`
+	TVStations            MatchTVStations     `json:"tvstations"`
 	Highlights            MatchHighlights     `json:"highlights, omitempty"`
-	Round                 *Round              `json:"round"`
-	Stage                 *Stage              `json:"stage"`
-	Referee               *Referee            `json:"referee"`
-	Venue                 *Venue              `json:"venue"`
+	Round                 *Round              `json:"round, omitempty"`
+	Stage                 *Stage              `json:"stage, omitempty"`
+	Referee               *Referee            `json:"referee, omitempty"`
+	Assistants            Assistants          `json:"assistants"`
+	Venue                 *Venue              `json:"venue, omitempty"`
 	Odds                  AggregatedMatchOdds `json:"odds, omitempty"`
 	InPlayOdds            AggregatedMatchOdds `json:"inplayOdds, omitempty"`
 	FlatOdds              AggregatedMatchOdds `json:"flatOdds, omitempty"`
-	LocalCoach            *Coach              `json:"localCoach"`
-	VisitorCoach          *Coach              `json:"visitorCoach"`
-	TeamStats             TeamsStats          `json:"stats"`
+	LocalCoach            *Coach              `json:"localCoach, omitempty"`
+	VisitorCoach          *Coach              `json:"visitorCoach, omitempty"`
+	TeamStats             TeamsStats          `json:"stats, omitempty"`
 }
 
-//// Retrieve a single fixture resource by ID. Use the includes slice to enrich the response data.
-//func (c *HTTPClient) FixtureById(id int, includes []string) (*Fixture, *Meta, error) {
-//	url := fixtureUri + "/" + strconv.Itoa(id)
-//
-//	response := new(FixtureResponse)
-//
-//	err := c.handleRequest(url, includes, response)
-//
-//	if err != nil {
-//		return nil, nil, err
-//	}
-//
-//	return &response.Data, &response.Meta, err
-//}
-//
-//// Retrieve a multiple fixture resources by ID. Use the includes slice to enrich the response data.
-//func (c *HTTPClient) FixturesById(ids []string, includes []string) ([]Fixture, *Meta, error) {
-//	url := fixtureMultiUri + "/" + strings.Join(ids, ",")
-//
-//	response := new(FixturesResponse)
-//
-//	err := c.handleRequest(url, includes, response)
-//
-//	if err != nil {
-//		return nil, nil, err
-//	}
-//
-//	return response.Data, &response.Meta, err
-//}
-//
+// FixtureById sends a request and returns a single Fixture struct.
+
+// Use the includes slice of string to enrich the response data.
+func (c *HTTPClient) FixtureById(ctx context.Context, id int, includes []string) (*Fixture, *Meta, error) {
+	path := fmt.Sprintf(fixturesUri+"/%d", id)
+
+	values := url.Values{
+		"include": {strings.Join(includes, ",")},
+	}
+
+	response := struct {
+		Data *Fixture `json:"data"`
+		Meta *Meta    `json:"meta"`
+	}{}
+
+	err := c.getResource(ctx, path, values, &response)
+
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return response.Data, response.Meta, err
+}
+
+// FixturesById returns a slice of Fixture resource struct and supporting meta data.
+
+// Use the includes slice of string to enrich the response data.
+func (c *HTTPClient) FixturesById(ctx context.Context, ids []int, includes []string) ([]Fixture, *Meta, error) {
+	str := strings.Trim(strings.Join(strings.Fields(fmt.Sprint(ids)), ","), "[]")
+
+	path := fmt.Sprintf(fixturesMultiUri +"/%s", str)
+
+	values := url.Values{
+		"include": {strings.Join(includes, ",")},
+	}
+
+	response := struct {
+		Data []Fixture `json:"data"`
+		Meta *Meta    `json:"meta"`
+	}{}
+
+	err := c.getResource(ctx, path, values, &response)
+
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return response.Data, response.Meta, err
+}
+
 //// Retrieve a multiple fixture resources for a given date. The `date` string argument is expected in `YYYY-mm-dd` format
 //// i.e. `2019-03-12`. Use the includes slice to enrich the response data.
 //func (c *HTTPClient) FixturesByDate(date string, includes []string) ([]Fixture, *Meta, error) {
