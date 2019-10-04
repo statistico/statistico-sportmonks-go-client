@@ -81,7 +81,9 @@ var continentIncludesResponse = `{
 
 func TestContinents(t *testing.T) {
 	t.Run("returns Continent struct slice", func(t *testing.T) {
-		server := mockResponseServer(continentsResponse, 200)
+		url := defaultBaseUrl + "/continents?api_token=api-key&include=&page=1"
+
+		server := mockResponseServer(t, continentsResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
@@ -95,7 +97,9 @@ func TestContinents(t *testing.T) {
 	})
 
 	t.Run("returns Continent struct slice with country includes data", func(t *testing.T) {
-		server := mockResponseServer(continentsIncludesResponse, 200)
+		url := defaultBaseUrl + "/continents?api_token=api-key&include=countries&page=1"
+
+		server := mockResponseServer(t, continentsIncludesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
@@ -112,7 +116,9 @@ func TestContinents(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		server := mockResponseServer(errorResponse, 400)
+		url := defaultBaseUrl + "/continents?api_token=api-key&include=&page=1"
+
+		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
@@ -128,7 +134,9 @@ func TestContinents(t *testing.T) {
 
 func TestContinentById(t *testing.T) {
 	t.Run("returns a single Continent struct", func(t *testing.T) {
-		server := mockResponseServer(continentResponse, 200)
+		url := defaultBaseUrl + "/continents/1?api_token=api-key&include="
+
+		server := mockResponseServer(t, continentResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
@@ -142,7 +150,9 @@ func TestContinentById(t *testing.T) {
 	})
 
 	t.Run("returns Continent struct with country includes data", func(t *testing.T) {
-		server := mockResponseServer(continentIncludesResponse, 200)
+		url := defaultBaseUrl + "/continents/1?api_token=api-key&include=countries"
+
+		server := mockResponseServer(t, continentIncludesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
@@ -159,7 +169,9 @@ func TestContinentById(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		server := mockResponseServer(errorResponse, 400)
+		url := defaultBaseUrl + "/continents/1?api_token=api-key&include="
+
+		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 

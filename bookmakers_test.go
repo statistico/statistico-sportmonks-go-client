@@ -32,8 +32,10 @@ var bookmakerResponse = `{
 `
 
 func TestBookmakers(t *testing.T) {
+	url := defaultBaseUrl + "/bookmakers?api_token=api-key"
+
 	t.Run("returns bookmaker struct slice", func(t *testing.T) {
-		server := mockResponseServer(bookmakersResponse, 200)
+		server := mockResponseServer(t, bookmakersResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
@@ -47,7 +49,7 @@ func TestBookmakers(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		server := mockResponseServer(errorResponse, 400)
+		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
@@ -66,8 +68,10 @@ func TestBookmakers(t *testing.T) {
 }
 
 func TestBookMakerById(t *testing.T) {
+	url := defaultBaseUrl + "/bookmakers/1?api_token=api-key"
+
 	t.Run("returns a single bookmaker struct", func(t *testing.T) {
-		server := mockResponseServer(bookmakerResponse, 200)
+		server := mockResponseServer(t, bookmakerResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
@@ -81,11 +85,11 @@ func TestBookMakerById(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		server := mockResponseServer(errorResponse, 400)
+		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		bookmaker, _, err := client.BookmakerById(context.Background(), 10)
+		bookmaker, _, err := client.BookmakerById(context.Background(), 1)
 
 		if bookmaker != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", bookmaker)

@@ -5,13 +5,15 @@ import (
 	"fmt"
 	"net/url"
 	"strings"
+	"time"
 )
 
+const dateFormat = "2006-01-02"
 const fixturesUri = "/fixtures"
-const fixtureDateUri = "/api/v2.0/fixtures/date"
-const fixtureBetweenUri = "/api/v2.0/fixtures/between"
+const fixturesDateUri = "/fixtures/date"
+const fixturesBetweenUri = "/fixtures/between"
+const fixturesLastUpdatedUri = "/fixtures/updates"
 const fixturesMultiUri = "/fixtures/multi"
-const fixtureUpdatesUri = "/api/v2.0/fixtures/between"
 
 type Fixture struct {
 	ID                    int                 `json:"id"`
@@ -67,7 +69,7 @@ type Fixture struct {
 	TeamStats             TeamsStats          `json:"stats, omitempty"`
 }
 
-// FixtureById sends a request and returns a single Fixture struct.
+// FixtureById returns a single Fixture struct.
 
 // Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) FixtureById(ctx context.Context, id int, includes []string) (*Fixture, *Meta, error) {
@@ -91,7 +93,7 @@ func (c *HTTPClient) FixtureById(ctx context.Context, id int, includes []string)
 	return response.Data, response.Meta, err
 }
 
-// FixturesById returns a slice of Fixture resource struct and supporting meta data.
+// FixturesById returns a slice of Fixture struct.
 
 // Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) FixturesById(ctx context.Context, ids []int, includes []string) ([]Fixture, *Meta, error) {
@@ -99,6 +101,45 @@ func (c *HTTPClient) FixturesById(ctx context.Context, ids []int, includes []str
 
 	path := fmt.Sprintf(fixturesMultiUri +"/%s", str)
 
+	return multipleFixtureResponse(c, ctx, path, includes)
+}
+
+// FixturesByDate returns a slice of Fixture struct for a given date.
+
+// Use the includes slice of string to enrich the response data.
+func (c *HTTPClient) FixturesByDate(ctx context.Context, date time.Time, includes []string) ([]Fixture, *Meta, error) {
+	path := fmt.Sprintf(fixturesDateUri + "/" + date.Format("2006-01-02"))
+
+	return multipleFixtureResponse(c, ctx, path, includes)
+}
+
+// FixturesByDate returns a slice of Fixture struct for a between two dates.
+
+// Use the includes slice of string to enrich the response data.
+func (c *HTTPClient) FixturesBetween(ctx context.Context, from, to time.Time, includes []string) ([]Fixture, *Meta, error) {
+	path := fmt.Sprintf(fixturesBetweenUri + "/%s/%s", from.Format(dateFormat), to.Format(dateFormat))
+
+	return multipleFixtureResponse(c, ctx, path, includes)
+}
+
+// FixturesByDate returns a slice of Fixture struct for a between two dates for a given team ID.
+
+// Use the includes slice of string to enrich the response data.
+func (c *HTTPClient) FixturesBetweenForTeam(ctx context.Context, from, to time.Time, teamId int, includes []string) ([]Fixture, *Meta, error) {
+	path := fmt.Sprintf(fixturesBetweenUri + "/%s/%s/%d", from.Format(dateFormat), to.Format(dateFormat), teamId)
+
+	return multipleFixtureResponse(c, ctx, path, includes)
+
+}
+
+// FixturesLastUpdated returns a slice of Fixture struct of fixtures that were most recently updated.
+
+// Use the includes slice of string to enrich the response data.
+func (c *HTTPClient) FixturesLastUpdated(ctx context.Context, includes []string) ([]Fixture, *Meta, error) {
+	return multipleFixtureResponse(c, ctx, fixturesLastUpdatedUri, includes)
+}
+
+func multipleFixtureResponse(client *HTTPClient, ctx context.Context, path string, includes []string) ([]Fixture, *Meta, error) {
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},
 	}
@@ -108,7 +149,7 @@ func (c *HTTPClient) FixturesById(ctx context.Context, ids []int, includes []str
 		Meta *Meta    `json:"meta"`
 	}{}
 
-	err := c.getResource(ctx, path, values, &response)
+	err := client.getResource(ctx, path, values, &response)
 
 	if err != nil {
 		return nil, nil, err
@@ -116,65 +157,3 @@ func (c *HTTPClient) FixturesById(ctx context.Context, ids []int, includes []str
 
 	return response.Data, response.Meta, err
 }
-
-//// Retrieve a multiple fixture resources for a given date. The `date` string argument is expected in `YYYY-mm-dd` format
-//// i.e. `2019-03-12`. Use the includes slice to enrich the response data.
-//func (c *HTTPClient) FixturesByDate(date string, includes []string) ([]Fixture, *Meta, error) {
-//	url := fixtureDateUri + "/" + date
-//
-//	response := new(FixturesResponse)
-//
-//	err := c.handleRequest(url, includes, response)
-//
-//	if err != nil {
-//		return nil, nil, err
-//	}
-//
-//	return response.Data, &response.Meta, err
-//}
-//
-//// Retrieve a multiple fixture resources between two dates. The `dateFrom` and `dateTo` string arguments are expected
-//// in `YYYY-mm-dd` format i.e. `2019-03-12`. Use the includes slice to enrich the response data.
-//func (c *HTTPClient) FixturesBetween(dateFrom, dateTo string, includes []string) ([]Fixture, *Meta, error) {
-//	url := fmt.Sprintf(fixtureBetweenUri + "/between/%s/%s", dateFrom, dateTo)
-//
-//	response := new(FixturesResponse)
-//
-//	err := c.handleRequest(url, includes, response)
-//
-//	if err != nil {
-//		return nil, nil, err
-//	}
-//
-//	return response.Data, &response.Meta, err
-//}
-//
-//// Retrieve a multiple fixture resources between two dates for a given team. The `dateFrom` and `dateTo` string
-//// arguments are expected in `YYYY-mm-dd` format i.e. `2019-03-12`. Use the includes slice to enrich the response data.
-//func (c *HTTPClient) FixturesBetweenForTeam(dateFrom, dateTo string, teamId int, includes []string) ([]Fixture, *Meta, error) {
-//	url := fmt.Sprintf(fixtureBetweenUri + "/between/%s/%s/%d", dateFrom, dateTo, teamId)
-//
-//	response := new(FixturesResponse)
-//
-//	err := c.handleRequest(url, includes, response)
-//
-//	if err != nil {
-//		return nil, nil, err
-//	}
-//
-//	return response.Data, &response.Meta, err
-//}
-//
-//// Retrieve a multiple fixture resources that have recently been updated. Use the includes slice to enrich the response
-//// data.
-//func (c *HTTPClient) FixturesLastUpdated(includes []string) ([]Fixture, *Meta, error) {
-//	response := new(FixturesResponse)
-//
-//	err := c.handleRequest(fixtureUpdatesUri, includes, response)
-//
-//	if err != nil {
-//		return nil, nil, err
-//	}
-//
-//	return response.Data, &response.Meta, err
-//}

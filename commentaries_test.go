@@ -22,8 +22,10 @@ var commentariesResponse = `{
 `
 
 func TestCommentariesByFixtureId(t *testing.T) {
+	url := defaultBaseUrl + "/commentaries/fixture/11867289?api_token=api-key"
+
 	t.Run("returns commentary struct slice", func(t *testing.T) {
-		server := mockResponseServer(commentariesResponse, 200)
+		server := mockResponseServer(t, commentariesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
@@ -37,11 +39,11 @@ func TestCommentariesByFixtureId(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		server := mockResponseServer(errorResponse, 400)
+		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		bookmakers, _, err := client.CommentariesByFixtureId(context.Background(), 999)
+		bookmakers, _, err := client.CommentariesByFixtureId(context.Background(), 11867289)
 
 		if bookmakers != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", bookmakers)

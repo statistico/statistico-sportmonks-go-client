@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/stretchr/testify/assert"
 	"testing"
+	"time"
 )
 
 var fixtureResponse = `{
@@ -213,8 +214,10 @@ var fixturesResponse = `{
 }`
 
 func TestFixtureById(t *testing.T) {
+	url := defaultBaseUrl + "/fixtures/11867285?api_token=api-key&include="
+
 	t.Run("returns a single Fixture struct", func(t *testing.T) {
-		server := mockResponseServer(fixtureResponse, 200)
+		server := mockResponseServer(t, fixtureResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
@@ -228,7 +231,7 @@ func TestFixtureById(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		server := mockResponseServer(errorResponse, 400)
+		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
@@ -243,12 +246,14 @@ func TestFixtureById(t *testing.T) {
 }
 
 func TestFixturesById(t *testing.T) {
+	url := defaultBaseUrl + "/fixtures/multi/11867285,555?api_token=api-key&include="
+
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
-		server := mockResponseServer(fixturesResponse, 200)
+		server := mockResponseServer(t, fixturesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.FixturesById(context.Background(), []int{11867285}, []string{})
+		fixtures, _, err := client.FixturesById(context.Background(), []int{11867285, 555}, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -258,11 +263,128 @@ func TestFixturesById(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		server := mockResponseServer(errorResponse, 400)
+		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.FixtureById(context.Background(), 11867285, []string{})
+		fixtures, _, err := client.FixturesById(context.Background(), []int{11867285, 555}, []string{})
+
+		if fixtures != nil {
+			t.Fatalf("Test failed, expected nil, got %+v", fixtures)
+		}
+
+		assertError(t, err)
+	})
+}
+
+func TestFixturesByDate(t *testing.T) {
+	str := "2014-11-12T11:45:26.371Z"
+	d, err := time.Parse(time.RFC3339, str)
+
+	if err != nil {
+		t.Fatalf("Test failed, expected nil, got %+v", err.Error())
+	}
+
+	url := defaultBaseUrl + "/fixtures/date/2014-11-12?api_token=api-key&include="
+
+	t.Run("returns slice of Fixture struct", func(t *testing.T) {
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesByDate(context.Background(), d, []string{})
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, &fixtures[0])
+	})
+
+	t.Run("returns bad status code error", func(t *testing.T) {
+		server := mockResponseServer(t, errorResponse, 400, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesByDate(context.Background(), d, []string{})
+
+		if fixtures != nil {
+			t.Fatalf("Test failed, expected nil, got %+v", fixtures)
+		}
+
+		assertError(t, err)
+	})
+}
+
+func TestFixturesBetween(t *testing.T) {
+	from := "2014-11-12T11:45:26.371Z"
+	dateFrom, err := time.Parse(time.RFC3339, from)
+
+	if err != nil {
+		t.Fatalf("Test failed, expected nil, got %+v", err.Error())
+	}
+
+	to := "2014-12-12T11:45:26.371Z"
+	dateTo, err := time.Parse(time.RFC3339, to)
+
+	if err != nil {
+		t.Fatalf("Test failed, expected nil, got %+v", err.Error())
+	}
+
+	url := defaultBaseUrl + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include="
+
+	t.Run("returns slice of Fixture struct", func(t *testing.T) {
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesBetween(context.Background(), dateFrom, dateTo, []string{})
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, &fixtures[0])
+	})
+
+	t.Run("returns bad status code error", func(t *testing.T) {
+		server := mockResponseServer(t, errorResponse, 400, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesBetween(context.Background(), dateFrom, dateTo, []string{})
+
+		if fixtures != nil {
+			t.Fatalf("Test failed, expected nil, got %+v", fixtures)
+		}
+
+		assertError(t, err)
+	})
+}
+
+func TestFixturesLastUpdated(t *testing.T) {
+	url := defaultBaseUrl + "/fixtures/updates?api_token=api-key&include="
+
+	t.Run("returns slice of Fixture struct", func(t *testing.T) {
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesLastUpdated(context.Background(), []string{})
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, &fixtures[0])
+	})
+
+	t.Run("returns bad status code error", func(t *testing.T) {
+		server := mockResponseServer(t, errorResponse, 400, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesLastUpdated(context.Background(), []string{})
 
 		if fixtures != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", fixtures)

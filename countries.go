@@ -58,7 +58,7 @@ func (c *HTTPClient) Countries(ctx context.Context, page int, includes []string)
 
 // Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) CountryById(ctx context.Context, id int, includes []string) (*Country, *Meta, error) {
-	path := fmt.Sprintf(continentsUri+"/%d", id)
+	path := fmt.Sprintf(countriesUri +"/%d", id)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},

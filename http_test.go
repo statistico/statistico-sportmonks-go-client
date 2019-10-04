@@ -85,8 +85,10 @@ func newTestClient(fn roundTripFunc) *http.Client {
 	}
 }
 
-func mockResponseServer(body string, code int) *http.Client {
+func mockResponseServer(t *testing.T, body string, code int, url string) *http.Client {
 	return newTestClient(func (req *http.Request) *http.Response {
+		assert.Equal(t, url, req.URL.String())
+
 		return &http.Response{
 			StatusCode: code,
 			Body:       ioutil.NopCloser(bytes.NewBufferString(body)),

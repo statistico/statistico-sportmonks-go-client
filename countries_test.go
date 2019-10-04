@@ -146,7 +146,9 @@ var countryIncludesResponse = `{
 
 func TestCountries(t *testing.T) {
 	t.Run("returns Country struct slice", func(t *testing.T) {
-		server := mockResponseServer(countriesResponse, 200)
+		url := defaultBaseUrl + "/countries?api_token=api-key&include=&page=1"
+
+		server := mockResponseServer(t, countriesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
@@ -162,7 +164,9 @@ func TestCountries(t *testing.T) {
 	})
 
 	t.Run("returns Country struct slice with includes data", func(t *testing.T) {
-		server := mockResponseServer(countriesIncludesResponse, 200)
+		url := defaultBaseUrl + "/countries?api_token=api-key&include=continent%2Cleagues&page=1"
+
+		server := mockResponseServer(t, countriesIncludesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
@@ -181,7 +185,9 @@ func TestCountries(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		server := mockResponseServer(errorResponse, 400)
+		url := defaultBaseUrl + "/countries?api_token=api-key&include=&page=1"
+
+		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
@@ -197,7 +203,9 @@ func TestCountries(t *testing.T) {
 
 func TestCountryById(t *testing.T) {
 	t.Run("returns a single Country struct", func(t *testing.T) {
-		server := mockResponseServer(countryResponse, 200)
+		url := defaultBaseUrl + "/countries/1?api_token=api-key&include="
+
+		server := mockResponseServer(t, countryResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
@@ -213,7 +221,9 @@ func TestCountryById(t *testing.T) {
 	})
 
 	t.Run("returns Country struct with country includes data", func(t *testing.T) {
-		server := mockResponseServer(countryIncludesResponse, 200)
+		url := defaultBaseUrl + "/countries/11?api_token=api-key&include=countries%2C+leagues"
+
+		server := mockResponseServer(t, countryIncludesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
@@ -232,7 +242,9 @@ func TestCountryById(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		server := mockResponseServer(errorResponse, 400)
+		url := defaultBaseUrl + "/countries/11?api_token=api-key&include=countries%2C+leagues"
+
+		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
