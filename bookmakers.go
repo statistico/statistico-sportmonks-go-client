@@ -14,9 +14,10 @@ type Bookmaker struct {
 	Logo *string     `json:"logo"`
 }
 
-func (c *HTTPClient) Bookmakers(ctx context.Context) ([]*Bookmaker, *Meta, error) {
+// Bookmakers sends a request and returns a slice of Bookmaker resource struct and supporting meta data.
+func (c *HTTPClient) Bookmakers(ctx context.Context) ([]Bookmaker, *Meta, error) {
 	response := struct {
-		Data []*Bookmaker `json:"data"`
+		Data []Bookmaker `json:"data"`
 		Meta *Meta `json:"meta"`
 	}{}
 
@@ -29,6 +30,7 @@ func (c *HTTPClient) Bookmakers(ctx context.Context) ([]*Bookmaker, *Meta, error
 	return response.Data, response.Meta, err
 }
 
+// BookmakerById sends a request and returns a single Bookmaker resource.
 func (c *HTTPClient) BookmakerById(ctx context.Context, id int) (*Bookmaker, *Meta, error) {
 	path := fmt.Sprintf(bookmakersUri +"/%d", id)
 

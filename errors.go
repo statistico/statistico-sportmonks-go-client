@@ -13,12 +13,3 @@ type ErrBadStatusCode struct {
 func (e *ErrBadStatusCode) Error() string {
 	return fmt.Sprintf("Request failed with message: %s, code: %d", e.Err.Message, e.Err.Code)
 }
-
-type ErrNotExpectedJSON struct {
-	OriginalBody string
-	Err          error
-}
-
-func (e *ErrNotExpectedJSON) Error() string {
-	return fmt.Sprintf("Unexpected JSON: %s from %s", e.Err.Error(), e.OriginalBody)
-}
