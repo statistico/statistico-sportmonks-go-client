@@ -53,12 +53,16 @@ func (c *HTTPClient) Continents(ctx context.Context, page int, includes []string
 func (c *HTTPClient) ContinentById(ctx context.Context, id int, includes []string) (*Continent, *Meta, error) {
 	path := fmt.Sprintf(continentsUri+"/%d", id)
 
+	values := url.Values{
+		"include": {strings.Join(includes, ",")},
+	}
+
 	response := struct {
 		Data *Continent `json:"data"`
 		Meta *Meta      `json:"meta"`
 	}{}
 
-	err := c.getResource(ctx, path, url.Values{}, &response)
+	err := c.getResource(ctx, path, values, &response)
 
 	if err != nil {
 		return nil, nil, err
