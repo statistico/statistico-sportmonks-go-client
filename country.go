@@ -1,9 +1,5 @@
 package sportmonks
 
-import (
-	"encoding/json"
-)
-
 const countryUri = "/api/v2.0/countries"
 
 // Country struct
@@ -14,10 +10,12 @@ type Country struct {
 		Continent   string      `json:"continent"`
 		SubRegion   string      `json:"sub_region"`
 		WorldRegion string      `json:"world_region"`
-		FIFA        json.Number  `json:", string"`
+		FIFA        string      `json:"fifa, string"`
 		ISO         string      `json:"iso, string"`
+		ISO2        string      `json:"iso2, string"`
 		Longitude   string      `json:"longitude"`
 		Latitude    string      `json:"latitude"`
+		Flag        string      `json:"flag"`
 	} `json:"extra, omitempty"`
 	Continent struct {
 		Data *Continent `json:"data"`

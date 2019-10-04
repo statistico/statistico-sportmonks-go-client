@@ -3,7 +3,6 @@ package sportmonks
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -28,15 +27,15 @@ func NewHTTPClient(key string) *HTTPClient {
 }
 
 func (c *HTTPClient) getResource(ctx context.Context, url string, query url.Values, response interface{}) error {
-	url = fmt.Sprintf(c.BaseURL+url+"?api_token=%s", c.Key)
-
-	req, err := http.NewRequest(http.MethodGet, url, nil)
+	req, err := http.NewRequest(http.MethodGet, c.BaseURL + url, nil)
 
 	if err != nil {
 		return err
 	}
 
-	req.URL.RawPath = query.Encode()
+	query.Set("api_token", c.Key)
+
+	req.URL.RawQuery = query.Encode()
 
 	return c.do(ctx, req, response)
 }

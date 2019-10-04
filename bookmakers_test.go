@@ -18,34 +18,7 @@ var bookmakersResponse = `{
 		  "name": "bet365",
 		  "logo": null
 		}
-	],
-	"meta": {
-    "subscription": {
-      "started_at": {
-        "date": "2019-06-06 10:26:46.000000",
-        "timezone_type": 3,
-        "timezone": "UTC"
-      },
-      "trial_ends_at": {
-        "date": "2019-06-06 10:38:03.000000",
-        "timezone_type": 3,
-        "timezone": "UTC"
-      },
-      "ends_at": null
-    },
-    "plan": {
-      "name": "Euro Plan Standard",
-      "price": "40.00",
-      "request_limit": "2000,60"
-    },
-    "sports": [
-      {
-        "id": 1,
-        "name": "Soccer",
-        "current": true
-      }
-    ]
-  }
+	]
 }
 `
 
@@ -54,34 +27,7 @@ var bookmakerResponse = `{
 		"id": 1,
     	"name": "10Bet",
     	"logo": null
-	},
-	"meta": {
-    "subscription": {
-      "started_at": {
-        "date": "2019-06-06 10:26:46.000000",
-        "timezone_type": 3,
-        "timezone": "UTC"
-      },
-      "trial_ends_at": {
-        "date": "2019-06-06 10:38:03.000000",
-        "timezone_type": 3,
-        "timezone": "UTC"
-      },
-      "ends_at": null
-    },
-    "plan": {
-      "name": "Euro Plan Standard",
-      "price": "40.00",
-      "request_limit": "2000,60"
-    },
-    "sports": [
-      {
-        "id": 1,
-        "name": "Soccer",
-        "current": true
-      }
-    ]
-  }
+	}
 }
 `
 
@@ -91,7 +37,7 @@ func TestBookmakers(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		bookmakers, meta, err := client.Bookmakers(context.Background())
+		bookmakers, _, err := client.Bookmakers(context.Background())
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -100,12 +46,6 @@ func TestBookmakers(t *testing.T) {
 		assert.Equal(t, 1, bookmakers[0].ID)
 		assert.Equal(t, "10Bet", bookmakers[0].Name)
 		assert.Nil(t, bookmakers[0].Logo)
-		assert.Equal(t, "Euro Plan Standard", meta.Plan.Name)
-		assert.Equal(t, "40.00", meta.Plan.Price)
-		assert.Equal(t, "2000,60", meta.Plan.RequestLimit)
-		assert.Equal(t, 1, (*meta.Sports)[0].ID)
-		assert.Equal(t, "Soccer", (*meta.Sports)[0].Name)
-		assert.Equal(t, true, (*meta.Sports)[0].Current)
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
