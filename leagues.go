@@ -70,7 +70,7 @@ func (c *HTTPClient) Leagues(ctx context.Context, page int, includes []string) (
 	return response.Data, response.Meta, err
 }
 
-// LeagueById sends a request and returns a single League struct.
+// LeagueById returns a single League struct.
 
 // Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) LeagueById(ctx context.Context, id int, includes []string) (*League, *Meta, error) {
