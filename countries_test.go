@@ -32,46 +32,46 @@ var countriesIncludesResponse = `{
 			"id": 11,
 			"name": "Germany",
 			"extra": {
-			"continent": "Europe",
-			"sub_region": "Western Europe",
-			"world_region": "EMEA",
-			"fifa": "GER",
-			"iso": "DEU",
-			"iso2": "DE",
-			"longitude": "19.37775993347168",
-			"latitude": "52.147850036621094",
-			"flag": "http:\/\/www.w3.org\/2000\/svg"
-		},
-		"continent": {
-			"data": {
-			  "id": 1,
-			  "name": "Europe"
-			}
-		},
-		"leagues": {
-		   "data": [
-				{
-					"id": 82,
-					"active": true,
-					"type": "domestic",
-					"legacy_id": 4,
-					"country_id": 11,
-					"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/leagues\/82.png",
-					"name": "Bundesliga",
-					"is_cup": false,
-					"current_season_id": 16264,
-					"current_round_id": 174546,
-					"current_stage_id": 77444845,
-					"live_standings": true,
-					"coverage": {
-					  "predictions": 1,
-					  "topscorer_goals": true,
-					  "topscorer_assists": true,
-					  "topscorer_cards": true
-					}
+				"continent": "Europe",
+				"sub_region": "Western Europe",
+				"world_region": "EMEA",
+				"fifa": "GER",
+				"iso": "DEU",
+				"iso2": "DE",
+				"longitude": "19.37775993347168",
+				"latitude": "52.147850036621094",
+				"flag": "http:\/\/www.w3.org\/2000\/svg"
+			},
+			"continent": {
+				"data": {
+				  "id": 1,
+				  "name": "Europe"
 				}
-		   ]
-		}
+			},
+			"leagues": {
+			   "data": [
+					{
+						"id": 82,
+						"active": true,
+						"type": "domestic",
+						"legacy_id": 4,
+						"country_id": 11,
+						"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/leagues\/82.png",
+						"name": "Bundesliga",
+						"is_cup": false,
+						"current_season_id": 16264,
+						"current_round_id": 174546,
+						"current_stage_id": 77444845,
+						"live_standings": true,
+						"coverage": {
+						  "predictions": 1,
+						  "topscorer_goals": true,
+						  "topscorer_assists": true,
+						  "topscorer_cards": true
+						}
+					}
+			   ]
+			}
 		}
 	]
 }`

@@ -73,6 +73,10 @@ type (
 		Data []Country `json:"data"`
 	}
 
+	CountryData struct {
+		Data *Country `json:"data"`
+	}
+
 	ContinentData struct {
 		Data *Continent `json:"data"`
 	}
@@ -278,6 +282,14 @@ type (
 		FullName   string `json:"fullname"`
 		FirstName  string `json:"firstname"`
 		LastName   string `json:"lastname"`
+	}
+
+	Seasons struct {
+		Data []Season `json:"data"`
+	}
+
+	SeasonData struct {
+		Data *Season `json:"data"`
 	}
 
  	Sidelined struct {
