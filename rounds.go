@@ -18,15 +18,15 @@ type Round struct {
 	StageID  int    `json:"stage_id"`
 	Start    string `json:"start"`
 	End      string `json:"end"`
-	FixtureData Fixtures `json:"fixtures, omitempty"`
+	FixturesData FixturesData `json:"fixtures, omitempty"`
 	LeagueData  LeagueData `json:"league"`
-	ResultsData Fixtures `json:"results, omitempty"`
+	ResultsData FixturesData `json:"results, omitempty"`
 	SeasonData  SeasonData `json:"season"`
 }
 
 // Fixtures returns a slice of Fixture struct associated to a Round
 func (r *Round) Fixtures() []Fixture {
-	return r.FixtureData.Data
+	return r.FixturesData.Data
 }
 
 // League returns a League struct associated to a Round

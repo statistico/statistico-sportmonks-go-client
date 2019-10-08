@@ -1,55 +1,30 @@
 package sportmonks
 
-const seasonUri = "/api/v2.0/seasons"
+const seasonsUri = "/seasons"
 
 // Season struct
 type Season struct {
-	ID              int    `json:"id"`
-	Name            string `json:"name"`
-	LeagueID        int    `json:"league_id"`
-	IsCurrentSeason bool   `json:"is_current_season"`
-	CurrentRoundID  *int   `json:"current_round_id"`
-	CurrentStageID  *int   `json:"current_stage_id"`
-	AggregatedAssistScorers struct {
-		Data []AssistScorer `json:"data"`
-	} `json:"aggregatedAssistscorers, omitempty"`
-	AggregatedCardScorers struct {
-		Data []CardScorer `json:"data"`
-	} `json:"aggregatedCardscorers, omitempty"`
-	AggregatedGoalScorers struct {
-		Data []GoalScorer `json:"data"`
-	} `json:"aggregatedGoalscorers, omitempty"`
-	AssistScorers struct {
-		Data []AssistScorer `json:"data"`
-	} `json:"assistscorers, omitempty"`
-	CardScorers struct {
-		Data []CardScorer `json:"data"`
-	} `json:"cardscorers, omitempty"`
-	Fixtures        struct {
-		Data []Fixture `json:"data"`
-	} `json:"fixtures, omitempty"`
-	GoalScorers struct {
-		Data []GoalScorer `json:"data"`
-	} `json:"goalscorers, omitempty"`
-	Groups struct {
-		Data []Group `json:"data"`
-	} `json:"groups, omitempty"`
-	League struct {
-		Data *League `json:"data"`
-	} `json:"league, omitempty"`
-	Results struct {
-		Data []Fixture `json:"data"`
-	} `json:"results, omitempty"`
-	Rounds struct {
-		Data []Round `json:"data"`
-	} `json:"rounds, omitempty"`
-	Stages struct {
-		Data []Stage `json:"data"`
-	} `json:"stages, omitempty"`
-	Upcoming struct {
-		Data []Fixture `json:"data"`
-	} `json:"upcoming, omitempty"`
+	ID                         int                        `json:"id"`
+	Name                       string                     `json:"name"`
+	LeagueID                   int                        `json:"league_id"`
+	IsCurrentSeason            bool                       `json:"is_current_season"`
+	CurrentRoundID             *int                       `json:"current_round_id"`
+	CurrentStageID             *int                       `json:"current_stage_id"`
+	AggregatedAssistScorerData AggregatedAssistScorerData `json:"aggregatedAssistscorers, omitempty"`
+	AggregatedCardScorerData   AggregatedCardScorerData   `json:"aggregatedCardscorers, omitempty"`
+	AggregatedGoalScorerData   AggregatedGoalScorerData   `json:"aggregatedGoalscorers, omitempty"`
+	AssistScorerData           AssistScorerData           `json:"assistscorers, omitempty"`
+	CardScorerData             CardScorerData             `json:"cardscorers, omitempty"`
+	FixturesData               FixturesData               `json:"fixtures, omitempty"`
+	GoalScorerData             GoalScorerData             `json:"goalscorers, omitempty"`
+	GroupsData                 GroupsData                 `json:"groups, omitempty"`
+	LeagueData                 LeagueData                 `json:"league, omitempty"`
+	ResultsData                FixturesData               `json:"results, omitempty"`
+	RoundsData                 RoundsData                 `json:"rounds, omitempty"`
+	StagesData                 StagesData                 `json:"stages, omitempty"`
+	Upcoming                   FixturesData               `json:"upcoming, omitempty"`
 }
+
 //
 //// Make a request to retrieve multiple season resources. The request endpoint executed within this method
 //// is paginated, the first argument to this method allows the consumer to specify a page to request.

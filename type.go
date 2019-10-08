@@ -1,8 +1,24 @@
 package sportmonks
 
 type (
+	AggregatedAssistScorerData struct {
+		Data []AssistScorer `json:"data"`
+	}
+
+	AggregatedCardScorerData struct {
+		Data []CardScorer `json:"data"`
+	}
+
+	AggregatedGoalScorerData struct {
+		Data []GoalScorer `json:"data"`
+	}
+
 	AggregatedMatchOdds struct {
 		Data []MatchOdds `json:"data"`
+	}
+
+	AssistScorerData struct {
+		Data []AssistScorer `json:"data"`
 	}
 
 	// Assist Scorer struct
@@ -56,6 +72,10 @@ type (
 		} `json:"team"`
 	}
 
+	CardScorerData struct {
+		Data []CardScorer `json:"data"`
+	}
+
  	CornerEvent struct {
 		ID          int         `json:"id"`
 		TeamID      int         `json:"team_id"`
@@ -93,6 +113,14 @@ type (
 		Flag        string      `json:"flag"`
 	}
 
+	GoalScorerData struct {
+		Data []GoalScorer `json:"data"`
+	}
+
+	GroupsData struct {
+		Data []Group `json:"data"`
+	}
+
 	Leagues struct {
 		Data []League `json:"data"`
 	}
@@ -104,7 +132,7 @@ type (
 		TopScorerCards   bool `json:"topscorer_cards"`
 	}
 
-	Fixtures struct {
+	FixturesData struct {
 		Data []Fixture `json:"data"`
 	}
 
@@ -292,6 +320,10 @@ type (
 		LastName   string `json:"lastname"`
 	}
 
+	RoundsData struct {
+		Data []Round `json:"data"`
+	}
+
 	Seasons struct {
 		Data []Season `json:"data"`
 	}
@@ -336,6 +368,10 @@ type (
 		Yellowcards        int  `json:"yellowcards"`
 		Yellowred          int  `json:"yellowred"`
 		Redcards           int  `json:"redcards"`
+	}
+
+	StagesData struct {
+		Data []Stage `json:"data"`
 	}
 
 	SubstitutionEvent struct {
