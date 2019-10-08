@@ -104,6 +104,10 @@ type (
 		TopScorerCards   bool `json:"topscorer_cards"`
 	}
 
+	Fixtures struct {
+		Data []Fixture `json:"data"`
+	}
+
 	GoalEvent struct {
 		ID               int     `json:"id"`
 		TeamID           string  `json:"team_id"`
@@ -151,6 +155,10 @@ type (
 		StageName string `json:"stage_name"`
 		Resource  string `json:"resource"`
  	}
+
+	LeagueData struct {
+		Data *League `json:"data"`
+	}
 
 	Lineup struct {
 		Data []PlayerMatchStats `json:"data"`

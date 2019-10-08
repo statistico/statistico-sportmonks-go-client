@@ -79,6 +79,7 @@ func (c *HTTPClient) LeagueById(ctx context.Context, id int, includes []string) 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},
 	}
+
 	response := struct {
 		Data *League `json:"data"`
 		Meta *Meta      `json:"meta"`
