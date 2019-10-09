@@ -46,7 +46,7 @@ var roundIncludesResponse = `{
 				  "topscorer_goals": true,
 				  "topscorer_assists": true,
 				  "topscorer_cards": true
-				},
+				}
 			}
 		},
 		"season": {
@@ -311,7 +311,7 @@ var roundsSeasonIncludesResponse = `{
 					  "topscorer_goals": true,
 					  "topscorer_assists": true,
 					  "topscorer_cards": true
-					},
+					}
 				}
 			},
 			"season": {

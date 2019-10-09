@@ -177,8 +177,8 @@ type (
 		Name      string `json:"name"`
 		LeagueID  int    `json:"league_id"`
 		SeasonID  int    `json:"season_id"`
-		RoundID   int    `json:"round_id"`
-		RoundName int    `json:"round_name"`
+		RoundID   *int    `json:"round_id"`
+		RoundName *int    `json:"round_name"`
 		StageID   int    `json:"stage_id"`
 		StageName string `json:"stage_name"`
 		Resource  string `json:"resource"`

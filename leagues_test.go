@@ -250,7 +250,7 @@ func TestLeagueById(t *testing.T) {
 		assertLeague(t, league)
 	})
 
-	t.Run("returns aLeague struct with includes data", func(t *testing.T) {
+	t.Run("returns a League struct with includes data", func(t *testing.T) {
 		url := defaultBaseUrl + "/leagues/82?api_token=api-key&include=country%2Cseason%2Cseasons"
 
 		server := mockResponseServer(t, leagueIncludesResponse, 200, url)
