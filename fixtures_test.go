@@ -106,7 +106,7 @@ var fixtureResponse = `{
 		  }
 		},
 		"deleted": false
-  }
+  	}
 }`
 
 var fixturesResponse = `{
