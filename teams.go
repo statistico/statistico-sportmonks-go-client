@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/url"
+	"strconv"
 	"strings"
 )
 
@@ -35,7 +36,7 @@ type Team struct {
 	LeagueData                 LeagueData                 `json:"league, omitempty"`
 	LocalFixtureData           FixturesData               `json:"visitorFixtures, omitempty"`
 	SidelinedData              SidelinedData              `json:"sidelined, omitempty"`
-	SquadData                  PlayersData                `json:"squad, omitempty"`
+	SquadData                  SquadPlayerData                `json:"squad, omitempty"`
 	StatsData                  TeamSeasonStatsData        `json:"stats, omitempty"`
 	TransfersData              TransfersData              `json:"transfers, omitempty"`
 	UEFARankingData            RankingData                `json:"uefaranking. omitempty"`
@@ -97,7 +98,7 @@ func (t *Team) Sidelined() []Sidelined {
 	return t.SidelinedData.Data
 }
 
-func (t *Team) Squad() []Player {
+func (t *Team) Squad() []SquadPlayer {
 	return t.SquadData.Data
 }
 
@@ -152,19 +153,29 @@ func (c *HTTPClient) TeamById(ctx context.Context, id int, includes []string) (*
 	return response.Data, response.Meta, err
 }
 
-//// Make a request to retrieve multiple team resources for a given season. The request endpoint executed within this
-//// method is paginated, the second argument to this method allows the consumer to specify a page to request.
-//// Use the includes slice to enrich the response data.
-//func (c *HTTPClient) TeamsBySeasonId(seasonId int, page int, includes []string) ([]Team, *Meta, error) {
-//	url := teamSeasonUri + "/" + strconv.Itoa(seasonId)
-//
-//	response := new(TeamsResponse)
-//
-//	err := c.handlePaginatedRequest(url, includes, page, response)
-//
-//	if err != nil {
-//		return nil, nil, err
-//	}
-//
-//	return response.Data, &response.Meta, err
-//}
+// TeamsBySeasonId returns a slice of Team struct associated to a season with supporting meta data. The endpoint used
+// within this method is paginated, to select the required page use the 'page' method argument. Page information
+// including current page and total page are included within the Meta response.
+
+// Use the includes slice of string to enrich the response data.
+func (c *HTTPClient) TeamsBySeasonId(ctx context.Context, seasonId, page int, includes []string) ([]Team, *Meta, error) {
+	path := fmt.Sprintf(teamsSeasonUri + "/%d", seasonId)
+
+	values := url.Values{
+		"include": {strings.Join(includes, ",")},
+		"page":    {strconv.Itoa(page)},
+	}
+
+	response := struct {
+		Data []Team `json:"data"`
+		Meta *Meta      `json:"meta"`
+	}{}
+
+	err := c.getResource(ctx, path, values, &response)
+
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return response.Data, response.Meta, err
+}

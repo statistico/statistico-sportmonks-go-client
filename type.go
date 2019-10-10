@@ -431,6 +431,10 @@ type (
 		Penalties Penalties`json:"penalties"`
  	}
 
+	SquadPlayerData struct {
+		Data []SquadPlayer `json:"data"`
+	}
+
 	StagesData struct {
 		Data []Stage `json:"data"`
 	}

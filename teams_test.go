@@ -38,6 +38,120 @@ var teamIncludesResponse = `{
 		"squad": {
 			"data": [
 				{
+					  "player_id": 219591,
+					  "position_id": 2,
+					  "number": 4,
+					  "captain": 0,
+					  "injured": false,
+					  "minutes": 90,
+					  "appearences": 2,
+					  "lineups": 1,
+					  "substitute_in": 1,
+					  "substitute_out": 0,
+					  "substitutes_on_bench": 7,
+					  "goals": 0,
+					  "assists": 0,
+					  "saves": null,
+					  "inside_box_saves": null,
+					  "dispossesed": null,
+					  "interceptions": null,
+					  "yellowcards": 1,
+					  "yellowred": 0,
+					  "redcards": 0,
+					  "tackles": null,
+					  "blocks": null,
+					  "hit_post": null,
+					  "fouls": {
+						"committed": 2,
+						"drawn": null
+					  },
+					  "crosses": {
+						"total": null,
+						"accurate": null
+					  },
+					  "dribbles": {
+						"attempts": null,
+						"success": null,
+						"dribbled_past": null
+					  },
+					  "duels": {
+						"total": null,
+						"won": null
+					  },
+					  "passes": {
+						"total": 30,
+						"accuracy": 75,
+						"key_passes": null
+					  },
+					  "penalties": {
+						"won": null,
+						"scores": null,
+						"missed": null,
+						"committed": null,
+						"saves": null
+					  }
+				}
+			]
+		},
+		"league": {
+			"data": {
+				"id": 82,
+				"active": true,
+				"type": "domestic",
+				"legacy_id": 4,
+				"country_id": 11,
+				"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/leagues\/82.png",
+				"name": "Bundesliga",
+				"is_cup": false,
+				"current_season_id": 16264,
+				"current_round_id": 174546,
+				"current_stage_id": 77444845,
+				"live_standings": true,
+				"coverage": {
+				  "predictions": 1,
+				  "topscorer_goals": true,
+				  "topscorer_assists": true,
+				  "topscorer_cards": true
+				}
+			}
+		}
+	}
+}`
+
+var teamsResponse = `{
+	"data": [
+		{
+			"id": 1,
+			"legacy_id": 377,
+			"name": "West Ham United",
+			"short_code": "WHU",
+			"twitter": "@WestHamUtd",
+			"country_id": 462,
+			"national_team": false,
+			"founded": 1895,
+			"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/teams\/1\/1.png",
+			"venue_id": 214,
+			"current_season_id": 16036
+		}
+	]
+}`
+
+var teamsIncludesReponse = `{
+	"data": [
+		{
+			"id": 1,
+			"legacy_id": 377,
+			"name": "West Ham United",
+			"short_code": "WHU",
+			"twitter": "@WestHamUtd",
+			"country_id": 462,
+			"national_team": false,
+			"founded": 1895,
+			"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/teams\/1\/1.png",
+			"venue_id": 214,
+			"current_season_id": 16036,
+			"squad": {
+				"data": [
 					{
 						  "player_id": 219591,
 						  "position_id": 2,
@@ -92,10 +206,32 @@ var teamIncludesResponse = `{
 							"saves": null
 						  }
 					}
+				]
+			},
+			"league": {
+				"data": {
+					"id": 82,
+					"active": true,
+					"type": "domestic",
+					"legacy_id": 4,
+					"country_id": 11,
+					"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/leagues\/82.png",
+					"name": "Bundesliga",
+					"is_cup": false,
+					"current_season_id": 16264,
+					"current_round_id": 174546,
+					"current_stage_id": 77444845,
+					"live_standings": true,
+					"coverage": {
+					  "predictions": 1,
+					  "topscorer_goals": true,
+					  "topscorer_assists": true,
+					  "topscorer_cards": true
+					}
 				}
-			]
+			}
 		}
-	}
+	]
 }`
 
 func TestTeamById(t *testing.T) {
@@ -113,6 +249,97 @@ func TestTeamById(t *testing.T) {
 		}
 
 		assertTeam(t, team)
+	})
+
+	t.Run("returns a single Team struct with includes data", func(t *testing.T) {
+		url := defaultBaseUrl + "/teams/1?api_token=api-key&include=squad%2Cleague"
+
+		server := mockResponseServer(t, teamIncludesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		team, _, err := client.TeamById(context.Background(), 1, []string{"squad", "league"})
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertTeam(t, team)
+		assertSquadPlayer(t, &team.Squad()[0])
+		assertLeague(t, team.League())
+	})
+
+	t.Run("returns bad status code error", func(t *testing.T) {
+		url := defaultBaseUrl + "/teams/1?api_token=api-key&include="
+
+		server := mockResponseServer(t, errorResponse, 400, url)
+
+		client := newTestHTTPClient(server)
+
+		team, _, err := client.TeamById(context.Background(), 1, []string{})
+
+		if team != nil {
+			t.Fatalf("Test failed, expected nil, got %+v", team)
+		}
+
+		assertError(t, err)
+	})
+}
+
+func TestTeamsBySeasonId(t *testing.T) {
+	t.Run("returns a slice of Team struct", func(t *testing.T) {
+		url := defaultBaseUrl + "/teams/season/12962?api_token=api-key&include=&page=1"
+
+		server := mockResponseServer(t, teamsResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		teams, _, err := client.TeamsBySeasonId(context.Background(), 12962, 1, []string{})
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertTeam(t, &teams[0])
+	})
+
+	t.Run("returns a slice of Team struct with includes data", func(t *testing.T) {
+		url := defaultBaseUrl + "/teams/season/12962?api_token=api-key&include=squad%2Cleague&page=1"
+
+		server := mockResponseServer(t, teamsIncludesReponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		teams, _, err := client.TeamsBySeasonId(
+			context.Background(),
+			12962,
+			1,
+			[]string{"squad", "league"},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertTeam(t, &teams[0])
+		assertSquadPlayer(t, &teams[0].Squad()[0])
+		assertLeague(t, teams[0].League())
+	})
+
+	t.Run("returns bad status code error", func(t *testing.T) {
+		url := defaultBaseUrl + "/teams/season/12962?api_token=api-key&include=&page=1"
+
+		server := mockResponseServer(t, errorResponse, 400, url)
+
+		client := newTestHTTPClient(server)
+
+		teams, _, err := client.TeamsBySeasonId(context.Background(), 12962, 1, []string{})
+
+		if teams != nil {
+			t.Fatalf("Test failed, expected nil, got %+v", teams)
+		}
+
+		assertError(t, err)
 	})
 }
 
