@@ -53,6 +53,10 @@ func (s *Season) CardScorers() []CardScorer {
 	return s.CardScorerData.Data
 }
 
+func (s *Season) Fixtures() []Fixture {
+	return s.FixturesData.Data
+}
+
 func (s *Season) GoalScorers() []GoalScorer {
 	return s.GoalScorerData.Data
 }
@@ -63,10 +67,6 @@ func (s *Season) Groups() []Group {
 
 func (s *Season) League() *League {
 	return s.LeagueData.Data
-}
-
-func (s *Season) Fixtures() []Fixture {
-	return s.FixturesData.Data
 }
 
 func (s *Season) Results() []Fixture {

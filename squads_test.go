@@ -1,0 +1,46 @@
+package sportmonks
+
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
+
+func assertSquadPlayer(t *testing.T, player *SquadPlayer) {
+	assert.Equal(t, 219591, player.PlayerID)
+	assert.Equal(t, 2, player.PositionID)
+	assert.Equal(t, 4, player.Number)
+	assert.Equal(t, 0, player.Captain)
+	assert.Equal(t, false, player.Injured)
+	assert.Equal(t, 2, player.Appearances)
+	assert.Equal(t, 1, player.Lineups)
+	assert.Equal(t, 1, player.SubstituteIn)
+	assert.Equal(t, 0, player.SubstituteOut)
+	assert.Equal(t, 7, player.SubstitutesOnBench)
+	assert.Equal(t, 0, player.Goals)
+	assert.Equal(t, 0, player.Assists)
+	assert.Nil(t, *player.Saves)
+	assert.Nil(t, *player.InsideBoxSaves)
+	assert.Nil(t, *player.Dispossessed)
+	assert.Equal(t, 1, player.YellowCards)
+	assert.Equal(t, 0, player.YellowRed)
+	assert.Nil(t, *player.Tackles)
+	assert.Nil(t, *player.Blocks)
+	assert.Nil(t, *player.HitPost)
+	assert.Equal(t, 2, player.Fouls.Committed)
+	assert.Nil(t, *player.Fouls.Drawn)
+	assert.Nil(t, *player.Crosses.Total)
+	assert.Nil(t, *player.Crosses.Accurate)
+	assert.Nil(t, *player.Dribbles.Attempts)
+	assert.Nil(t, *player.Dribbles.Success)
+	assert.Nil(t, *player.Dribbles.DribbledPast)
+	assert.Nil(t, *player.Duels.Total)
+	assert.Nil(t, *player.Duels.Won)
+	assert.Equal(t, 30, player.Passes.Total)
+	assert.Equal(t, 75, player.Passes.Accuracy)
+	assert.Nil(t, *player.Passes.KeyPasses)
+	assert.Nil(t, *player.Penalties.Won)
+	assert.Nil(t, *player.Penalties.Scores)
+	assert.Nil(t, *player.Penalties.Missed)
+	assert.Nil(t, *player.Penalties.Committed)
+	assert.Nil(t, *player.Penalties.Saves)
+}
