@@ -1,6 +1,13 @@
 package sportmonks
 
-const videoHighlightsUri = "/api/v2.0/highlights"
+import (
+	"context"
+	"net/url"
+	"strconv"
+	"strings"
+)
+
+const videoHighlightsUri = "/highlights"
 
 type VideoHighlights struct {
 	FixtureID int         `json:"fixture_id"`
@@ -12,20 +19,34 @@ type VideoHighlights struct {
 		TimezoneType int    `json:"timezone_type"`
 		Timezone     string `json:"timezone"`
 	} `json:"created_at"`
-	Fixture *Fixture`json:"fixture, omitempty"`
+	FixtureData FixtureData `json:"fixture, omitempty"`
 }
-//
-//// Make a request to retrieve multiple video highlight resources. The request endpoint executed within this method
-//// is paginated, the first argument to this method allows the consumer to specify a page to request.
-//// Use the includes slice to enrich the response data.
-//func (c *HTTPClient) VideoHighlights(page int, includes []string) ([]VideoHighlights, *Meta, error) {
-//	response := new(VideoHighlightsResponse)
-//
-//	err := c.handlePaginatedRequest(videoHighlightsUri, includes, page, response)
-//
-//	if err != nil {
-//		return nil, nil, err
-//	}
-//
-//	return response.Data, &response.Meta, err
-//}
+
+func (v *VideoHighlights) Fixture() *Fixture {
+	return v.FixtureData.Data
+}
+
+// VideoHighlights returns a slice of VideoHighlight struct. The endpoint used within this method is paginated,
+// to select the required page use the 'page' method argument. Page information including current page and total
+// page are included within the Meta response.
+
+// Use the includes slice to enrich the response data.
+func (c *HTTPClient) VideoHighlights(ctx context.Context, page int, includes []string) ([]VideoHighlights, *Meta, error) {
+	values := url.Values{
+		"page":    {strconv.Itoa(page)},
+		"include": {strings.Join(includes, ",")},
+	}
+
+	response := struct {
+		Data []VideoHighlights `json:"data"`
+		Meta *Meta       `json:"meta"`
+	}{}
+
+	err := c.getResource(ctx, videoHighlightsUri, values, &response)
+
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return response.Data, response.Meta, err
+}

@@ -152,6 +152,10 @@ type (
 		TopScorerCards   bool `json:"topscorer_cards"`
 	}
 
+	FixtureData struct {
+		Data *Fixture `json:"data"`
+	}
+
 	FixturesData struct {
 		Data []Fixture `json:"data"`
 	}
