@@ -152,7 +152,7 @@ type (
 		PSScore             *string `json:"ps_score"`
 	}
 
-	Standings struct {
+	TeamStandings struct {
 		LocalTeamPosition   int `json:"localteam_position"`
 		VisitorTeamPosition int `json:"visitorteam_position"`
 	}

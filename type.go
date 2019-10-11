@@ -221,6 +221,23 @@ type (
 		Data []PlayerMatchStats `json:"data"`
 	}
 
+ 	LiveStandings struct {
+		Position           int    `json:"position"`
+		Played             int    `json:"played"`
+		TeamID             int    `json:"team_id"`
+		TeamName           string `json:"team_name"`
+		ShortCode          string `json:"short_code"`
+		TeamLogo           string `json:"team_logo"`
+		Goals              string `json:"goals"`
+		GoalDiff           int    `json:"goal_diff"`
+		Wins               int    `json:"wins"`
+		Lost               int    `json:"lost"`
+		Draws              int    `json:"draws"`
+		Points             int    `json:"points"`
+		Description        string `json:"description"`
+		FairPlayPointsLose int    `json:"fairplay_points_lose"`
+	}
+
 	MatchCommentary struct {
 		Data []Commentary `json:"data"`
 	}
@@ -387,6 +404,10 @@ type (
 		LastName   string `json:"lastname"`
 	}
 
+	RoundData struct {
+		Data *Round `json:"data"`
+	}
+
 	RoundsData struct {
 		Data []Round `json:"data"`
 	}
@@ -448,22 +469,8 @@ type (
 		Data *Team `json:"data"`
 	}
 
-	TeamLeagueStanding struct {
-		Position  int         `json:"position"`
-		TeamID    int         `json:"team_id"`
-		TeamName  string      `json:"team_name"`
-		RoundID   int         `json:"round_id"`
-		RoundName int         `json:"round_name"`
-		GroupID   *int 		   `json:"group_id"`
-		GroupName *int `json:"group_name"`
-		Overall  	TeamLeagueStats `json:"overall"`
-		Home 		TeamLeagueStats `json:"home"`
-		Away 		TeamLeagueStats `json:"away"`
-		Total 		TeamLeagueTotalStats `json:"total"`
-		Result     string `json:"result"`
-		Points     int    `json:"points"`
-		RecentForm string `json:"recent_form"`
-		Status     string `json:"status"`
+	LeagueStandingData struct {
+		Data []LeagueStanding `json:"data"`
 	}
 
 	TeamLeagueStats struct {

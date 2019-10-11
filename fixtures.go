@@ -39,7 +39,7 @@ type Fixture struct {
 	Scores                Scores              `json:"scores"`
 	Time                  FixtureTime         `json:"time"`
 	Coaches               Coaches             `json:"coaches"`
-	Standings             Standings           `json:"standings"`
+	Standings             TeamStandings           `json:"standings"`
 	Leg                   *string             `json:"leg"`
 	Colors                TeamColors        	`json:"colors"`
 	Deleted               bool                `json:"deleted"`
