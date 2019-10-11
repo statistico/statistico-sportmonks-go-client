@@ -281,6 +281,10 @@ type (
 		Data []Player `json:"data"`
 	}
 
+	PlayerLineupData struct {
+		Data []PlayerMatchStats `json:"data"`
+	}
+
  	PlayerMatchStats struct {
 		TeamID             int         `json:"team_id"`
 		FixtureID          int         `json:"fixture_id"`
@@ -330,20 +334,28 @@ type (
 		Tackles            *int`json:"tackles"`
 		Blocks             *int `json:"blocks"`
 		HitPost            *int `json:"hit_post"`
-		Fouls             PlayerFouls      `json:"fouls"`
-		Crosses            PlayerCrosses      `json:"crosses"`
-		Dribbles  			PlayerDribbles`json:"dribbles"`
-		Duels 				PlayerDuels `json:"duels"`
-		Passes            PlayerSeasonPasses `json:"passes"`
-		Penalties  		PlayerPenalties `json:"penalties"`
+		Fouls              Fouls `json:"fouls"`
+		Crosses Crosses `json:"crosses"`
+		Dribbles Dribbles `json:"dribbles"`
+		Duels Duels `json:"duels"`
+		Passes Passes `json:"passes"`
+		Penalties Penalties`json:"penalties"`
 		Player struct {
 			Data Player `json:"data"`
 		} `json:"player, omitempty"`
 	}
 
+	PlayerSeasonStatsData struct {
+		Data []PlayerSeasonStats `json:"data"`
+	}
+
  	Position struct {
 		ID   int    `json:"id"`
 		Name string `json:"name"`
+	}
+
+	PositionData struct {
+		Data *Position `json:"data"`
 	}
 
 	Ranking struct {
@@ -458,7 +470,7 @@ type (
 	}
 
 	TeamData struct {
-		Data Team `json:"data"`
+		Data *Team `json:"data"`
 	}
 
 	TeamLeagueStanding struct {
@@ -621,6 +633,10 @@ type (
 		Seasons  struct {
 			Data []Season `json:"data"`
 		} `json:"seasons"`
+	}
+
+	TrophyData struct {
+		Data []Trophy `json:"data"`
 	}
 
 	VenueData struct {
