@@ -6,8 +6,6 @@ import (
 	"net/url"
 )
 
-const bookmakersUri = "/bookmakers"
-
 type Bookmaker struct {
 	ID   int     `json:"id"`
 	Name string  `json:"name"`

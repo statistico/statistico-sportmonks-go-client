@@ -6,8 +6,6 @@ import (
 	"net/url"
 )
 
-const commentariesFixtureUri = "/commentaries/fixture"
-
 type Commentary struct {
 	FixtureID   int         `json:"fixture_id"`
 	Important   bool        `json:"important"`

@@ -49,7 +49,7 @@ func (s *SquadPlayer) Player() *Player {
 // TeamSquad returns a slice of SquadPlayer struct associated to season ID and team ID. Use the includes slice to
 // enrich the response data.
 func (c *HTTPClient) TeamSquad(ctx context.Context, seasonId, teamId int, includes []string) ([]SquadPlayer, *Meta, error) {
-	path := fmt.Sprintf("/squad/season/%d/team/%d", seasonId, teamId)
+	path := fmt.Sprintf(teamSquadUri + "/%d/team/%d", seasonId, teamId)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},

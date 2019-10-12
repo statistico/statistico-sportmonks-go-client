@@ -8,8 +8,6 @@ import (
 	"strings"
 )
 
-const continentsUri = "/continents"
-
 // Continent struct
 type Continent struct {
 	ID        int     `json:"id"`

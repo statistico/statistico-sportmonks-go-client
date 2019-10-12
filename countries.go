@@ -8,8 +8,6 @@ import (
 	"strings"
 )
 
-const countriesUri = "/countries"
-
 // Country struct
 type Country struct {
 	ID        int           `json:"id"`

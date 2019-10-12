@@ -6,8 +6,6 @@ import (
 	"net/url"
 )
 
-const tvStationsUri = "/tvstations/fixture"
-
 type TVStation struct {
 	FixtureID int    `json:"fixture_id"`
 	TVStation string `json:"tvstation"`

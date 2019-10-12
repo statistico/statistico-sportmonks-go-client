@@ -7,8 +7,6 @@ import (
 	"strings"
 )
 
-const videoHighlightsUri = "/highlights"
-
 type VideoHighlights struct {
 	FixtureID int         `json:"fixture_id"`
 	EventID   *int `json:"event_id"`

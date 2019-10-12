@@ -8,8 +8,6 @@ import (
 	"strings"
 )
 
-const seasonsUri = "/seasons"
-
 // Season struct
 type Season struct {
 	ID                         int                        `json:"id"`

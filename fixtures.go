@@ -9,12 +9,6 @@ import (
 )
 
 const dateFormat = "2006-01-02"
-const fixturesUri = "/fixtures"
-const fixturesDateUri = "/fixtures/date"
-const fixturesBetweenUri = "/fixtures/between"
-const fixturesLastUpdatedUri = "/fixtures/updates"
-const fixturesMultiUri = "/fixtures/multi"
-const headToHeadUri = "/head2head"
 
 type Fixture struct {
 	ID                    int                 `json:"id"`

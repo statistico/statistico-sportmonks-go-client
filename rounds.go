@@ -7,9 +7,6 @@ import (
 	"strings"
 )
 
-const roundsUri = "/rounds"
-const roundsSeasonUri = "/rounds/season"
-
 type Round struct {
 	ID       int    `json:"id"`
 	Name     int    `json:"name"`

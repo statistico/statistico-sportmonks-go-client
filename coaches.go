@@ -6,8 +6,6 @@ import (
 	"net/url"
 )
 
-const coachesUri = "/coaches"
-
 type Coach struct {
 	ID           int     `json:"coach_id"`
 	TeamID       int     `json:"team_id"`

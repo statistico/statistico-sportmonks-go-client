@@ -7,8 +7,6 @@ import (
 	"strings"
 )
 
-const topScorersSeasonUri = "/topscorers/season"
-
 type TopScorers struct {
 	ID              int    `json:"id"`
 	Name            string `json:"name"`

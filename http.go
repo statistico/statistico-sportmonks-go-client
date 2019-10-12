@@ -8,7 +8,38 @@ import (
 	"net/url"
 )
 
-const defaultBaseUrl = "https://soccer.sportmonks.com/api/v2.0"
+const (
+	defaultBaseUrl         = "https://soccer.sportmonks.com/api/v2.0"
+	bookmakersUri          = "/bookmakers"
+	coachesUri             = "/coaches"
+	commentariesFixtureUri = "/commentaries/fixture"
+	continentsUri          = "/continents"
+	countriesUri           = "/countries"
+	fixturesUri            = "/fixtures"
+	fixturesDateUri        = "/fixtures/date"
+	fixturesBetweenUri     = "/fixtures/between"
+	fixturesLastUpdatedUri = "/fixtures/updates"
+	fixturesMultiUri       = "/fixtures/multi"
+	headToHeadUri          = "/head2head"
+	leagueStandingsUri     = "/standings/season"
+	leaguesUri             = "/leagues"
+	liveLeagueStandingsUri = "/standings/season/live"
+	marketsUri             = "/markets"
+	playersUri             = "/players"
+	roundsUri              = "/rounds"
+	roundsSeasonUri        = "/rounds/season"
+	seasonsUri             = "/seasons"
+	stagesUri              = "/stages"
+	stagesSeasonUri        = "/stages/season"
+	teamSquadUri           = "/squad/season"
+	teamsUri               = "/teams"
+	teamsSeasonUri         = "/teams/season"
+	topScorersSeasonUri    = "/topscorers/season"
+	tvStationsUri          = "/tvstations/fixture"
+	venuesUri              = "/venues"
+	venuesSeasonUri        = "/venues/season"
+	videoHighlightsUri     = "/highlights"
+)
 
 // Client is a HTTP request builder and sender
 type HTTPClient struct {

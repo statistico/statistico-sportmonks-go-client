@@ -7,8 +7,6 @@ import (
 	"strings"
 )
 
-const playersUri = "/players"
-
 type Player struct {
 	ID     int    `json:"player_id"`
 	TeamID       int    `json:"team_id"`

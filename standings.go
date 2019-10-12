@@ -7,11 +7,6 @@ import (
 	"strings"
 )
 
-//import "fmt"
-
-const leagueStandingsUri = "/standings/season"
-const liveLeagueStandingsUri = "/standings/season/live"
-
 type Standings struct {
 	Name      string `json:"name"`
 	LeagueID  int    `json:"league_id"`

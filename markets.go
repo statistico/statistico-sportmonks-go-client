@@ -6,8 +6,6 @@ import (
 	"net/url"
 )
 
-const marketsUri = "/markets"
-
 type Market struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
