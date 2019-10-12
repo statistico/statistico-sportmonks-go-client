@@ -14,11 +14,7 @@ type VideoHighlights struct {
 	EventID   *int `json:"event_id"`
 	Location  string      `json:"location"`
 	Type      string      `json:"type"`
-	CreatedAt struct {
-		Date         string `json:"date"`
-		TimezoneType int    `json:"timezone_type"`
-		Timezone     string `json:"timezone"`
-	} `json:"created_at"`
+	CreatedAt DateTime `json:"created_at"`
 	FixtureData FixtureData `json:"fixture, omitempty"`
 }
 
