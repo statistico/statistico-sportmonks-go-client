@@ -14,6 +14,7 @@ const fixturesDateUri = "/fixtures/date"
 const fixturesBetweenUri = "/fixtures/between"
 const fixturesLastUpdatedUri = "/fixtures/updates"
 const fixturesMultiUri = "/fixtures/multi"
+const headToHeadUri = "/head2head"
 
 type Fixture struct {
 	ID                    int                 `json:"id"`
@@ -137,6 +138,15 @@ func (c *HTTPClient) FixturesBetweenForTeam(ctx context.Context, from, to time.T
 // Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) FixturesLastUpdated(ctx context.Context, includes []string) ([]Fixture, *Meta, error) {
 	return multipleFixtureResponse(c, ctx, fixturesLastUpdatedUri, includes)
+}
+
+// HeadToHead returns a slice of Fixture struct of results between two teams.
+
+// Use the includes slice of string to enrich the response data.
+func (c *HTTPClient) HeadToHead(ctx context.Context, idOne, idTwo int, includes []string) ([]Fixture, *Meta, error) {
+	path := fmt.Sprintf(headToHeadUri + "/%d/%d", idOne, idTwo)
+
+	return multipleFixtureResponse(c, ctx, path, includes)
 }
 
 func multipleFixtureResponse(client *HTTPClient, ctx context.Context, path string, includes []string) ([]Fixture, *Meta, error) {

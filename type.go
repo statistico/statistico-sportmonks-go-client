@@ -21,23 +21,6 @@ type (
 		Data []AssistScorer `json:"data"`
 	}
 
-	// Assist Scorer struct
-	AssistScorer struct {
-		Position int    `json:"position"`
-		SeasonID int    `json:"season_id"`
-		PlayerID int    `json:"player_id"`
-		TeamID   int    `json:"team_id"`
-		StageID  int    `json:"stage_id"`
-		Assists  int    `json:"assists"`
-		Type     string `json:"type"`
-		Player struct {
-			Data Player `json:"data"`
-		} `json:"player"`
-		Team struct {
-			Data Team `json:"data"`
-		} `json:"team"`
-	}
-
  	CardEvent struct {
 		ID          int64       `json:"id"`
 		TeamID      string      `json:"team_id"`
@@ -52,24 +35,6 @@ type (
 
 	CardEvents struct {
 		Data []CardEvent `json:"data"`
-	}
-
-	// CardScorer struct
-	CardScorer struct {
-		Position    int    `json:"position"`
-		SeasonID    int    `json:"season_id"`
-		PlayerID    int    `json:"player_id"`
-		TeamID      int    `json:"team_id"`
-		StageID     int    `json:"stage_id"`
-		YellowCards int    `json:"yellowcards"`
-		RedCards    int    `json:"redcards"`
-		Type        string `json:"type"`
-		Player struct {
-			Data Player `json:"data"`
-		} `json:"player"`
-		Team struct {
-			Data Team `json:"data"`
-		} `json:"team"`
 	}
 
 	CardScorerData struct {
@@ -182,23 +147,6 @@ type (
 
 	GoalEvents struct {
 		Data []GoalEvent `json:"data"`
-	}
-
-	GoalScorer struct {
-		Position     int    `json:"position"`
-		SeasonID     int    `json:"season_id"`
-		PlayerID     int    `json:"player_id"`
-		TeamID       int    `json:"team_id"`
-		StageID      int    `json:"stage_id"`
-		Goals        int    `json:"goals"`
-		PenaltyGoals int    `json:"penalty_goals"`
-		Type         string `json:"type"`
-		Player struct {
-			Data Player `json:"data"`
-		} `json:"player"`
-		Team struct {
-			Data Team `json:"data"`
-		} `json:"team"`
 	}
 
  	Group struct {

@@ -50,11 +50,6 @@ type (
 		Meta Meta       `json:"meta"`
 	}
 
-	HeadToHeadResponse struct {
-		Data []HeadToHead `json:"data"`
-		Meta Meta       `json:"meta"`
-	}
-
 	LeaguesResponse struct {
 		Data []League `json:"data"`
 		Meta Meta     `json:"meta"`

@@ -264,14 +264,3 @@ func assertGroup(t *testing.T, group *Group) {
 	assert.Equal(t, "Group stage", group.StageName)
 	assert.Equal(t, "group", group.Resource)
 }
-
-func assertGoalScorer(t *testing.T, goalscorer *GoalScorer) {
-	assert.Equal(t, 1, goalscorer.Position)
-	assert.Equal(t, 7907, goalscorer.SeasonID)
-	assert.Equal(t, 210173, goalscorer.PlayerID)
-	assert.Equal(t, 579, goalscorer.TeamID)
-	assert.Equal(t, 56494, goalscorer.StageID)
-	assert.Equal(t, 3, goalscorer.Goals)
-	assert.Equal(t, 0, goalscorer.PenaltyGoals)
-	assert.Equal(t, "goals", goalscorer.Type)
-}
