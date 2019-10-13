@@ -1,12 +1,6 @@
 package sportmonks
 
 type (
-	Assistants struct {
-		FirstAssistantID  *int `json:"first_assistant_id"`
-		SecondAssistantID *int `json:"second_assistant_id"`
-		FourthOfficialID  *int `json:"fourth_official_id"`
-	}
-
 	Coaches struct {
 		LocalTeamCoachID   int `json:"localteam_coach_id"`
 		VisitorTeamCoachID int `json:"visitorteam_coach_id"`

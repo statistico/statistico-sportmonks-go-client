@@ -38,7 +38,7 @@ func (p *Player) Country() *Country {
 	return p.CountryData.Data
 }
 
-func (p *Player) Lineup() []PlayerMatchStats {
+func (p *Player) Lineup() []PlayerStats {
 	return p.LineupData.Data
 }
 

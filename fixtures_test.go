@@ -105,7 +105,58 @@ var fixtureResponse = `{
 			"kit_colors": null
 		  }
 		},
-		"deleted": false
+		"deleted": false,
+		"league": {
+			"data": {
+				"id": 82,
+				"active": true,
+				"type": "domestic",
+				"legacy_id": 4,
+				"country_id": 11,
+				"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/leagues\/82.png",
+				"name": "Bundesliga",
+				"is_cup": false,
+				"current_season_id": 16264,
+				"current_round_id": 174546,
+				"current_stage_id": 77444845,
+				"live_standings": true,
+				"coverage": {
+				  "predictions": 1,
+				  "topscorer_goals": true,
+				  "topscorer_assists": true,
+				  "topscorer_cards": true
+				}
+			}
+		},
+		"stage": {
+			"data": {
+				"id": 10,
+				"name": "Regular Season",
+				"type": null,
+				"league_id": 8,
+				"season_id": 12,
+				"sort_order": null,
+				"has_standings": null
+			}
+		},
+		"goals": {
+			"data": [
+				{
+					"id": 11867297001,
+					"team_id": "78",
+					"type": "goal",
+					"fixture_id": 11867297,
+					"player_id": 95776,
+					"player_name": "N. Maupay",
+					"player_assist_id": null,
+					"player_assist_name": null,
+					"minute": 3,
+					"extra_minute": null,
+					"reason": null,
+					"result": "1-0"
+				}
+			]
+		}
   	}
 }`
 
@@ -208,15 +259,66 @@ var fixturesResponse = `{
 				"kit_colors": null
 			  }
 			},
-			"deleted": false
+			"deleted": false,
+			"league": {
+				"data": {
+					"id": 82,
+					"active": true,
+					"type": "domestic",
+					"legacy_id": 4,
+					"country_id": 11,
+					"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/leagues\/82.png",
+					"name": "Bundesliga",
+					"is_cup": false,
+					"current_season_id": 16264,
+					"current_round_id": 174546,
+					"current_stage_id": 77444845,
+					"live_standings": true,
+					"coverage": {
+					  "predictions": 1,
+					  "topscorer_goals": true,
+					  "topscorer_assists": true,
+					  "topscorer_cards": true
+					}
+				}
+			},
+			"stage": {
+				"data": {
+					"id": 10,
+					"name": "Regular Season",
+					"type": null,
+					"league_id": 8,
+					"season_id": 12,
+					"sort_order": null,
+					"has_standings": null
+				}
+			},
+			"goals": {
+				"data": [
+					{
+						"id": 11867297001,
+						"team_id": "78",
+						"type": "goal",
+						"fixture_id": 11867297,
+						"player_id": 95776,
+						"player_name": "N. Maupay",
+						"player_assist_id": null,
+						"player_assist_name": null,
+						"minute": 3,
+						"extra_minute": null,
+						"reason": null,
+						"result": "1-0"
+					}
+				]
+			}
 	    }
 	]
 }`
 
 func TestFixtureById(t *testing.T) {
-	url := defaultBaseUrl + "/fixtures/11867285?api_token=api-key&include="
-
 	t.Run("returns a single Fixture struct", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/11867285?api_token=api-key&include="
+
 		server := mockResponseServer(t, fixtureResponse, 200, url)
 
 		client := newTestHTTPClient(server)
@@ -230,7 +332,32 @@ func TestFixtureById(t *testing.T) {
 		assertFixture(t, fixture)
 	})
 
+	t.Run("returns a single Fixture struct with includes data", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/11867285?api_token=api-key&include=league%2Cstage%2Cgoals"
+
+		server := mockResponseServer(t, fixtureResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixture, _, err := client.FixtureById(
+			context.Background(),
+			11867285,
+			[]string{LeagueIncludes, StageIncludes, GoalsIncludes},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, fixture)
+		assertLeague(t, fixture.League())
+		assertStage(t, fixture.Stage())
+		assertGoalEvent(t, &fixture.Goals()[0])
+	})
+
 	t.Run("returns bad status code error", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/11867285?api_token=api-key&include="
+
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
@@ -246,9 +373,9 @@ func TestFixtureById(t *testing.T) {
 }
 
 func TestFixturesById(t *testing.T) {
-	url := defaultBaseUrl + "/fixtures/multi/11867285,555?api_token=api-key&include="
-
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/multi/11867285,555?api_token=api-key&include="
+
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
@@ -262,7 +389,32 @@ func TestFixturesById(t *testing.T) {
 		assertFixture(t, &fixtures[0])
 	})
 
+	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/multi/11867285,555?api_token=api-key&include=league%2Cstage%2Cgoals"
+
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesById(
+			context.Background(),
+			[]int{11867285, 555},
+			[]string{LeagueIncludes, StageIncludes, GoalsIncludes},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, &fixtures[0])
+		assertLeague(t, fixtures[0].League())
+		assertStage(t, fixtures[0].Stage())
+		assertGoalEvent(t, &fixtures[0].Goals()[0])
+	})
+
 	t.Run("returns bad status code error", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/multi/11867285,555?api_token=api-key&include="
+
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
@@ -285,9 +437,9 @@ func TestFixturesByDate(t *testing.T) {
 		t.Fatalf("Test failed, expected nil, got %+v", err.Error())
 	}
 
-	url := defaultBaseUrl + "/fixtures/date/2014-11-12?api_token=api-key&include="
-
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/date/2014-11-12?api_token=api-key&include="
+
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
@@ -301,7 +453,32 @@ func TestFixturesByDate(t *testing.T) {
 		assertFixture(t, &fixtures[0])
 	})
 
+	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/date/2014-11-12?api_token=api-key&include=league%2Cstage%2Cgoals"
+
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesByDate(
+			context.Background(),
+			d,
+			[]string{LeagueIncludes, StageIncludes, GoalsIncludes},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, &fixtures[0])
+		assertLeague(t, fixtures[0].League())
+		assertStage(t, fixtures[0].Stage())
+		assertGoalEvent(t, &fixtures[0].Goals()[0])
+	})
+
 	t.Run("returns bad status code error", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/date/2014-11-12?api_token=api-key&include="
+
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
@@ -317,23 +494,21 @@ func TestFixturesByDate(t *testing.T) {
 }
 
 func TestFixturesBetween(t *testing.T) {
-	from := "2014-11-12T11:45:26.371Z"
-	dateFrom, err := time.Parse(time.RFC3339, from)
+	dateFrom, err := time.Parse(time.RFC3339, "2014-11-12T11:45:26.371Z")
 
 	if err != nil {
 		t.Fatalf("Test failed, expected nil, got %+v", err.Error())
 	}
 
-	to := "2014-12-12T11:45:26.371Z"
-	dateTo, err := time.Parse(time.RFC3339, to)
+	dateTo, err := time.Parse(time.RFC3339, "2014-12-12T11:45:26.371Z")
 
 	if err != nil {
 		t.Fatalf("Test failed, expected nil, got %+v", err.Error())
 	}
-
-	url := defaultBaseUrl + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include="
 
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include="
+
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
@@ -347,7 +522,33 @@ func TestFixturesBetween(t *testing.T) {
 		assertFixture(t, &fixtures[0])
 	})
 
+	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include=league%2Cstage%2Cgoals"
+
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesBetween(
+			context.Background(),
+			dateFrom,
+			dateTo,
+			[]string{LeagueIncludes, StageIncludes, GoalsIncludes},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, &fixtures[0])
+		assertLeague(t, fixtures[0].League())
+		assertStage(t, fixtures[0].Stage())
+		assertGoalEvent(t, &fixtures[0].Goals()[0])
+	})
+
 	t.Run("returns bad status code error", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include="
+
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
@@ -362,10 +563,93 @@ func TestFixturesBetween(t *testing.T) {
 	})
 }
 
-func TestFixturesLastUpdated(t *testing.T) {
-	url := defaultBaseUrl + "/fixtures/updates?api_token=api-key&include="
+func TestFixturesBetweenForTeam(t *testing.T) {
+	dateFrom, err := time.Parse(time.RFC3339, "2014-11-12T11:45:26.371Z")
+
+	if err != nil {
+		t.Fatalf("Test failed, expected nil, got %+v", err.Error())
+	}
+
+	dateTo, err := time.Parse(time.RFC3339, "2014-12-12T11:45:26.371Z")
+
+	if err != nil {
+		t.Fatalf("Test failed, expected nil, got %+v", err.Error())
+	}
 
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include="
+
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesBetweenForTeam(
+			context.Background(),
+			dateFrom,
+			dateTo,
+			1,
+			[]string{},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, &fixtures[0])
+	})
+
+	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include=league%2Cstage%2Cgoals"
+
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesBetweenForTeam(
+			context.Background(),
+			dateFrom,
+			dateTo,
+			1,
+			[]string{LeagueIncludes, StageIncludes, GoalsIncludes},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, &fixtures[0])
+		assertLeague(t, fixtures[0].League())
+		assertStage(t, fixtures[0].Stage())
+		assertGoalEvent(t, &fixtures[0].Goals()[0])
+	})
+
+	t.Run("returns bad status code error", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include="
+
+		server := mockResponseServer(t, errorResponse, 400, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesBetweenForTeam(
+			context.Background(),
+			dateFrom,
+			dateTo,
+			1,
+			[]string{},
+		)
+
+		if fixtures != nil {
+			t.Fatalf("Test failed, expected nil, got %+v", fixtures)
+		}
+
+		assertError(t, err)
+	})
+}
+
+func TestFixturesLastUpdated(t *testing.T) {
+	t.Run("returns slice of Fixture struct", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/updates?api_token=api-key&include="
+
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
@@ -379,7 +663,31 @@ func TestFixturesLastUpdated(t *testing.T) {
 		assertFixture(t, &fixtures[0])
 	})
 
+	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/updates?api_token=api-key&include=league%2Cstage%2Cgoals"
+
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesLastUpdated(
+			context.Background(),
+			[]string{LeagueIncludes, StageIncludes, GoalsIncludes},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, &fixtures[0])
+		assertLeague(t, fixtures[0].League())
+		assertStage(t, fixtures[0].Stage())
+		assertGoalEvent(t, &fixtures[0].Goals()[0])
+	})
+
 	t.Run("returns bad status code error", func(t *testing.T) {
+		url := defaultBaseUrl + "/fixtures/updates?api_token=api-key&include="
+
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
@@ -462,4 +770,19 @@ func assertFixture(t *testing.T, fixture *Fixture) {
 	assert.Nil(t, fixture.Colors.VisitorTeam.Color)
 	assert.Nil(t, fixture.Colors.VisitorTeam.KitColor)
 	assert.Equal(t, false, fixture.Deleted)
+}
+
+func assertGoalEvent(t *testing.T, goal *GoalEvent) {
+	assert.Equal(t, 11867297001, goal.ID)
+	assert.Equal(t, "78", goal.TeamID)
+	assert.Equal(t, "goal", goal.Type)
+	assert.Equal(t, 11867297, goal.FixtureID)
+	assert.Equal(t, 95776, goal.PlayerID)
+	assert.Equal(t, "N. Maupay", goal.PlayerName)
+	assert.Nil(t, goal.PlayerAssistID)
+	assert.Nil(t, goal.PlayerAssistName)
+	assert.Equal(t, 3, goal.Minute)
+	assert.Nil(t, goal.ExtraMinute)
+	assert.Nil(t, goal.Reason)
+	assert.Equal(t, "1-0", goal.Result)
 }
