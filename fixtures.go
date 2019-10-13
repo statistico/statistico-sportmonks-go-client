@@ -202,7 +202,7 @@ func (c *HTTPClient) FixtureById(ctx context.Context, id int, includes []string)
 func (c *HTTPClient) FixturesById(ctx context.Context, ids []int, includes []string) ([]Fixture, *Meta, error) {
 	str := strings.Trim(strings.Join(strings.Fields(fmt.Sprint(ids)), ","), "[]")
 
-	path := fmt.Sprintf(fixturesMultiUri + "/%s", str)
+	path := fmt.Sprintf(fixturesMultiUri+"/%s", str)
 
 	return multipleFixtureResponse(c, ctx, path, includes)
 }
@@ -219,7 +219,7 @@ func (c *HTTPClient) FixturesByDate(ctx context.Context, date time.Time, include
 // FixturesByDate returns a slice of Fixture struct for a between two dates. Use the includes slice of string to enrich
 // the response data.
 func (c *HTTPClient) FixturesBetween(ctx context.Context, from, to time.Time, includes []string) ([]Fixture, *Meta, error) {
-	path := fmt.Sprintf(fixturesBetweenUri + "/%s/%s", from.Format(dateFormat), to.Format(dateFormat))
+	path := fmt.Sprintf(fixturesBetweenUri+"/%s/%s", from.Format(dateFormat), to.Format(dateFormat))
 
 	return multipleFixtureResponse(c, ctx, path, includes)
 }
@@ -227,7 +227,7 @@ func (c *HTTPClient) FixturesBetween(ctx context.Context, from, to time.Time, in
 // FixturesByDate returns a slice of Fixture struct for a between two dates for a given team ID. Use the includes slice
 // of string to enrich the response data.
 func (c *HTTPClient) FixturesBetweenForTeam(ctx context.Context, from, to time.Time, teamId int, includes []string) ([]Fixture, *Meta, error) {
-	path := fmt.Sprintf(fixturesBetweenUri + "/%s/%s/%d", from.Format(dateFormat), to.Format(dateFormat), teamId)
+	path := fmt.Sprintf(fixturesBetweenUri+"/%s/%s/%d", from.Format(dateFormat), to.Format(dateFormat), teamId)
 
 	return multipleFixtureResponse(c, ctx, path, includes)
 
@@ -242,7 +242,7 @@ func (c *HTTPClient) FixturesLastUpdated(ctx context.Context, includes []string)
 // HeadToHead returns a slice of Fixture struct of results between two teams. Use the includes slice of string to
 // enrich the response data.
 func (c *HTTPClient) HeadToHead(ctx context.Context, idOne, idTwo int, includes []string) ([]Fixture, *Meta, error) {
-	path := fmt.Sprintf(headToHeadUri + "/%d/%d", idOne, idTwo)
+	path := fmt.Sprintf(headToHeadUri+"/%d/%d", idOne, idTwo)
 
 	return multipleFixtureResponse(c, ctx, path, includes)
 }

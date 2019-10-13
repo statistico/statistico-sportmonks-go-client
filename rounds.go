@@ -8,17 +8,17 @@ import (
 )
 
 type Round struct {
-	ID       int    `json:"id"`
-	Name     int    `json:"name"`
-	LeagueID int    `json:"league_id"`
-	SeasonID int    `json:"season_id"`
-	StageID  int    `json:"stage_id"`
-	Start    string `json:"start"`
-	End      string `json:"end"`
+	ID           int          `json:"id"`
+	Name         int          `json:"name"`
+	LeagueID     int          `json:"league_id"`
+	SeasonID     int          `json:"season_id"`
+	StageID      int          `json:"stage_id"`
+	Start        string       `json:"start"`
+	End          string       `json:"end"`
 	FixturesData FixturesData `json:"fixtures, omitempty"`
-	LeagueData  LeagueData `json:"league"`
-	ResultsData FixturesData `json:"results, omitempty"`
-	SeasonData  SeasonData `json:"season"`
+	LeagueData   LeagueData   `json:"league"`
+	ResultsData  FixturesData `json:"results, omitempty"`
+	SeasonData   SeasonData   `json:"season"`
 }
 
 // Fixtures returns a slice of Fixture struct associated to a Round
@@ -50,8 +50,8 @@ func (c *HTTPClient) RoundById(ctx context.Context, id int, includes []string) (
 	}
 
 	response := struct {
-		Data *Round 	`json:"data"`
-		Meta *Meta      `json:"meta"`
+		Data *Round `json:"data"`
+		Meta *Meta  `json:"meta"`
 	}{}
 
 	err := c.getResource(ctx, path, values, &response)
@@ -73,8 +73,8 @@ func (c *HTTPClient) RoundsBySeasonId(ctx context.Context, id int, includes []st
 	}
 
 	response := struct {
-		Data []Round 	`json:"data"`
-		Meta *Meta      `json:"meta"`
+		Data []Round `json:"data"`
+		Meta *Meta   `json:"meta"`
 	}{}
 
 	err := c.getResource(ctx, path, values, &response)

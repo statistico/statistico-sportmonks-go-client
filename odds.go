@@ -7,34 +7,34 @@ const inPlayFixtureOddsUri = "/api/v2.0/odds/inplay/fixture"
 
 type (
 	MatchOdds struct {
-		ID    int `json:"id"`
-		Name string `json:"name"`
-		Suspended int `json:"suspended"`
+		ID        int    `json:"id"`
+		Name      string `json:"name"`
+		Suspended int    `json:"suspended"`
 		Bookmaker struct {
-			Data [] BookmakerOdds`json:"data"`
+			Data []BookmakerOdds `json:"data"`
 		} `json:"bookmaker"`
 	}
 
 	BookmakerOdds struct {
-		ID    int `json:"id"`
-		Name string `json:"name"`
+		ID        int    `json:"id"`
+		Name      string `json:"name"`
 		Bookmaker struct {
 			Data []Odds `json:"data"`
 		} `json:"odds"`
 	}
 
 	Odds struct {
-		Value            string      `json:"value"`
+		Value            string  `json:"value"`
 		Handicap         *string `json:"handicap"`
-		Total            string      `json:"total"`
-		Label            string      `json:"label"`
-		Probability      string      `json:"probability"`
-		Dp3              string      `json:"dp3"`
-		American         int         `json:"american"`
+		Total            string  `json:"total"`
+		Label            string  `json:"label"`
+		Probability      string  `json:"probability"`
+		Dp3              string  `json:"dp3"`
+		American         int     `json:"american"`
 		Fractional       *string `json:"factional"`
 		Winning          *string `json:"winning"`
-		Stop             bool        `json:"stop"`
-		BookmakerEventID int         `json:"bookmaker_event_id"`
+		Stop             bool    `json:"stop"`
+		BookmakerEventID int     `json:"bookmaker_event_id"`
 		LastUpdate       struct {
 			Date         string `json:"date"`
 			TimezoneType int    `json:"timezone_type"`

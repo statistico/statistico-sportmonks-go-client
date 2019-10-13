@@ -58,7 +58,7 @@ func NewHTTPClient(key string) *HTTPClient {
 }
 
 func (c *HTTPClient) getResource(ctx context.Context, url string, query url.Values, response interface{}) error {
-	req, err := http.NewRequest(http.MethodGet, c.BaseURL + url, nil)
+	req, err := http.NewRequest(http.MethodGet, c.BaseURL+url, nil)
 
 	if err != nil {
 		return err

@@ -33,7 +33,7 @@ type Team struct {
 	LeagueData                 LeagueData                 `json:"league, omitempty"`
 	LocalFixtureData           FixturesData               `json:"visitorFixtures, omitempty"`
 	SidelinedData              SidelinedData              `json:"sidelined, omitempty"`
-	SquadData                  SquadPlayerData                `json:"squad, omitempty"`
+	SquadData                  SquadPlayerData            `json:"squad, omitempty"`
 	StatsData                  TeamSeasonStatsData        `json:"stats, omitempty"`
 	TransfersData              TransfersData              `json:"transfers, omitempty"`
 	UEFARankingData            RankingData                `json:"uefaranking. omitempty"`
@@ -130,7 +130,7 @@ func (t *Team) VisitorResults() []Fixture {
 // TeamById returns a single Team struct with supporting meta data. Use the includes slice of string to enrich
 // the response data.
 func (c *HTTPClient) TeamById(ctx context.Context, id int, includes []string) (*Team, *Meta, error) {
-	path := fmt.Sprintf(teamsUri + "/%d", id)
+	path := fmt.Sprintf(teamsUri+"/%d", id)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},
@@ -138,7 +138,7 @@ func (c *HTTPClient) TeamById(ctx context.Context, id int, includes []string) (*
 
 	response := struct {
 		Data *Team `json:"data"`
-		Meta *Meta      `json:"meta"`
+		Meta *Meta `json:"meta"`
 	}{}
 
 	err := c.getResource(ctx, path, values, &response)
@@ -156,7 +156,7 @@ func (c *HTTPClient) TeamById(ctx context.Context, id int, includes []string) (*
 
 // Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) TeamsBySeasonId(ctx context.Context, seasonId, page int, includes []string) ([]Team, *Meta, error) {
-	path := fmt.Sprintf(teamsSeasonUri + "/%d", seasonId)
+	path := fmt.Sprintf(teamsSeasonUri+"/%d", seasonId)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},
@@ -165,7 +165,7 @@ func (c *HTTPClient) TeamsBySeasonId(ctx context.Context, seasonId, page int, in
 
 	response := struct {
 		Data []Team `json:"data"`
-		Meta *Meta      `json:"meta"`
+		Meta *Meta  `json:"meta"`
 	}{}
 
 	err := c.getResource(ctx, path, values, &response)

@@ -109,7 +109,7 @@ func TestContinents(t *testing.T) {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
 		}
 
-		country := continents[0].CountryData()[0]
+		country := continents[0].Countries()[0]
 
 		assertContinent(t, &continents[0])
 		assertCountry(t, &country)
@@ -162,7 +162,7 @@ func TestContinentById(t *testing.T) {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
 		}
 
-		country := continent.CountryData()[0]
+		country := continent.Countries()[0]
 
 		assertContinent(t, continent)
 		assertCountry(t, &country)

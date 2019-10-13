@@ -8,17 +8,17 @@ import (
 )
 
 type Stage struct {
-	ID           int         `json:"id"`
-	Name         string      `json:"name"`
+	ID           int          `json:"id"`
+	Name         string       `json:"name"`
 	Type         *string      `json:"type"`
-	LeagueID     int         `json:"league_id"`
-	SeasonID     int         `json:"season_id"`
-	SortOrder    *string     `json:"sort_order"`
+	LeagueID     int          `json:"league_id"`
+	SeasonID     int          `json:"season_id"`
+	SortOrder    *string      `json:"sort_order"`
 	HasStandings *bool        `json:"has_standings"`
 	FixturesData FixturesData `json:"fixtures, omitempty"`
-	LeagueData LeagueData `json:"league, omitempty"`
-	ResultsData FixturesData`json:"results, omitempty"`
-	SeasonData SeasonData`json:"season, omitempty"`
+	LeagueData   LeagueData   `json:"league, omitempty"`
+	ResultsData  FixturesData `json:"results, omitempty"`
+	SeasonData   SeasonData   `json:"season, omitempty"`
 }
 
 // Fixtures returns a slice of Fixture struct associated to a Stage.
@@ -51,7 +51,7 @@ func (c *HTTPClient) StageById(ctx context.Context, id int, includes []string) (
 
 	response := struct {
 		Data *Stage `json:"data"`
-		Meta *Meta      `json:"meta"`
+		Meta *Meta  `json:"meta"`
 	}{}
 
 	err := c.getResource(ctx, path, values, &response)
@@ -66,7 +66,7 @@ func (c *HTTPClient) StageById(ctx context.Context, id int, includes []string) (
 // StagesBySeasonId returns a slice of Stage struct and supporting meta data. Use the includes slice to
 // enrich the response data.
 func (c *HTTPClient) StagesBySeasonId(ctx context.Context, id int, includes []string) ([]Stage, *Meta, error) {
-	path := fmt.Sprintf(stagesSeasonUri + "/%d", id)
+	path := fmt.Sprintf(stagesSeasonUri+"/%d", id)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},
@@ -74,7 +74,7 @@ func (c *HTTPClient) StagesBySeasonId(ctx context.Context, id int, includes []st
 
 	response := struct {
 		Data []Stage `json:"data"`
-		Meta *Meta      `json:"meta"`
+		Meta *Meta   `json:"meta"`
 	}{}
 
 	err := c.getResource(ctx, path, values, &response)

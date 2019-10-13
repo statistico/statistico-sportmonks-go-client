@@ -150,7 +150,7 @@ func TestTeamSquad(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		squad, _ , err := client.TeamSquad(context.Background(), 12962, 1, []string{})
+		squad, _, err := client.TeamSquad(context.Background(), 12962, 1, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -166,7 +166,7 @@ func TestTeamSquad(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		squad, _ , err := client.TeamSquad(context.Background(), 12962, 1, []string{"player"})
+		squad, _, err := client.TeamSquad(context.Background(), 12962, 1, []string{"player"})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -183,7 +183,7 @@ func TestTeamSquad(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		squad, _ , err := client.TeamSquad(context.Background(), 12962, 1, []string{})
+		squad, _, err := client.TeamSquad(context.Background(), 12962, 1, []string{})
 
 		if squad != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", squad)

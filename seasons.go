@@ -95,8 +95,8 @@ func (c *HTTPClient) Seasons(ctx context.Context, page int, includes []string) (
 	}
 
 	response := struct {
-		Data []Season 	 `json:"data"`
-		Meta *Meta       `json:"meta"`
+		Data []Season `json:"data"`
+		Meta *Meta    `json:"meta"`
 	}{}
 
 	err := c.getResource(ctx, seasonsUri, values, &response)
@@ -118,8 +118,8 @@ func (c *HTTPClient) SeasonById(ctx context.Context, id int, includes []string) 
 	}
 
 	response := struct {
-		Data *Season    `json:"data"`
-		Meta *Meta      `json:"meta"`
+		Data *Season `json:"data"`
+		Meta *Meta   `json:"meta"`
 	}{}
 
 	err := c.getResource(ctx, path, values, &response)

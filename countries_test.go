@@ -159,8 +159,8 @@ func TestCountries(t *testing.T) {
 		}
 
 		assertCountry(t, &countries[0])
-		assert.Nil(t, countries[0].ContinentData())
-		assert.Nil(t, countries[0].LeagueData())
+		assert.Nil(t, countries[0].Continent())
+		assert.Nil(t, countries[0].Leagues())
 	})
 
 	t.Run("returns Country struct slice with includes data", func(t *testing.T) {
@@ -176,8 +176,8 @@ func TestCountries(t *testing.T) {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
 		}
 
-		continent := countries[0].ContinentData()
-		league := countries[0].LeagueData()[0]
+		continent := countries[0].Continent()
+		league := countries[0].Leagues()[0]
 
 		assertCountry(t, &countries[0])
 		assertContinent(t, continent)
@@ -216,8 +216,8 @@ func TestCountryById(t *testing.T) {
 		}
 
 		assertCountry(t, country)
-		assert.Nil(t, country.ContinentData())
-		assert.Nil(t, country.LeagueData())
+		assert.Nil(t, country.Continent())
+		assert.Nil(t, country.Leagues())
 	})
 
 	t.Run("returns Country struct with country includes data", func(t *testing.T) {
@@ -233,8 +233,8 @@ func TestCountryById(t *testing.T) {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
 		}
 
-		continent := country.ContinentData()
-		league := country.LeagueData()[0]
+		continent := country.Continent()
+		league := country.Leagues()[0]
 
 		assertCountry(t, country)
 		assertContinent(t, continent)

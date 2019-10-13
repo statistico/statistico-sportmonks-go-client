@@ -39,4 +39,3 @@ type Client interface {
 	// Use the includes slice of string to enrich the response data.
 	CountryById(ctx context.Context, id int, includes []string) (*Country, *Meta, error)
 }
-

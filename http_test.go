@@ -86,7 +86,7 @@ func newTestClient(fn roundTripFunc) *http.Client {
 }
 
 func mockResponseServer(t *testing.T, body string, code int, url string) *http.Client {
-	return newTestClient(func (req *http.Request) *http.Response {
+	return newTestClient(func(req *http.Request) *http.Response {
 		assert.Equal(t, url, req.URL.String())
 
 		return &http.Response{

@@ -33,6 +33,7 @@ var venueSeasonResponse = `{
 		}
 	]
 }`
+
 func TestVenueById(t *testing.T) {
 	t.Run("returns a single Venue struct", func(t *testing.T) {
 		url := defaultBaseUrl + "/venues/200?api_token=api-key"
@@ -102,12 +103,12 @@ func TestVenueBySeasonId(t *testing.T) {
 }
 
 func assertVenue(t *testing.T, venue *Venue) {
-	assert.Equal(t,200, venue.ID)
-	assert.Equal(t,"Turf Moor", venue.Name)
-	assert.Equal(t,"grass", venue.Surface)
-	assert.Equal(t,"Harry Potts Way", *venue.Address)
-	assert.Equal(t,"Burnley", venue.City)
-	assert.Equal(t,22546, venue.Capacity)
-	assert.Equal(t,"https://cdn.sportmonks.com/images/soccer/venues/8/200.png", venue.ImagePath)
+	assert.Equal(t, 200, venue.ID)
+	assert.Equal(t, "Turf Moor", venue.Name)
+	assert.Equal(t, "grass", venue.Surface)
+	assert.Equal(t, "Harry Potts Way", *venue.Address)
+	assert.Equal(t, "Burnley", venue.City)
+	assert.Equal(t, 22546, venue.Capacity)
+	assert.Equal(t, "https://cdn.sportmonks.com/images/soccer/venues/8/200.png", venue.ImagePath)
 	assert.Nil(t, venue.Coordinates)
 }

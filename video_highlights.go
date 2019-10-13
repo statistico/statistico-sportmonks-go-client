@@ -8,11 +8,11 @@ import (
 )
 
 type VideoHighlights struct {
-	FixtureID int         `json:"fixture_id"`
-	EventID   *int `json:"event_id"`
-	Location  string      `json:"location"`
-	Type      string      `json:"type"`
-	CreatedAt DateTime `json:"created_at"`
+	FixtureID   int         `json:"fixture_id"`
+	EventID     *int        `json:"event_id"`
+	Location    string      `json:"location"`
+	Type        string      `json:"type"`
+	CreatedAt   DateTime    `json:"created_at"`
 	FixtureData FixtureData `json:"fixture, omitempty"`
 }
 
@@ -33,7 +33,7 @@ func (c *HTTPClient) VideoHighlights(ctx context.Context, page int, includes []s
 
 	response := struct {
 		Data []VideoHighlights `json:"data"`
-		Meta *Meta       `json:"meta"`
+		Meta *Meta             `json:"meta"`
 	}{}
 
 	err := c.getResource(ctx, videoHighlightsUri, values, &response)

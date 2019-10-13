@@ -649,7 +649,7 @@ func TestStagesBySeasonId(t *testing.T) {
 func assertStage(t *testing.T, stage *Stage) {
 	assert.Equal(t, 10, stage.ID)
 	assert.Equal(t, "Regular Season", stage.Name)
-	assert.Nil(t,  stage.Type)
+	assert.Nil(t, stage.Type)
 	assert.Equal(t, 8, stage.LeagueID)
 	assert.Equal(t, 12, stage.SeasonID)
 	assert.Nil(t, stage.SortOrder)

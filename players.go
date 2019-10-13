@@ -8,7 +8,7 @@ import (
 )
 
 type Player struct {
-	ID     int    `json:"player_id"`
+	ID           int    `json:"player_id"`
 	TeamID       int    `json:"team_id"`
 	CountryID    int    `json:"country_id"`
 	PositionID   int    `json:"position_id"`
@@ -24,14 +24,14 @@ type Player struct {
 	Weight       string `json:"weight"`
 	ImagePath    string `json:"image_path"`
 
-	CountryData      CountryData `json:"country"`
-	LineupData 	PlayerLineupData `json:"lineups, omitempty"`
-	PositionData PositionData `json:"position, omitempty"`
-	SidelinedData SidelinedData `json:"sidelined, omitempty"`
-	StatsData PlayerSeasonStatsData `json:"stats, omitempty"`
-	TeamData TeamData `json:"team, omitempty"`
-	TransfersData TransfersData `json:"transfers, omitempty"`
-	TrophyData TrophyData`json:"trophies, omitempty"`
+	CountryData   CountryData           `json:"country"`
+	LineupData    PlayerLineupData      `json:"lineups, omitempty"`
+	PositionData  PositionData          `json:"position, omitempty"`
+	SidelinedData SidelinedData         `json:"sidelined, omitempty"`
+	StatsData     PlayerSeasonStatsData `json:"stats, omitempty"`
+	TeamData      TeamData              `json:"team, omitempty"`
+	TransfersData TransfersData         `json:"transfers, omitempty"`
+	TrophyData    TrophyData            `json:"trophies, omitempty"`
 }
 
 func (p *Player) Country() *Country {
@@ -69,7 +69,7 @@ func (p *Player) Trophies() []Trophy {
 // MarketById returns a single Market struct and supporting meta data. Use the includes slice of string to enrich
 // the response data.
 func (c *HTTPClient) PlayerById(ctx context.Context, id int, includes []string) (*Player, *Meta, error) {
-	path := fmt.Sprintf(playersUri + "/%d", id)
+	path := fmt.Sprintf(playersUri+"/%d", id)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},
@@ -77,7 +77,7 @@ func (c *HTTPClient) PlayerById(ctx context.Context, id int, includes []string) 
 
 	response := struct {
 		Data *Player `json:"data"`
-		Meta *Meta    `json:"meta"`
+		Meta *Meta   `json:"meta"`
 	}{}
 
 	err := c.getResource(ctx, path, values, &response)

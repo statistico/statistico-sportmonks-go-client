@@ -5,8 +5,8 @@ import "fmt"
 // ErrBadStatusCode is returned when the API returns a non 200 error code
 type ErrBadStatusCode struct {
 	Err *struct {
-		Message      string `json:"message"`
-		Code         int	`json:"code"`
+		Message string `json:"message"`
+		Code    int    `json:"code"`
 	} `json:"error"`
 }
 

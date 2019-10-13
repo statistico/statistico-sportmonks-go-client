@@ -8,16 +8,16 @@ import (
 )
 
 type Standings struct {
-	Name      string `json:"name"`
-	LeagueID  int    `json:"league_id"`
-	SeasonID  int    `json:"season_id"`
-	RoundID   int    `json:"round_id"`
-	RoundName int    `json:"round_name"`
-	Type      string `json:"type"`
-	StageID   int    `json:"stage_id"`
-	StageName string `json:"stage_name"`
-	Resource  string `json:"resource"`
-	LeagueStandingData LeagueStandingData`json:"standings"`
+	Name               string             `json:"name"`
+	LeagueID           int                `json:"league_id"`
+	SeasonID           int                `json:"season_id"`
+	RoundID            int                `json:"round_id"`
+	RoundName          int                `json:"round_name"`
+	Type               string             `json:"type"`
+	StageID            int                `json:"stage_id"`
+	StageName          string             `json:"stage_name"`
+	Resource           string             `json:"resource"`
+	LeagueStandingData LeagueStandingData `json:"standings"`
 }
 
 func (s *Standings) LeagueStandings() []LeagueStanding {
@@ -25,27 +25,27 @@ func (s *Standings) LeagueStandings() []LeagueStanding {
 }
 
 type LeagueStanding struct {
-	Position  int         `json:"position"`
-	TeamID    int         `json:"team_id"`
-	TeamName  string      `json:"team_name"`
-	RoundID   int         `json:"round_id"`
-	RoundName int         `json:"round_name"`
-	GroupID   *int 		   `json:"group_id"`
-	GroupName *int `json:"group_name"`
-	Overall  	TeamLeagueStats `json:"overall"`
-	Home 		TeamLeagueStats `json:"home"`
-	Away 		TeamLeagueStats `json:"away"`
-	Total 		TeamLeagueTotalStats `json:"total"`
-	Result     *string `json:"result"`
-	Points     int    `json:"points"`
-	RecentForm string `json:"recent_form"`
-	Status     string `json:"status"`
+	Position   int                  `json:"position"`
+	TeamID     int                  `json:"team_id"`
+	TeamName   string               `json:"team_name"`
+	RoundID    int                  `json:"round_id"`
+	RoundName  int                  `json:"round_name"`
+	GroupID    *int                 `json:"group_id"`
+	GroupName  *int                 `json:"group_name"`
+	Overall    TeamLeagueStats      `json:"overall"`
+	Home       TeamLeagueStats      `json:"home"`
+	Away       TeamLeagueStats      `json:"away"`
+	Total      TeamLeagueTotalStats `json:"total"`
+	Result     *string              `json:"result"`
+	Points     int                  `json:"points"`
+	RecentForm string               `json:"recent_form"`
+	Status     string               `json:"status"`
 
 	LeagueData LeagueData `json:"league"`
-	RoundData RoundData `json:"round"`
+	RoundData  RoundData  `json:"round"`
 	SeasonData SeasonData `json:"season"`
 	StagesData StagesData `json:"stages"`
-	TeamData TeamData `json:"team"`
+	TeamData   TeamData   `json:"team"`
 }
 
 func (s *LeagueStanding) League() *League {
@@ -70,7 +70,7 @@ func (s *LeagueStanding) Team() *Team {
 
 // StandingsBySeasonId returns a slice of Standings struct for a Season. Use the includes slice to enrich the response data.
 func (c *HTTPClient) StandingsBySeasonId(ctx context.Context, seasonId int, includes []string) ([]Standings, *Meta, error) {
-	path := fmt.Sprintf(leagueStandingsUri +"/%d", seasonId)
+	path := fmt.Sprintf(leagueStandingsUri+"/%d", seasonId)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},
@@ -78,7 +78,7 @@ func (c *HTTPClient) StandingsBySeasonId(ctx context.Context, seasonId int, incl
 
 	response := struct {
 		Data []Standings `json:"data"`
-		Meta *Meta    `json:"meta"`
+		Meta *Meta       `json:"meta"`
 	}{}
 
 	err := c.getResource(ctx, path, values, &response)
@@ -92,11 +92,11 @@ func (c *HTTPClient) StandingsBySeasonId(ctx context.Context, seasonId int, incl
 
 // LiveStandingsBySeasonId returns a slice of Standings struct for a Season with supporting meta data.
 func (c *HTTPClient) LiveStandingsBySeasonId(ctx context.Context, seasonId int) ([]LiveStandings, *Meta, error) {
-	path := fmt.Sprintf(liveLeagueStandingsUri +"/%d", seasonId)
+	path := fmt.Sprintf(liveLeagueStandingsUri+"/%d", seasonId)
 
 	response := struct {
 		Data []LiveStandings `json:"data"`
-		Meta *Meta    `json:"meta"`
+		Meta *Meta           `json:"meta"`
 	}{}
 
 	err := c.getResource(ctx, path, url.Values{}, &response)

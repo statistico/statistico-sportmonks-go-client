@@ -10,14 +10,14 @@ import (
 
 // Continent struct
 type Continent struct {
-	ID        int     `json:"id"`
-	Name      string    `json:"name"`
-	Countries Countries `json:"countries, omitempty"`
+	ID            int           `json:"id"`
+	Name          string        `json:"name"`
+	CountriesData CountriesData `json:"countries, omitempty"`
 }
 
-// CountryData returns a Country struct slice associated to a Continent
-func (c *Continent) CountryData() []Country {
-	return c.Countries.Data
+// Countries returns a Country struct slice associated to a Continent
+func (c *Continent) Countries() []Country {
+	return c.CountriesData.Data
 }
 
 // Continents returns a slice of Continent struct and supporting meta data. The endpoint used within this method

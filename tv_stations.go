@@ -13,11 +13,11 @@ type TVStation struct {
 
 // TvStationsByFixtureId returns a slice of TVStation struct and supporting meta data for a Fixture
 func (c *HTTPClient) TVStationsByFixtureId(ctx context.Context, fixtureId int) ([]TVStation, *Meta, error) {
-	path := fmt.Sprintf(tvStationsUri + "/%d", fixtureId)
+	path := fmt.Sprintf(tvStationsUri+"/%d", fixtureId)
 
 	response := struct {
 		Data []TVStation `json:"data"`
-		Meta *Meta    `json:"meta"`
+		Meta *Meta       `json:"meta"`
 	}{}
 
 	err := c.getResource(ctx, path, url.Values{}, &response)

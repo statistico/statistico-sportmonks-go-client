@@ -33,7 +33,7 @@ func (c *HTTPClient) MarketById(ctx context.Context, id int) (*Market, *Meta, er
 
 	response := struct {
 		Data *Market `json:"data"`
-		Meta *Meta    `json:"meta"`
+		Meta *Meta   `json:"meta"`
 	}{}
 
 	err := c.getResource(ctx, path, url.Values{}, &response)

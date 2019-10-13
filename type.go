@@ -1,16 +1,22 @@
 package sportmonks
 
 type (
-	AggregatedAssistScorerData struct {
-		Data []AssistScorer `json:"data"`
-	}
-
-	AggregatedCardScorerData struct {
-		Data []CardScorer `json:"data"`
-	}
-
-	AggregatedGoalScorerData struct {
-		Data []GoalScorer `json:"data"`
+	AdditionalPlayerMatchStats struct {
+		Offsides       *int `json:"offsides"`
+		Saves          *int `json:"saves"`
+		InsideBoxSaves *int `json:"inside_box_saves"`
+		PenScored      *int `json:"pen_scored"`
+		PenMissed      *int `json:"pen_missed"`
+		PenSaved       *int `json:"pen_saved"`
+		PenCommitted   *int `json:"pen_committed"`
+		PenWon         *int `json:"pen_won"`
+		HitWoodwork    *int `json:"hit_woodwork"`
+		Tackles        *int `json:"tackles"`
+		Blocks         *int `json:"blocks"`
+		Interceptions  *int `json:"interceptions"`
+		Clearances     *int `json:"clearances"`
+		Dispossessed   *int `json:"dispossesed"`
+		MinutesPlayed  *int `json:"minutes_played"`
 	}
 
 	AggregatedMatchOdds struct {
@@ -23,19 +29,15 @@ type (
 		FourthOfficialID  *int `json:"fourth_official_id"`
 	}
 
-	AssistScorerData struct {
-		Data []AssistScorer `json:"data"`
-	}
-
- 	CardEvent struct {
-		ID          int64       `json:"id"`
-		TeamID      string      `json:"team_id"`
-		Type        string      `json:"type"`
-		FixtureID   int         `json:"fixture_id"`
-		PlayerID    int         `json:"player_id"`
-		PlayerName  string      `json:"player_name"`
-		Minute      int         `json:"minute"`
-		ExtraMinute *int `json:"extra_minute"`
+	CardEvent struct {
+		ID          int64   `json:"id"`
+		TeamID      string  `json:"team_id"`
+		Type        string  `json:"type"`
+		FixtureID   int     `json:"fixture_id"`
+		PlayerID    int     `json:"player_id"`
+		PlayerName  string  `json:"player_name"`
+		Minute      int     `json:"minute"`
+		ExtraMinute *int    `json:"extra_minute"`
 		Reason      *string `json:"reason"`
 	}
 
@@ -43,21 +45,18 @@ type (
 		Data []CardEvent `json:"data"`
 	}
 
-	CardScorerData struct {
-		Data []CardScorer `json:"data"`
+	Coaches struct {
+		LocalTeamCoachID   int `json:"localteam_coach_id"`
+		VisitorTeamCoachID int `json:"visitorteam_coach_id"`
 	}
 
-	CoachData struct {
-		Data *Coach `json:"data"`
-	}
-
- 	CornerEvent struct {
-		ID          int         `json:"id"`
-		TeamID      int         `json:"team_id"`
-		FixtureID   int         `json:"fixture_id"`
-		Minute      int         `json:"minute"`
-		ExtraMinute *int `json:"extra_minute"`
-		Comment     string      `json:"comment"`
+	CornerEvent struct {
+		ID          int    `json:"id"`
+		TeamID      int    `json:"team_id"`
+		FixtureID   int    `json:"fixture_id"`
+		Minute      int    `json:"minute"`
+		ExtraMinute *int   `json:"extra_minute"`
+		Comment     string `json:"comment"`
 	}
 
 	CornerEvents struct {
@@ -68,24 +67,16 @@ type (
 		Data []Country `json:"data"`
 	}
 
-	CountryData struct {
-		Data *Country `json:"data"`
-	}
-
-	ContinentData struct {
-		Data *Continent `json:"data"`
-	}
-
 	CountryExtra struct {
-		Continent   string      `json:"continent"`
-		SubRegion   string      `json:"sub_region"`
-		WorldRegion string      `json:"world_region"`
-		FIFA        string      `json:"fifa, string"`
-		ISO         string      `json:"iso, string"`
-		ISO2        string      `json:"iso2, string"`
-		Longitude   string      `json:"longitude"`
-		Latitude    string      `json:"latitude"`
-		Flag        string      `json:"flag"`
+		Continent   string `json:"continent"`
+		SubRegion   string `json:"sub_region"`
+		WorldRegion string `json:"world_region"`
+		FIFA        string `json:"fifa, string"`
+		ISO         string `json:"iso, string"`
+		ISO2        string `json:"iso2, string"`
+		Longitude   string `json:"longitude"`
+		Latitude    string `json:"latitude"`
+		Flag        string `json:"flag"`
 	}
 
 	Crosses struct {
@@ -104,35 +95,29 @@ type (
 		Won   *int `json:"won"`
 	}
 
-	GoalScorerData struct {
-		Data []GoalScorer `json:"data"`
+	FixtureTime struct {
+		Status     string `json:"status"`
+		StartingAt struct {
+			DateTime  string `json:"date_time"`
+			Date      string `json:"date"`
+			Time      string `json:"time"`
+			Timestamp int    `json:"timestamp"`
+			Timezone  string `json:"timezone"`
+		} `json:"starting_at"`
+		Minute      int  `json:"minute"`
+		Second      *int `json:"second"`
+		AddedTime   *int `json:"added_time"`
+		ExtraMinute *int `json:"extra_minute"`
+		InjuryTime  *int `json:"injury_time"`
 	}
 
-	GroupsData struct {
-		Data []Group `json:"data"`
-	}
-
-	Leagues struct {
-		Data []League `json:"data"`
-	}
-
-	LeagueCoverage struct {
-		Predictions      int `json:"predictions"`
-		TopScorerGoals   bool `json:"topscorer_goals"`
-		TopScorerAssists bool `json:"topscorer_assists"`
-		TopScorerCards   bool `json:"topscorer_cards"`
-	}
-
-	FixtureData struct {
-		Data *Fixture `json:"data"`
-	}
-
-	FixturesData struct {
-		Data []Fixture `json:"data"`
+	Formations struct {
+		LocalTeamFormation   string `json:"localteam_formation"`
+		VisitorTeamFormation string `json:"visitorteam_formation"`
 	}
 
 	Fouls struct {
-		Committed int         `json:"committed"`
+		Committed int  `json:"committed"`
 		Drawn     *int `json:"drawn"`
 	}
 
@@ -155,27 +140,43 @@ type (
 		Data []GoalEvent `json:"data"`
 	}
 
- 	Group struct {
+	Group struct {
 		ID        int    `json:"id"`
 		Name      string `json:"name"`
 		LeagueID  int    `json:"league_id"`
 		SeasonID  int    `json:"season_id"`
-		RoundID   *int    `json:"round_id"`
-		RoundName *int    `json:"round_name"`
+		RoundID   *int   `json:"round_id"`
+		RoundName *int   `json:"round_name"`
 		StageID   int    `json:"stage_id"`
 		StageName string `json:"stage_name"`
 		Resource  string `json:"resource"`
- 	}
+	}
 
-	LeagueData struct {
-		Data *League `json:"data"`
+	KitColors struct {
+		Color    *string `json:"color"`
+		KitColor *string `json:"kit_colors"`
+	}
+
+	Leagues struct {
+		Data []League `json:"data"`
+	}
+
+	LeagueCoverage struct {
+		Predictions      int  `json:"predictions"`
+		TopScorerGoals   bool `json:"topscorer_goals"`
+		TopScorerAssists bool `json:"topscorer_assists"`
+		TopScorerCards   bool `json:"topscorer_cards"`
+	}
+
+	LeagueStandingData struct {
+		Data []LeagueStanding `json:"data"`
 	}
 
 	Lineup struct {
 		Data []PlayerStats `json:"data"`
 	}
 
- 	LiveStandings struct {
+	LiveStandings struct {
 		Position           int    `json:"position"`
 		Played             int    `json:"played"`
 		TeamID             int    `json:"team_id"`
@@ -196,20 +197,20 @@ type (
 		Data []Commentary `json:"data"`
 	}
 
- 	MatchEvent struct {
-		ID                int64       `json:"id"`
-		TeamID            string      `json:"team_id"`
-		Type              string      `json:"type"`
-		FixtureID         int         `json:"fixture_id"`
-		PlayerID          int         `json:"player_id"`
-		PlayerName        string      `json:"player_name"`
-		RelatedPlayerID   int         `json:"related_player_id"`
-		RelatedPlayerName string      `json:"related_player_name"`
-		Minute            int         `json:"minute"`
-		ExtraMinute       *int `json:"extra_minute"`
+	MatchEvent struct {
+		ID                int64   `json:"id"`
+		TeamID            string  `json:"team_id"`
+		Type              string  `json:"type"`
+		FixtureID         int     `json:"fixture_id"`
+		PlayerID          int     `json:"player_id"`
+		PlayerName        string  `json:"player_name"`
+		RelatedPlayerID   int     `json:"related_player_id"`
+		RelatedPlayerName string  `json:"related_player_name"`
+		Minute            int     `json:"minute"`
+		ExtraMinute       *int    `json:"extra_minute"`
 		Reason            *string `json:"reason"`
-		Injured           *bool       `json:"injuried"`
-		Result            string      `json:"result"`
+		Injured           *bool   `json:"injuried"`
+		Result            string  `json:"result"`
 	}
 
 	MatchEvents struct {
@@ -220,13 +221,17 @@ type (
 		Data []VideoHighlights `json:"data"`
 	}
 
-	MatchTVStations struct {
-		Data []TVStation `json:"data"`
+	MatchOfficial struct {
+		ID         int    `json:"id"`
+		CommonName string `json:"common_name"`
+		FullName   string `json:"fullname"`
+		FirstName  string `json:"firstname"`
+		LastName   string `json:"lastname"`
 	}
 
 	Passes struct {
-		Total     int         `json:"total"`
-		Accuracy  *int         `json:"accuracy"`
+		Total     int  `json:"total"`
+		Accuracy  *int `json:"accuracy"`
 		KeyPasses *int `json:"key_passes"`
 	}
 
@@ -238,135 +243,155 @@ type (
 		Saves     *int `json:"saves"`
 	}
 
-	PlayerData struct {
-		Data *Player `json:"data"`
-	}
-
-	PlayersData struct {
-		Data []Player `json:"data"`
-	}
-
-	PlayerLineupData struct {
-		Data []PlayerStats `json:"data"`
-	}
-
- 	PlayerStats struct {
-		TeamID             int         `json:"team_id"`
-		FixtureID          int         `json:"fixture_id"`
-		PlayerID           int         `json:"player_id"`
-		PlayerName         string      `json:"player_name"`
-		Number             int         `json:"number"`
-		Position           *string `json:"position, string"`
-		AdditionalPosition *string` json:"additional_position, string"`
-		FormationPosition  *int `json:"formation_position"`
-		PositionX              *string `json:"posx"`
-		PositionY               *string `json:"posy"`
-		Captain            bool        `json:"captain"`
+	PlayerStats struct {
+		TeamID             int              `json:"team_id"`
+		FixtureID          int              `json:"fixture_id"`
+		PlayerID           int              `json:"player_id"`
+		PlayerName         string           `json:"player_name"`
+		Number             int              `json:"number"`
+		Position           *string          `json:"position, string"`
+		AdditionalPosition *string          ` json:"additional_position, string"`
+		FormationPosition  *int             `json:"formation_position"`
+		PositionX          *string          `json:"posx"`
+		PositionY          *string          `json:"posy"`
+		Captain            bool             `json:"captain"`
 		Stats              PlayerMatchStats `json:"stats"`
- 	}
+	}
+
+	PlayerCrosses struct {
+		Total    *int `json:"total"`
+		Accurate *int `json:"accurate"`
+	}
+
+	PlayerDribbles struct {
+		Attempts     *int `json:"attempts"`
+		Success      *int `json:"success"`
+		DribbledPast *int `json:"dribbled_past"`
+	}
+
+	PlayerDuels struct {
+		Total *int `json:"total"`
+		Won   *int `json:"won"`
+	}
+
+	PlayerCards struct {
+		YellowCards *int `json:"yellowcards"`
+		RedCards    *int `json:"redcards"`
+	}
+
+	PlayerFouls struct {
+		Drawn     *int `json:"drawn"`
+		Committed *int `json:"committed"`
+	}
+
+	PlayerGoals struct {
+		Scored   *int `json:"scored"`
+		Assist   *int `json:"assists"`
+		Conceded *int `json:"conceded"`
+	}
+
+	PlayerPenalties struct {
+		Won       *int `json:"won"`
+		Scores    *int `json:"scores"`
+		Missed    *int `json:"missed"`
+		Committed *int `json:"committed"`
+		Saves     *int `json:"saves"`
+	}
+
+	PlayerMatchPasses struct {
+		TotalCrosses    *int `json:"total_crosses"`
+		CrossesAccuracy *int `json:"crosses_accuracy"`
+		Passes          *int `json:"passes"`
+		PassesAccuracy  *int `json:"passes_accuracy"`
+		KeyPasses       *int `json:"key_passes"`
+	}
+
+	PlayerSeasonPasses struct {
+		Total     *int `json:"total"`
+		Accuracy  *int `json:"accuracy"`
+		KeyPasses *int `json:"key_passes"`
+	}
+
+	PlayerShots struct {
+		ShotsTotal  *int `json:"shots_total"`
+		ShotsOnGoal *int `json:"shots_on_goal"`
+	}
 
 	PlayerMatchStats struct {
-		Shots PlayerShots`json:"shots"`
-		Goals PlayerGoals `json:"goals"`
-		Fouls PlayerFouls`json:"fouls"`
-		Cards PlayerCards `json:"cards"`
-		Passing PlayerMatchPasses `json:"passing"`
-		Dribbles Player `json:"dribbles"`
-		Duels PlayerDuels `json:"duels"`
-		Other AdditionalPlayerMatchStats`json:"other"`
+		Shots    PlayerShots                `json:"shots"`
+		Goals    PlayerGoals                `json:"goals"`
+		Fouls    PlayerFouls                `json:"fouls"`
+		Cards    PlayerCards                `json:"cards"`
+		Passing  PlayerMatchPasses          `json:"passing"`
+		Dribbles Player                     `json:"dribbles"`
+		Duels    PlayerDuels                `json:"duels"`
+		Other    AdditionalPlayerMatchStats `json:"other"`
 	}
 
- 	PlayerSeasonStats struct {
-		PlayerID           int         `json:"player_id"`
-		TeamID             int         `json:"team_id"`
-		LeagueID           int         `json:"league_id"`
-		SeasonID           int         `json:"season_id"`
-		Captain            int         `json:"captain"`
-		Minutes            int         `json:"minutes"`
-		Appearances        int         `json:"appearences"`
-		Lineups            int         `json:"lineups"`
-		SubstituteIn       int         `json:"substitute_in"`
-		SubstituteOut      int         `json:"substitute_out"`
-		SubstitutesOnBench int         `json:"substitutes_on_bench"`
-		Goals              int         `json:"goals"`
-		Assists            int         `json:"assists"`
-		Saves              int         `json:"saves"`
-		InsideBoxSaves     int         `json:"inside_box_saves"`
-		Dispossessed        int         `json:"dispossesed"`
-		Interceptions      int         `json:"interceptions"`
-		YellowCards        int         `json:"yellowcards"`
-		YellowRed          int         `json:"yellowred"`
-		RedCards           int         `json:"redcards"`
-		Type               string      `json:"type"`
-		Tackles            *int`json:"tackles"`
-		Blocks             *int `json:"blocks"`
-		HitPost            *int `json:"hit_post"`
-		Fouls              Fouls `json:"fouls"`
-		Crosses Crosses `json:"crosses"`
-		Dribbles Dribbles `json:"dribbles"`
-		Duels Duels `json:"duels"`
-		Passes Passes `json:"passes"`
-		Penalties Penalties`json:"penalties"`
-		Player struct {
-			Data Player `json:"data"`
-		} `json:"player, omitempty"`
+	PlayerSeasonStats struct {
+		PlayerID           int        `json:"player_id"`
+		TeamID             int        `json:"team_id"`
+		LeagueID           int        `json:"league_id"`
+		SeasonID           int        `json:"season_id"`
+		Captain            int        `json:"captain"`
+		Minutes            int        `json:"minutes"`
+		Appearances        int        `json:"appearences"`
+		Lineups            int        `json:"lineups"`
+		SubstituteIn       int        `json:"substitute_in"`
+		SubstituteOut      int        `json:"substitute_out"`
+		SubstitutesOnBench int        `json:"substitutes_on_bench"`
+		Goals              int        `json:"goals"`
+		Assists            int        `json:"assists"`
+		Saves              int        `json:"saves"`
+		InsideBoxSaves     int        `json:"inside_box_saves"`
+		Dispossessed       int        `json:"dispossesed"`
+		Interceptions      int        `json:"interceptions"`
+		YellowCards        int        `json:"yellowcards"`
+		YellowRed          int        `json:"yellowred"`
+		RedCards           int        `json:"redcards"`
+		Type               string     `json:"type"`
+		Tackles            *int       `json:"tackles"`
+		Blocks             *int       `json:"blocks"`
+		HitPost            *int       `json:"hit_post"`
+		Fouls              Fouls      `json:"fouls"`
+		Crosses            Crosses    `json:"crosses"`
+		Dribbles           Dribbles   `json:"dribbles"`
+		Duels              Duels      `json:"duels"`
+		Passes             Passes     `json:"passes"`
+		Penalties          Penalties  `json:"penalties"`
+		PlayerData         PlayerData `json:"player, omitempty"`
 	}
 
-	PlayerSeasonStatsData struct {
-		Data []PlayerSeasonStats `json:"data"`
-	}
-
- 	Position struct {
+	Position struct {
 		ID   int    `json:"id"`
 		Name string `json:"name"`
-	}
-
-	PositionData struct {
-		Data *Position `json:"data"`
 	}
 
 	Ranking struct {
 		TeamID            int     `json:"team_id"`
 		Points            float64 `json:"points"`
-		Coeffiecient      int     `json:"coeffiecient"`
+		Coefficient       int     `json:"coeffiecient"`
 		Position          int     `json:"position"`
 		PositionStatus    string  `json:"position_status"`
 		PositionWonOrLost int     `json:"position_won_or_lost"`
-	}
-
-	RankingData struct {
-		Data *Ranking `json:"data"`
-	}
-
- 	MatchOfficial struct {
-		ID         int    `json:"id"`
-		CommonName string `json:"common_name"`
-		FullName   string `json:"fullname"`
-		FirstName  string `json:"firstname"`
-		LastName   string `json:"lastname"`
-	}
-
-	MatchOfficialData struct {
-		Data *MatchOfficial `json:"data"`
-	}
-
-	RoundData struct {
-		Data *Round `json:"data"`
-	}
-
-	RoundsData struct {
-		Data []Round `json:"data"`
 	}
 
 	Seasons struct {
 		Data []Season `json:"data"`
 	}
 
-	SeasonData struct {
-		Data *Season `json:"data"`
+	Scores struct {
+		LocalTeamScore      int     `json:"localteam_score"`
+		VisitorTeamScore    int     `json:"visitorteam_score"`
+		LocalTeamPenScore   *int    `json:"localteam_pen_score"`
+		VisitorTeamPenScore *int    `json:"visitorteam_pen_score"`
+		HTScore             *string `json:"ht_score"`
+		FTScore             *string `json:"ft_score"`
+		ETScore             *string `json:"et_score"`
+		PSScore             *string `json:"ps_score"`
 	}
 
- 	Sidelined struct {
+	Sidelined struct {
 		PlayerID    int    `json:"player_id"`
 		SeasonID    int    `json:"season_id"`
 		TeamID      int    `json:"team_id"`
@@ -374,27 +399,10 @@ type (
 		StartDate   string `json:"start_date"`
 	}
 
-	SidelinedData struct {
-		Data []Sidelined `json:"data"`
-	}
-
-	// Sport struct
 	Sport struct {
 		ID      int    `json:"id"`
 		Name    string `json:"name"`
 		Current bool   `json:"current"`
-	}
-
-	SquadPlayerData struct {
-		Data []SquadPlayer `json:"data"`
-	}
-
-	StageData struct {
-		Data *Stage `json:"data"`
-	}
-
-	StagesData struct {
-		Data []Stage `json:"data"`
 	}
 
 	SubstitutionEvent struct {
@@ -419,10 +427,6 @@ type (
 		Data *Team `json:"data"`
 	}
 
-	LeagueStandingData struct {
-		Data []LeagueStanding `json:"data"`
-	}
-
 	TeamLeagueStats struct {
 		GamesPlayed  int `json:"games_played"`
 		Won          int `json:"won"`
@@ -437,10 +441,10 @@ type (
 		Points         int `json:"points"`
 	}
 
- 	TeamSeasonStats struct {
-		TeamID   int         `json:"team_id"`
-		SeasonID int         `json:"season_id"`
-		StageID  *int 		 `json:"stage_id"`
+	TeamSeasonStats struct {
+		TeamID   int  `json:"team_id"`
+		SeasonID int  `json:"season_id"`
+		StageID  *int `json:"stage_id"`
 		Win      struct {
 			Total string `json:"total"`
 			Home  string `json:"home"`
@@ -503,7 +507,7 @@ type (
 			Home  string `json:"home"`
 			Away  string `json:"away"`
 		} `json:"avg_first_goal_conceded"`
-		Attacks                     *int`json:"attacks"`
+		Attacks                     *int `json:"attacks"`
 		DangerousAttacks            *int `json:"dangerous_attacks"`
 		AvgBallPossessionPercentage *int `json:"avg_ball_possession_percentage"`
 		Fouls                       *int `json:"fouls"`
@@ -520,8 +524,34 @@ type (
 		GoalLine                    *int `json:"goal_line"`
 	}
 
-	TeamSeasonStatsData struct {
-		Data *TeamSeasonStats `json:"data"`
+	TeamStandings struct {
+		LocalTeamPosition   int `json:"localteam_position"`
+		VisitorTeamPosition int `json:"visitorteam_position"`
+	}
+
+	TeamAttacks struct {
+		Attacks          interface{} `json:"attacks"`
+		DangerousAttacks interface{} `json:"dangerous_attacks"`
+	}
+
+	TeamColors struct {
+		LocalTeam   KitColors `json:"localteam"`
+		VisitorTeam KitColors `json:"visitorteam"`
+	}
+
+	TeamPasses struct {
+		Total      interface{} `json:"total"`
+		Accurate   interface{} `json:"accurate"`
+		Percentage interface{} `json:"percentage"`
+	}
+
+	TeamShots struct {
+		Total      interface{} `json:"total"`
+		OnGoal     interface{} `json:"ongoal"`
+		OffGoal    interface{} `json:"offgoal"`
+		Blocked    interface{} `json:"blocked"`
+		InsideBox  interface{} `json:"insidebox"`
+		OutsideBox interface{} `json:"outsidebox"`
 	}
 
 	TeamStats struct {
@@ -530,48 +560,71 @@ type (
 		Shots          TeamShots   `json:"shots"`
 		Passes         TeamPasses  `json:"passes"`
 		Attacks        TeamAttacks `json:"attacks"`
-		Fouls          *int `json:"fouls"`
-		Corners        *int `json:"corners"`
-		Offsides       *int `json:"offsides"`
-		PossessionTime *int `json:"possessiontime"`
-		YellowCards    *int `json:"yellowcards"`
-		RedCards       *int `json:"redcards"`
-		Saves          *int `json:"saves"`
-		Substitutions  *int `json:"substitutions"`
-		GoalKick       *int `json:"goal_kick"`
-		GoalAttempts   *int `json:"goal_attempts"`
-		FreeKick       *int `json:"free_kick"`
-		ThrowIn        *int `json:"throw_in"`
-		BallSafe       *int `json:"ball_safe"`
-		Goals          *int `json:"goals"`
-		Penalties          *int `json:"penalties"`
-		Injuries          *int `json:"injuries"`
+		Fouls          *int        `json:"fouls"`
+		Corners        *int        `json:"corners"`
+		Offsides       *int        `json:"offsides"`
+		PossessionTime *int        `json:"possessiontime"`
+		YellowCards    *int        `json:"yellowcards"`
+		RedCards       *int        `json:"redcards"`
+		Saves          *int        `json:"saves"`
+		Substitutions  *int        `json:"substitutions"`
+		GoalKick       *int        `json:"goal_kick"`
+		GoalAttempts   *int        `json:"goal_attempts"`
+		FreeKick       *int        `json:"free_kick"`
+		ThrowIn        *int        `json:"throw_in"`
+		BallSafe       *int        `json:"ball_safe"`
+		Goals          *int        `json:"goals"`
+		Penalties      *int        `json:"penalties"`
+		Injuries       *int        `json:"injuries"`
 	}
 
 	TeamsStats struct {
 		Data []TeamStats `json:"data"`
 	}
 
-	TransfersData struct {
-		Data []Transfer `json:"data"`
+	Transfer struct {
+		PlayerID   int     `json:"player_id"`
+		FromTeamID int     `json:"from_team_id"`
+		ToTeamID   int     `json:"to_team_id"`
+		SeasonID   *int    `json:"season_id"`
+		Transfer   string  `json:"transfer"`
+		Type       string  `json:"type"`
+		Date       string  `json:"date"`
+		Amount     *string `json:"amount"`
 	}
 
- 	Trophy struct {
-		PlayerID int    `json:"player_id"`
-		Status   string `json:"status"`
-		Times    int    `json:"times"`
-		League   string `json:"league"`
-		LeagueID int    `json:"league_id"`
-		Seasons  struct {
-			Data []Season `json:"data"`
-		} `json:"seasons"`
+	Trophy struct {
+		PlayerID int         `json:"player_id"`
+		Status   string      `json:"status"`
+		Times    int         `json:"times"`
+		League   string      `json:"league"`
+		LeagueID int         `json:"league_id"`
+		Seasons  SeasonsData `json:"seasons"`
 	}
 
-	TrophyData struct {
-		Data []Trophy `json:"data"`
-	}
-
-	VenueData struct {
-		Data *Venue `json:"data"`
+	WeatherReport struct {
+		Code        string `json:"code"`
+		Type        string `json:"type"`
+		Icon        string `json:"icon"`
+		Temperature struct {
+			Temp float64 `json:"temp"`
+			Unit string  `json:"unit"`
+		} `json:"temperature"`
+		TemperatureCelcius struct {
+			Temp float64 `json:"temp"`
+			Unit string  `json:"unit"`
+		} `json:"temperature_celcius"`
+		Clouds   string `json:"clouds"`
+		Humidity string `json:"humidity"`
+		Pressure *int   `json:"pressure"`
+		Wind     struct {
+			Speed  string `json:"speed"`
+			Degree int    `json:"degree"`
+		} `json:"wind"`
+		Coordinates struct {
+			Lat *float64 `json:"lat"`
+			Lon *float64 `json:"lon"`
+		}
+		UpdatedAt *string `json:"updated_at"`
 	}
 )

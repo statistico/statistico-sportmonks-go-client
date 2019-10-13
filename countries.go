@@ -10,21 +10,21 @@ import (
 
 // Country struct
 type Country struct {
-	ID        int           `json:"id"`
-	Name      string        `json:"name"`
-	Extra     CountryExtra  `json:"extra"`
-	Continent ContinentData `json:"continent, omitempty"`
-	Leagues   Leagues       `json:"leagues, omitempty"`
+	ID            int           `json:"id"`
+	Name          string        `json:"name"`
+	Extra         CountryExtra  `json:"extra"`
+	ContinentData ContinentData `json:"continent, omitempty"`
+	LeaguesData   LeaguesData   `json:"leagues, omitempty"`
 }
 
-// ContinentData returns a Continent struct associated to a Country
-func (c *Country) ContinentData() *Continent {
-	return c.Continent.Data
+// Continent returns a Continent struct associated to a Country
+func (c *Country) Continent() *Continent {
+	return c.ContinentData.Data
 }
 
-// LeagueData returns a League struct slice associated to a Country
-func (c *Country) LeagueData() []League {
-	return c.Leagues.Data
+// Leagues returns a League struct slice associated to a Country
+func (c *Country) Leagues() []League {
+	return c.LeaguesData.Data
 }
 
 // Countries returns a slice of Country struct and supporting meta data. The endpoint used within this method
@@ -56,7 +56,7 @@ func (c *HTTPClient) Countries(ctx context.Context, page int, includes []string)
 
 // Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) CountryById(ctx context.Context, id int, includes []string) (*Country, *Meta, error) {
-	path := fmt.Sprintf(countriesUri +"/%d", id)
+	path := fmt.Sprintf(countriesUri+"/%d", id)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},

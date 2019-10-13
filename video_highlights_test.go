@@ -195,7 +195,7 @@ func assertVideoHighlights(t *testing.T, video *VideoHighlights) {
 	assert.Nil(t, video.EventID)
 	assert.Equal(t, "https://cc.sporttube.com/embed/05tCCCG", video.Location)
 	assert.Equal(t, "video", video.Type)
-	assert.Equal(t,  "2019-10-06 18:36:10.000000", video.CreatedAt.Date)
-	assert.Equal(t,  3, video.CreatedAt.TimezoneType)
-	assert.Equal(t,  "UTC", video.CreatedAt.Timezone)
+	assert.Equal(t, "2019-10-06 18:36:10.000000", video.CreatedAt.Date)
+	assert.Equal(t, 3, video.CreatedAt.TimezoneType)
+	assert.Equal(t, "UTC", video.CreatedAt.Timezone)
 }
