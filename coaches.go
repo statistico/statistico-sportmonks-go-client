@@ -6,6 +6,7 @@ import (
 	"net/url"
 )
 
+// Coach provides a struct representation of a Coach resource
 type Coach struct {
 	ID           int     `json:"coach_id"`
 	TeamID       int     `json:"team_id"`

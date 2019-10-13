@@ -75,7 +75,7 @@ func TestBookMakerById(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		bookmaker, _, err := client.BookmakerById(context.Background(), 1)
+		bookmaker, _, err := client.BookmakerByID(context.Background(), 1)
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -89,7 +89,7 @@ func TestBookMakerById(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		bookmaker, _, err := client.BookmakerById(context.Background(), 1)
+		bookmaker, _, err := client.BookmakerByID(context.Background(), 1)
 
 		if bookmaker != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", bookmaker)

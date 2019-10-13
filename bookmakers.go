@@ -6,6 +6,7 @@ import (
 	"net/url"
 )
 
+// Bookmaker provides a struct representation of a Bookmaker resource
 type Bookmaker struct {
 	ID   int     `json:"id"`
 	Name string  `json:"name"`
@@ -28,8 +29,8 @@ func (c *HTTPClient) Bookmakers(ctx context.Context) ([]Bookmaker, *Meta, error)
 	return response.Data, response.Meta, err
 }
 
-// BookmakerById returns a single Bookmaker resource.
-func (c *HTTPClient) BookmakerById(ctx context.Context, id int) (*Bookmaker, *Meta, error) {
+// BookmakerByID returns a single Bookmaker resource.
+func (c *HTTPClient) BookmakerByID(ctx context.Context, id int) (*Bookmaker, *Meta, error) {
 	path := fmt.Sprintf(bookmakersUri+"/%d", id)
 
 	response := struct {

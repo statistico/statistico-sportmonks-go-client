@@ -6,6 +6,7 @@ import (
 	"net/url"
 )
 
+// Commentary provides a struct representation of a Commentary resource
 type Commentary struct {
 	FixtureID   int    `json:"fixture_id"`
 	Important   bool   `json:"important"`
