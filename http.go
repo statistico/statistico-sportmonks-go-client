@@ -24,6 +24,8 @@ const (
 	leagueStandingsUri     = "/standings/season"
 	leaguesUri             = "/leagues"
 	liveLeagueStandingsUri = "/standings/season/live"
+	liveScoresUri          = "/livescores"
+	liveScoresInPlayUri    = "/livescores/now"
 	marketsUri             = "/markets"
 	playersUri             = "/players"
 	roundsUri              = "/rounds"
