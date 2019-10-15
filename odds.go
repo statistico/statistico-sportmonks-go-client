@@ -10,7 +10,7 @@ type (
 	MatchOdds struct {
 		ID                int               `json:"id"`
 		Name              string            `json:"name"`
-		Suspended         int               `json:"suspended"`
+		Suspended         bool               `json:"suspended"`
 		BookmakerOddsData BookmakerOddsData `json:"bookmaker"`
 	}
 
@@ -31,7 +31,7 @@ type (
 		Fractional       *string  `json:"factional"`
 		Winning          *string  `json:"winning"`
 		Stop             bool     `json:"stop"`
-		BookmakerEventID int      `json:"bookmaker_event_id"`
+		BookmakerEventID string      `json:"bookmaker_event_id"`
 		LastUpdate       DateTime `json:"last_update"`
 	}
 )
