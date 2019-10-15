@@ -234,15 +234,15 @@ var teamsIncludesReponse = `{
 	]
 }`
 
-func TestTeamById(t *testing.T) {
+func TestTeamByID(t *testing.T) {
 	t.Run("returns a single Team struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/teams/1?api_token=api-key&include="
+		url := ddefaultBaseURL + "/teams/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, teamResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		team, _, err := client.TeamById(context.Background(), 1, []string{})
+		team, _, err := client.TeamByID(context.Background(), 1, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -252,13 +252,13 @@ func TestTeamById(t *testing.T) {
 	})
 
 	t.Run("returns a single Team struct with includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/teams/1?api_token=api-key&include=squad%2Cleague"
+		url := ddefaultBaseURL + "/teams/1?api_token=api-key&include=squad%2Cleague"
 
 		server := mockResponseServer(t, teamIncludesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		team, _, err := client.TeamById(context.Background(), 1, []string{"squad", "league"})
+		team, _, err := client.TeamByID(context.Background(), 1, []string{"squad", "league"})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -270,13 +270,13 @@ func TestTeamById(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/teams/1?api_token=api-key&include="
+		url := ddefaultBaseURL + "/teams/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		team, _, err := client.TeamById(context.Background(), 1, []string{})
+		team, _, err := client.TeamByID(context.Background(), 1, []string{})
 
 		if team != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", team)
@@ -286,15 +286,15 @@ func TestTeamById(t *testing.T) {
 	})
 }
 
-func TestTeamsBySeasonId(t *testing.T) {
+func TestTeamsBySeasonID(t *testing.T) {
 	t.Run("returns a slice of Team struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/teams/season/12962?api_token=api-key&include=&page=1"
+		url := ddefaultBaseURL + "/teams/season/12962?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, teamsResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		teams, _, err := client.TeamsBySeasonId(context.Background(), 12962, 1, []string{})
+		teams, _, err := client.TeamsBySeasonID(context.Background(), 12962, 1, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -304,13 +304,13 @@ func TestTeamsBySeasonId(t *testing.T) {
 	})
 
 	t.Run("returns a slice of Team struct with includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/teams/season/12962?api_token=api-key&include=squad%2Cleague&page=1"
+		url := ddefaultBaseURL + "/teams/season/12962?api_token=api-key&include=squad%2Cleague&page=1"
 
 		server := mockResponseServer(t, teamsIncludesReponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		teams, _, err := client.TeamsBySeasonId(
+		teams, _, err := client.TeamsBySeasonID(
 			context.Background(),
 			12962,
 			1,
@@ -327,13 +327,13 @@ func TestTeamsBySeasonId(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/teams/season/12962?api_token=api-key&include=&page=1"
+		url := ddefaultBaseURL + "/teams/season/12962?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		teams, _, err := client.TeamsBySeasonId(context.Background(), 12962, 1, []string{})
+		teams, _, err := client.TeamsBySeasonID(context.Background(), 12962, 1, []string{})
 
 		if teams != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", teams)

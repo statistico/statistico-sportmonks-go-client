@@ -34,15 +34,15 @@ var venueSeasonResponse = `{
 	]
 }`
 
-func TestVenueById(t *testing.T) {
+func TestVenueByID(t *testing.T) {
 	t.Run("returns a single Venue struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/venues/200?api_token=api-key"
+		url := ddefaultBaseURL + "/venues/200?api_token=api-key"
 
 		server := mockResponseServer(t, venueResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		venue, _, err := client.VenueById(context.Background(), 200)
+		venue, _, err := client.VenueByID(context.Background(), 200)
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -52,13 +52,13 @@ func TestVenueById(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/venues/200?api_token=api-key"
+		url := ddefaultBaseURL + "/venues/200?api_token=api-key"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		venue, _, err := client.VenueById(context.Background(), 200)
+		venue, _, err := client.VenueByID(context.Background(), 200)
 
 		if venue != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", venue)
@@ -68,15 +68,15 @@ func TestVenueById(t *testing.T) {
 	})
 }
 
-func TestVenueBySeasonId(t *testing.T) {
+func TestVenueBySeasonID(t *testing.T) {
 	t.Run("returns a slice of Venue struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/venues/season/12962?api_token=api-key"
+		url := ddefaultBaseURL + "/venues/season/12962?api_token=api-key"
 
 		server := mockResponseServer(t, venueSeasonResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		venues, _, err := client.VenuesBySeasonId(context.Background(), 12962)
+		venues, _, err := client.VenuesBySeasonID(context.Background(), 12962)
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -86,13 +86,13 @@ func TestVenueBySeasonId(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/venues/season/12962?api_token=api-key"
+		url := ddefaultBaseURL + "/venues/season/12962?api_token=api-key"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		venues, _, err := client.VenuesBySeasonId(context.Background(), 12962)
+		venues, _, err := client.VenuesBySeasonID(context.Background(), 12962)
 
 		if venues != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", venues)

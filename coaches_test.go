@@ -23,15 +23,15 @@ var coachResponse = `{
   	}
 }`
 
-func TestCoachById(t *testing.T) {
-	url := defaultBaseUrl + "/coaches/2?api_token=api-key"
+func TestCoachByID(t *testing.T) {
+	url := ddefaultBaseURL + "/coaches/2?api_token=api-key"
 
 	t.Run("returns a single coach struct", func(t *testing.T) {
 		server := mockResponseServer(t, coachResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		coach, _, err := client.CoachById(context.Background(), 2)
+		coach, _, err := client.CoachByID(context.Background(), 2)
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -45,7 +45,7 @@ func TestCoachById(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		coach, _, err := client.CoachById(context.Background(), 2)
+		coach, _, err := client.CoachByID(context.Background(), 2)
 
 		if coach != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", coach)

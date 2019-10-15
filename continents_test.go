@@ -81,7 +81,7 @@ var continentIncludesResponse = `{
 
 func TestContinents(t *testing.T) {
 	t.Run("returns Continent struct slice", func(t *testing.T) {
-		url := defaultBaseUrl + "/continents?api_token=api-key&include=&page=1"
+		url := ddefaultBaseURL + "/continents?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, continentsResponse, 200, url)
 
@@ -97,7 +97,7 @@ func TestContinents(t *testing.T) {
 	})
 
 	t.Run("returns Continent struct slice with country includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/continents?api_token=api-key&include=countries&page=1"
+		url := ddefaultBaseURL + "/continents?api_token=api-key&include=countries&page=1"
 
 		server := mockResponseServer(t, continentsIncludesResponse, 200, url)
 
@@ -116,7 +116,7 @@ func TestContinents(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/continents?api_token=api-key&include=&page=1"
+		url := ddefaultBaseURL + "/continents?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -132,15 +132,15 @@ func TestContinents(t *testing.T) {
 	})
 }
 
-func TestContinentById(t *testing.T) {
+func TestContinentByID(t *testing.T) {
 	t.Run("returns a single Continent struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/continents/1?api_token=api-key&include="
+		url := ddefaultBaseURL + "/continents/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, continentResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		continent, _, err := client.ContinentById(context.Background(), 1, []string{})
+		continent, _, err := client.ContinentByID(context.Background(), 1, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -150,13 +150,13 @@ func TestContinentById(t *testing.T) {
 	})
 
 	t.Run("returns Continent struct with country includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/continents/1?api_token=api-key&include=countries"
+		url := ddefaultBaseURL + "/continents/1?api_token=api-key&include=countries"
 
 		server := mockResponseServer(t, continentIncludesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		continent, _, err := client.ContinentById(context.Background(), 1, []string{"countries"})
+		continent, _, err := client.ContinentByID(context.Background(), 1, []string{"countries"})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -169,13 +169,13 @@ func TestContinentById(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/continents/1?api_token=api-key&include="
+		url := ddefaultBaseURL + "/continents/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		continent, _, err := client.ContinentById(context.Background(), 1, []string{})
+		continent, _, err := client.ContinentByID(context.Background(), 1, []string{})
 
 		if continent != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", continent)

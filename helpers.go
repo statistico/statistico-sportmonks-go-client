@@ -1,151 +1,171 @@
 package sportmonks
 
 type (
-	AggregatedAssistScorerData struct {
+	aggregatedAssistScorerData struct {
 		Data []AssistScorer `json:"data"`
 	}
 
-	AggregatedCardScorerData struct {
+	aggregatedCardScorerData struct {
 		Data []CardScorer `json:"data"`
 	}
 
-	AggregatedGoalScorerData struct {
+	aggregatedGoalScorerData struct {
 		Data []GoalScorer `json:"data"`
 	}
 
-	AssistScorerData struct {
+	aggregatedMatchOddsData struct {
+		Data []MatchOdds `json:"data"`
+	}
+
+	assistScorerData struct {
 		Data []AssistScorer `json:"data"`
 	}
 
-	BookmakerOddsData struct {
+	bookmakerOddsData struct {
 		Data []BookmakerOdds `json:"data"`
 	}
 
-	CardScorerData struct {
+	cardEventsData struct {
+		Data []CardEvent `json:"data"`
+	}
+
+	cardScorerData struct {
 		Data []CardScorer `json:"data"`
 	}
 
-	CoachData struct {
+	coachData struct {
 		Data *Coach `json:"data"`
 	}
 
-	CountryData struct {
+	cornerEventsData struct {
+		Data []CornerEvent `json:"data"`
+	}
+
+	countryData struct {
 		Data *Country `json:"data"`
 	}
 
-	CountriesData struct {
+	countriesData struct {
 		Data []Country `json:"data"`
 	}
 
-	ContinentData struct {
+	continentData struct {
 		Data *Continent `json:"data"`
 	}
 
-	FixtureData struct {
+	fixtureData struct {
 		Data *Fixture `json:"data"`
 	}
 
-	FixturesData struct {
+	fixturesData struct {
 		Data []Fixture `json:"data"`
 	}
 
-	GoalScorerData struct {
+	goalScorerData struct {
 		Data []GoalScorer `json:"data"`
 	}
 
-	GroupsData struct {
+	groupsData struct {
 		Data []Group `json:"data"`
 	}
 
-	LeagueData struct {
+	leagueData struct {
 		Data *League `json:"data"`
 	}
 
-	LeaguesData struct {
+	leaguesData struct {
 		Data []League `json:"data"`
 	}
 
-	MatchTVStations struct {
+	leagueStandingData struct {
+		Data []LeagueStanding `json:"data"`
+	}
+
+	matchHighlightsData struct {
+		Data []VideoHighlights `json:"data"`
+	}
+
+	matchTVStations struct {
 		Data []TVStation `json:"data"`
 	}
 
-	MatchOfficialData struct {
+	matchOfficialData struct {
 		Data *MatchOfficial `json:"data"`
 	}
 
-	OddsData struct {
+	oddsData struct {
 		Data []Odds `json:"data"`
 	}
 
-	PlayerData struct {
+	playerData struct {
 		Data *Player `json:"data"`
 	}
 
-	PlayersData struct {
+	playersData struct {
 		Data []Player `json:"data"`
 	}
 
-	PlayerLineupData struct {
+	playerLineupData struct {
 		Data []PlayerStats `json:"data"`
 	}
 
-	PlayerSeasonStatsData struct {
+	playerSeasonStatsData struct {
 		Data []PlayerSeasonStats `json:"data"`
 	}
 
-	PositionData struct {
+	positionData struct {
 		Data *Position `json:"data"`
 	}
 
-	RankingData struct {
+	rankingData struct {
 		Data *Ranking `json:"data"`
 	}
 
-	RoundData struct {
+	roundData struct {
 		Data *Round `json:"data"`
 	}
 
-	RoundsData struct {
+	roundsData struct {
 		Data []Round `json:"data"`
 	}
 
-	SeasonData struct {
+	seasonData struct {
 		Data *Season `json:"data"`
 	}
 
-	SeasonsData struct {
+	seasonsData struct {
 		Data []Season `json:"data"`
 	}
 
-	SidelinedData struct {
+	sidelinedData struct {
 		Data []Sidelined `json:"data"`
 	}
 
-	SquadPlayerData struct {
+	squadPlayerData struct {
 		Data []SquadPlayer `json:"data"`
 	}
 
-	StageData struct {
+	stageData struct {
 		Data *Stage `json:"data"`
 	}
 
-	StagesData struct {
+	stagesData struct {
 		Data []Stage `json:"data"`
 	}
 
-	TeamSeasonStatsData struct {
+	teamSeasonStatsData struct {
 		Data *TeamSeasonStats `json:"data"`
 	}
 
-	TransfersData struct {
+	transfersData struct {
 		Data []Transfer `json:"data"`
 	}
 
-	TrophyData struct {
+	trophyData struct {
 		Data []Trophy `json:"data"`
 	}
 
-	VenueData struct {
+	venueData struct {
 		Data *Venue `json:"data"`
 	}
 )

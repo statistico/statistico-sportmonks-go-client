@@ -534,15 +534,15 @@ var stagesSeasonIncludesResponse = `{
 	]
 }`
 
-func TestStageById(t *testing.T) {
+func TestStageByID(t *testing.T) {
 	t.Run("returns a Stage struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/stages/10?api_token=api-key&include="
+		url := ddefaultBaseURL + "/stages/10?api_token=api-key&include="
 
 		server := mockResponseServer(t, stageResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		stage, _, err := client.StageById(context.Background(), 10, []string{})
+		stage, _, err := client.StageByID(context.Background(), 10, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -552,13 +552,13 @@ func TestStageById(t *testing.T) {
 	})
 
 	t.Run("return a Stage struct with includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/stages/10?api_token=api-key&include=season%2Cleague%2Cfixtures%2Cresults"
+		url := ddefaultBaseURL + "/stages/10?api_token=api-key&include=season%2Cleague%2Cfixtures%2Cresults"
 
 		server := mockResponseServer(t, stageIncludesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		stage, _, err := client.StageById(context.Background(), 10, []string{"season", "league", "fixtures", "results"})
+		stage, _, err := client.StageByID(context.Background(), 10, []string{"season", "league", "fixtures", "results"})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -572,13 +572,13 @@ func TestStageById(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/stages/10?api_token=api-key&include="
+		url := ddefaultBaseURL + "/stages/10?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		stage, _, err := client.StageById(context.Background(), 10, []string{})
+		stage, _, err := client.StageByID(context.Background(), 10, []string{})
 
 		if stage != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", stage)
@@ -588,15 +588,15 @@ func TestStageById(t *testing.T) {
 	})
 }
 
-func TestStagesBySeasonId(t *testing.T) {
+func TestStagesBySeasonID(t *testing.T) {
 	t.Run("returns a slice of Stage struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/stages/season/10?api_token=api-key&include="
+		url := ddefaultBaseURL + "/stages/season/10?api_token=api-key&include="
 
 		server := mockResponseServer(t, stagesSeasonResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		stages, _, err := client.StagesBySeasonId(context.Background(), 10, []string{})
+		stages, _, err := client.StagesBySeasonID(context.Background(), 10, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -606,13 +606,13 @@ func TestStagesBySeasonId(t *testing.T) {
 	})
 
 	t.Run("returns a slice of Stage struct with includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/stages/season/10?api_token=api-key&include=season%2Cleague%2Cfixtures%2Cresults"
+		url := ddefaultBaseURL + "/stages/season/10?api_token=api-key&include=season%2Cleague%2Cfixtures%2Cresults"
 
 		server := mockResponseServer(t, stagesSeasonIncludesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		stages, _, err := client.StagesBySeasonId(
+		stages, _, err := client.StagesBySeasonID(
 			context.Background(),
 			10,
 			[]string{"season", "league", "fixtures", "results"},
@@ -630,13 +630,13 @@ func TestStagesBySeasonId(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/stages/season/10?api_token=api-key&include="
+		url := ddefaultBaseURL + "/stages/season/10?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		stages, _, err := client.StagesBySeasonId(context.Background(), 10, []string{})
+		stages, _, err := client.StagesBySeasonID(context.Background(), 10, []string{})
 
 		if stages != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", stages)

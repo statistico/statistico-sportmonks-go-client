@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// TopScorers provides a struct representation of a TopScorers resource
 type TopScorers struct {
 	ID               int              `json:"id"`
 	Name             string           `json:"name"`
@@ -14,23 +15,27 @@ type TopScorers struct {
 	IsCurrentSeason  bool             `json:"is_current_season"`
 	CurrentRoundID   *int             `json:"current_round_id"`
 	CurrentStageID   *int             `json:"current_stage_id"`
-	AssistScorerData AssistScorerData `json:"assistscorers"`
-	CardScorerData   CardScorerData   `json:"cardscorers"`
-	GoalScorerData   GoalScorerData   `json:"goalscorers"`
+	AssistScorerData assistScorerData `json:"assistscorers"`
+	CardScorerData   cardScorerData   `json:"cardscorers"`
+	GoalScorerData   goalScorerData   `json:"goalscorers"`
 }
 
+// AssistScorers returns assist scorer data.
 func (t *TopScorers) AssistScorers() []AssistScorer {
 	return t.AssistScorerData.Data
 }
 
+// CardScorers returns card scorer data.
 func (t *TopScorers) CardScorers() []CardScorer {
 	return t.CardScorerData.Data
 }
 
+// GoalScorers returns goal scorer data.
 func (t *TopScorers) GoalScorers() []GoalScorer {
 	return t.GoalScorerData.Data
 }
 
+// AggregatedTopScorers provides a struct representation of a AggregatedTopScorers resource
 type AggregatedTopScorers struct {
 	ID               int              `json:"id"`
 	Name             string           `json:"name"`
@@ -38,23 +43,27 @@ type AggregatedTopScorers struct {
 	IsCurrentSeason  bool             `json:"is_current_season"`
 	CurrentRoundID   *int             `json:"current_round_id"`
 	CurrentStageID   *int             `json:"current_stage_id"`
-	AssistScorerData AssistScorerData `json:"aggregatedAssistscorers"`
-	CardScorerData   CardScorerData   `json:"aggregatedCardscorers"`
-	GoalScorerData   GoalScorerData   `json:"aggregatedGoalscorers"`
+	AssistScorerData assistScorerData `json:"aggregatedAssistscorers"`
+	CardScorerData   cardScorerData   `json:"aggregatedCardscorers"`
+	GoalScorerData   goalScorerData   `json:"aggregatedGoalscorers"`
 }
 
+// AssistScorers returns aggregated assist scorer data.
 func (a *AggregatedTopScorers) AssistScorers() []AssistScorer {
 	return a.AssistScorerData.Data
 }
 
+// CardScorers returns aggregated card scorer data.
 func (a *AggregatedTopScorers) CardScorers() []CardScorer {
 	return a.CardScorerData.Data
 }
 
+// GoalScorers returns aggregated goal scorer data.
 func (a *AggregatedTopScorers) GoalScorers() []GoalScorer {
 	return a.GoalScorerData.Data
 }
 
+// AssistScorer provides a struct representation of a AssistScorer resource
 type AssistScorer struct {
 	Position   int        `json:"position"`
 	SeasonID   int        `json:"season_id"`
@@ -63,18 +72,21 @@ type AssistScorer struct {
 	StageID    int        `json:"stage_id"`
 	Assists    int        `json:"assists"`
 	Type       string     `json:"type"`
-	PlayerData PlayerData `json:"player"`
+	PlayerData playerData `json:"player"`
 	TeamData   TeamData   `json:"team"`
 }
 
+// Player returns the player data associated to an assist scorer record.
 func (a *AssistScorer) Player() *Player {
 	return a.PlayerData.Data
 }
 
+// Team returns the team data associated to an assist scorer record.
 func (a *AssistScorer) Team() *Team {
 	return a.TeamData.Data
 }
 
+// CardScorer provides a struct representation of a CardScorer resource
 type CardScorer struct {
 	Position    int        `json:"position"`
 	SeasonID    int        `json:"season_id"`
@@ -84,18 +96,21 @@ type CardScorer struct {
 	YellowCards int        `json:"yellowcards"`
 	RedCards    int        `json:"redcards"`
 	Type        string     `json:"type"`
-	PlayerData  PlayerData `json:"player"`
+	PlayerData  playerData `json:"player"`
 	TeamData    TeamData   `json:"team"`
 }
 
+// Player returns the player data associated to an card scorer record.
 func (c *CardScorer) Player() *Player {
 	return c.PlayerData.Data
 }
 
+// Team returns the team data associated to an card scorer record.
 func (c *CardScorer) Team() *Team {
 	return c.TeamData.Data
 }
 
+// GoalScorer provides a struct representation of a GoalScorer resource
 type GoalScorer struct {
 	Position     int        `json:"position"`
 	SeasonID     int        `json:"season_id"`
@@ -105,21 +120,24 @@ type GoalScorer struct {
 	Goals        int        `json:"goals"`
 	PenaltyGoals int        `json:"penalty_goals"`
 	Type         string     `json:"type"`
-	PlayerData   PlayerData `json:"player"`
+	PlayerData   playerData `json:"player"`
 	TeamData     TeamData   `json:"team"`
 }
 
+// Player returns the player data associated to an goal scorer record.
 func (g *GoalScorer) Player() *Player {
 	return g.PlayerData.Data
 }
 
+// Team returns the team data associated to an goal scorer record.
 func (g *GoalScorer) Team() *Team {
 	return g.TeamData.Data
 }
 
-// TopScorersBySeasonId returns a slice of Fixture struct. Use the includes slice of string to enrich the response data.
-func (c *HTTPClient) TopScorersBySeasonId(ctx context.Context, seasonId int, includes []string) (*TopScorers, *Meta, error) {
-	path := fmt.Sprintf(topScorersSeasonUri+"/%d", seasonId)
+// TopScorersBySeasonID fetches a TopScorers resource for a season by ID.
+// Use the includes slice of string to enrich the response data.
+func (c *HTTPClient) TopScorersBySeasonID(ctx context.Context, seasonID int, includes []string) (*TopScorers, *Meta, error) {
+	path := fmt.Sprintf(topScorersSeasonURI+"/%d", seasonID)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},
@@ -139,10 +157,10 @@ func (c *HTTPClient) TopScorersBySeasonId(ctx context.Context, seasonId int, inc
 	return response.Data, response.Meta, err
 }
 
-// AggregatedTopScorersBySeasonId returns a slice of Fixture struct. Use the includes slice of string to enrich
-// the response data.
-func (c *HTTPClient) AggregatedTopScorersBySeasonId(ctx context.Context, seasonId int, includes []string) (*AggregatedTopScorers, *Meta, error) {
-	path := fmt.Sprintf(topScorersSeasonUri+"/%d/aggregated", seasonId)
+// AggregatedTopScorersBySeasonID fetches an AggregatedTopScorers resource for a season by ID.
+// Use the includes slice of string to enrich the response data.
+func (c *HTTPClient) AggregatedTopScorersBySeasonID(ctx context.Context, seasonID int, includes []string) (*AggregatedTopScorers, *Meta, error) {
+	path := fmt.Sprintf(topScorersSeasonURI+"/%d/aggregated", seasonID)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},

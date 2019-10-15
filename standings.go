@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// Standings provides a struct representation of a Standings resource
 type Standings struct {
 	Name               string             `json:"name"`
 	LeagueID           int                `json:"league_id"`
@@ -17,13 +18,15 @@ type Standings struct {
 	StageID            int                `json:"stage_id"`
 	StageName          string             `json:"stage_name"`
 	Resource           string             `json:"resource"`
-	LeagueStandingData LeagueStandingData `json:"standings"`
+	LeagueStandingData leagueStandingData `json:"standings"`
 }
 
+// LeagueStandings returns league standing resources describing team specific league information
 func (s *Standings) LeagueStandings() []LeagueStanding {
 	return s.LeagueStandingData.Data
 }
 
+// LeagueStanding provides a struct representation of a LeagueStanding resource
 type LeagueStanding struct {
 	Position   int                  `json:"position"`
 	TeamID     int                  `json:"team_id"`
@@ -41,36 +44,42 @@ type LeagueStanding struct {
 	RecentForm string               `json:"recent_form"`
 	Status     string               `json:"status"`
 
-	LeagueData LeagueData `json:"league"`
-	RoundData  RoundData  `json:"round"`
-	SeasonData SeasonData `json:"season"`
-	StagesData StagesData `json:"stages"`
+	LeagueData leagueData `json:"league"`
+	RoundData  roundData  `json:"round"`
+	SeasonData seasonData `json:"season"`
+	StagesData stagesData `json:"stages"`
 	TeamData   TeamData   `json:"team"`
 }
 
+// League returns league data.
 func (s *LeagueStanding) League() *League {
 	return s.LeagueData.Data
 }
 
+// Round returns round data.
 func (s *LeagueStanding) Round() *Round {
 	return s.RoundData.Data
 }
 
+// Season returns season data.
 func (s *LeagueStanding) Season() *Season {
 	return s.SeasonData.Data
 }
 
+// Stages returns stages data.
 func (s *LeagueStanding) Stages() []Stage {
 	return s.StagesData.Data
 }
 
+// Team return team data.
 func (s *LeagueStanding) Team() *Team {
 	return s.TeamData.Data
 }
 
-// StandingsBySeasonId returns a slice of Standings struct for a Season. Use the includes slice to enrich the response data.
-func (c *HTTPClient) StandingsBySeasonId(ctx context.Context, seasonId int, includes []string) ([]Standings, *Meta, error) {
-	path := fmt.Sprintf(leagueStandingsUri+"/%d", seasonId)
+// StandingsBySeasonID fetches a Standings resource for a Season ID.
+// Use the includes slice to enrich the response data.
+func (c *HTTPClient) StandingsBySeasonID(ctx context.Context, seasonID int, includes []string) ([]Standings, *Meta, error) {
+	path := fmt.Sprintf(leagueStandingsURI+"/%d", seasonID)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},
@@ -90,9 +99,10 @@ func (c *HTTPClient) StandingsBySeasonId(ctx context.Context, seasonId int, incl
 	return response.Data, response.Meta, err
 }
 
-// LiveStandingsBySeasonId returns a slice of Standings struct for a Season with supporting meta data.
-func (c *HTTPClient) LiveStandingsBySeasonId(ctx context.Context, seasonId int) ([]LiveStandings, *Meta, error) {
-	path := fmt.Sprintf(liveLeagueStandingsUri+"/%d", seasonId)
+// LiveStandingsBySeasonID fetches a Standings resource for a Season ID for present moment standings.
+// Use the includes slice to enrich the response data.
+func (c *HTTPClient) LiveStandingsBySeasonID(ctx context.Context, seasonID int) ([]LiveStandings, *Meta, error) {
+	path := fmt.Sprintf(liveLeagueStandingsURI+"/%d", seasonID)
 
 	response := struct {
 		Data []LiveStandings `json:"data"`

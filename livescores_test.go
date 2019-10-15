@@ -162,7 +162,7 @@ var liveScoresResponse = `{
 
 func TestLivesScores(t *testing.T) {
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/livescores?api_token=api-key&include=&page=1"
+		url := ddefaultBaseURL + "/livescores?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, liveScoresResponse, 200, url)
 
@@ -178,7 +178,7 @@ func TestLivesScores(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/livescores?api_token=api-key&include=league%2Cstage%2Cgoals&page=1"
+		url := ddefaultBaseURL + "/livescores?api_token=api-key&include=league%2Cstage%2Cgoals&page=1"
 
 		server := mockResponseServer(t, liveScoresResponse, 200, url)
 
@@ -187,7 +187,7 @@ func TestLivesScores(t *testing.T) {
 		fixtures, _, err := client.LiveScores(
 			context.Background(),
 			1,
-			[]string{LeagueIncludes, StageIncludes, GoalsIncludes},
+			[]string{"league", "stage", "goals"},
 		)
 
 		if err != nil {
@@ -201,7 +201,7 @@ func TestLivesScores(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/livescores?api_token=api-key&include=&page=1"
+		url := ddefaultBaseURL + "/livescores?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -219,7 +219,7 @@ func TestLivesScores(t *testing.T) {
 
 func TestLivesScoresInPlay(t *testing.T) {
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/livescores/now?api_token=api-key&include="
+		url := ddefaultBaseURL + "/livescores/now?api_token=api-key&include="
 
 		server := mockResponseServer(t, liveScoresResponse, 200, url)
 
@@ -235,7 +235,7 @@ func TestLivesScoresInPlay(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/livescores/now?api_token=api-key&include=league%2Cstage%2Cgoals"
+		url := ddefaultBaseURL + "/livescores/now?api_token=api-key&include=league%2Cstage%2Cgoals"
 
 		server := mockResponseServer(t, liveScoresResponse, 200, url)
 
@@ -243,7 +243,7 @@ func TestLivesScoresInPlay(t *testing.T) {
 
 		fixtures, _, err := client.LiveScoresInPlay(
 			context.Background(),
-			[]string{LeagueIncludes, StageIncludes, GoalsIncludes},
+			[]string{"league", "stage", "goals"},
 		)
 
 		if err != nil {
@@ -257,7 +257,7 @@ func TestLivesScoresInPlay(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/livescores/now?api_token=api-key&include="
+		url := ddefaultBaseURL + "/livescores/now?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

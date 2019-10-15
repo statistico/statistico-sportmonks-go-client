@@ -315,15 +315,15 @@ var fixturesResponse = `{
 	]
 }`
 
-func TestFixtureById(t *testing.T) {
+func TestFixtureByID(t *testing.T) {
 	t.Run("returns a single Fixture struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/11867285?api_token=api-key&include="
+		url := ddefaultBaseURL + "/fixtures/11867285?api_token=api-key&include="
 
 		server := mockResponseServer(t, fixtureResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		fixture, _, err := client.FixtureById(context.Background(), 11867285, []string{})
+		fixture, _, err := client.FixtureByID(context.Background(), 11867285, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -333,16 +333,16 @@ func TestFixtureById(t *testing.T) {
 	})
 
 	t.Run("returns a single Fixture struct with includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/11867285?api_token=api-key&include=league%2Cstage%2Cgoals"
+		url := ddefaultBaseURL + "/fixtures/11867285?api_token=api-key&include=league%2Cstage%2Cgoals"
 
 		server := mockResponseServer(t, fixtureResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		fixture, _, err := client.FixtureById(
+		fixture, _, err := client.FixtureByID(
 			context.Background(),
 			11867285,
-			[]string{LeagueIncludes, StageIncludes, GoalsIncludes},
+			[]string{"league", "stage", "goals"},
 		)
 
 		if err != nil {
@@ -356,13 +356,13 @@ func TestFixtureById(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/11867285?api_token=api-key&include="
+		url := ddefaultBaseURL + "/fixtures/11867285?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		fixture, _, err := client.FixtureById(context.Background(), 11867285, []string{})
+		fixture, _, err := client.FixtureByID(context.Background(), 11867285, []string{})
 
 		if fixture != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", fixture)
@@ -372,15 +372,15 @@ func TestFixtureById(t *testing.T) {
 	})
 }
 
-func TestFixturesById(t *testing.T) {
+func TestFixturesByID(t *testing.T) {
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/multi/11867285,555?api_token=api-key&include="
+		url := ddefaultBaseURL + "/fixtures/multi/11867285,555?api_token=api-key&include="
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.FixturesById(context.Background(), []int{11867285, 555}, []string{})
+		fixtures, _, err := client.FixturesByID(context.Background(), []int{11867285, 555}, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -390,16 +390,16 @@ func TestFixturesById(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/multi/11867285,555?api_token=api-key&include=league%2Cstage%2Cgoals"
+		url := ddefaultBaseURL + "/fixtures/multi/11867285,555?api_token=api-key&include=league%2Cstage%2Cgoals"
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.FixturesById(
+		fixtures, _, err := client.FixturesByID(
 			context.Background(),
 			[]int{11867285, 555},
-			[]string{LeagueIncludes, StageIncludes, GoalsIncludes},
+			[]string{"league", "stage", "goals"},
 		)
 
 		if err != nil {
@@ -413,13 +413,13 @@ func TestFixturesById(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/multi/11867285,555?api_token=api-key&include="
+		url := ddefaultBaseURL + "/fixtures/multi/11867285,555?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.FixturesById(context.Background(), []int{11867285, 555}, []string{})
+		fixtures, _, err := client.FixturesByID(context.Background(), []int{11867285, 555}, []string{})
 
 		if fixtures != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", fixtures)
@@ -438,7 +438,7 @@ func TestFixturesByDate(t *testing.T) {
 	}
 
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/date/2014-11-12?api_token=api-key&include="
+		url := ddefaultBaseURL + "/fixtures/date/2014-11-12?api_token=api-key&include="
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -454,7 +454,7 @@ func TestFixturesByDate(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/date/2014-11-12?api_token=api-key&include=league%2Cstage%2Cgoals"
+		url := ddefaultBaseURL + "/fixtures/date/2014-11-12?api_token=api-key&include=league%2Cstage%2Cgoals"
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -463,7 +463,7 @@ func TestFixturesByDate(t *testing.T) {
 		fixtures, _, err := client.FixturesByDate(
 			context.Background(),
 			d,
-			[]string{LeagueIncludes, StageIncludes, GoalsIncludes},
+			[]string{"league", "stage", "goals"},
 		)
 
 		if err != nil {
@@ -477,7 +477,7 @@ func TestFixturesByDate(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/date/2014-11-12?api_token=api-key&include="
+		url := ddefaultBaseURL + "/fixtures/date/2014-11-12?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -507,7 +507,7 @@ func TestFixturesBetween(t *testing.T) {
 	}
 
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include="
+		url := ddefaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include="
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -523,7 +523,7 @@ func TestFixturesBetween(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include=league%2Cstage%2Cgoals"
+		url := ddefaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include=league%2Cstage%2Cgoals"
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -533,7 +533,7 @@ func TestFixturesBetween(t *testing.T) {
 			context.Background(),
 			dateFrom,
 			dateTo,
-			[]string{LeagueIncludes, StageIncludes, GoalsIncludes},
+			[]string{"league", "stage", "goals"},
 		)
 
 		if err != nil {
@@ -547,7 +547,7 @@ func TestFixturesBetween(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include="
+		url := ddefaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -577,7 +577,7 @@ func TestFixturesBetweenForTeam(t *testing.T) {
 	}
 
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include="
+		url := ddefaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -599,7 +599,7 @@ func TestFixturesBetweenForTeam(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include=league%2Cstage%2Cgoals"
+		url := ddefaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include=league%2Cstage%2Cgoals"
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -610,7 +610,7 @@ func TestFixturesBetweenForTeam(t *testing.T) {
 			dateFrom,
 			dateTo,
 			1,
-			[]string{LeagueIncludes, StageIncludes, GoalsIncludes},
+			[]string{"league", "stage", "goals"},
 		)
 
 		if err != nil {
@@ -624,7 +624,7 @@ func TestFixturesBetweenForTeam(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include="
+		url := ddefaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -648,7 +648,7 @@ func TestFixturesBetweenForTeam(t *testing.T) {
 
 func TestFixturesLastUpdated(t *testing.T) {
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/updates?api_token=api-key&include="
+		url := ddefaultBaseURL + "/fixtures/updates?api_token=api-key&include="
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -664,7 +664,7 @@ func TestFixturesLastUpdated(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/updates?api_token=api-key&include=league%2Cstage%2Cgoals"
+		url := ddefaultBaseURL + "/fixtures/updates?api_token=api-key&include=league%2Cstage%2Cgoals"
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -672,7 +672,7 @@ func TestFixturesLastUpdated(t *testing.T) {
 
 		fixtures, _, err := client.FixturesLastUpdated(
 			context.Background(),
-			[]string{LeagueIncludes, StageIncludes, GoalsIncludes},
+			[]string{"league", "stage", "goals"},
 		)
 
 		if err != nil {
@@ -686,7 +686,7 @@ func TestFixturesLastUpdated(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/fixtures/updates?api_token=api-key&include="
+		url := ddefaultBaseURL + "/fixtures/updates?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

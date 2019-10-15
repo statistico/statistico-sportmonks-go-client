@@ -24,7 +24,7 @@ var marketResponse = `{
 
 func TestMarkets(t *testing.T) {
 	t.Run("returns a slice of Market struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/markets?api_token=api-key"
+		url := ddefaultBaseURL + "/markets?api_token=api-key"
 
 		server := mockResponseServer(t, marketsResponse, 200, url)
 
@@ -40,7 +40,7 @@ func TestMarkets(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/markets?api_token=api-key"
+		url := ddefaultBaseURL + "/markets?api_token=api-key"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -56,15 +56,15 @@ func TestMarkets(t *testing.T) {
 	})
 }
 
-func TestMarketById(t *testing.T) {
+func TestMarketByID(t *testing.T) {
 	t.Run("returns a single Market struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/markets/1?api_token=api-key"
+		url := ddefaultBaseURL + "/markets/1?api_token=api-key"
 
 		server := mockResponseServer(t, marketResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		market, _, err := client.MarketById(context.Background(), 1)
+		market, _, err := client.MarketByID(context.Background(), 1)
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -74,16 +74,16 @@ func TestMarketById(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/markets?api_token=api-key"
+		url := ddefaultBaseURL + "/markets/1?api_token=api-key"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		markets, _, err := client.Markets(context.Background())
+		market, _, err := client.MarketByID(context.Background(), 1)
 
-		if markets != nil {
-			t.Fatalf("Test failed, expected nil, got %+v", markets)
+		if market != nil {
+			t.Fatalf("Test failed, expected nil, got %+v", market)
 		}
 
 		assertError(t, err)

@@ -8,13 +8,13 @@ import (
 	"strings"
 )
 
-// Country struct
+// Country provides a struct representation of a Country resource
 type Country struct {
 	ID            int           `json:"id"`
 	Name          string        `json:"name"`
 	Extra         CountryExtra  `json:"extra"`
-	ContinentData ContinentData `json:"continent, omitempty"`
-	LeaguesData   LeaguesData   `json:"leagues, omitempty"`
+	ContinentData continentData `json:"continent, omitempty"`
+	LeaguesData   leaguesData   `json:"leagues, omitempty"`
 }
 
 // Continent returns a Continent struct associated to a Country
@@ -27,10 +27,9 @@ func (c *Country) Leagues() []League {
 	return c.LeaguesData.Data
 }
 
-// Countries returns a slice of Country struct and supporting meta data. The endpoint used within this method
-// is paginated, to select the required page use the 'page' method argument. Page information including current page
-// and total page are included within the Meta response.
-
+// Countries fetches Country resources. The endpoint used within this method is paginated, to select the required
+// page use the 'page' method argument. Page information including current page and total page are included within
+// the Meta struct.
 // Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) Countries(ctx context.Context, page int, includes []string) ([]Country, *Meta, error) {
 	values := url.Values{
@@ -43,7 +42,7 @@ func (c *HTTPClient) Countries(ctx context.Context, page int, includes []string)
 		Meta *Meta     `json:"meta"`
 	}{}
 
-	err := c.getResource(ctx, countriesUri, values, &response)
+	err := c.getResource(ctx, countriesURI, values, &response)
 
 	if err != nil {
 		return nil, nil, err
@@ -52,11 +51,10 @@ func (c *HTTPClient) Countries(ctx context.Context, page int, includes []string)
 	return response.Data, response.Meta, err
 }
 
-// CountryById sends a request and returns a single Country struct.
-
+// CountryByID fetches a Country resource by ID.
 // Use the includes slice of string to enrich the response data.
-func (c *HTTPClient) CountryById(ctx context.Context, id int, includes []string) (*Country, *Meta, error) {
-	path := fmt.Sprintf(countriesUri+"/%d", id)
+func (c *HTTPClient) CountryByID(ctx context.Context, id int, includes []string) (*Country, *Meta, error) {
+	path := fmt.Sprintf(countriesURI+"/%d", id)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},

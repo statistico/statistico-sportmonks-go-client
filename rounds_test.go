@@ -534,15 +534,15 @@ var roundsSeasonIncludesResponse = `{
 	]
 }`
 
-func TestRoundById(t *testing.T) {
+func TestRoundByID(t *testing.T) {
 	t.Run("return a single Round struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/rounds/100?api_token=api-key&include="
+		url := ddefaultBaseURL + "/rounds/100?api_token=api-key&include="
 
 		server := mockResponseServer(t, roundResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		round, _, err := client.RoundById(context.Background(), 100, []string{})
+		round, _, err := client.RoundByID(context.Background(), 100, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -552,13 +552,13 @@ func TestRoundById(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/rounds/100?api_token=api-key&include="
+		url := ddefaultBaseURL + "/rounds/100?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		round, _, err := client.RoundById(context.Background(), 100, []string{})
+		round, _, err := client.RoundByID(context.Background(), 100, []string{})
 
 		if round != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", round)
@@ -568,13 +568,13 @@ func TestRoundById(t *testing.T) {
 	})
 
 	t.Run("return a single Round struct with includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/rounds/100?api_token=api-key&include=fixtures%2Cleague%2Cresults%2Cseason"
+		url := ddefaultBaseURL + "/rounds/100?api_token=api-key&include=fixtures%2Cleague%2Cresults%2Cseason"
 
 		server := mockResponseServer(t, roundIncludesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		round, _, err := client.RoundById(context.Background(), 100, []string{"fixtures,league,results,season"})
+		round, _, err := client.RoundByID(context.Background(), 100, []string{"fixtures,league,results,season"})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -588,15 +588,15 @@ func TestRoundById(t *testing.T) {
 	})
 }
 
-func TestRoundsBySeasonId(t *testing.T) {
+func TestRoundsBySeasonID(t *testing.T) {
 	t.Run("returns a slice of Round struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/rounds/season/16029?api_token=api-key&include="
+		url := ddefaultBaseURL + "/rounds/season/16029?api_token=api-key&include="
 
 		server := mockResponseServer(t, roundsSeasonResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		rounds, _, err := client.RoundsBySeasonId(context.Background(), 16029, []string{})
+		rounds, _, err := client.RoundsBySeasonID(context.Background(), 16029, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -606,13 +606,13 @@ func TestRoundsBySeasonId(t *testing.T) {
 	})
 
 	t.Run("returns a slice of Round struct with includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/rounds/season/16029?api_token=api-key&include=fixtures%2Cleague%2Cresults%2Cseason"
+		url := ddefaultBaseURL + "/rounds/season/16029?api_token=api-key&include=fixtures%2Cleague%2Cresults%2Cseason"
 
 		server := mockResponseServer(t, roundsSeasonIncludesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		rounds, _, err := client.RoundsBySeasonId(context.Background(), 16029, []string{"fixtures,league,results,season"})
+		rounds, _, err := client.RoundsBySeasonID(context.Background(), 16029, []string{"fixtures,league,results,season"})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -626,13 +626,13 @@ func TestRoundsBySeasonId(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/rounds/season/16029?api_token=api-key&include="
+		url := ddefaultBaseURL + "/rounds/season/16029?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		rounds, _, err := client.RoundsBySeasonId(context.Background(), 16029, []string{})
+		rounds, _, err := client.RoundsBySeasonID(context.Background(), 16029, []string{})
 
 		if rounds != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", rounds)

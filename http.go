@@ -9,54 +9,54 @@ import (
 )
 
 const (
-	defaultBaseUrl         = "https://soccer.sportmonks.com/api/v2.0"
-	bookmakersUri          = "/bookmakers"
-	coachesUri             = "/coaches"
-	commentariesFixtureUri = "/commentaries/fixture"
-	continentsUri          = "/continents"
-	countriesUri           = "/countries"
-	fixturesUri            = "/fixtures"
-	fixturesDateUri        = "/fixtures/date"
-	fixturesBetweenUri     = "/fixtures/between"
-	fixturesLastUpdatedUri = "/fixtures/updates"
-	fixturesMultiUri       = "/fixtures/multi"
-	headToHeadUri          = "/head2head"
-	inPlayOddsFixtureUri   = "/odds/inplay/fixture"
-	leagueStandingsUri     = "/standings/season"
-	leaguesUri             = "/leagues"
-	liveLeagueStandingsUri = "/standings/season/live"
-	liveScoresUri          = "/livescores"
-	liveScoresInPlayUri    = "/livescores/now"
-	marketsUri             = "/markets"
-	oddsFixtureUri         = "/odds/fixture"
-	playersUri             = "/players"
-	roundsUri              = "/rounds"
-	roundsSeasonUri        = "/rounds/season"
-	seasonsUri             = "/seasons"
-	stagesUri              = "/stages"
-	stagesSeasonUri        = "/stages/season"
-	teamSquadUri           = "/squad/season"
-	teamsUri               = "/teams"
-	teamsSeasonUri         = "/teams/season"
-	topScorersSeasonUri    = "/topscorers/season"
-	tvStationsUri          = "/tvstations/fixture"
-	venuesUri              = "/venues"
-	venuesSeasonUri        = "/venues/season"
-	videoHighlightsUri     = "/highlights"
+	ddefaultBaseURL        = "https://soccer.sportmonks.com/api/v2.0"
+	bookmakersURI          = "/bookmakers"
+	coachesURI             = "/coaches"
+	commentariesFixtureURI = "/commentaries/fixture"
+	continentsURI          = "/continents"
+	countriesURI           = "/countries"
+	fixturesURI            = "/fixtures"
+	fixturesDateURI        = "/fixtures/date"
+	fixturesBetweenURI     = "/fixtures/between"
+	fixturesLastUpdatedURI = "/fixtures/updates"
+	fixturesMultiURI       = "/fixtures/multi"
+	headToHeadURI          = "/head2head"
+	inPlayOddsFixtureURI   = "/odds/inplay/fixture"
+	leagueStandingsURI     = "/standings/season"
+	leaguesURI             = "/leagues"
+	liveLeagueStandingsURI = "/standings/season/live"
+	liveScoresURI          = "/livescores"
+	liveScoresInPlayURI    = "/livescores/now"
+	marketsURI             = "/markets"
+	oddsFixtureURI         = "/odds/fixture"
+	playersURI             = "/players"
+	roundsURI              = "/rounds"
+	roundsSeasonURI        = "/rounds/season"
+	seasonsURI             = "/seasons"
+	stagesURI              = "/stages"
+	stagesSeasonURI        = "/stages/season"
+	teamSquadURI           = "/squad/season"
+	teamsURI               = "/teams"
+	teamsSeasonURI         = "/teams/season"
+	topScorersSeasonURI    = "/topscorers/season"
+	tvStationsURI          = "/tvstations/fixture"
+	venuesURI              = "/venues"
+	venuesSeasonURI        = "/venues/season"
+	videoHighlightsURI     = "/highlights"
 )
 
-// Client is a HTTP request builder and sender
+// HTTPClient is a HTTP request builder and sender
 type HTTPClient struct {
 	HTTPClient *http.Client
 	BaseURL    string
 	Key        string
 }
 
-// NewClient creates a new Client with default settings. A key is required to instantiate the Client
+// NewHTTPClient creates a new Client with default settings. A key is required to instantiate the Client
 func NewHTTPClient(key string) *HTTPClient {
 	return &HTTPClient{
 		HTTPClient: &http.Client{},
-		BaseURL:    defaultBaseUrl,
+		BaseURL:    ddefaultBaseURL,
 		Key:        key,
 	}
 }
@@ -89,14 +89,14 @@ func (c *HTTPClient) do(ctx context.Context, req *http.Request, intf interface{}
 		return err
 	}
 
-	return parseJsonResponseBody(resp.Body, intf)
+	return parseJSONResponseBody(resp.Body, intf)
 }
 
 func checkStatusCode(resp *http.Response) error {
 	if resp.StatusCode != http.StatusOK {
 		err := new(ErrBadStatusCode)
 
-		e := parseJsonResponseBody(resp.Body, &err)
+		e := parseJSONResponseBody(resp.Body, &err)
 
 		if e != nil {
 			return e
@@ -108,7 +108,7 @@ func checkStatusCode(resp *http.Response) error {
 	return nil
 }
 
-func parseJsonResponseBody(body io.ReadCloser, response interface{}) error {
+func parseJSONResponseBody(body io.ReadCloser, response interface{}) error {
 	if err := json.NewDecoder(body).Decode(&response); err != nil {
 		return err
 	}

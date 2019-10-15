@@ -114,15 +114,15 @@ var playerIncludesResponse = `{
 	}
 }`
 
-func TestPlayerById(t *testing.T) {
+func TestPlayerByID(t *testing.T) {
 	t.Run("return a single Player struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/players/219591?api_token=api-key&include="
+		url := ddefaultBaseURL + "/players/219591?api_token=api-key&include="
 
 		server := mockResponseServer(t, playerResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		player, _, err := client.PlayerById(context.Background(), 219591, []string{})
+		player, _, err := client.PlayerByID(context.Background(), 219591, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", err)
@@ -132,13 +132,13 @@ func TestPlayerById(t *testing.T) {
 	})
 
 	t.Run("return a single Player struct with includes data", func(t *testing.T) {
-		url := defaultBaseUrl + "/players/219591?api_token=api-key&include=stats%2Cposition%2Ctrophies"
+		url := ddefaultBaseURL + "/players/219591?api_token=api-key&include=stats%2Cposition%2Ctrophies"
 
 		server := mockResponseServer(t, playerIncludesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		player, _, err := client.PlayerById(context.Background(), 219591, []string{"stats", "position", "trophies"})
+		player, _, err := client.PlayerByID(context.Background(), 219591, []string{"stats", "position", "trophies"})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", err)
@@ -151,13 +151,13 @@ func TestPlayerById(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/players/219591?api_token=api-key&include="
+		url := ddefaultBaseURL + "/players/219591?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		player, _, err := client.PlayerById(context.Background(), 219591, []string{})
+		player, _, err := client.PlayerByID(context.Background(), 219591, []string{})
 
 		if player != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", player)

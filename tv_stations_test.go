@@ -15,15 +15,15 @@ var tvStationsResponse = `{
 	]
 }`
 
-func TestTVStationsByFixtureId(t *testing.T) {
+func TestTVStationsByFixtureID(t *testing.T) {
 	t.Run("returns a slice of TVStation struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/tvstations/fixture/11867285?api_token=api-key"
+		url := ddefaultBaseURL + "/tvstations/fixture/11867285?api_token=api-key"
 
 		server := mockResponseServer(t, tvStationsResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		tv, _, err := client.TVStationsByFixtureId(context.Background(), 11867285)
+		tv, _, err := client.TVStationsByFixtureID(context.Background(), 11867285)
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -33,13 +33,13 @@ func TestTVStationsByFixtureId(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/tvstations/fixture/11867285?api_token=api-key"
+		url := ddefaultBaseURL + "/tvstations/fixture/11867285?api_token=api-key"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		tv, _, err := client.TVStationsByFixtureId(context.Background(), 11867285)
+		tv, _, err := client.TVStationsByFixtureID(context.Background(), 11867285)
 
 		if tv != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", tv)

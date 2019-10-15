@@ -1,6 +1,7 @@
 package sportmonks
 
 type (
+	// AdditionalPlayerMatchStats provides additional stats information
 	AdditionalPlayerMatchStats struct {
 		Offsides       *int `json:"offsides"`
 		Saves          *int `json:"saves"`
@@ -19,16 +20,14 @@ type (
 		MinutesPlayed  *int `json:"minutes_played"`
 	}
 
-	AggregatedMatchOdds struct {
-		Data []MatchOdds `json:"data"`
-	}
-
+	// Assistants provides IDs of match officials
 	Assistants struct {
 		FirstAssistantID  *int `json:"first_assistant_id"`
 		SecondAssistantID *int `json:"second_assistant_id"`
 		FourthOfficialID  *int `json:"fourth_official_id"`
 	}
 
+	// CardEvent provides details of a card event
 	CardEvent struct {
 		ID          int64   `json:"id"`
 		TeamID      string  `json:"team_id"`
@@ -41,15 +40,13 @@ type (
 		Reason      *string `json:"reason"`
 	}
 
-	CardEvents struct {
-		Data []CardEvent `json:"data"`
-	}
-
+	// Coaches provides IDs of coaches in a fixture
 	Coaches struct {
 		LocalTeamCoachID   int `json:"localteam_coach_id"`
 		VisitorTeamCoachID int `json:"visitorteam_coach_id"`
 	}
 
+	// CornerEvent provides details of a corner event
 	CornerEvent struct {
 		ID          int    `json:"id"`
 		TeamID      int    `json:"team_id"`
@@ -57,10 +54,6 @@ type (
 		Minute      int    `json:"minute"`
 		ExtraMinute *int   `json:"extra_minute"`
 		Comment     string `json:"comment"`
-	}
-
-	CornerEvents struct {
-		Data []CornerEvent `json:"data"`
 	}
 
 	Countries struct {
@@ -168,10 +161,6 @@ type (
 		TopScorerCards   bool `json:"topscorer_cards"`
 	}
 
-	LeagueStandingData struct {
-		Data []LeagueStanding `json:"data"`
-	}
-
 	Lineup struct {
 		Data []PlayerStats `json:"data"`
 	}
@@ -215,10 +204,6 @@ type (
 
 	MatchEvents struct {
 		Data []MatchEvent `json:"data"`
-	}
-
-	MatchHighlights struct {
-		Data []VideoHighlights `json:"data"`
 	}
 
 	MatchOfficial struct {
@@ -359,7 +344,7 @@ type (
 		Duels              Duels      `json:"duels"`
 		Passes             Passes     `json:"passes"`
 		Penalties          Penalties  `json:"penalties"`
-		PlayerData         PlayerData `json:"player, omitempty"`
+		PlayerData         playerData `json:"player, omitempty"`
 	}
 
 	Position struct {
@@ -599,7 +584,7 @@ type (
 		Times    int         `json:"times"`
 		League   string      `json:"league"`
 		LeagueID int         `json:"league_id"`
-		Seasons  SeasonsData `json:"seasons"`
+		Seasons  seasonsData `json:"seasons"`
 	}
 
 	WeatherReport struct {

@@ -17,9 +17,9 @@ type Commentary struct {
 	Comment     string `json:"comment"`
 }
 
-// CommentariesByFixtureId returns a slice of Commentary associated to a fixture
-func (c *HTTPClient) CommentariesByFixtureId(ctx context.Context, fixtureId int) ([]Commentary, *Meta, error) {
-	path := fmt.Sprintf(commentariesFixtureUri+"/%d", fixtureId)
+// CommentariesByFixtureID fetches Commentary resources associated to a fixture
+func (c *HTTPClient) CommentariesByFixtureID(ctx context.Context, fixtureID int) ([]Commentary, *Meta, error) {
+	path := fmt.Sprintf(commentariesFixtureURI+"/%d", fixtureID)
 
 	response := struct {
 		Data []Commentary `json:"data"`

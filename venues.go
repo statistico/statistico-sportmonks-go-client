@@ -6,6 +6,7 @@ import (
 	"net/url"
 )
 
+// Venue provides a struct representation of a Venue resource
 type Venue struct {
 	ID          int     `json:"id"`
 	Name        string  `json:"name"`
@@ -17,9 +18,9 @@ type Venue struct {
 	Coordinates *string `json:"coordinates"`
 }
 
-// VenueById returns a single Venue struct and supporting meta data.
-func (c *HTTPClient) VenueById(ctx context.Context, id int) (*Venue, *Meta, error) {
-	path := fmt.Sprintf(venuesUri+"/%d", id)
+// VenueByID fetches a Venue resource by ID.
+func (c *HTTPClient) VenueByID(ctx context.Context, id int) (*Venue, *Meta, error) {
+	path := fmt.Sprintf(venuesURI+"/%d", id)
 
 	response := struct {
 		Data *Venue `json:"data"`
@@ -35,9 +36,9 @@ func (c *HTTPClient) VenueById(ctx context.Context, id int) (*Venue, *Meta, erro
 	return response.Data, response.Meta, err
 }
 
-// VenuesBySeasonId returns a slice of Venue struct and supporting meta data associated to a Season
-func (c *HTTPClient) VenuesBySeasonId(ctx context.Context, id int) ([]Venue, *Meta, error) {
-	path := fmt.Sprintf(venuesSeasonUri+"/%d", id)
+// VenuesBySeasonID fetches a Venue resource by season ID.
+func (c *HTTPClient) VenuesBySeasonID(ctx context.Context, id int) ([]Venue, *Meta, error) {
+	path := fmt.Sprintf(venuesSeasonURI+"/%d", id)
 
 	response := struct {
 		Data []Venue `json:"data"`

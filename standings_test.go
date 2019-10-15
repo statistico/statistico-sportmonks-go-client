@@ -175,15 +175,15 @@ var liveStandingsResponse = `{
 	]
 }`
 
-func TestStandingsBySeasonId(t *testing.T) {
+func TestStandingsBySeasonID(t *testing.T) {
 	t.Run("returns a slice of Standings struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/standings/season/12962?api_token=api-key&include="
+		url := ddefaultBaseURL + "/standings/season/12962?api_token=api-key&include="
 
 		server := mockResponseServer(t, standingsResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		standings, _, err := client.StandingsBySeasonId(context.Background(), 12962, []string{})
+		standings, _, err := client.StandingsBySeasonID(context.Background(), 12962, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -195,13 +195,13 @@ func TestStandingsBySeasonId(t *testing.T) {
 
 	t.Run("returns a slice of Standings struct with includes data", func(t *testing.T) {
 		t.Run("returns a slice of Standings struct", func(t *testing.T) {
-			url := defaultBaseUrl + "/standings/season/12962?api_token=api-key&include=standings.team%2Cstandings.round"
+			url := ddefaultBaseURL + "/standings/season/12962?api_token=api-key&include=standings.team%2Cstandings.round"
 
 			server := mockResponseServer(t, standingsIncludesResponse, 200, url)
 
 			client := newTestHTTPClient(server)
 
-			standings, _, err := client.StandingsBySeasonId(
+			standings, _, err := client.StandingsBySeasonID(
 				context.Background(),
 				12962,
 				[]string{"standings.team", "standings.round"},
@@ -219,13 +219,13 @@ func TestStandingsBySeasonId(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseUrl + "/standings/season/12962?api_token=api-key&include="
+		url := ddefaultBaseURL + "/standings/season/12962?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		standings, _, err := client.StandingsBySeasonId(context.Background(), 12962, []string{})
+		standings, _, err := client.StandingsBySeasonID(context.Background(), 12962, []string{})
 
 		if standings != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", standings)
@@ -235,15 +235,15 @@ func TestStandingsBySeasonId(t *testing.T) {
 	})
 }
 
-func TestLiveStandingsBySeasonId(t *testing.T) {
+func TestLiveStandingsBySeasonID(t *testing.T) {
 	t.Run("returns a slice of LiveStandings struct", func(t *testing.T) {
-		url := defaultBaseUrl + "/standings/season/live/12962?api_token=api-key"
+		url := ddefaultBaseURL + "/standings/season/live/12962?api_token=api-key"
 
 		server := mockResponseServer(t, liveStandingsResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		standings, _, err := client.LiveStandingsBySeasonId(context.Background(), 12962)
+		standings, _, err := client.LiveStandingsBySeasonID(context.Background(), 12962)
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())

@@ -51,7 +51,7 @@ func TestNewHTTPClient(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		_, _, _ = client.ContinentById(context.Background(), 10, []string{"countries"})
+		_, _, _ = client.ContinentByID(context.Background(), 10, []string{"countries"})
 	})
 }
 
@@ -66,7 +66,7 @@ func assertError(t *testing.T, err error) {
 func newTestHTTPClient(server *http.Client) *HTTPClient {
 	return &HTTPClient{
 		HTTPClient: server,
-		BaseURL:    defaultBaseUrl,
+		BaseURL:    ddefaultBaseURL,
 		Key:        "api-key",
 	}
 }

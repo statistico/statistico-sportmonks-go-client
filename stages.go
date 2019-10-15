@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// Stage provides a struct representation of a Stage resource
 type Stage struct {
 	ID           int          `json:"id"`
 	Name         string       `json:"name"`
@@ -15,35 +16,36 @@ type Stage struct {
 	SeasonID     int          `json:"season_id"`
 	SortOrder    *string      `json:"sort_order"`
 	HasStandings *bool        `json:"has_standings"`
-	FixturesData FixturesData `json:"fixtures, omitempty"`
-	LeagueData   LeagueData   `json:"league, omitempty"`
-	ResultsData  FixturesData `json:"results, omitempty"`
-	SeasonData   SeasonData   `json:"season, omitempty"`
+	FixturesData fixturesData `json:"fixtures, omitempty"`
+	LeagueData   leagueData   `json:"league, omitempty"`
+	ResultsData  fixturesData `json:"results, omitempty"`
+	SeasonData   seasonData   `json:"season, omitempty"`
 }
 
-// Fixtures returns a slice of Fixture struct associated to a Stage.
+// Fixtures returns fixture data.
 func (s *Stage) Fixtures() []Fixture {
 	return s.FixturesData.Data
 }
 
-// League returns a League struct associated to a Stage.
+// League returns league data.
 func (s *Stage) League() *League {
 	return s.LeagueData.Data
 }
 
-// Results returns a slice of completed Fixture struct associated to a Stage.
+// Results returns completed fixture data.
 func (s *Stage) Results() []Fixture {
 	return s.ResultsData.Data
 }
 
-// Season returns a Season struct associated to a Stage.
+// Season returns a season data.
 func (s *Stage) Season() *Season {
 	return s.SeasonData.Data
 }
 
-// StageById returns a Stage struct and associated meta data.
-func (c *HTTPClient) StageById(ctx context.Context, id int, includes []string) (*Stage, *Meta, error) {
-	path := fmt.Sprintf(stagesUri+"/%d", id)
+// StageByID fetches a Stage resource by ID.
+// Use the includes slice of string to enrich the response data.
+func (c *HTTPClient) StageByID(ctx context.Context, id int, includes []string) (*Stage, *Meta, error) {
+	path := fmt.Sprintf(stagesURI+"/%d", id)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},
@@ -63,10 +65,10 @@ func (c *HTTPClient) StageById(ctx context.Context, id int, includes []string) (
 	return response.Data, response.Meta, err
 }
 
-// StagesBySeasonId returns a slice of Stage struct and supporting meta data. Use the includes slice to
-// enrich the response data.
-func (c *HTTPClient) StagesBySeasonId(ctx context.Context, id int, includes []string) ([]Stage, *Meta, error) {
-	path := fmt.Sprintf(stagesSeasonUri+"/%d", id)
+// StagesBySeasonID fetches a Stage resources by a season ID.
+// Use the includes slice of string to enrich the response data.
+func (c *HTTPClient) StagesBySeasonID(ctx context.Context, id int, includes []string) ([]Stage, *Meta, error) {
+	path := fmt.Sprintf(stagesSeasonURI+"/%d", id)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},

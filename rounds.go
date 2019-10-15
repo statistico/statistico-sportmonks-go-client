@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// Round provides a struct representation of a Round resource
 type Round struct {
 	ID           int          `json:"id"`
 	Name         int          `json:"name"`
@@ -15,10 +16,10 @@ type Round struct {
 	StageID      int          `json:"stage_id"`
 	Start        string       `json:"start"`
 	End          string       `json:"end"`
-	FixturesData FixturesData `json:"fixtures, omitempty"`
-	LeagueData   LeagueData   `json:"league"`
-	ResultsData  FixturesData `json:"results, omitempty"`
-	SeasonData   SeasonData   `json:"season"`
+	FixturesData fixturesData `json:"fixtures, omitempty"`
+	LeagueData   leagueData   `json:"league"`
+	ResultsData  fixturesData `json:"results, omitempty"`
+	SeasonData   seasonData   `json:"season"`
 }
 
 // Fixtures returns a slice of Fixture struct associated to a Round
@@ -41,9 +42,10 @@ func (r *Round) Season() *Season {
 	return r.SeasonData.Data
 }
 
-// RoundById returns a single Round struct. Use the includes slice of string to enrich the response data.
-func (c *HTTPClient) RoundById(ctx context.Context, id int, includes []string) (*Round, *Meta, error) {
-	path := fmt.Sprintf(roundsUri+"/%d", id)
+// RoundByID fetches a Round resource by ID.
+// Use the includes slice of string to enrich the response data.
+func (c *HTTPClient) RoundByID(ctx context.Context, id int, includes []string) (*Round, *Meta, error) {
+	path := fmt.Sprintf(roundsURI+"/%d", id)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},
@@ -63,10 +65,10 @@ func (c *HTTPClient) RoundById(ctx context.Context, id int, includes []string) (
 	return response.Data, response.Meta, err
 }
 
-// RoundsBySeasonId returns a single Round struct associated to a Season. Use the includes slice of string to enrich
-// the response data.
-func (c *HTTPClient) RoundsBySeasonId(ctx context.Context, id int, includes []string) ([]Round, *Meta, error) {
-	path := fmt.Sprintf(roundsSeasonUri+"/%d", id)
+// RoundsBySeasonID fetches a Round resource associated to a Season by Season ID.
+// Use the includes slice of string to enrich the response data.
+func (c *HTTPClient) RoundsBySeasonID(ctx context.Context, id int, includes []string) ([]Round, *Meta, error) {
+	path := fmt.Sprintf(roundsSeasonURI+"/%d", id)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},
