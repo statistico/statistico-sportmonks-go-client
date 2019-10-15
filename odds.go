@@ -10,7 +10,7 @@ type (
 	MatchOdds struct {
 		ID                int               `json:"id"`
 		Name              string            `json:"name"`
-		Suspended         bool               `json:"suspended"`
+		Suspended         bool              `json:"suspended"`
 		BookmakerOddsData BookmakerOddsData `json:"bookmaker"`
 	}
 
@@ -31,7 +31,7 @@ type (
 		Fractional       *string  `json:"factional"`
 		Winning          *string  `json:"winning"`
 		Stop             bool     `json:"stop"`
-		BookmakerEventID string      `json:"bookmaker_event_id"`
+		BookmakerEventID string   `json:"bookmaker_event_id"`
 		LastUpdate       DateTime `json:"last_update"`
 	}
 )
@@ -46,7 +46,7 @@ func (b *BookmakerOdds) Odds() []Odds {
 
 // OddsByFixtureId returns a slice of MatchOdds struct associated to a fixture.
 func (c *HTTPClient) OddsByFixtureId(ctx context.Context, fixtureId int) ([]MatchOdds, *Meta, error) {
-	path := fmt.Sprintf(oddsFixtureUri + "/%d", fixtureId)
+	path := fmt.Sprintf(oddsFixtureUri+"/%d", fixtureId)
 
 	response := struct {
 		Data []MatchOdds `json:"data"`
@@ -64,7 +64,7 @@ func (c *HTTPClient) OddsByFixtureId(ctx context.Context, fixtureId int) ([]Matc
 
 // InPlayOddsByFixtureId returns a slice of MatchOdds struct associated to a fixture.
 func (c *HTTPClient) InPlayOddsByFixtureId(ctx context.Context, fixtureId int) ([]MatchOdds, *Meta, error) {
-	path := fmt.Sprintf(inPlayOddsFixtureUri + "/%d", fixtureId)
+	path := fmt.Sprintf(inPlayOddsFixtureUri+"/%d", fixtureId)
 
 	response := struct {
 		Data []MatchOdds `json:"data"`
@@ -82,7 +82,7 @@ func (c *HTTPClient) InPlayOddsByFixtureId(ctx context.Context, fixtureId int) (
 
 // OddsByFixtureAndBookmaker returns a slice of MatchOdds struct associated to a fixture and bookmaker.
 func (c *HTTPClient) OddsByFixtureAndBookmaker(ctx context.Context, fixtureId, bookmakerId int) ([]MatchOdds, *Meta, error) {
-	path := fmt.Sprintf(oddsFixtureUri + "/%d/bookmaker/%d", fixtureId, bookmakerId)
+	path := fmt.Sprintf(oddsFixtureUri+"/%d/bookmaker/%d", fixtureId, bookmakerId)
 
 	response := struct {
 		Data []MatchOdds `json:"data"`
@@ -100,7 +100,7 @@ func (c *HTTPClient) OddsByFixtureAndBookmaker(ctx context.Context, fixtureId, b
 
 // OddsByFixtureAndMarket returns a slice of MatchOdds struct associated to a fixture and market.
 func (c *HTTPClient) OddsByFixtureAndMarket(ctx context.Context, fixtureId, marketId int) ([]MatchOdds, *Meta, error) {
-	path := fmt.Sprintf(oddsFixtureUri + "/%d/market/%d", fixtureId, marketId)
+	path := fmt.Sprintf(oddsFixtureUri+"/%d/market/%d", fixtureId, marketId)
 
 	response := struct {
 		Data []MatchOdds `json:"data"`

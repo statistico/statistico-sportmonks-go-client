@@ -214,7 +214,7 @@ func assertBookmakerOdds(t *testing.T, odds *BookmakerOdds) {
 }
 
 func assertOdds(t *testing.T, odds *Odds) {
-	assert.Equal(t,  "1.91", odds.Value)
+	assert.Equal(t, "1.91", odds.Value)
 	assert.Nil(t, odds.Handicap)
 	assert.Equal(t, "1.5", odds.Total)
 	assert.Equal(t, "Over", odds.Label)
