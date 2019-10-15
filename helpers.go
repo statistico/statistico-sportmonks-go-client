@@ -17,6 +17,10 @@ type (
 		Data []AssistScorer `json:"data"`
 	}
 
+	BookmakerOddsData struct {
+		Data []BookmakerOdds `json:"data"`
+	}
+
 	CardScorerData struct {
 		Data []CardScorer `json:"data"`
 	}
@@ -67,6 +71,10 @@ type (
 
 	MatchOfficialData struct {
 		Data *MatchOfficial `json:"data"`
+	}
+
+	OddsData struct {
+		Data []Odds `json:"data"`
 	}
 
 	PlayerData struct {
