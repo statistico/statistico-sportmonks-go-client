@@ -3,10 +3,10 @@ package sportmonks
 type (
 	// Meta struct
 	Meta struct {
-		Pagination   *Pagination   `json:"pagination, omitempty"`
-		Plan         *Plan         `json:"plan, omitempty"`
-		Sports       *Sports       `json:"sports, omitempty"`
-		Subscription *Subscription `json:"subscription, omitempty"`
+		Pagination   *Pagination   `json:"pagination,omitempty"`
+		Plan         *Plan         `json:"plan,omitempty"`
+		Sports       *Sports       `json:"sports,omitempty"`
+		Subscription *Subscription `json:"subscription,omitempty"`
 	}
 
 	// Pagination struct
@@ -34,9 +34,9 @@ type (
 
 	// Subscription struct
 	Subscription struct {
-		StartAt     DateTime `json:"started_at, omitempty"`
-		EndsAt      DateTime `json:"ends_at, omitempty"`
-		TrialEndsAt DateTime `json:"trial_ends_at, omitempty"`
+		StartAt     DateTime `json:"started_at,omitempty"`
+		EndsAt      DateTime `json:"ends_at,omitempty"`
+		TrialEndsAt DateTime `json:"trial_ends_at,omitempty"`
 	}
 
 	// DateTime struct

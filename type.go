@@ -64,9 +64,9 @@ type (
 		Continent   string `json:"continent"`
 		SubRegion   string `json:"sub_region"`
 		WorldRegion string `json:"world_region"`
-		FIFA        string `json:"fifa, string"`
-		ISO         string `json:"iso, string"`
-		ISO2        string `json:"iso2, string"`
+		FIFA        string `json:"fifa,string"`
+		ISO         string `json:"iso,string"`
+		ISO2        string `json:"iso2,string"`
 		Longitude   string `json:"longitude"`
 		Latitude    string `json:"latitude"`
 		Flag        string `json:"flag"`
@@ -234,8 +234,8 @@ type (
 		PlayerID           int              `json:"player_id"`
 		PlayerName         string           `json:"player_name"`
 		Number             int              `json:"number"`
-		Position           *string          `json:"position, string"`
-		AdditionalPosition *string          ` json:"additional_position, string"`
+		Position           *string          `json:"position,string"`
+		AdditionalPosition *string          ` json:"additional_position,string"`
 		FormationPosition  *int             `json:"formation_position"`
 		PositionX          *string          `json:"posx"`
 		PositionY          *string          `json:"posy"`
@@ -344,7 +344,7 @@ type (
 		Duels              Duels      `json:"duels"`
 		Passes             Passes     `json:"passes"`
 		Penalties          Penalties  `json:"penalties"`
-		PlayerData         playerData `json:"player, omitempty"`
+		PlayerData         playerData `json:"player,omitempty"`
 	}
 
 	Position struct {

@@ -46,27 +46,27 @@ type Fixture struct {
 	MatchEvents           MatchEvents             `json:"events"`
 	LineupData            playerLineupData        `json:"lineup"`
 	BenchData             playerLineupData        `json:"bench"`
-	LocalTeamData         TeamData                `json:"localTeam, omitempty"`
-	VisitorTeamData       TeamData                `json:"visitorTeam, omitempty"`
+	LocalTeamData         TeamData                `json:"localTeam,omitempty"`
+	VisitorTeamData       TeamData                `json:"visitorTeam,omitempty"`
 	SubstitutionData      SubstitutionEvents      `json:"substitutions"`
 	SidelinedData         sidelinedData           `json:"sidelined"`
-	CommentsData          MatchCommentary         `json:"comments, omitempty"`
+	CommentsData          MatchCommentary         `json:"comments,omitempty"`
 	TVStationData         matchTVStations         `json:"tvstations"`
-	HighlightData         matchHighlightsData     `json:"highlights, omitempty"`
-	LeagueData            leagueData              `json:"league, omitempty"`
-	RoundData             roundData               `json:"round, omitempty"`
-	StageData             stageData               `json:"stage, omitempty"`
-	RefereeData           matchOfficialData       `json:"referee, omitempty"`
-	FirstAssistantData    matchOfficialData       `json:"firstAssistant, omitempty"`
-	SecondAssistantData   matchOfficialData       `json:"secondAssistant, omitempty"`
-	FourthOfficialData    matchOfficialData       `json:"fourthOfficial, omitempty"`
-	VenueData             venueData               `json:"venue, omitempty"`
-	OddsData              aggregatedMatchOddsData `json:"odds, omitempty"`
-	InPlayOddsData        aggregatedMatchOddsData `json:"inplayOdds, omitempty"`
-	FlatOddsData          aggregatedMatchOddsData `json:"flatOdds, omitempty"`
-	LocalCoachData        coachData               `json:"localCoach, omitempty"`
-	VisitorCoachData      coachData               `json:"visitorCoach, omitempty"`
-	TeamStatsData         TeamsStats              `json:"stats, omitempty"`
+	HighlightData         matchHighlightsData     `json:"highlights,omitempty"`
+	LeagueData            leagueData              `json:"league,omitempty"`
+	RoundData             roundData               `json:"round,omitempty"`
+	StageData             stageData               `json:"stage,omitempty"`
+	RefereeData           matchOfficialData       `json:"referee,omitempty"`
+	FirstAssistantData    matchOfficialData       `json:"firstAssistant,omitempty"`
+	SecondAssistantData   matchOfficialData       `json:"secondAssistant,omitempty"`
+	FourthOfficialData    matchOfficialData       `json:"fourthOfficial,omitempty"`
+	VenueData             venueData               `json:"venue,omitempty"`
+	OddsData              aggregatedMatchOddsData `json:"odds,omitempty"`
+	InPlayOddsData        aggregatedMatchOddsData `json:"inplayOdds,omitempty"`
+	FlatOddsData          aggregatedMatchOddsData `json:"flatOdds,omitempty"`
+	LocalCoachData        coachData               `json:"localCoach,omitempty"`
+	VisitorCoachData      coachData               `json:"visitorCoach,omitempty"`
+	TeamStatsData         TeamsStats              `json:"stats,omitempty"`
 }
 
 // Bench returns PlayerStats data for players on the bench for a fixture

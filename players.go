@@ -25,13 +25,13 @@ type Player struct {
 	Weight        string                `json:"weight"`
 	ImagePath     string                `json:"image_path"`
 	CountryData   countryData           `json:"country"`
-	LineupData    playerLineupData      `json:"lineups, omitempty"`
-	PositionData  positionData          `json:"position, omitempty"`
-	SidelinedData sidelinedData         `json:"sidelined, omitempty"`
-	StatsData     playerSeasonStatsData `json:"stats, omitempty"`
-	TeamData      TeamData              `json:"team, omitempty"`
-	TransfersData transfersData         `json:"transfers, omitempty"`
-	TrophyData    trophyData            `json:"trophies, omitempty"`
+	LineupData    playerLineupData      `json:"lineups,omitempty"`
+	PositionData  positionData          `json:"position,omitempty"`
+	SidelinedData sidelinedData         `json:"sidelined,omitempty"`
+	StatsData     playerSeasonStatsData `json:"stats,omitempty"`
+	TeamData      TeamData              `json:"team,omitempty"`
+	TransfersData transfersData         `json:"transfers,omitempty"`
+	TrophyData    trophyData            `json:"trophies,omitempty"`
 }
 
 // Country returns Country data.

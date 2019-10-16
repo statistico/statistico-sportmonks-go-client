@@ -16,9 +16,9 @@ type Round struct {
 	StageID      int          `json:"stage_id"`
 	Start        string       `json:"start"`
 	End          string       `json:"end"`
-	FixturesData fixturesData `json:"fixtures, omitempty"`
+	FixturesData fixturesData `json:"fixtures,omitempty"`
 	LeagueData   leagueData   `json:"league"`
-	ResultsData  fixturesData `json:"results, omitempty"`
+	ResultsData  fixturesData `json:"results,omitempty"`
 	SeasonData   seasonData   `json:"season"`
 }
 

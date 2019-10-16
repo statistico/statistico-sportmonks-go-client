@@ -16,19 +16,19 @@ type Season struct {
 	IsCurrentSeason            bool                       `json:"is_current_season"`
 	CurrentRoundID             *int                       `json:"current_round_id"`
 	CurrentStageID             *int                       `json:"current_stage_id"`
-	AggregatedAssistScorerData aggregatedAssistScorerData `json:"aggregatedAssistscorers, omitempty"`
-	AggregatedCardScorerData   aggregatedCardScorerData   `json:"aggregatedCardscorers, omitempty"`
-	AggregatedGoalScorerData   aggregatedGoalScorerData   `json:"aggregatedGoalscorers, omitempty"`
-	AssistScorerData           assistScorerData           `json:"assistscorers, omitempty"`
-	CardScorerData             cardScorerData             `json:"cardscorers, omitempty"`
-	FixturesData               fixturesData               `json:"fixtures, omitempty"`
-	GoalScorerData             goalScorerData             `json:"goalscorers, omitempty"`
-	GroupsData                 groupsData                 `json:"groups, omitempty"`
-	LeagueData                 leagueData                 `json:"league, omitempty"`
-	ResultsData                fixturesData               `json:"results, omitempty"`
-	RoundsData                 roundsData                 `json:"rounds, omitempty"`
-	StagesData                 stagesData                 `json:"stages, omitempty"`
-	Upcoming                   fixturesData               `json:"upcoming, omitempty"`
+	AggregatedAssistScorerData aggregatedAssistScorerData `json:"aggregatedAssistscorers,omitempty"`
+	AggregatedCardScorerData   aggregatedCardScorerData   `json:"aggregatedCardscorers,omitempty"`
+	AggregatedGoalScorerData   aggregatedGoalScorerData   `json:"aggregatedGoalscorers,omitempty"`
+	AssistScorerData           assistScorerData           `json:"assistscorers,omitempty"`
+	CardScorerData             cardScorerData             `json:"cardscorers,omitempty"`
+	FixturesData               fixturesData               `json:"fixtures,omitempty"`
+	GoalScorerData             goalScorerData             `json:"goalscorers,omitempty"`
+	GroupsData                 groupsData                 `json:"groups,omitempty"`
+	LeagueData                 leagueData                 `json:"league,omitempty"`
+	ResultsData                fixturesData               `json:"results,omitempty"`
+	RoundsData                 roundsData                 `json:"rounds,omitempty"`
+	StagesData                 stagesData                 `json:"stages,omitempty"`
+	Upcoming                   fixturesData               `json:"upcoming,omitempty"`
 }
 
 // AggregatedAssistScorers returns aggregated assist scorer data.

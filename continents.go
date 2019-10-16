@@ -12,7 +12,7 @@ import (
 type Continent struct {
 	ID            int           `json:"id"`
 	Name          string        `json:"name"`
-	CountriesData countriesData `json:"countries, omitempty"`
+	CountriesData countriesData `json:"countries,omitempty"`
 }
 
 // Countries returns a Country struct slice associated to a Continent

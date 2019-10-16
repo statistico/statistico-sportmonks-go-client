@@ -21,27 +21,27 @@ type Team struct {
 	LogoPath                   *string                    `json:"logo_path"`
 	VenueID                    int                        `json:"venue_id"`
 	CurrentSeasonID            int                        `json:"current_season_id"`
-	AggregatedAssistScorerData aggregatedAssistScorerData `json:"aggregatedAssistscorers, omitempty"`
-	AggregatedCardScorerData   aggregatedCardScorerData   `json:"aggregatedCardscorers, omitempty"`
-	AggregatedGoalScorerData   aggregatedGoalScorerData   `json:"aggregatedGoalscorers, omitempty"`
-	AssistScorerData           assistScorerData           `json:"assistscorers, omitempty"`
-	CardScorerData             cardScorerData             `json:"cardscorers, omitempty"`
-	CoachData                  coachData                  `json:"coach, omitempty"`
-	CountryData                countryData                `json:"country, omitempty"`
+	AggregatedAssistScorerData aggregatedAssistScorerData `json:"aggregatedAssistscorers,omitempty"`
+	AggregatedCardScorerData   aggregatedCardScorerData   `json:"aggregatedCardscorers,omitempty"`
+	AggregatedGoalScorerData   aggregatedGoalScorerData   `json:"aggregatedGoalscorers,omitempty"`
+	AssistScorerData           assistScorerData           `json:"assistscorers,omitempty"`
+	CardScorerData             cardScorerData             `json:"cardscorers,omitempty"`
+	CoachData                  coachData                  `json:"coach,omitempty"`
+	CountryData                countryData                `json:"country,omitempty"`
 	FIFARankingData            rankingData                `json:"fifaranking"`
-	GoalScorerData             goalScorerData             `json:"goalscorers, omitempty"`
-	Latest                     fixturesData               `json:"latest, omitempty"`
-	LeagueData                 leagueData                 `json:"league, omitempty"`
-	LocalFixtureData           fixturesData               `json:"visitorFixtures, omitempty"`
-	SidelinedData              sidelinedData              `json:"sidelined, omitempty"`
-	SquadData                  squadPlayerData            `json:"squad, omitempty"`
-	StatsData                  teamSeasonStatsData        `json:"stats, omitempty"`
-	TransfersData              transfersData              `json:"transfers, omitempty"`
+	GoalScorerData             goalScorerData             `json:"goalscorers,omitempty"`
+	Latest                     fixturesData               `json:"latest,omitempty"`
+	LeagueData                 leagueData                 `json:"league,omitempty"`
+	LocalFixtureData           fixturesData               `json:"localFixtures,omitempty"`
+	SidelinedData              sidelinedData              `json:"sidelined,omitempty"`
+	SquadData                  squadPlayerData            `json:"squad,omitempty"`
+	StatsData                  teamSeasonStatsData        `json:"stats,omitempty"`
+	TransfersData              transfersData              `json:"transfers,omitempty"`
 	UEFARankingData            rankingData                `json:"uefaranking. omitempty"`
-	Upcoming                   fixturesData               `json:"upcoming, omitempty"`
-	VenueData                  venueData                  `json:"venue, omitempty"`
-	VisitorFixtureData         fixturesData               `json:"visitorFixtures, omitempty"`
-	VisitorResultData          fixturesData               `json:"visitorResults, omitempty"`
+	Upcoming                   fixturesData               `json:"upcoming,omitempty"`
+	VenueData                  venueData                  `json:"venue,omitempty"`
+	VisitorFixtureData         fixturesData               `json:"visitorFixtures,omitempty"`
+	VisitorResultData          fixturesData               `json:"visitorResults,omitempty"`
 }
 
 // AggregatedAssistScorers returns aggregated assist scorer data.
