@@ -25,7 +25,7 @@ type League struct {
 	Coverage        LeagueCoverage `json:"coverage"`
 	Country         countryData    `json:"country,omitempty"`
 	Season          seasonData     `json:"season,omitempty"`
-	Seasons         Seasons        `json:"seasons,omitempty"`
+	Seasons         seasonsData    `json:"seasons,omitempty"`
 }
 
 // CountryData returns a Country struct associated to a League

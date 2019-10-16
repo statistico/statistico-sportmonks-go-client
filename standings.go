@@ -48,7 +48,7 @@ type LeagueStanding struct {
 	RoundData  roundData  `json:"round"`
 	SeasonData seasonData `json:"season"`
 	StagesData stagesData `json:"stages"`
-	TeamData   TeamData   `json:"team"`
+	TeamData   teamData   `json:"team"`
 }
 
 // League returns league data.

@@ -67,9 +67,9 @@ type (
 		Continent   string `json:"continent"`
 		SubRegion   string `json:"sub_region"`
 		WorldRegion string `json:"world_region"`
-		FIFA        string `json:"fifa,string"`
-		ISO         string `json:"iso,string"`
-		ISO2        string `json:"iso2,string"`
+		FIFA        string `json:"fifa"`
+		ISO         string `json:"iso"`
+		ISO2        string `json:"iso2"`
 		Longitude   string `json:"longitude"`
 		Latitude    string `json:"latitude"`
 		Flag        string `json:"flag"`
@@ -266,13 +266,13 @@ type (
 
 	// PlayerMatchStats provides stats for a player for a specific fixture.
 	PlayerMatchStats struct {
-		Shots    Shots                `json:"shots"`
-		Goals    Goals                `json:"goals"`
-		Fouls    Fouls                `json:"fouls"`
-		Cards    Cards                `json:"cards"`
-		Passing  MatchPasses          `json:"passing"`
+		Shots    Shots                      `json:"shots"`
+		Goals    Goals                      `json:"goals"`
+		Fouls    Fouls                      `json:"fouls"`
+		Cards    Cards                      `json:"cards"`
+		Passing  MatchPasses                `json:"passing"`
 		Dribbles Player                     `json:"dribbles"`
-		Duels    Duels                `json:"duels"`
+		Duels    Duels                      `json:"duels"`
 		Other    AdditionalPlayerMatchStats `json:"other"`
 	}
 
@@ -466,7 +466,7 @@ type (
 		AvgShotsOffTargetPerGame    *int `json:"avg_shots_off_target_per_game"`
 		ShotsOnTarget               *int `json:"shots_on_target"`
 		AvgShotsOnTargetPerGame     *int `json:"avg_shots_on_target_per_game"`
-		BTTS                       *int `json:"btts"`
+		BTTS                        *int `json:"btts"`
 		GoalLine                    *int `json:"goal_line"`
 	}
 
@@ -490,8 +490,8 @@ type (
 
 	// TeamPasses provides pass data for a team in a fixture.
 	TeamPasses struct {
-		Total      *int `json:"total"`
-		Accurate   *int`json:"accurate"`
+		Total      *int    `json:"total"`
+		Accurate   *int    `json:"accurate"`
 		Percentage *string `json:"percentage"`
 	}
 

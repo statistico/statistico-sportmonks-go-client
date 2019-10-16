@@ -73,7 +73,7 @@ type AssistScorer struct {
 	Assists    int        `json:"assists"`
 	Type       string     `json:"type"`
 	PlayerData playerData `json:"player"`
-	TeamData   TeamData   `json:"team"`
+	TeamData   teamData   `json:"team"`
 }
 
 // Player returns the player data associated to an assist scorer record.
@@ -97,7 +97,7 @@ type CardScorer struct {
 	RedCards    int        `json:"redcards"`
 	Type        string     `json:"type"`
 	PlayerData  playerData `json:"player"`
-	TeamData    TeamData   `json:"team"`
+	TeamData    teamData   `json:"team"`
 }
 
 // Player returns the player data associated to an card scorer record.
@@ -121,7 +121,7 @@ type GoalScorer struct {
 	PenaltyGoals int        `json:"penalty_goals"`
 	Type         string     `json:"type"`
 	PlayerData   playerData `json:"player"`
-	TeamData     TeamData   `json:"team"`
+	TeamData     teamData   `json:"team"`
 }
 
 // Player returns the player data associated to an goal scorer record.

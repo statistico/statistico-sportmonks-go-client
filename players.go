@@ -29,7 +29,7 @@ type Player struct {
 	PositionData  positionData          `json:"position,omitempty"`
 	SidelinedData sidelinedData         `json:"sidelined,omitempty"`
 	StatsData     playerSeasonStatsData `json:"stats,omitempty"`
-	TeamData      TeamData              `json:"team,omitempty"`
+	TeamData      teamData              `json:"team,omitempty"`
 	TransfersData transfersData         `json:"transfers,omitempty"`
 	TrophyData    trophyData            `json:"trophies,omitempty"`
 }
