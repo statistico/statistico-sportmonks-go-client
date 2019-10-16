@@ -5,7 +5,16 @@ jobs:
       - image: circleci/golang:1.12
     steps:
       - checkout
-      - run: go mod download
-      - run: golint ./...
-      - run: go vet ./...
-      - run: go test -v ./...
+      - run:
+          name: Install dependencies
+          command: |
+            go get -u golang.org/x/lint/golint
+            go mod download
+      - run:
+          name: Perform styling checks
+          command: |
+            golint ./...
+            go vet ./...
+      - run:
+          name: Run tests
+          command:  go test -v ./...
