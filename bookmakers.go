@@ -29,7 +29,7 @@ func (c *HTTPClient) Bookmakers(ctx context.Context) ([]Bookmaker, *Meta, error)
 	return response.Data, response.Meta, err
 }
 
-// BookmakerByID fetch a single Bookmaker resource by ID.
+// BookmakerByID fetches a single Bookmaker resource by ID.
 func (c *HTTPClient) BookmakerByID(ctx context.Context, id int) (*Bookmaker, *Meta, error) {
 	path := fmt.Sprintf(bookmakersURI+"/%d", id)
 
