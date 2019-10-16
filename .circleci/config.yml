@@ -1,0 +1,17 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.12
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: go mod download
+      - run:
+          name: Perform style checks
+          command: |
+            go vet ./...
+      - run:
+          name: Run tests
+          command:  go test -v ./...
