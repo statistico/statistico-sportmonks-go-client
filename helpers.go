@@ -61,6 +61,10 @@ type (
 		Data []Fixture `json:"data"`
 	}
 
+	goalEventsData struct {
+		Data []GoalEvent `json:"data"`
+	}
+
 	goalScorerData struct {
 		Data []GoalScorer `json:"data"`
 	}
@@ -81,16 +85,24 @@ type (
 		Data []LeagueStanding `json:"data"`
 	}
 
+	matchCommentaryData struct {
+		Data []Commentary `json:"data"`
+	}
+
 	matchHighlightsData struct {
 		Data []VideoHighlights `json:"data"`
 	}
 
-	matchTVStations struct {
-		Data []TVStation `json:"data"`
+	matchEventsData struct {
+		Data []MatchEvent `json:"data"`
 	}
 
 	matchOfficialData struct {
 		Data *MatchOfficial `json:"data"`
+	}
+
+	matchTVStationsData struct {
+		Data []TVStation `json:"data"`
 	}
 
 	oddsData struct {
@@ -99,10 +111,6 @@ type (
 
 	playerData struct {
 		Data *Player `json:"data"`
-	}
-
-	playersData struct {
-		Data []Player `json:"data"`
 	}
 
 	playerLineupData struct {
@@ -153,8 +161,20 @@ type (
 		Data []Stage `json:"data"`
 	}
 
+	substitutionEventsData struct {
+		Data []SubstitutionEvent `json:"data"`
+	}
+
+	teamData struct {
+		Data *Team `json:"data"`
+	}
+
 	teamSeasonStatsData struct {
 		Data *TeamSeasonStats `json:"data"`
+	}
+
+	teamsStatsData struct {
+		Data []TeamStats `json:"data"`
 	}
 
 	transfersData struct {

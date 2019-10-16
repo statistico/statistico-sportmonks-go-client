@@ -7,13 +7,10 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: |
-            go get -u golang.org/x/lint/golint
-            go mod download
+          command: go mod download
       - run:
-          name: Perform styling checks
+          name: Perform style checks
           command: |
-            golint ./...
             go vet ./...
       - run:
           name: Run tests

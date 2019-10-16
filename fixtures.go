@@ -42,16 +42,16 @@ type Fixture struct {
 	Deleted               bool                    `json:"deleted"`
 	CardEvents            cardEventsData          `json:"cards"`
 	CornerEvents          cornerEventsData        `json:"corners"`
-	GoalEvents            GoalEvents              `json:"goals"`
-	MatchEvents           MatchEvents             `json:"events"`
+	GoalEvents            goalEventsData              `json:"goals"`
+	MatchEvents           matchEventsData             `json:"events"`
 	LineupData            playerLineupData        `json:"lineup"`
 	BenchData             playerLineupData        `json:"bench"`
-	LocalTeamData         TeamData                `json:"localTeam,omitempty"`
-	VisitorTeamData       TeamData                `json:"visitorTeam,omitempty"`
-	SubstitutionData      SubstitutionEvents      `json:"substitutions"`
+	LocalTeamData         teamData                `json:"localTeam,omitempty"`
+	VisitorTeamData       teamData                `json:"visitorTeam,omitempty"`
+	SubstitutionData      substitutionEventsData      `json:"substitutions"`
 	SidelinedData         sidelinedData           `json:"sidelined"`
-	CommentsData          MatchCommentary         `json:"comments,omitempty"`
-	TVStationData         matchTVStations         `json:"tvstations"`
+	CommentsData          matchCommentaryData         `json:"comments,omitempty"`
+	TVStationData         matchTVStationsData         `json:"tvstations"`
 	HighlightData         matchHighlightsData     `json:"highlights,omitempty"`
 	LeagueData            leagueData              `json:"league,omitempty"`
 	RoundData             roundData               `json:"round,omitempty"`
@@ -66,7 +66,7 @@ type Fixture struct {
 	FlatOddsData          aggregatedMatchOddsData `json:"flatOdds,omitempty"`
 	LocalCoachData        coachData               `json:"localCoach,omitempty"`
 	VisitorCoachData      coachData               `json:"visitorCoach,omitempty"`
-	TeamStatsData         TeamsStats              `json:"stats,omitempty"`
+	TeamStatsData         teamsStatsData              `json:"stats,omitempty"`
 }
 
 // Bench returns PlayerStats data for players on the bench for a fixture
