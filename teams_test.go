@@ -242,7 +242,7 @@ func TestTeamByID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		team, _, err := client.TeamByID(context.Background(), 1, []string{})
+		team, _, err := client.TeamByID(context.Background(), 1, []string{}, map[string][]int{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -258,7 +258,35 @@ func TestTeamByID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		team, _, err := client.TeamByID(context.Background(), 1, []string{"squad", "league"})
+		team, _, err := client.TeamByID(context.Background(), 1, []string{"squad", "league"}, map[string][]int{})
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertTeam(t, team)
+		assertSquadPlayer(t, &team.Squad()[0])
+		assertLeague(t, team.League())
+	})
+
+	t.Run("returns a single Team struct with includes data and filter parameters", func(t *testing.T) {
+		url := ddefaultBaseURL + "/teams/1?api_token=api-key&include=squad%2Cleague&seasons=4%2C56"
+
+		server := mockResponseServer(t, teamIncludesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		team, _, err := client.TeamByID(
+			context.Background(),
+			1,
+			[]string{"squad", "league"},
+			map[string][]int{
+				"seasons": {
+					4,
+					56,
+				},
+			},
+		)
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -276,7 +304,7 @@ func TestTeamByID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		team, _, err := client.TeamByID(context.Background(), 1, []string{})
+		team, _, err := client.TeamByID(context.Background(), 1, []string{}, map[string][]int{})
 
 		if team != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", team)
