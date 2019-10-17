@@ -151,12 +151,14 @@ func (t *Team) VisitorResults() []Fixture {
 
 // TeamByID fetches a Team resource by ID.
 // Use the includes slice of string to enrich the response data.
-func (c *HTTPClient) TeamByID(ctx context.Context, id int, includes []string) (*Team, *Meta, error) {
+func (c *HTTPClient) TeamByID(ctx context.Context, id int, includes []string, filters map[string][]int) (*Team, *Meta, error) {
 	path := fmt.Sprintf(teamsURI+"/%d", id)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},
 	}
+
+	formatFilters(&values, filters)
 
 	response := struct {
 		Data *Team `json:"data"`

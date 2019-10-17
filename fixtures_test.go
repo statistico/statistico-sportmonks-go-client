@@ -323,7 +323,7 @@ func TestFixtureByID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		fixture, _, err := client.FixtureByID(context.Background(), 11867285, []string{})
+		fixture, _, err := client.FixtureByID(context.Background(), 11867285, []string{}, map[string][]int{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -343,6 +343,36 @@ func TestFixtureByID(t *testing.T) {
 			context.Background(),
 			11867285,
 			[]string{"league", "stage", "goals"},
+			map[string][]int{},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, fixture)
+		assertLeague(t, fixture.League())
+		assertStage(t, fixture.Stage())
+		assertGoalEvent(t, &fixture.Goals()[0])
+	})
+
+	t.Run("returns a single Fixture struct with includes data and filter parameters", func(t *testing.T) {
+		url := ddefaultBaseURL + "/fixtures/11867285?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10"
+
+		server := mockResponseServer(t, fixtureResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixture, _, err := client.FixtureByID(
+			context.Background(),
+			11867285,
+			[]string{"league", "stage", "goals"},
+			map[string][]int{
+				"leagues": {
+					8,
+					10,
+				},
+			},
 		)
 
 		if err != nil {
@@ -362,7 +392,7 @@ func TestFixtureByID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		fixture, _, err := client.FixtureByID(context.Background(), 11867285, []string{})
+		fixture, _, err := client.FixtureByID(context.Background(), 11867285, []string{}, map[string][]int{})
 
 		if fixture != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", fixture)
@@ -380,7 +410,12 @@ func TestFixturesByID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.FixturesByID(context.Background(), []int{11867285, 555}, []string{})
+		fixtures, _, err := client.FixturesByID(
+			context.Background(),
+			[]int{11867285, 555},
+			[]string{},
+			map[string][]int{},
+		)
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -400,6 +435,36 @@ func TestFixturesByID(t *testing.T) {
 			context.Background(),
 			[]int{11867285, 555},
 			[]string{"league", "stage", "goals"},
+			map[string][]int{},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, &fixtures[0])
+		assertLeague(t, fixtures[0].League())
+		assertStage(t, fixtures[0].Stage())
+		assertGoalEvent(t, &fixtures[0].Goals()[0])
+	})
+
+	t.Run("returns slice of Fixture struct with includes data and filter parameters", func(t *testing.T) {
+		url := ddefaultBaseURL + "/fixtures/multi/11867285,555?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10"
+
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesByID(
+			context.Background(),
+			[]int{11867285, 555},
+			[]string{"league", "stage", "goals"},
+			map[string][]int{
+				"leagues": {
+					8,
+					10,
+				},
+			},
 		)
 
 		if err != nil {
@@ -419,7 +484,7 @@ func TestFixturesByID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.FixturesByID(context.Background(), []int{11867285, 555}, []string{})
+		fixtures, _, err := client.FixturesByID(context.Background(), []int{11867285, 555}, []string{}, map[string][]int{})
 
 		if fixtures != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", fixtures)
@@ -444,7 +509,7 @@ func TestFixturesByDate(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.FixturesByDate(context.Background(), d, []string{})
+		fixtures, _, err := client.FixturesByDate(context.Background(), d, []string{}, map[string][]int{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -464,6 +529,36 @@ func TestFixturesByDate(t *testing.T) {
 			context.Background(),
 			d,
 			[]string{"league", "stage", "goals"},
+			map[string][]int{},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, &fixtures[0])
+		assertLeague(t, fixtures[0].League())
+		assertStage(t, fixtures[0].Stage())
+		assertGoalEvent(t, &fixtures[0].Goals()[0])
+	})
+
+	t.Run("returns slice of Fixture struct with includes data and filter parameters", func(t *testing.T) {
+		url := ddefaultBaseURL + "/fixtures/date/2014-11-12?api_token=api-key&include=league%2Cstage%2Cgoals&markets=8%2C10"
+
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesByDate(
+			context.Background(),
+			d,
+			[]string{"league", "stage", "goals"},
+			map[string][]int{
+				"markets": {
+					8,
+					10,
+				},
+			},
 		)
 
 		if err != nil {
@@ -483,7 +578,7 @@ func TestFixturesByDate(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.FixturesByDate(context.Background(), d, []string{})
+		fixtures, _, err := client.FixturesByDate(context.Background(), d, []string{}, map[string][]int{})
 
 		if fixtures != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", fixtures)
@@ -513,7 +608,7 @@ func TestFixturesBetween(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.FixturesBetween(context.Background(), dateFrom, dateTo, []string{})
+		fixtures, _, err := client.FixturesBetween(context.Background(), dateFrom, dateTo, []string{}, map[string][]int{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -534,6 +629,37 @@ func TestFixturesBetween(t *testing.T) {
 			dateFrom,
 			dateTo,
 			[]string{"league", "stage", "goals"},
+			map[string][]int{},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, &fixtures[0])
+		assertLeague(t, fixtures[0].League())
+		assertStage(t, fixtures[0].Stage())
+		assertGoalEvent(t, &fixtures[0].Goals()[0])
+	})
+
+	t.Run("returns slice of Fixture struct with includes data and filter parameters", func(t *testing.T) {
+		url := ddefaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10"
+
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesBetween(
+			context.Background(),
+			dateFrom,
+			dateTo,
+			[]string{"league", "stage", "goals"},
+			map[string][]int{
+				"leagues": {
+					8,
+					10,
+				},
+			},
 		)
 
 		if err != nil {
@@ -553,7 +679,7 @@ func TestFixturesBetween(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.FixturesBetween(context.Background(), dateFrom, dateTo, []string{})
+		fixtures, _, err := client.FixturesBetween(context.Background(), dateFrom, dateTo, []string{}, map[string][]int{})
 
 		if fixtures != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", fixtures)
@@ -589,6 +715,7 @@ func TestFixturesBetweenForTeam(t *testing.T) {
 			dateTo,
 			1,
 			[]string{},
+			map[string][]int{},
 		)
 
 		if err != nil {
@@ -611,6 +738,38 @@ func TestFixturesBetweenForTeam(t *testing.T) {
 			dateTo,
 			1,
 			[]string{"league", "stage", "goals"},
+			map[string][]int{},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, &fixtures[0])
+		assertLeague(t, fixtures[0].League())
+		assertStage(t, fixtures[0].Stage())
+		assertGoalEvent(t, &fixtures[0].Goals()[0])
+	})
+
+	t.Run("returns slice of Fixture struct with includes data and filter parameters", func(t *testing.T) {
+		url := ddefaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include=league%2Cstage%2Cgoals%3Aorder%28starting_at%7Casc%29&leagues=8%2C10"
+
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesBetweenForTeam(
+			context.Background(),
+			dateFrom,
+			dateTo,
+			1,
+			[]string{"league", "stage", "goals:order(starting_at|asc)"},
+			map[string][]int{
+				"leagues": {
+					8,
+					10,
+				},
+			},
 		)
 
 		if err != nil {
@@ -636,6 +795,7 @@ func TestFixturesBetweenForTeam(t *testing.T) {
 			dateTo,
 			1,
 			[]string{},
+			map[string][]int{},
 		)
 
 		if fixtures != nil {
@@ -654,7 +814,7 @@ func TestFixturesLastUpdated(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.FixturesLastUpdated(context.Background(), []string{})
+		fixtures, _, err := client.FixturesLastUpdated(context.Background(), []string{}, map[string][]int{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -673,6 +833,35 @@ func TestFixturesLastUpdated(t *testing.T) {
 		fixtures, _, err := client.FixturesLastUpdated(
 			context.Background(),
 			[]string{"league", "stage", "goals"},
+			map[string][]int{},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, &fixtures[0])
+		assertLeague(t, fixtures[0].League())
+		assertStage(t, fixtures[0].Stage())
+		assertGoalEvent(t, &fixtures[0].Goals()[0])
+	})
+
+	t.Run("returns slice of Fixture struct with includes data and filter parameters", func(t *testing.T) {
+		url := ddefaultBaseURL + "/fixtures/updates?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10"
+
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.FixturesLastUpdated(
+			context.Background(),
+			[]string{"league", "stage", "goals"},
+			map[string][]int{
+				"leagues": {
+					8,
+					10,
+				},
+			},
 		)
 
 		if err != nil {
@@ -692,7 +881,7 @@ func TestFixturesLastUpdated(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.FixturesLastUpdated(context.Background(), []string{})
+		fixtures, _, err := client.FixturesLastUpdated(context.Background(), []string{}, map[string][]int{})
 
 		if fixtures != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", fixtures)

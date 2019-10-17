@@ -78,12 +78,14 @@ func (s *LeagueStanding) Team() *Team {
 
 // StandingsBySeasonID fetches a Standings resource for a Season ID.
 // Use the includes slice to enrich the response data.
-func (c *HTTPClient) StandingsBySeasonID(ctx context.Context, seasonID int, includes []string) ([]Standings, *Meta, error) {
+func (c *HTTPClient) StandingsBySeasonID(ctx context.Context, seasonID int, includes []string, filters map[string][]int) ([]Standings, *Meta, error) {
 	path := fmt.Sprintf(leagueStandingsURI+"/%d", seasonID)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},
 	}
+
+	formatFilters(&values, filters)
 
 	response := struct {
 		Data []Standings `json:"data"`
@@ -101,15 +103,19 @@ func (c *HTTPClient) StandingsBySeasonID(ctx context.Context, seasonID int, incl
 
 // LiveStandingsBySeasonID fetches a Standings resource for a Season ID for present moment standings.
 // Use the includes slice to enrich the response data.
-func (c *HTTPClient) LiveStandingsBySeasonID(ctx context.Context, seasonID int) ([]LiveStandings, *Meta, error) {
+func (c *HTTPClient) LiveStandingsBySeasonID(ctx context.Context, seasonID int, filters map[string][]int) ([]LiveStandings, *Meta, error) {
 	path := fmt.Sprintf(liveLeagueStandingsURI+"/%d", seasonID)
+
+	values := url.Values{}
+
+	formatFilters(&values, filters)
 
 	response := struct {
 		Data []LiveStandings `json:"data"`
 		Meta *Meta           `json:"meta"`
 	}{}
 
-	err := c.getResource(ctx, path, url.Values{}, &response)
+	err := c.getResource(ctx, path, values, &response)
 
 	if err != nil {
 		return nil, nil, err

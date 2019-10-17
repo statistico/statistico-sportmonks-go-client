@@ -168,7 +168,7 @@ func TestLivesScores(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.LiveScores(context.Background(), 1, []string{})
+		fixtures, _, err := client.LiveScores(context.Background(), 1, []string{}, map[string][]int{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -188,6 +188,36 @@ func TestLivesScores(t *testing.T) {
 			context.Background(),
 			1,
 			[]string{"league", "stage", "goals"},
+			map[string][]int{},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, &fixtures[0])
+		assertLeague(t, fixtures[0].League())
+		assertStage(t, fixtures[0].Stage())
+		assertGoalEvent(t, &fixtures[0].Goals()[0])
+	})
+
+	t.Run("returns slice of Fixture struct with includes data and filter parameters", func(t *testing.T) {
+		url := ddefaultBaseURL + "/livescores?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10&page=1"
+
+		server := mockResponseServer(t, liveScoresResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.LiveScores(
+			context.Background(),
+			1,
+			[]string{"league", "stage", "goals"},
+			map[string][]int{
+				"leagues": {
+					8,
+					10,
+				},
+			},
 		)
 
 		if err != nil {
@@ -207,7 +237,7 @@ func TestLivesScores(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.LiveScores(context.Background(), 1, []string{})
+		fixtures, _, err := client.LiveScores(context.Background(), 1, []string{}, map[string][]int{})
 
 		if fixtures != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", fixtures)
@@ -225,7 +255,7 @@ func TestLivesScoresInPlay(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.LiveScoresInPlay(context.Background(), []string{})
+		fixtures, _, err := client.LiveScoresInPlay(context.Background(), []string{}, map[string][]int{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -244,6 +274,35 @@ func TestLivesScoresInPlay(t *testing.T) {
 		fixtures, _, err := client.LiveScoresInPlay(
 			context.Background(),
 			[]string{"league", "stage", "goals"},
+			map[string][]int{},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertFixture(t, &fixtures[0])
+		assertLeague(t, fixtures[0].League())
+		assertStage(t, fixtures[0].Stage())
+		assertGoalEvent(t, &fixtures[0].Goals()[0])
+	})
+
+	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
+		url := ddefaultBaseURL + "/livescores/now?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10"
+
+		server := mockResponseServer(t, liveScoresResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		fixtures, _, err := client.LiveScoresInPlay(
+			context.Background(),
+			[]string{"league", "stage", "goals"},
+			map[string][]int{
+				"leagues": {
+					8,
+					10,
+				},
+			},
 		)
 
 		if err != nil {
@@ -263,7 +322,7 @@ func TestLivesScoresInPlay(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		fixtures, _, err := client.LiveScoresInPlay(context.Background(), []string{})
+		fixtures, _, err := client.LiveScoresInPlay(context.Background(), []string{}, map[string][]int{})
 
 		if fixtures != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", fixtures)
