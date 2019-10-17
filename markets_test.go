@@ -24,7 +24,7 @@ var marketResponse = `{
 
 func TestMarkets(t *testing.T) {
 	t.Run("returns a slice of Market struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/markets?api_token=api-key"
+		url := defaultBaseURL + "/markets?api_token=api-key"
 
 		server := mockResponseServer(t, marketsResponse, 200, url)
 
@@ -40,7 +40,7 @@ func TestMarkets(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/markets?api_token=api-key"
+		url := defaultBaseURL + "/markets?api_token=api-key"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -58,7 +58,7 @@ func TestMarkets(t *testing.T) {
 
 func TestMarketByID(t *testing.T) {
 	t.Run("returns a single Market struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/markets/1?api_token=api-key"
+		url := defaultBaseURL + "/markets/1?api_token=api-key"
 
 		server := mockResponseServer(t, marketResponse, 200, url)
 
@@ -74,7 +74,7 @@ func TestMarketByID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/markets/1?api_token=api-key"
+		url := defaultBaseURL + "/markets/1?api_token=api-key"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

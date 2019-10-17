@@ -182,7 +182,7 @@ var leagueIncludesResponse = `{
 
 func TestLeagues(t *testing.T) {
 	t.Run("returns slice of League struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/leagues?api_token=api-key&include=&page=1"
+		url := defaultBaseURL + "/leagues?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, leaguesResponse, 200, url)
 
@@ -198,7 +198,7 @@ func TestLeagues(t *testing.T) {
 	})
 
 	t.Run("returns slice of League struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/leagues?api_token=api-key&include=country%2Cseason%2Cseasons&page=1"
+		url := defaultBaseURL + "/leagues?api_token=api-key&include=country%2Cseason%2Cseasons&page=1"
 
 		server := mockResponseServer(t, leaguesIncludesResponse, 200, url)
 
@@ -217,7 +217,7 @@ func TestLeagues(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/leagues?api_token=api-key&include=&page=1"
+		url := defaultBaseURL + "/leagues?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -235,7 +235,7 @@ func TestLeagues(t *testing.T) {
 
 func TestLeagueByID(t *testing.T) {
 	t.Run("returns a single League struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/leagues/82?api_token=api-key&include="
+		url := defaultBaseURL + "/leagues/82?api_token=api-key&include="
 
 		server := mockResponseServer(t, leagueResponse, 200, url)
 
@@ -251,7 +251,7 @@ func TestLeagueByID(t *testing.T) {
 	})
 
 	t.Run("returns a League struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/leagues/82?api_token=api-key&include=country%2Cseason%2Cseasons"
+		url := defaultBaseURL + "/leagues/82?api_token=api-key&include=country%2Cseason%2Cseasons"
 
 		server := mockResponseServer(t, leagueIncludesResponse, 200, url)
 
@@ -270,7 +270,7 @@ func TestLeagueByID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/leagues/82?api_token=api-key&include="
+		url := defaultBaseURL + "/leagues/82?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

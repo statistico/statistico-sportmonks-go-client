@@ -22,7 +22,7 @@ var commentariesResponse = `{
 `
 
 func TestCommentariesByFixtureID(t *testing.T) {
-	url := ddefaultBaseURL + "/commentaries/fixture/11867289?api_token=api-key"
+	url := defaultBaseURL + "/commentaries/fixture/11867289?api_token=api-key"
 
 	t.Run("returns commentary struct slice", func(t *testing.T) {
 		server := mockResponseServer(t, commentariesResponse, 200, url)

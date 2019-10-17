@@ -36,7 +36,7 @@ var venueSeasonResponse = `{
 
 func TestVenueByID(t *testing.T) {
 	t.Run("returns a single Venue struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/venues/200?api_token=api-key"
+		url := defaultBaseURL + "/venues/200?api_token=api-key"
 
 		server := mockResponseServer(t, venueResponse, 200, url)
 
@@ -52,7 +52,7 @@ func TestVenueByID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/venues/200?api_token=api-key"
+		url := defaultBaseURL + "/venues/200?api_token=api-key"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -70,7 +70,7 @@ func TestVenueByID(t *testing.T) {
 
 func TestVenueBySeasonID(t *testing.T) {
 	t.Run("returns a slice of Venue struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/venues/season/12962?api_token=api-key"
+		url := defaultBaseURL + "/venues/season/12962?api_token=api-key"
 
 		server := mockResponseServer(t, venueSeasonResponse, 200, url)
 
@@ -86,7 +86,7 @@ func TestVenueBySeasonID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/venues/season/12962?api_token=api-key"
+		url := defaultBaseURL + "/venues/season/12962?api_token=api-key"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

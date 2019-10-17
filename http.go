@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	ddefaultBaseURL        = "https://soccer.sportmonks.com/api/v2.0"
+	defaultBaseURL        = "https://soccer.sportmonks.com/api/v2.0"
 	bookmakersURI          = "/bookmakers"
 	coachesURI             = "/coaches"
 	commentariesFixtureURI = "/commentaries/fixture"
@@ -58,7 +58,7 @@ type HTTPClient struct {
 func NewHTTPClient(key string) *HTTPClient {
 	return &HTTPClient{
 		HTTPClient: &http.Client{},
-		BaseURL:    ddefaultBaseURL,
+		BaseURL:    defaultBaseURL,
 		Key:        key,
 	}
 }

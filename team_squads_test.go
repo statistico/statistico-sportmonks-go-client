@@ -144,7 +144,7 @@ var teamSquadsIncludesResponse = `{
 
 func TestTeamSquad(t *testing.T) {
 	t.Run("returns a slice of SquadPlayer struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/squad/season/12962/team/1?api_token=api-key&include="
+		url := defaultBaseURL + "/squad/season/12962/team/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, teamSquadsResponse, 200, url)
 
@@ -160,7 +160,7 @@ func TestTeamSquad(t *testing.T) {
 	})
 
 	t.Run("returns a slice of SquadPlayer struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/squad/season/12962/team/1?api_token=api-key&include=player"
+		url := defaultBaseURL + "/squad/season/12962/team/1?api_token=api-key&include=player"
 
 		server := mockResponseServer(t, teamSquadsIncludesResponse, 200, url)
 
@@ -177,7 +177,7 @@ func TestTeamSquad(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/squad/season/12962/team/1?api_token=api-key&include="
+		url := defaultBaseURL + "/squad/season/12962/team/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

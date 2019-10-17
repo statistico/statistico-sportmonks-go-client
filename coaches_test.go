@@ -24,7 +24,7 @@ var coachResponse = `{
 }`
 
 func TestCoachByID(t *testing.T) {
-	url := ddefaultBaseURL + "/coaches/2?api_token=api-key"
+	url := defaultBaseURL + "/coaches/2?api_token=api-key"
 
 	t.Run("returns a single coach struct", func(t *testing.T) {
 		server := mockResponseServer(t, coachResponse, 200, url)

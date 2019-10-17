@@ -284,7 +284,7 @@ var aggregatedTopScorersIncludesResponse = `{
 
 func TestTopScorersBySeasonID(t *testing.T) {
 	t.Run("returns a TopScorers struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/topscorers/season/12962?api_token=api-key&include="
+		url := defaultBaseURL + "/topscorers/season/12962?api_token=api-key&include="
 
 		server := mockResponseServer(t, topScorersResponse, 200, url)
 
@@ -307,7 +307,7 @@ func TestTopScorersBySeasonID(t *testing.T) {
 	})
 
 	t.Run("returns a TopScorers struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/topscorers/season/12962?api_token=api-key&include=goalscorers.team%2Ccardscorers.player"
+		url := defaultBaseURL + "/topscorers/season/12962?api_token=api-key&include=goalscorers.team%2Ccardscorers.player"
 
 		server := mockResponseServer(t, topScorersIncludesResponse, 200, url)
 
@@ -337,7 +337,7 @@ func TestTopScorersBySeasonID(t *testing.T) {
 	})
 
 	t.Run("returns a TopScorers struct with includes data and filter parameters", func(t *testing.T) {
-		url := ddefaultBaseURL + "/topscorers/season/12962?api_token=api-key&include=goalscorers.team%2Ccardscorers.player&stage_ids=4%2C33"
+		url := defaultBaseURL + "/topscorers/season/12962?api_token=api-key&include=goalscorers.team%2Ccardscorers.player&stage_ids=4%2C33"
 
 		server := mockResponseServer(t, topScorersIncludesResponse, 200, url)
 
@@ -372,7 +372,7 @@ func TestTopScorersBySeasonID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/topscorers/season/12962?api_token=api-key&include="
+		url := defaultBaseURL + "/topscorers/season/12962?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -390,7 +390,7 @@ func TestTopScorersBySeasonID(t *testing.T) {
 
 func TestAggregatedTopScorersBySeasonID(t *testing.T) {
 	t.Run("returns an AggregatedTopScorers struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/topscorers/season/12962/aggregated?api_token=api-key&include="
+		url := defaultBaseURL + "/topscorers/season/12962/aggregated?api_token=api-key&include="
 
 		server := mockResponseServer(t, aggregatedTopScorersResponse, 200, url)
 
@@ -413,7 +413,7 @@ func TestAggregatedTopScorersBySeasonID(t *testing.T) {
 	})
 
 	t.Run("returns a AggregatedTopScorers struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/topscorers/season/12962/aggregated?api_token=api-key&include=assistscorers.player%2Ccardscorers.team"
+		url := defaultBaseURL + "/topscorers/season/12962/aggregated?api_token=api-key&include=assistscorers.player%2Ccardscorers.team"
 
 		server := mockResponseServer(t, aggregatedTopScorersIncludesResponse, 200, url)
 

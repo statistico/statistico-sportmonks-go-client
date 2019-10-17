@@ -67,7 +67,7 @@ type (
 		Continent   string `json:"continent"`
 		SubRegion   string `json:"sub_region"`
 		WorldRegion string `json:"world_region"`
-		FIFA        string `json:"fifa"`
+		FIFA        string `json:"fifa,string"`
 		ISO         string `json:"iso"`
 		ISO2        string `json:"iso2"`
 		Longitude   string `json:"longitude"`

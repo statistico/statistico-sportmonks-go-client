@@ -116,7 +116,7 @@ var playerIncludesResponse = `{
 
 func TestPlayerByID(t *testing.T) {
 	t.Run("return a single Player struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/players/219591?api_token=api-key&include="
+		url := defaultBaseURL + "/players/219591?api_token=api-key&include="
 
 		server := mockResponseServer(t, playerResponse, 200, url)
 
@@ -132,7 +132,7 @@ func TestPlayerByID(t *testing.T) {
 	})
 
 	t.Run("return a single Player struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/players/219591?api_token=api-key&include=stats%2Cposition%2Ctrophies"
+		url := defaultBaseURL + "/players/219591?api_token=api-key&include=stats%2Cposition%2Ctrophies"
 
 		server := mockResponseServer(t, playerIncludesResponse, 200, url)
 
@@ -151,7 +151,7 @@ func TestPlayerByID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/players/219591?api_token=api-key&include="
+		url := defaultBaseURL + "/players/219591?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
