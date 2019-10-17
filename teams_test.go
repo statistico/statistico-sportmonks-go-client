@@ -236,7 +236,7 @@ var teamsIncludesReponse = `{
 
 func TestTeamByID(t *testing.T) {
 	t.Run("returns a single Team struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/teams/1?api_token=api-key&include="
+		url := defaultBaseURL + "/teams/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, teamResponse, 200, url)
 
@@ -252,7 +252,7 @@ func TestTeamByID(t *testing.T) {
 	})
 
 	t.Run("returns a single Team struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/teams/1?api_token=api-key&include=squad%2Cleague"
+		url := defaultBaseURL + "/teams/1?api_token=api-key&include=squad%2Cleague"
 
 		server := mockResponseServer(t, teamIncludesResponse, 200, url)
 
@@ -270,7 +270,7 @@ func TestTeamByID(t *testing.T) {
 	})
 
 	t.Run("returns a single Team struct with includes data and filter parameters", func(t *testing.T) {
-		url := ddefaultBaseURL + "/teams/1?api_token=api-key&include=squad%2Cleague&seasons=4%2C56"
+		url := defaultBaseURL + "/teams/1?api_token=api-key&include=squad%2Cleague&seasons=4%2C56"
 
 		server := mockResponseServer(t, teamIncludesResponse, 200, url)
 
@@ -298,7 +298,7 @@ func TestTeamByID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/teams/1?api_token=api-key&include="
+		url := defaultBaseURL + "/teams/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -316,7 +316,7 @@ func TestTeamByID(t *testing.T) {
 
 func TestTeamsBySeasonID(t *testing.T) {
 	t.Run("returns a slice of Team struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/teams/season/12962?api_token=api-key&include=&page=1"
+		url := defaultBaseURL + "/teams/season/12962?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, teamsResponse, 200, url)
 
@@ -332,7 +332,7 @@ func TestTeamsBySeasonID(t *testing.T) {
 	})
 
 	t.Run("returns a slice of Team struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/teams/season/12962?api_token=api-key&include=squad%2Cleague&page=1"
+		url := defaultBaseURL + "/teams/season/12962?api_token=api-key&include=squad%2Cleague&page=1"
 
 		server := mockResponseServer(t, teamsIncludesReponse, 200, url)
 
@@ -355,7 +355,7 @@ func TestTeamsBySeasonID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/teams/season/12962?api_token=api-key&include=&page=1"
+		url := defaultBaseURL + "/teams/season/12962?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

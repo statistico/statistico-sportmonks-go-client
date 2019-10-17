@@ -317,7 +317,7 @@ var fixturesResponse = `{
 
 func TestFixtureByID(t *testing.T) {
 	t.Run("returns a single Fixture struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/11867285?api_token=api-key&include="
+		url := defaultBaseURL + "/fixtures/11867285?api_token=api-key&include="
 
 		server := mockResponseServer(t, fixtureResponse, 200, url)
 
@@ -333,7 +333,7 @@ func TestFixtureByID(t *testing.T) {
 	})
 
 	t.Run("returns a single Fixture struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/11867285?api_token=api-key&include=league%2Cstage%2Cgoals"
+		url := defaultBaseURL + "/fixtures/11867285?api_token=api-key&include=league%2Cstage%2Cgoals"
 
 		server := mockResponseServer(t, fixtureResponse, 200, url)
 
@@ -357,7 +357,7 @@ func TestFixtureByID(t *testing.T) {
 	})
 
 	t.Run("returns a single Fixture struct with includes data and filter parameters", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/11867285?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10"
+		url := defaultBaseURL + "/fixtures/11867285?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10"
 
 		server := mockResponseServer(t, fixtureResponse, 200, url)
 
@@ -386,7 +386,7 @@ func TestFixtureByID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/11867285?api_token=api-key&include="
+		url := defaultBaseURL + "/fixtures/11867285?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -404,7 +404,7 @@ func TestFixtureByID(t *testing.T) {
 
 func TestFixturesByID(t *testing.T) {
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/multi/11867285,555?api_token=api-key&include="
+		url := defaultBaseURL + "/fixtures/multi/11867285,555?api_token=api-key&include="
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -425,7 +425,7 @@ func TestFixturesByID(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/multi/11867285,555?api_token=api-key&include=league%2Cstage%2Cgoals"
+		url := defaultBaseURL + "/fixtures/multi/11867285,555?api_token=api-key&include=league%2Cstage%2Cgoals"
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -449,7 +449,7 @@ func TestFixturesByID(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data and filter parameters", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/multi/11867285,555?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10"
+		url := defaultBaseURL + "/fixtures/multi/11867285,555?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10"
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -478,7 +478,7 @@ func TestFixturesByID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/multi/11867285,555?api_token=api-key&include="
+		url := defaultBaseURL + "/fixtures/multi/11867285,555?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -503,7 +503,7 @@ func TestFixturesByDate(t *testing.T) {
 	}
 
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/date/2014-11-12?api_token=api-key&include="
+		url := defaultBaseURL + "/fixtures/date/2014-11-12?api_token=api-key&include="
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -519,7 +519,7 @@ func TestFixturesByDate(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/date/2014-11-12?api_token=api-key&include=league%2Cstage%2Cgoals"
+		url := defaultBaseURL + "/fixtures/date/2014-11-12?api_token=api-key&include=league%2Cstage%2Cgoals"
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -543,7 +543,7 @@ func TestFixturesByDate(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data and filter parameters", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/date/2014-11-12?api_token=api-key&include=league%2Cstage%2Cgoals&markets=8%2C10"
+		url := defaultBaseURL + "/fixtures/date/2014-11-12?api_token=api-key&include=league%2Cstage%2Cgoals&markets=8%2C10"
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -572,7 +572,7 @@ func TestFixturesByDate(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/date/2014-11-12?api_token=api-key&include="
+		url := defaultBaseURL + "/fixtures/date/2014-11-12?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -602,7 +602,7 @@ func TestFixturesBetween(t *testing.T) {
 	}
 
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include="
+		url := defaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include="
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -618,7 +618,7 @@ func TestFixturesBetween(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include=league%2Cstage%2Cgoals"
+		url := defaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include=league%2Cstage%2Cgoals"
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -643,7 +643,7 @@ func TestFixturesBetween(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data and filter parameters", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10"
+		url := defaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10"
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -673,7 +673,7 @@ func TestFixturesBetween(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include="
+		url := defaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -703,7 +703,7 @@ func TestFixturesBetweenForTeam(t *testing.T) {
 	}
 
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include="
+		url := defaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -726,7 +726,7 @@ func TestFixturesBetweenForTeam(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include=league%2Cstage%2Cgoals"
+		url := defaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include=league%2Cstage%2Cgoals"
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -752,7 +752,7 @@ func TestFixturesBetweenForTeam(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data and filter parameters", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include=league%2Cstage%2Cgoals%3Aorder%28starting_at%7Casc%29&leagues=8%2C10"
+		url := defaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include=league%2Cstage%2Cgoals%3Aorder%28starting_at%7Casc%29&leagues=8%2C10"
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -783,7 +783,7 @@ func TestFixturesBetweenForTeam(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include="
+		url := defaultBaseURL + "/fixtures/between/2014-11-12/2014-12-12/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -808,7 +808,7 @@ func TestFixturesBetweenForTeam(t *testing.T) {
 
 func TestFixturesLastUpdated(t *testing.T) {
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/updates?api_token=api-key&include="
+		url := defaultBaseURL + "/fixtures/updates?api_token=api-key&include="
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -824,7 +824,7 @@ func TestFixturesLastUpdated(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/updates?api_token=api-key&include=league%2Cstage%2Cgoals"
+		url := defaultBaseURL + "/fixtures/updates?api_token=api-key&include=league%2Cstage%2Cgoals"
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -847,7 +847,7 @@ func TestFixturesLastUpdated(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data and filter parameters", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/updates?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10"
+		url := defaultBaseURL + "/fixtures/updates?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10"
 
 		server := mockResponseServer(t, fixturesResponse, 200, url)
 
@@ -875,7 +875,7 @@ func TestFixturesLastUpdated(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/fixtures/updates?api_token=api-key&include="
+		url := defaultBaseURL + "/fixtures/updates?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

@@ -536,7 +536,7 @@ var stagesSeasonIncludesResponse = `{
 
 func TestStageByID(t *testing.T) {
 	t.Run("returns a Stage struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/stages/10?api_token=api-key&include="
+		url := defaultBaseURL + "/stages/10?api_token=api-key&include="
 
 		server := mockResponseServer(t, stageResponse, 200, url)
 
@@ -552,7 +552,7 @@ func TestStageByID(t *testing.T) {
 	})
 
 	t.Run("return a Stage struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/stages/10?api_token=api-key&include=season%2Cleague%2Cfixtures%2Cresults"
+		url := defaultBaseURL + "/stages/10?api_token=api-key&include=season%2Cleague%2Cfixtures%2Cresults"
 
 		server := mockResponseServer(t, stageIncludesResponse, 200, url)
 
@@ -572,7 +572,7 @@ func TestStageByID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/stages/10?api_token=api-key&include="
+		url := defaultBaseURL + "/stages/10?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -590,7 +590,7 @@ func TestStageByID(t *testing.T) {
 
 func TestStagesBySeasonID(t *testing.T) {
 	t.Run("returns a slice of Stage struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/stages/season/10?api_token=api-key&include="
+		url := defaultBaseURL + "/stages/season/10?api_token=api-key&include="
 
 		server := mockResponseServer(t, stagesSeasonResponse, 200, url)
 
@@ -606,7 +606,7 @@ func TestStagesBySeasonID(t *testing.T) {
 	})
 
 	t.Run("returns a slice of Stage struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/stages/season/10?api_token=api-key&include=season%2Cleague%2Cfixtures%2Cresults"
+		url := defaultBaseURL + "/stages/season/10?api_token=api-key&include=season%2Cleague%2Cfixtures%2Cresults"
 
 		server := mockResponseServer(t, stagesSeasonIncludesResponse, 200, url)
 
@@ -630,7 +630,7 @@ func TestStagesBySeasonID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/stages/season/10?api_token=api-key&include="
+		url := defaultBaseURL + "/stages/season/10?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

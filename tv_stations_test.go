@@ -17,7 +17,7 @@ var tvStationsResponse = `{
 
 func TestTVStationsByFixtureID(t *testing.T) {
 	t.Run("returns a slice of TVStation struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/tvstations/fixture/11867285?api_token=api-key"
+		url := defaultBaseURL + "/tvstations/fixture/11867285?api_token=api-key"
 
 		server := mockResponseServer(t, tvStationsResponse, 200, url)
 
@@ -33,7 +33,7 @@ func TestTVStationsByFixtureID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/tvstations/fixture/11867285?api_token=api-key"
+		url := defaultBaseURL + "/tvstations/fixture/11867285?api_token=api-key"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

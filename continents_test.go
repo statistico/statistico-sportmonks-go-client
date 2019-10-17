@@ -81,7 +81,7 @@ var continentIncludesResponse = `{
 
 func TestContinents(t *testing.T) {
 	t.Run("returns Continent struct slice", func(t *testing.T) {
-		url := ddefaultBaseURL + "/continents?api_token=api-key&include=&page=1"
+		url := defaultBaseURL + "/continents?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, continentsResponse, 200, url)
 
@@ -97,7 +97,7 @@ func TestContinents(t *testing.T) {
 	})
 
 	t.Run("returns Continent struct slice with country includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/continents?api_token=api-key&include=countries&page=1"
+		url := defaultBaseURL + "/continents?api_token=api-key&include=countries&page=1"
 
 		server := mockResponseServer(t, continentsIncludesResponse, 200, url)
 
@@ -116,7 +116,7 @@ func TestContinents(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/continents?api_token=api-key&include=&page=1"
+		url := defaultBaseURL + "/continents?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -134,7 +134,7 @@ func TestContinents(t *testing.T) {
 
 func TestContinentByID(t *testing.T) {
 	t.Run("returns a single Continent struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/continents/1?api_token=api-key&include="
+		url := defaultBaseURL + "/continents/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, continentResponse, 200, url)
 
@@ -150,7 +150,7 @@ func TestContinentByID(t *testing.T) {
 	})
 
 	t.Run("returns Continent struct with country includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/continents/1?api_token=api-key&include=countries"
+		url := defaultBaseURL + "/continents/1?api_token=api-key&include=countries"
 
 		server := mockResponseServer(t, continentIncludesResponse, 200, url)
 
@@ -169,7 +169,7 @@ func TestContinentByID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/continents/1?api_token=api-key&include="
+		url := defaultBaseURL + "/continents/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

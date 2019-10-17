@@ -66,7 +66,7 @@ func assertError(t *testing.T, err error) {
 func newTestHTTPClient(server *http.Client) *HTTPClient {
 	return &HTTPClient{
 		HTTPClient: server,
-		BaseURL:    ddefaultBaseURL,
+		BaseURL:    defaultBaseURL,
 		Key:        "api-key",
 	}
 }

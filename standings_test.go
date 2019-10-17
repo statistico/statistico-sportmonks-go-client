@@ -177,7 +177,7 @@ var liveStandingsResponse = `{
 
 func TestStandingsBySeasonID(t *testing.T) {
 	t.Run("returns a slice of Standings struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/standings/season/12962?api_token=api-key&include="
+		url := defaultBaseURL + "/standings/season/12962?api_token=api-key&include="
 
 		server := mockResponseServer(t, standingsResponse, 200, url)
 
@@ -195,7 +195,7 @@ func TestStandingsBySeasonID(t *testing.T) {
 
 	t.Run("returns a slice of Standings struct with includes data", func(t *testing.T) {
 		t.Run("returns a slice of Standings struct", func(t *testing.T) {
-			url := ddefaultBaseURL + "/standings/season/12962?api_token=api-key&include=standings.team%2Cstandings.round"
+			url := defaultBaseURL + "/standings/season/12962?api_token=api-key&include=standings.team%2Cstandings.round"
 
 			server := mockResponseServer(t, standingsIncludesResponse, 200, url)
 
@@ -221,7 +221,7 @@ func TestStandingsBySeasonID(t *testing.T) {
 
 	t.Run("returns a slice of Standings struct with includes data", func(t *testing.T) {
 		t.Run("returns a slice of Standings struct", func(t *testing.T) {
-			url := ddefaultBaseURL + "/standings/season/12962?api_token=api-key&include=standings.team%2Cstandings.round&stage_ids=8%2C10"
+			url := defaultBaseURL + "/standings/season/12962?api_token=api-key&include=standings.team%2Cstandings.round&stage_ids=8%2C10"
 
 			server := mockResponseServer(t, standingsIncludesResponse, 200, url)
 
@@ -251,7 +251,7 @@ func TestStandingsBySeasonID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/standings/season/12962?api_token=api-key&include="
+		url := defaultBaseURL + "/standings/season/12962?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -269,7 +269,7 @@ func TestStandingsBySeasonID(t *testing.T) {
 
 func TestLiveStandingsBySeasonID(t *testing.T) {
 	t.Run("returns a slice of LiveStandings struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/standings/season/live/12962?api_token=api-key"
+		url := defaultBaseURL + "/standings/season/live/12962?api_token=api-key"
 
 		server := mockResponseServer(t, liveStandingsResponse, 200, url)
 
@@ -285,7 +285,7 @@ func TestLiveStandingsBySeasonID(t *testing.T) {
 	})
 
 	t.Run("returns a slice of LiveStandings struct with filter parameters", func(t *testing.T) {
-		url := ddefaultBaseURL + "/standings/season/live/12962?api_token=api-key&stage_ids=8%2C10"
+		url := defaultBaseURL + "/standings/season/live/12962?api_token=api-key&stage_ids=8%2C10"
 
 		server := mockResponseServer(t, liveStandingsResponse, 200, url)
 
@@ -295,11 +295,11 @@ func TestLiveStandingsBySeasonID(t *testing.T) {
 			context.Background(),
 			12962,
 			map[string][]int{
-			"stage_ids": {
-				8,
-				10,
-			},
-		})
+				"stage_ids": {
+					8,
+					10,
+				},
+			})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())

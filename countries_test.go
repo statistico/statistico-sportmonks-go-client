@@ -146,7 +146,7 @@ var countryIncludesResponse = `{
 
 func TestCountries(t *testing.T) {
 	t.Run("returns Country struct slice", func(t *testing.T) {
-		url := ddefaultBaseURL + "/countries?api_token=api-key&include=&page=1"
+		url := defaultBaseURL + "/countries?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, countriesResponse, 200, url)
 
@@ -164,7 +164,7 @@ func TestCountries(t *testing.T) {
 	})
 
 	t.Run("returns Country struct slice with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/countries?api_token=api-key&include=continent%2Cleagues&page=1"
+		url := defaultBaseURL + "/countries?api_token=api-key&include=continent%2Cleagues&page=1"
 
 		server := mockResponseServer(t, countriesIncludesResponse, 200, url)
 
@@ -185,7 +185,7 @@ func TestCountries(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/countries?api_token=api-key&include=&page=1"
+		url := defaultBaseURL + "/countries?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -203,7 +203,7 @@ func TestCountries(t *testing.T) {
 
 func TestCountryByID(t *testing.T) {
 	t.Run("returns a single Country struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/countries/1?api_token=api-key&include="
+		url := defaultBaseURL + "/countries/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, countryResponse, 200, url)
 
@@ -221,7 +221,7 @@ func TestCountryByID(t *testing.T) {
 	})
 
 	t.Run("returns Country struct with country includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/countries/11?api_token=api-key&include=countries%2C+leagues"
+		url := defaultBaseURL + "/countries/11?api_token=api-key&include=countries%2C+leagues"
 
 		server := mockResponseServer(t, countryIncludesResponse, 200, url)
 
@@ -242,7 +242,7 @@ func TestCountryByID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/countries/11?api_token=api-key&include=countries%2C+leagues"
+		url := defaultBaseURL + "/countries/11?api_token=api-key&include=countries%2C+leagues"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

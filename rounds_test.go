@@ -536,7 +536,7 @@ var roundsSeasonIncludesResponse = `{
 
 func TestRoundByID(t *testing.T) {
 	t.Run("return a single Round struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/rounds/100?api_token=api-key&include="
+		url := defaultBaseURL + "/rounds/100?api_token=api-key&include="
 
 		server := mockResponseServer(t, roundResponse, 200, url)
 
@@ -552,7 +552,7 @@ func TestRoundByID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/rounds/100?api_token=api-key&include="
+		url := defaultBaseURL + "/rounds/100?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -568,7 +568,7 @@ func TestRoundByID(t *testing.T) {
 	})
 
 	t.Run("return a single Round struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/rounds/100?api_token=api-key&include=fixtures%2Cleague%2Cresults%2Cseason"
+		url := defaultBaseURL + "/rounds/100?api_token=api-key&include=fixtures%2Cleague%2Cresults%2Cseason"
 
 		server := mockResponseServer(t, roundIncludesResponse, 200, url)
 
@@ -590,7 +590,7 @@ func TestRoundByID(t *testing.T) {
 
 func TestRoundsBySeasonID(t *testing.T) {
 	t.Run("returns a slice of Round struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/rounds/season/16029?api_token=api-key&include="
+		url := defaultBaseURL + "/rounds/season/16029?api_token=api-key&include="
 
 		server := mockResponseServer(t, roundsSeasonResponse, 200, url)
 
@@ -606,7 +606,7 @@ func TestRoundsBySeasonID(t *testing.T) {
 	})
 
 	t.Run("returns a slice of Round struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/rounds/season/16029?api_token=api-key&include=fixtures%2Cleague%2Cresults%2Cseason"
+		url := defaultBaseURL + "/rounds/season/16029?api_token=api-key&include=fixtures%2Cleague%2Cresults%2Cseason"
 
 		server := mockResponseServer(t, roundsSeasonIncludesResponse, 200, url)
 
@@ -626,7 +626,7 @@ func TestRoundsBySeasonID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/rounds/season/16029?api_token=api-key&include="
+		url := defaultBaseURL + "/rounds/season/16029?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

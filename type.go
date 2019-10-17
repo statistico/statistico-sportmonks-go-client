@@ -64,15 +64,15 @@ type (
 
 	// CountryExtra provides additional data for a Country.
 	CountryExtra struct {
-		Continent   string `json:"continent"`
-		SubRegion   string `json:"sub_region"`
-		WorldRegion string `json:"world_region"`
-		FIFA        string `json:"fifa"`
-		ISO         string `json:"iso"`
-		ISO2        string `json:"iso2"`
-		Longitude   string `json:"longitude"`
-		Latitude    string `json:"latitude"`
-		Flag        string `json:"flag"`
+		Continent   string      `json:"continent"`
+		SubRegion   string      `json:"sub_region"`
+		WorldRegion string      `json:"world_region"`
+		FIFA        interface{} `json:"fifa,string"`
+		ISO         string      `json:"iso"`
+		ISO2        string      `json:"iso2"`
+		Longitude   string      `json:"longitude"`
+		Latitude    string      `json:"latitude"`
+		Flag        string      `json:"flag"`
 	}
 
 	// Crosses explains cross stat data for a player.

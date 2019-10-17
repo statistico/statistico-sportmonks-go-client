@@ -141,7 +141,7 @@ var videoHighlightsIncludesResponse = `{
 
 func TestVideoHighlights(t *testing.T) {
 	t.Run("returns a slice of VideoHighlight struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/highlights?api_token=api-key&include=&page=2"
+		url := defaultBaseURL + "/highlights?api_token=api-key&include=&page=2"
 
 		server := mockResponseServer(t, videoHighlightsResponse, 200, url)
 
@@ -157,7 +157,7 @@ func TestVideoHighlights(t *testing.T) {
 	})
 
 	t.Run("returns a slice of VideoHighlight struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/highlights?api_token=api-key&include=fixture&page=2"
+		url := defaultBaseURL + "/highlights?api_token=api-key&include=fixture&page=2"
 
 		server := mockResponseServer(t, videoHighlightsIncludesResponse, 200, url)
 
@@ -174,7 +174,7 @@ func TestVideoHighlights(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/highlights?api_token=api-key&include=&page=2"
+		url := defaultBaseURL + "/highlights?api_token=api-key&include=&page=2"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

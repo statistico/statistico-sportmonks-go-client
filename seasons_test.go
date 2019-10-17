@@ -140,7 +140,7 @@ var seasonIncludesResponse = `{
 
 func TestSeasons(t *testing.T) {
 	t.Run("returns a slice of Season struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/seasons?api_token=api-key&include=&page=1"
+		url := defaultBaseURL + "/seasons?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, seasonsResponse, 200, url)
 
@@ -156,7 +156,7 @@ func TestSeasons(t *testing.T) {
 	})
 
 	t.Run("returns a slice of Season struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/seasons?api_token=api-key&include=groups%2Cgoalscorers%2Crounds&page=1"
+		url := defaultBaseURL + "/seasons?api_token=api-key&include=groups%2Cgoalscorers%2Crounds&page=1"
 
 		server := mockResponseServer(t, seasonsIncludesResponse, 200, url)
 
@@ -175,7 +175,7 @@ func TestSeasons(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/seasons?api_token=api-key&include=&page=1"
+		url := defaultBaseURL + "/seasons?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -193,7 +193,7 @@ func TestSeasons(t *testing.T) {
 
 func TestSeasonByID(t *testing.T) {
 	t.Run("returns a single Season struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/seasons/55?api_token=api-key&include="
+		url := defaultBaseURL + "/seasons/55?api_token=api-key&include="
 
 		server := mockResponseServer(t, seasonResponse, 200, url)
 
@@ -209,7 +209,7 @@ func TestSeasonByID(t *testing.T) {
 	})
 
 	t.Run("returns a single Season struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/seasons/55?api_token=api-key&include=groups%2Cgoalscorers%2Crounds"
+		url := defaultBaseURL + "/seasons/55?api_token=api-key&include=groups%2Cgoalscorers%2Crounds"
 
 		server := mockResponseServer(t, seasonIncludesResponse, 200, url)
 
@@ -228,7 +228,7 @@ func TestSeasonByID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/seasons/55?api_token=api-key&include="
+		url := defaultBaseURL + "/seasons/55?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

@@ -32,7 +32,7 @@ var bookmakerResponse = `{
 `
 
 func TestBookmakers(t *testing.T) {
-	url := ddefaultBaseURL + "/bookmakers?api_token=api-key"
+	url := defaultBaseURL + "/bookmakers?api_token=api-key"
 
 	t.Run("returns bookmaker struct slice", func(t *testing.T) {
 		server := mockResponseServer(t, bookmakersResponse, 200, url)
@@ -68,7 +68,7 @@ func TestBookmakers(t *testing.T) {
 }
 
 func TestBookMakerByID(t *testing.T) {
-	url := ddefaultBaseURL + "/bookmakers/1?api_token=api-key"
+	url := defaultBaseURL + "/bookmakers/1?api_token=api-key"
 
 	t.Run("returns a single bookmaker struct", func(t *testing.T) {
 		server := mockResponseServer(t, bookmakerResponse, 200, url)

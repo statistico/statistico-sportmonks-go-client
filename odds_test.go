@@ -48,7 +48,7 @@ var oddsResponse = `{
 
 func TestOddsByFixtureID(t *testing.T) {
 	t.Run("returns a slice of MatchOdds struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/odds/fixture/11867285?api_token=api-key"
+		url := defaultBaseURL + "/odds/fixture/11867285?api_token=api-key"
 
 		server := mockResponseServer(t, oddsResponse, 200, url)
 
@@ -69,7 +69,7 @@ func TestOddsByFixtureID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/odds/fixture/11867285?api_token=api-key"
+		url := defaultBaseURL + "/odds/fixture/11867285?api_token=api-key"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -87,7 +87,7 @@ func TestOddsByFixtureID(t *testing.T) {
 
 func TestInPlayOddsByFixtureID(t *testing.T) {
 	t.Run("returns a slice of MatchOdds struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/odds/inplay/fixture/11867285?api_token=api-key"
+		url := defaultBaseURL + "/odds/inplay/fixture/11867285?api_token=api-key"
 
 		server := mockResponseServer(t, oddsResponse, 200, url)
 
@@ -108,7 +108,7 @@ func TestInPlayOddsByFixtureID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/odds/inplay/fixture/11867285?api_token=api-key"
+		url := defaultBaseURL + "/odds/inplay/fixture/11867285?api_token=api-key"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -126,7 +126,7 @@ func TestInPlayOddsByFixtureID(t *testing.T) {
 
 func TestOddsByFixtureAndBookmaker(t *testing.T) {
 	t.Run("returns a slice of MatchOdds struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/odds/fixture/11867285/bookmaker/1?api_token=api-key"
+		url := defaultBaseURL + "/odds/fixture/11867285/bookmaker/1?api_token=api-key"
 
 		server := mockResponseServer(t, oddsResponse, 200, url)
 
@@ -147,7 +147,7 @@ func TestOddsByFixtureAndBookmaker(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/odds/fixture/11867285/bookmaker/1?api_token=api-key"
+		url := defaultBaseURL + "/odds/fixture/11867285/bookmaker/1?api_token=api-key"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -165,7 +165,7 @@ func TestOddsByFixtureAndBookmaker(t *testing.T) {
 
 func TestOddsByFixtureAndMarket(t *testing.T) {
 	t.Run("returns a slice of MatchOdds struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/odds/fixture/11867285/market/1?api_token=api-key"
+		url := defaultBaseURL + "/odds/fixture/11867285/market/1?api_token=api-key"
 
 		server := mockResponseServer(t, oddsResponse, 200, url)
 
@@ -186,7 +186,7 @@ func TestOddsByFixtureAndMarket(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/odds/fixture/11867285/market/1?api_token=api-key"
+		url := defaultBaseURL + "/odds/fixture/11867285/market/1?api_token=api-key"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

@@ -162,7 +162,7 @@ var liveScoresResponse = `{
 
 func TestLivesScores(t *testing.T) {
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/livescores?api_token=api-key&include=&page=1"
+		url := defaultBaseURL + "/livescores?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, liveScoresResponse, 200, url)
 
@@ -178,7 +178,7 @@ func TestLivesScores(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/livescores?api_token=api-key&include=league%2Cstage%2Cgoals&page=1"
+		url := defaultBaseURL + "/livescores?api_token=api-key&include=league%2Cstage%2Cgoals&page=1"
 
 		server := mockResponseServer(t, liveScoresResponse, 200, url)
 
@@ -202,7 +202,7 @@ func TestLivesScores(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data and filter parameters", func(t *testing.T) {
-		url := ddefaultBaseURL + "/livescores?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10&page=1"
+		url := defaultBaseURL + "/livescores?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10&page=1"
 
 		server := mockResponseServer(t, liveScoresResponse, 200, url)
 
@@ -231,7 +231,7 @@ func TestLivesScores(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/livescores?api_token=api-key&include=&page=1"
+		url := defaultBaseURL + "/livescores?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -249,7 +249,7 @@ func TestLivesScores(t *testing.T) {
 
 func TestLivesScoresInPlay(t *testing.T) {
 	t.Run("returns slice of Fixture struct", func(t *testing.T) {
-		url := ddefaultBaseURL + "/livescores/now?api_token=api-key&include="
+		url := defaultBaseURL + "/livescores/now?api_token=api-key&include="
 
 		server := mockResponseServer(t, liveScoresResponse, 200, url)
 
@@ -265,7 +265,7 @@ func TestLivesScoresInPlay(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/livescores/now?api_token=api-key&include=league%2Cstage%2Cgoals"
+		url := defaultBaseURL + "/livescores/now?api_token=api-key&include=league%2Cstage%2Cgoals"
 
 		server := mockResponseServer(t, liveScoresResponse, 200, url)
 
@@ -288,7 +288,7 @@ func TestLivesScoresInPlay(t *testing.T) {
 	})
 
 	t.Run("returns slice of Fixture struct with includes data", func(t *testing.T) {
-		url := ddefaultBaseURL + "/livescores/now?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10"
+		url := defaultBaseURL + "/livescores/now?api_token=api-key&include=league%2Cstage%2Cgoals&leagues=8%2C10"
 
 		server := mockResponseServer(t, liveScoresResponse, 200, url)
 
@@ -316,7 +316,7 @@ func TestLivesScoresInPlay(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := ddefaultBaseURL + "/livescores/now?api_token=api-key&include="
+		url := defaultBaseURL + "/livescores/now?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
