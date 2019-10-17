@@ -295,11 +295,11 @@ func TestLiveStandingsBySeasonID(t *testing.T) {
 			context.Background(),
 			12962,
 			map[string][]int{
-			"stage_ids": {
-				8,
-				10,
-			},
-		})
+				"stage_ids": {
+					8,
+					10,
+				},
+			})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())

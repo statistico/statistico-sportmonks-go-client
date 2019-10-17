@@ -16,9 +16,9 @@ type (
 		PerPage     int `json:"per_page"`
 		CurrentPage int `json:"current_page"`
 		TotalPages  int `json:"total_pages"`
-		Links struct {
+		Links       struct {
 			Previous string `json:"previous"`
-			Next string `json:"next"`
+			Next     string `json:"next"`
 		} `json:"links"`
 	}
 
