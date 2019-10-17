@@ -136,12 +136,14 @@ func (g *GoalScorer) Team() *Team {
 
 // TopScorersBySeasonID fetches a TopScorers resource for a season by ID.
 // Use the includes slice of string to enrich the response data.
-func (c *HTTPClient) TopScorersBySeasonID(ctx context.Context, seasonID int, includes []string) (*TopScorers, *Meta, error) {
+func (c *HTTPClient) TopScorersBySeasonID(ctx context.Context, seasonID int, includes []string, filters map[string][]int) (*TopScorers, *Meta, error) {
 	path := fmt.Sprintf(topScorersSeasonURI+"/%d", seasonID)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},
 	}
+
+	formatFilters(&values, filters)
 
 	response := struct {
 		Data *TopScorers `json:"data"`

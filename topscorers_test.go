@@ -290,7 +290,7 @@ func TestTopScorersBySeasonID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		topscorers, _, err := client.TopScorersBySeasonID(context.Background(), 12962, []string{})
+		topscorers, _, err := client.TopScorersBySeasonID(context.Background(), 12962, []string{}, map[string][]int{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -317,6 +317,42 @@ func TestTopScorersBySeasonID(t *testing.T) {
 			context.Background(),
 			12962,
 			[]string{"goalscorers.team", "cardscorers.player"},
+			map[string][]int{},
+		)
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		goalscorers := topscorers.GoalScorers()
+		assists := topscorers.AssistScorers()
+		cards := topscorers.CardScorers()
+
+		assertTopScorers(t, topscorers)
+		assertGoalScorer(t, &goalscorers[0])
+		assertTeam(t, goalscorers[0].Team())
+		assertAssistScorer(t, &assists[0])
+		assertCardScorer(t, &cards[0])
+		assertPlayer(t, cards[0].Player())
+	})
+
+	t.Run("returns a TopScorers struct with includes data and filter parameters", func(t *testing.T) {
+		url := ddefaultBaseURL + "/topscorers/season/12962?api_token=api-key&include=goalscorers.team%2Ccardscorers.player&stage_ids=4%2C33"
+
+		server := mockResponseServer(t, topScorersIncludesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		topscorers, _, err := client.TopScorersBySeasonID(
+			context.Background(),
+			12962,
+			[]string{"goalscorers.team", "cardscorers.player"},
+			map[string][]int{
+				"stage_ids": {
+					4,
+					33,
+				},
+			},
 		)
 
 		if err != nil {
@@ -342,7 +378,7 @@ func TestTopScorersBySeasonID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		topscorers, _, err := client.TopScorersBySeasonID(context.Background(), 12962, []string{})
+		topscorers, _, err := client.TopScorersBySeasonID(context.Background(), 12962, []string{}, map[string][]int{})
 
 		if topscorers != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", topscorers)
