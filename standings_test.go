@@ -183,7 +183,7 @@ func TestStandingsBySeasonID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		standings, _, err := client.StandingsBySeasonID(context.Background(), 12962, []string{})
+		standings, _, err := client.StandingsBySeasonID(context.Background(), 12962, []string{}, map[string][]int{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -205,6 +205,38 @@ func TestStandingsBySeasonID(t *testing.T) {
 				context.Background(),
 				12962,
 				[]string{"standings.team", "standings.round"},
+				map[string][]int{},
+			)
+
+			if err != nil {
+				t.Fatalf("Test failed, expected nil, got %s", err.Error())
+			}
+
+			assertStandings(t, &standings[0])
+			assertLeagueStanding(t, &standings[0].LeagueStandings()[0])
+			assertTeam(t, standings[0].LeagueStandings()[0].Team())
+			assertRound(t, standings[0].LeagueStandings()[0].Round())
+		})
+	})
+
+	t.Run("returns a slice of Standings struct with includes data", func(t *testing.T) {
+		t.Run("returns a slice of Standings struct", func(t *testing.T) {
+			url := ddefaultBaseURL + "/standings/season/12962?api_token=api-key&include=standings.team%2Cstandings.round&stage_ids=8%2C10"
+
+			server := mockResponseServer(t, standingsIncludesResponse, 200, url)
+
+			client := newTestHTTPClient(server)
+
+			standings, _, err := client.StandingsBySeasonID(
+				context.Background(),
+				12962,
+				[]string{"standings.team", "standings.round"},
+				map[string][]int{
+					"stage_ids": {
+						8,
+						10,
+					},
+				},
 			)
 
 			if err != nil {
@@ -225,7 +257,7 @@ func TestStandingsBySeasonID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		standings, _, err := client.StandingsBySeasonID(context.Background(), 12962, []string{})
+		standings, _, err := client.StandingsBySeasonID(context.Background(), 12962, []string{}, map[string][]int{})
 
 		if standings != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", standings)
@@ -243,7 +275,31 @@ func TestLiveStandingsBySeasonID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		standings, _, err := client.LiveStandingsBySeasonID(context.Background(), 12962)
+		standings, _, err := client.LiveStandingsBySeasonID(context.Background(), 12962, map[string][]int{})
+
+		if err != nil {
+			t.Fatalf("Test failed, expected nil, got %s", err.Error())
+		}
+
+		assertLiveStandings(t, &standings[0])
+	})
+
+	t.Run("returns a slice of LiveStandings struct with filter parameters", func(t *testing.T) {
+		url := ddefaultBaseURL + "/standings/season/live/12962?api_token=api-key&stage_ids=8%2C10"
+
+		server := mockResponseServer(t, liveStandingsResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		standings, _, err := client.LiveStandingsBySeasonID(
+			context.Background(),
+			12962,
+			map[string][]int{
+			"stage_ids": {
+				8,
+				10,
+			},
+		})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
