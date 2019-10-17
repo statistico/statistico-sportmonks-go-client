@@ -3,9 +3,11 @@ package sportmonks
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 const (
@@ -114,4 +116,10 @@ func parseJSONResponseBody(body io.ReadCloser, response interface{}) error {
 	}
 
 	return nil
+}
+
+func formatFilters(query *url.Values, filters map[string][]int) {
+	for k, v := range filters {
+		query.Set(k, strings.Trim(strings.Join(strings.Fields(fmt.Sprint(v)), ","), "[]"))
+	}
 }
