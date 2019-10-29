@@ -144,6 +144,36 @@ var countryIncludesResponse = `{
 	}
 }`
 
+var countriesPaginatedResponse = `{
+	"data": [
+		{
+			"id": 11,
+			"name": "Germany",
+			"extra": {
+				"continent": "Europe",
+				"sub_region": "Western Europe",
+				"world_region": "EMEA",
+				"fifa": "GER",
+				"iso": "DEU",
+				"iso2": "DE",
+				"longitude": "19.37775993347168",
+				"latitude": "52.147850036621094",
+				"flag": "http:\/\/www.w3.org\/2000\/svg"
+			}
+		}
+	],
+	"meta": {
+		"pagination": {
+			"total": 2,
+			"count": 2,
+			"per_page": 100,
+			"current_page": 1,
+			"total_pages": 1,
+			"links": []
+		}
+	}
+}`
+
 func TestCountries(t *testing.T) {
 	t.Run("returns Country struct slice", func(t *testing.T) {
 		url := defaultBaseURL + "/countries?api_token=api-key&include=&page=1"
@@ -198,6 +228,18 @@ func TestCountries(t *testing.T) {
 		}
 
 		assertError(t, err)
+	})
+
+	t.Run("can handle paginated response", func(t *testing.T) {
+		url := defaultBaseURL + "/countries?api_token=api-key&include=continent%2Cleagues&page=1"
+
+		server := mockResponseServer(t, countriesPaginatedResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, meta, _ := client.Countries(context.Background(), 1, []string{"continent", "leagues"})
+		
+		assertPagination(t, meta.Pagination)
 	})
 }
 
@@ -270,4 +312,12 @@ func assertCountry(t *testing.T, country *Country) {
 	assert.Equal(t, "19.37775993347168", country.Extra.Longitude)
 	assert.Equal(t, "52.147850036621094", country.Extra.Latitude)
 	assert.Equal(t, "http://www.w3.org/2000/svg", country.Extra.Flag)
+}
+
+func assertPagination(t *testing.T, p *Pagination) {
+	assert.Equal(t, 2, p.Total)
+	assert.Equal(t, 2, p.Count)
+	assert.Equal(t, 100, p.PerPage)
+	assert.Equal(t, 1, p.CurrentPage)
+	assert.Equal(t, 1, p.TotalPages)
 }
