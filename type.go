@@ -565,9 +565,9 @@ type (
 			Temp float64 `json:"temp"`
 			Unit string  `json:"unit"`
 		} `json:"temperature_celcius"`
-		Clouds   string `json:"clouds"`
-		Humidity string `json:"humidity"`
-		Pressure *int   `json:"pressure"`
+		Clouds   string      `json:"clouds"`
+		Humidity string      `json:"humidity"`
+		Pressure *float64 `json:"pressure"`
 		Wind     struct {
 			Speed  string `json:"speed"`
 			Degree int    `json:"degree"`
