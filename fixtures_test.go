@@ -230,7 +230,6 @@ var fixturesResponse = `{
 				"timezone": "UTC"
 			  },
 			  "minute": 90,
-			  "second": null,
 			  "added_time": null,
 			  "extra_minute": null,
 			  "injury_time": null
@@ -942,7 +941,6 @@ func assertFixture(t *testing.T, fixture *Fixture) {
 	assert.Equal(t, 1569157200, fixture.Time.StartingAt.Timestamp)
 	assert.Equal(t, "UTC", fixture.Time.StartingAt.Timezone)
 	assert.Equal(t, 90, fixture.Time.Minute)
-	assert.Nil(t, fixture.Time.Second)
 	assert.Nil(t, fixture.Time.AddedTime)
 	assert.Nil(t, fixture.Time.ExtraMinute)
 	assert.Nil(t, fixture.Time.InjuryTime)
