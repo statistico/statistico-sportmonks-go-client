@@ -238,7 +238,7 @@ func TestCountries(t *testing.T) {
 		client := newTestHTTPClient(server)
 
 		_, meta, _ := client.Countries(context.Background(), 1, []string{"continent", "leagues"})
-		
+
 		assertPagination(t, meta.Pagination)
 	})
 }
