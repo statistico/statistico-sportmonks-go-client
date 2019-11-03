@@ -570,7 +570,7 @@ type (
 		Pressure *float64 `json:"pressure"`
 		Wind     struct {
 			Speed  string `json:"speed"`
-			Degree int    `json:"degree"`
+			Degree *float64    `json:"degree"`
 		} `json:"wind"`
 		Coordinates struct {
 			Lat *float64 `json:"lat"`

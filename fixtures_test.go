@@ -915,7 +915,7 @@ func assertFixture(t *testing.T, fixture *Fixture) {
 	assert.Equal(t, "82%", fixture.WeatherReport.Humidity)
 	assert.Equal(t, float64(1004), *fixture.WeatherReport.Pressure)
 	assert.Equal(t, "5.82 m/s", fixture.WeatherReport.Wind.Speed)
-	assert.Equal(t, 240, fixture.WeatherReport.Wind.Degree)
+	assert.Equal(t, float64(240), *fixture.WeatherReport.Wind.Degree)
 	assert.Equal(t, 51.51, *fixture.WeatherReport.Coordinates.Lat)
 	assert.Equal(t, -0.13, *fixture.WeatherReport.Coordinates.Lon)
 	assert.Equal(t, "2019-09-22T14:45:05.289505Z", *fixture.WeatherReport.UpdatedAt)
