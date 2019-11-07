@@ -248,8 +248,8 @@ type (
 		PlayerID           int              `json:"player_id"`
 		PlayerName         string           `json:"player_name"`
 		Number             int              `json:"number"`
-		Position           *string          `json:"position,string"`
-		AdditionalPosition *string          ` json:"additional_position,string"`
+		Position           *string          `json:"position"`
+		AdditionalPosition *string          ` json:"additional_position"`
 		FormationPosition  *int             `json:"formation_position"`
 		PositionX          *string          `json:"posx"`
 		PositionY          *string          `json:"posy"`
