@@ -489,9 +489,9 @@ type (
 
 	// TeamPasses provides pass data for a team in a fixture.
 	TeamPasses struct {
-		Total      *int    `json:"total"`
-		Accurate   *int    `json:"accurate"`
-		Percentage *string `json:"percentage"`
+		Total      *int `json:"total"`
+		Accurate   *int `json:"accurate"`
+		Percentage *int `json:"percentage"`
 	}
 
 	// TeamShots provides pass data for a team in a fixture.
@@ -564,12 +564,12 @@ type (
 			Temp float64 `json:"temp"`
 			Unit string  `json:"unit"`
 		} `json:"temperature_celcius"`
-		Clouds   string      `json:"clouds"`
-		Humidity string      `json:"humidity"`
+		Clouds   string   `json:"clouds"`
+		Humidity string   `json:"humidity"`
 		Pressure *float64 `json:"pressure"`
 		Wind     struct {
-			Speed  string `json:"speed"`
-			Degree *float64    `json:"degree"`
+			Speed  string   `json:"speed"`
+			Degree *float64 `json:"degree"`
 		} `json:"wind"`
 		Coordinates struct {
 			Lat *float64 `json:"lat"`
