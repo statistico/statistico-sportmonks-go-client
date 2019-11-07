@@ -251,8 +251,8 @@ type (
 		Position           *string          `json:"position"`
 		AdditionalPosition *string          ` json:"additional_position"`
 		FormationPosition  *int             `json:"formation_position"`
-		PositionX          *string          `json:"posx"`
-		PositionY          *string          `json:"posy"`
+		PositionX          *int             `json:"posx"`
+		PositionY          *int             `json:"posy"`
 		Captain            bool             `json:"captain"`
 		Stats              PlayerMatchStats `json:"stats"`
 	}
