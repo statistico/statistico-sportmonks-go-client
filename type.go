@@ -477,8 +477,8 @@ type (
 
 	// TeamAttacks provides attack data for a team in a fixture.
 	TeamAttacks struct {
-		Attacks          interface{} `json:"attacks"`
-		DangerousAttacks interface{} `json:"dangerous_attacks"`
+		Total     FlexInt `json:"attacks"`
+		Dangerous FlexInt `json:"dangerous_attacks"`
 	}
 
 	// TeamColors provides kid color data for a team in a fixture.
