@@ -496,12 +496,12 @@ type (
 
 	// TeamShots provides pass data for a team in a fixture.
 	TeamShots struct {
-		Total      *int `json:"total"`
-		OnGoal     *int `json:"ongoal"`
-		OffGoal    *int `json:"offgoal"`
-		Blocked    *int `json:"blocked"`
-		InsideBox  *int `json:"insidebox"`
-		OutsideBox *int `json:"outsidebox"`
+		Total      FlexInt `json:"total"`
+		OnGoal     FlexInt `json:"ongoal"`
+		OffGoal    FlexInt `json:"offgoal"`
+		Blocked    FlexInt `json:"blocked"`
+		InsideBox  FlexInt `json:"insidebox"`
+		OutsideBox FlexInt `json:"outsidebox"`
 	}
 
 	// TeamStats provides in depth stat data for a team in a fixture.
