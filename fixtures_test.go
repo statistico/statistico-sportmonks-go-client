@@ -167,7 +167,8 @@ var fixtureResponse = `{
 						"ongoal": "4",
 						"offgoal": "10",
 						"insidebox": "6",
-						"outsidebox": "9"
+						"outsidebox": "9",
+						"blocked": null
 					},
 					"passes": {
 						"total": 313,
@@ -1019,17 +1020,17 @@ func assertGoalEvent(t *testing.T, goal *GoalEvent) {
 func assertTeamStats(t *testing.T, stats *TeamStats) {
 	assert.Equal(t, 830, stats.TeamID)
 	assert.Equal(t, 11966141, stats.FixtureID)
-	assert.Equal(t, 14, int(stats.Shots.Total))
-	assert.Equal(t, 4, int(stats.Shots.OnGoal))
-	assert.Equal(t, 10, int(stats.Shots.OffGoal))
-	assert.Equal(t, 6, int(stats.Shots.InsideBox))
-	assert.Equal(t, 9, int(stats.Shots.OutsideBox))
-	assert.Equal(t, 0, int(stats.Shots.Blocked))
+	assert.Equal(t, 14, int(*stats.Shots.Total))
+	assert.Equal(t, 4, int(*stats.Shots.OnGoal))
+	assert.Equal(t, 10, int(*stats.Shots.OffGoal))
+	assert.Equal(t, 6, int(*stats.Shots.InsideBox))
+	assert.Equal(t, 9, int(*stats.Shots.OutsideBox))
+	assert.Nil(t, stats.Shots.Blocked)
 	assert.Equal(t, 313, *stats.Passes.Total)
 	assert.Equal(t, 230, *stats.Passes.Accurate)
 	assert.Equal(t, 0, *stats.Passes.Percentage)
-	assert.Equal(t, 104, int(stats.Attacks.Total))
-	assert.Equal(t, 52, int(stats.Attacks.Dangerous))
+	assert.Equal(t, 104, int(*stats.Attacks.Total))
+	assert.Equal(t, 52, int(*stats.Attacks.Dangerous))
 	assert.Equal(t, 13, *stats.Fouls)
 	assert.Equal(t, 8, *stats.Corners)
 	assert.Equal(t, 1, *stats.Offsides)

@@ -199,6 +199,8 @@ type (
 // E.g. if the json field contains an string "42", the FlexInt value will be "42".
 type FlexInt int
 
+// UnmarshalJSON implements the json.Unmarshaler interface, which allows values of any json type as an int
+// and run our custom conversion
 func (fi *FlexInt) UnmarshalJSON(b []byte) error {
 	if b[0] != '"' {
 		return json.Unmarshal(b, (*int)(fi))
