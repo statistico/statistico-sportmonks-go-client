@@ -156,6 +156,47 @@ var fixtureResponse = `{
 					"result": "1-0"
 				}
 			]
+		},
+		"stats": {
+			"data": [
+				{
+					"team_id": 830,
+					"fixture_id": 11966141,
+					"shots": {
+						"total": "14",
+						"ongoal": "4",
+						"offgoal": "10",
+						"insidebox": "6",
+						"outsidebox": "9"
+					},
+					"passes": {
+						"total": 313,
+						"accurate": 230,
+						"percentage": 0
+					},
+					"attacks": {
+						"attacks": 104,
+						"dangerous_attacks": 52
+					},
+					"fouls": 13,
+					"corners": 8,
+					"offsides": 1,
+					"possessiontime": 35,
+					"yellowcards": 1,
+					"redcards": 0,
+					"yellowredcards": 0,
+					"saves": 0,
+					"substitutions": 3,
+					"goal_kick": 11,
+					"goal_attempts": 14,
+					"free_kick": 16,
+					"throw_in": 30,
+					"ball_safe": 77,
+					"goals": 1,
+					"penalties": 0,
+					"injuries": 1
+				}
+			]
 		}
   	}
 }`
@@ -353,6 +394,7 @@ func TestFixtureByID(t *testing.T) {
 		assertLeague(t, fixture.League())
 		assertStage(t, fixture.Stage())
 		assertGoalEvent(t, &fixture.Goals()[0])
+		assertTeamStats(t, &fixture.TeamStats()[0])
 	})
 
 	t.Run("returns a single Fixture struct with includes data and filter parameters", func(t *testing.T) {
@@ -972,4 +1014,32 @@ func assertGoalEvent(t *testing.T, goal *GoalEvent) {
 	assert.Nil(t, goal.ExtraMinute)
 	assert.Nil(t, goal.Reason)
 	assert.Equal(t, "1-0", goal.Result)
+}
+
+func assertTeamStats(t *testing.T, stats *TeamStats) {
+	assert.Equal(t, 830, stats.TeamID)
+	assert.Equal(t, 11966141, stats.FixtureID)
+	assert.Equal(t, 14, int(stats.Shots.Total))
+	assert.Equal(t, 4, int(stats.Shots.OnGoal))
+	assert.Equal(t, 10, int(stats.Shots.OffGoal))
+	assert.Equal(t, 6, int(stats.Shots.InsideBox))
+	assert.Equal(t, 9, int(stats.Shots.OutsideBox))
+	assert.Equal(t, 0, int(stats.Shots.Blocked))
+	assert.Equal(t, 313, *stats.Passes.Total)
+	assert.Equal(t, 230, *stats.Passes.Accurate)
+	assert.Equal(t, 0, *stats.Passes.Percentage)
+	assert.Equal(t, 104, int(stats.Attacks.Total))
+	assert.Equal(t, 52, int(stats.Attacks.Dangerous))
+	assert.Equal(t, 13, *stats.Fouls)
+	assert.Equal(t, 8, *stats.Corners)
+	assert.Equal(t, 1, *stats.Offsides)
+	assert.Equal(t, 35, *stats.PossessionTime)
+	assert.Equal(t, 1, *stats.YellowCards)
+	assert.Equal(t, 0, *stats.RedCards)
+	assert.Equal(t, 0, *stats.Saves)
+	assert.Equal(t, 3, *stats.Substitutions)
+	assert.Equal(t, 11, *stats.GoalKick)
+	assert.Equal(t, 14, *stats.GoalAttempts)
+	assert.Equal(t, 16, *stats.FreeKick)
+	assert.Equal(t, 30, *stats.ThrowIn)
 }

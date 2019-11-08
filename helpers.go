@@ -1,5 +1,10 @@
 package sportmonks
 
+import (
+	"encoding/json"
+	"strconv"
+)
+
 type (
 	aggregatedAssistScorerData struct {
 		Data []AssistScorer `json:"data"`
@@ -189,3 +194,23 @@ type (
 		Data *Venue `json:"data"`
 	}
 )
+
+// A FlexInt is an int that can be un marshalled from a JSON field that has either a number or a string value.
+// E.g. if the json field contains an string "42", the FlexInt value will be "42".
+type FlexInt int
+
+func (fi *FlexInt) UnmarshalJSON(b []byte) error {
+	if b[0] != '"' {
+		return json.Unmarshal(b, (*int)(fi))
+	}
+	var s string
+	if err := json.Unmarshal(b, &s); err != nil {
+		return err
+	}
+	i, err := strconv.Atoi(s)
+	if err != nil {
+		return err
+	}
+	*fi = FlexInt(i)
+	return nil
+}
