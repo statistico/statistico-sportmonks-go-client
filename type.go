@@ -489,9 +489,9 @@ type (
 
 	// TeamPasses provides pass data for a team in a fixture.
 	TeamPasses struct {
-		Total      *int `json:"total"`
-		Accurate   *int `json:"accurate"`
-		Percentage *int `json:"percentage"`
+		Total      *FlexInt `json:"total"`
+		Accurate   *FlexInt `json:"accurate"`
+		Percentage *FlexInt `json:"percentage"`
 	}
 
 	// TeamShots provides pass data for a team in a fixture.
