@@ -54,13 +54,25 @@ type HTTPClient struct {
 	Key        string
 }
 
-// NewHTTPClient creates a new Client with default settings. A key is required to instantiate the Client
-func NewHTTPClient(key string) *HTTPClient {
+// NewDefaultHTTPClient creates a new Client with default settings. A key is required to instantiate the Client.
+func NewDefaultHTTPClient(key string) *HTTPClient {
 	return &HTTPClient{
 		HTTPClient: &http.Client{},
 		BaseURL:    defaultBaseURL,
 		Key:        key,
 	}
+}
+
+// SetHTTPClient provides functionality to over ride the default HTTPClient property.
+func (c *HTTPClient) SetHTTPClient(h *http.Client) {
+	if h != nil {
+		c.HTTPClient = h
+	}
+}
+
+// SetBaseURL provides functionality to over ride the default BaseURL property.
+func (c *HTTPClient) SetBaseURL(url string) {
+	c.BaseURL = url
 }
 
 func (c *HTTPClient) getResource(ctx context.Context, url string, query url.Values, response interface{}) error {

@@ -18,7 +18,7 @@ var errorResponse = `{
 
 func TestNewHTTPClient(t *testing.T) {
 	t.Run("instantiates with default properties", func(t *testing.T) {
-		client := NewHTTPClient("api-key")
+		client := NewDefaultHTTPClient("api-key")
 
 		assert.Equal(t, "https://soccer.sportmonks.com/api/v2.0", client.BaseURL)
 		assert.Equal(t, "api-key", client.Key)
