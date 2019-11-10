@@ -112,8 +112,8 @@ type (
 
 	// Formations provides formation information for home and away teams for a fixture.
 	Formations struct {
-		LocalTeamFormation   string `json:"localteam_formation"`
-		VisitorTeamFormation string `json:"visitorteam_formation"`
+		LocalTeamFormation   *string `json:"localteam_formation,omitempty"`
+		VisitorTeamFormation *string `json:"visitorteam_formation,omitempty"`
 	}
 
 	// Fouls explains foul stat data for a player.

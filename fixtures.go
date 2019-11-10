@@ -24,7 +24,7 @@ type Fixture struct {
 	LocalTeamID           int                     `json:"localteam_id"`
 	VisitorTeamID         int                     `json:"visitorteam_id"`
 	WinnerTeamID          *int                    `json:"winner_team_id"`
-	WeatherReport         WeatherReport           `json:"weather_report"`
+	WeatherReport         *WeatherReport           `json:"weather_report,omitempty"`
 	Commentaries          *bool                   `json:"commentaries"`
 	Attendance            *int                    `json:"attendance"`
 	Pitch                 *string                 `json:"pitch"`
