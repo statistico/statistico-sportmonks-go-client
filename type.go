@@ -483,8 +483,8 @@ type (
 
 	// TeamColors provides kid color data for a team in a fixture.
 	TeamColors struct {
-		LocalTeam   KitColors `json:"localteam"`
-		VisitorTeam KitColors `json:"visitorteam"`
+		LocalTeam   *KitColors `json:"localteam,omitempty"`
+		VisitorTeam *KitColors `json:"visitorteam,omitempty"`
 	}
 
 	// TeamPasses provides pass data for a team in a fixture.

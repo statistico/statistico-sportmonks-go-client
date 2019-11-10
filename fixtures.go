@@ -38,7 +38,7 @@ type Fixture struct {
 	Standings             TeamStandings           `json:"standings"`
 	Assistants            Assistants              `json:"assistants"`
 	Leg                   *string                 `json:"leg"`
-	Colors                TeamColors              `json:"colors"`
+	Colors                *TeamColors              `json:"colors,omitempty"`
 	Deleted               bool                    `json:"deleted"`
 	CardEvents            cardEventsData          `json:"cards"`
 	CornerEvents          cornerEventsData        `json:"corners"`
