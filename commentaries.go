@@ -6,7 +6,7 @@ import (
 	"net/url"
 )
 
-// Commentary provides a struct representation of a Commentary resource
+// Commentary provides a struct representation of a Commentary resource.
 type Commentary struct {
 	FixtureID   int    `json:"fixture_id"`
 	Important   bool   `json:"important"`
@@ -17,7 +17,7 @@ type Commentary struct {
 	Comment     string `json:"comment"`
 }
 
-// CommentariesByFixtureID fetches Commentary resources associated to a fixture
+// CommentariesByFixtureID fetches Commentary resources associated to a fixture.
 func (c *HTTPClient) CommentariesByFixtureID(ctx context.Context, fixtureID int) ([]Commentary, *Meta, error) {
 	path := fmt.Sprintf(commentariesFixtureURI+"/%d", fixtureID)
 

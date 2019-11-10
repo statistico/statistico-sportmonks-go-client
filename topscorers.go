@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// TopScorers provides a struct representation of a TopScorers resource
+// TopScorers provides a struct representation of a TopScorers resource.
 type TopScorers struct {
 	ID               int              `json:"id"`
 	Name             string           `json:"name"`
@@ -35,7 +35,7 @@ func (t *TopScorers) GoalScorers() []GoalScorer {
 	return t.GoalScorerData.Data
 }
 
-// AggregatedTopScorers provides a struct representation of a AggregatedTopScorers resource
+// AggregatedTopScorers provides a struct representation of a AggregatedTopScorers resource.
 type AggregatedTopScorers struct {
 	ID               int              `json:"id"`
 	Name             string           `json:"name"`
@@ -86,7 +86,7 @@ func (a *AssistScorer) Team() *Team {
 	return a.TeamData.Data
 }
 
-// CardScorer provides a struct representation of a CardScorer resource
+// CardScorer provides a struct representation of a CardScorer resource.
 type CardScorer struct {
 	Position    int        `json:"position"`
 	SeasonID    int        `json:"season_id"`
@@ -110,7 +110,7 @@ func (c *CardScorer) Team() *Team {
 	return c.TeamData.Data
 }
 
-// GoalScorer provides a struct representation of a GoalScorer resource
+// GoalScorer provides a struct representation of a GoalScorer resource.
 type GoalScorer struct {
 	Position     int        `json:"position"`
 	SeasonID     int        `json:"season_id"`
@@ -134,8 +134,7 @@ func (g *GoalScorer) Team() *Team {
 	return g.TeamData.Data
 }
 
-// TopScorersBySeasonID fetches a TopScorers resource for a season by ID.
-// Use the includes slice of string to enrich the response data.
+// TopScorersBySeasonID fetches a TopScorers resource for a season by ID. Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) TopScorersBySeasonID(ctx context.Context, seasonID int, includes []string, filters map[string][]int) (*TopScorers, *Meta, error) {
 	path := fmt.Sprintf(topScorersSeasonURI+"/%d", seasonID)
 
@@ -159,8 +158,8 @@ func (c *HTTPClient) TopScorersBySeasonID(ctx context.Context, seasonID int, inc
 	return response.Data, response.Meta, err
 }
 
-// AggregatedTopScorersBySeasonID fetches an AggregatedTopScorers resource for a season by ID.
-// Use the includes slice of string to enrich the response data.
+// AggregatedTopScorersBySeasonID fetches an AggregatedTopScorers resource for a season by ID. Use the includes slice of string to enrich
+// the response data.
 func (c *HTTPClient) AggregatedTopScorersBySeasonID(ctx context.Context, seasonID int, includes []string) (*AggregatedTopScorers, *Meta, error) {
 	path := fmt.Sprintf(topScorersSeasonURI+"/%d/aggregated", seasonID)
 

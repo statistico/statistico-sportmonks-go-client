@@ -2,7 +2,7 @@ package sportmonks
 
 import "fmt"
 
-// ErrBadStatusCode is returned when the API returns a non 200 error code
+// ErrBadStatusCode is returned when the API returns a non 200 error code.
 type ErrBadStatusCode struct {
 	Err *struct {
 		Message string `json:"message"`
