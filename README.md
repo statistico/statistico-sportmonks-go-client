@@ -42,6 +42,7 @@ documentation on API flexibility, relationships and includes functionality can b
 [here](https://www.sportmonks.com/docs/football/2.0/getting-started/a/api-flexibility-and-relationships/88). Instructions
 on how to use the filtering parameters and sort functionality can be found [here](https://www.sportmonks.com/docs/football/2.0/getting-started/a/api-filtering-sorting-and-pagination/90)
 
+For more details examples please see the [docs](/docs) directory
 ## Contributing
 You are more than welcome to contribute to this project. Fork and make a Pull Request, or create an Issue if you notice 
 any problems or would like to suggest improvements.
