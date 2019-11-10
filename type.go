@@ -112,8 +112,8 @@ type (
 
 	// Formations provides formation information for home and away teams for a fixture.
 	Formations struct {
-		LocalTeamFormation   string `json:"localteam_formation"`
-		VisitorTeamFormation string `json:"visitorteam_formation"`
+		LocalTeamFormation   *string `json:"localteam_formation,omitempty"`
+		VisitorTeamFormation *string `json:"visitorteam_formation,omitempty"`
 	}
 
 	// Fouls explains foul stat data for a player.
@@ -483,8 +483,8 @@ type (
 
 	// TeamColors provides kid color data for a team in a fixture.
 	TeamColors struct {
-		LocalTeam   KitColors `json:"localteam"`
-		VisitorTeam KitColors `json:"visitorteam"`
+		LocalTeam   *KitColors `json:"localteam,omitempty"`
+		VisitorTeam *KitColors `json:"visitorteam,omitempty"`
 	}
 
 	// TeamPasses provides pass data for a team in a fixture.
