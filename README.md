@@ -3,9 +3,7 @@
 [![Documentation](https://godoc.org/github.com/statistico/statistico-sportmonks-go-client?status.svg)](http://godoc.org/github.com/statistico/statistico-sportmonks-go-client)
 [![CircleCI](https://circleci.com/gh/statistico/statistico-sportmonks-go-client/tree/master.svg?style=shield)](https://circleci.com/gh/statistico/statistico-sportmonks-go-client/tree/master)
 
-This library is a Golang wrapper around version 2.0 of the SportMonks soccer API. 
-
-Full documentation and API reference can be found here:
+This library is a Golang wrapper around version 2.0 of the SportMonks soccer API. Full documentation and API reference can be found here:
 
 [Documentation](https://www.sportmonks.com/docs/football/2.0/prologue/a/introduction/94)
 
@@ -29,22 +27,22 @@ import (
 func main() {
     client := sportmonks.NewDefaultHTTPClient("YOUR_TOKEN_GOES_HERE")
     
-    league, _, err := client.LeagueByID(context.Background(), 10, []string{"seasons"}) 
+    league, _, err := client.LeagueByID(context.Background(), 10, []string{}) 
 
     if err != nil {
         fmt.Printf("%s\n", err)
         return
     }
 
-    fmt.Printf("ID: %d, Name: %s", league.ID, league.Name)
+    // Do something with league variable
 }
 ```
 The SportMonks soccer API provides powerful 'includes' and 'filtering' features that allow you to enrich data requests. Full
 documentation on API flexibility, relationships and includes functionality can be found 
 [here](https://www.sportmonks.com/docs/football/2.0/getting-started/a/api-flexibility-and-relationships/88). Instructions
-on how to use the filtering and sort functionality can be found [here](https://www.sportmonks.com/docs/football/2.0/getting-started/a/api-filtering-sorting-and-pagination/90)
+on how to use the filtering parameters and sort functionality can be found [here](https://www.sportmonks.com/docs/football/2.0/getting-started/a/api-filtering-sorting-and-pagination/90)
 
-Example usage of adding 'includes' parameters to include team data when fetching fixture data
+Example usage of adding 'includes' parameters to include team data when fetching fixture data:
 ```go
 package main
 
@@ -70,7 +68,7 @@ func main() {
    // Do something with fixture variable
 }
 ```
-Example usage of adding filter parameters to filter data when fetching fixture data for a specific date:
+Example usage of adding filter parameters to filter specific league data when fetching fixture data for a specific date:
 ```go
 package main
 
