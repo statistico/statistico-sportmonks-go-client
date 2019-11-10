@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// SquadPlayer provides a struct representation of a SquadPlayer resource
+// SquadPlayer provides a struct representation of a SquadPlayer resource.
 type SquadPlayer struct {
 	PlayerID           int        `json:"player_id"`
 	PositionID         int        `json:"position_id"`
@@ -41,13 +41,12 @@ type SquadPlayer struct {
 	PlayerData         playerData `json:"player"`
 }
 
-// Player returns the player specific data
+// Player returns the player specific data.
 func (s *SquadPlayer) Player() *Player {
 	return s.PlayerData.Data
 }
 
-// TeamSquad fetches SquadPlayer resources associated to season ID and team ID.
-// Use the includes slice to enrich the response data.
+// TeamSquad fetches SquadPlayer resources associated to season ID and team ID. Use the includes slice to enrich the response data.
 func (c *HTTPClient) TeamSquad(ctx context.Context, seasonID, teamID int, includes []string) ([]SquadPlayer, *Meta, error) {
 	path := fmt.Sprintf(teamSquadURI+"/%d/team/%d", seasonID, teamID)
 

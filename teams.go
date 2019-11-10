@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-// Team provides a struct representation of a Team resource
+// Team provides a struct representation of a Team resource.
 type Team struct {
 	ID                         int                        `json:"id"`
 	LegacyID                   int                        `json:"legacy_id"`
@@ -149,8 +149,7 @@ func (t *Team) VisitorResults() []Fixture {
 	return t.VisitorResultData.Data
 }
 
-// TeamByID fetches a Team resource by ID.
-// Use the includes slice of string to enrich the response data.
+// TeamByID fetches a Team resource by ID. Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) TeamByID(ctx context.Context, id int, includes []string, filters map[string][]int) (*Team, *Meta, error) {
 	path := fmt.Sprintf(teamsURI+"/%d", id)
 
@@ -176,8 +175,7 @@ func (c *HTTPClient) TeamByID(ctx context.Context, id int, includes []string, fi
 
 // TeamsBySeasonID fetches Team resources associated to a season ID. The endpoint used within this method is paginated,
 // to select the required page use the 'page' method argument. Page information including current page and total page
-// are included within the Meta response.
-// Use the includes slice of string to enrich the response data.
+// are included within the Meta response. Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) TeamsBySeasonID(ctx context.Context, seasonID, page int, includes []string) ([]Team, *Meta, error) {
 	path := fmt.Sprintf(teamsSeasonURI+"/%d", seasonID)
 

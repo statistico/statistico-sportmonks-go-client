@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// Stage provides a struct representation of a Stage resource
+// Stage provides a struct representation of a Stage resource.
 type Stage struct {
 	ID           int          `json:"id"`
 	Name         string       `json:"name"`
@@ -42,8 +42,7 @@ func (s *Stage) Season() *Season {
 	return s.SeasonData.Data
 }
 
-// StageByID fetches a Stage resource by ID.
-// Use the includes slice of string to enrich the response data.
+// StageByID fetches a Stage resource by ID. Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) StageByID(ctx context.Context, id int, includes []string) (*Stage, *Meta, error) {
 	path := fmt.Sprintf(stagesURI+"/%d", id)
 
@@ -65,8 +64,7 @@ func (c *HTTPClient) StageByID(ctx context.Context, id int, includes []string) (
 	return response.Data, response.Meta, err
 }
 
-// StagesBySeasonID fetches a Stage resources by a season ID.
-// Use the includes slice of string to enrich the response data.
+// StagesBySeasonID fetches a Stage resources by a season ID. Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) StagesBySeasonID(ctx context.Context, id int, includes []string) ([]Stage, *Meta, error) {
 	path := fmt.Sprintf(stagesSeasonURI+"/%d", id)
 

@@ -6,13 +6,13 @@ import (
 	"net/url"
 )
 
-// TVStation provides a struct representation of a TVStation resource
+// TVStation provides a struct representation of a TVStation resource.
 type TVStation struct {
 	FixtureID int    `json:"fixture_id"`
 	TVStation string `json:"tvstation"`
 }
 
-// TVStationsByFixtureID fetches TVStation resources for a fixture ID
+// TVStationsByFixtureID fetches TVStation resources for a fixture ID.
 func (c *HTTPClient) TVStationsByFixtureID(ctx context.Context, fixtureID int) ([]TVStation, *Meta, error) {
 	path := fmt.Sprintf(tvStationsURI+"/%d", fixtureID)
 

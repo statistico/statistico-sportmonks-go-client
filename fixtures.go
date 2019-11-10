@@ -10,7 +10,7 @@ import (
 
 const dateFormat = "2006-01-02"
 
-// Fixture provides a struct representation of a Fixture resource
+// Fixture provides a struct representation of a Fixture resource.
 type Fixture struct {
 	ID                    int                     `json:"id"`
 	LeagueID              int                     `json:"league_id"`
@@ -24,7 +24,7 @@ type Fixture struct {
 	LocalTeamID           int                     `json:"localteam_id"`
 	VisitorTeamID         int                     `json:"visitorteam_id"`
 	WinnerTeamID          *int                    `json:"winner_team_id"`
-	WeatherReport         *WeatherReport           `json:"weather_report,omitempty"`
+	WeatherReport         *WeatherReport          `json:"weather_report,omitempty"`
 	Commentaries          *bool                   `json:"commentaries"`
 	Attendance            *int                    `json:"attendance"`
 	Pitch                 *string                 `json:"pitch"`
@@ -38,7 +38,7 @@ type Fixture struct {
 	Standings             TeamStandings           `json:"standings"`
 	Assistants            Assistants              `json:"assistants"`
 	Leg                   *string                 `json:"leg"`
-	Colors                *TeamColors              `json:"colors,omitempty"`
+	Colors                *TeamColors             `json:"colors,omitempty"`
 	Deleted               bool                    `json:"deleted"`
 	CardEvents            cardEventsData          `json:"cards"`
 	CornerEvents          cornerEventsData        `json:"corners"`
@@ -69,143 +69,142 @@ type Fixture struct {
 	TeamStatsData         teamsStatsData          `json:"stats,omitempty"`
 }
 
-// Bench returns PlayerStats data for players on the bench for a fixture
+// Bench returns PlayerStats data for players on the bench for a fixture.
 func (f *Fixture) Bench() []PlayerStats {
 	return f.BenchData.Data
 }
 
-// Cards returns CardEvents for a fixture
+// Cards returns CardEvents for a fixture.
 func (f *Fixture) Cards() []CardEvent {
 	return f.CardEvents.Data
 }
 
-// Commentary returns Commentary data for a fixture
+// Commentary returns Commentary data for a fixture.
 func (f *Fixture) Commentary() []Commentary {
 	return f.CommentsData.Data
 }
 
-// Corners returns CornerEvents for a fixture
+// Corners returns CornerEvents for a fixture.
 func (f *Fixture) Corners() []CornerEvent {
 	return f.CornerEvents.Data
 }
 
-// Events returns all events for a fixture
+// Events returns all events for a fixture.
 func (f *Fixture) Events() []MatchEvent {
 	return f.MatchEvents.Data
 }
 
-// FirstAssistant return first assistant data for a fixture
+// FirstAssistant return first assistant data for a fixture.
 func (f *Fixture) FirstAssistant() *MatchOfficial {
 	return f.FirstAssistantData.Data
 }
 
-// FlatOdds returns flat odds data for a fixture
+// FlatOdds returns flat odds data for a fixture.
 func (f *Fixture) FlatOdds() []MatchOdds {
 	return f.FlatOddsData.Data
 }
 
-// FourthOfficial return fourth official data for a fixture
+// FourthOfficial return fourth official data for a fixture.
 func (f *Fixture) FourthOfficial() *MatchOfficial {
 	return f.FourthOfficialData.Data
 }
 
-// Goals returns GoalEvents for a fixture
+// Goals returns GoalEvents for a fixture.
 func (f *Fixture) Goals() []GoalEvent {
 	return f.GoalEvents.Data
 }
 
-// Highlights returns video highlights data for a fixture
+// Highlights returns video highlights data for a fixture.
 func (f *Fixture) Highlights() []VideoHighlights {
 	return f.HighlightData.Data
 }
 
-// InPlayOdds returns in play odds data for a fixture
+// InPlayOdds returns in play odds data for a fixture.
 func (f *Fixture) InPlayOdds() []MatchOdds {
 	return f.InPlayOddsData.Data
 }
 
-// League returns league data for a fixture
+// League returns league data for a fixture.
 func (f *Fixture) League() *League {
 	return f.LeagueData.Data
 }
 
-// Lineups returns PlayerStats data for starting players for a fixture
+// Lineups returns PlayerStats data for starting players for a fixture.
 func (f *Fixture) Lineups() []PlayerStats {
 	return f.LineupData.Data
 }
 
-// LocalCoach returns coach data for the home team
+// LocalCoach returns coach data for the home team.
 func (f *Fixture) LocalCoach() *Coach {
 	return f.LocalCoachData.Data
 }
 
-// LocalTeam return team data for the home team
+// LocalTeam return team data for the home team.
 func (f *Fixture) LocalTeam() *Team {
 	return f.LocalTeamData.Data
 }
 
-// Odds returns bookmaker odds data for a fixture
+// Odds returns bookmaker odds data for a fixture.
 func (f *Fixture) Odds() []MatchOdds {
 	return f.OddsData.Data
 }
 
-// Referee returns referee data for a fixture
+// Referee returns referee data for a fixture.
 func (f *Fixture) Referee() *MatchOfficial {
 	return f.RefereeData.Data
 }
 
-// Round returns round data for a fixture
+// Round returns round data for a fixture.
 func (f *Fixture) Round() *Round {
 	return f.RoundData.Data
 }
 
-// SecondAssistant return second assistant data for a fixture
+// SecondAssistant return second assistant data for a fixture.
 func (f *Fixture) SecondAssistant() *MatchOfficial {
 	return f.SecondAssistantData.Data
 }
 
-// Sidelined returns player data for injured players
+// Sidelined returns player data for injured players.
 func (f *Fixture) Sidelined() []Sidelined {
 	return f.SidelinedData.Data
 }
 
-// Stage returns round stage for a fixture
+// Stage returns round stage for a fixture.
 func (f *Fixture) Stage() *Stage {
 	return f.StageData.Data
 }
 
-// Substitutions returns SubstitutionEvents for a fixture
+// Substitutions returns SubstitutionEvents for a fixture.
 func (f *Fixture) Substitutions() []SubstitutionEvent {
 	return f.SubstitutionData.Data
 }
 
-// TeamStats returns stats data for home and away teams
+// TeamStats returns stats data for home and away teams.
 func (f *Fixture) TeamStats() []TeamStats {
 	return f.TeamStatsData.Data
 }
 
-// TVStations return tv station data for a fixture
+// TVStations return tv station data for a fixture.
 func (f *Fixture) TVStations() []TVStation {
 	return f.TVStationData.Data
 }
 
-// Venue returns round venue for a fixture
+// Venue returns round venue for a fixture.
 func (f *Fixture) Venue() *Venue {
 	return f.VenueData.Data
 }
 
-// VisitorCoach returns coach data for the away team
+// VisitorCoach returns coach data for the away team.
 func (f *Fixture) VisitorCoach() *Coach {
 	return f.VisitorCoachData.Data
 }
 
-// VisitorTeam return teams data for the away team
+// VisitorTeam return teams data for the away team.
 func (f *Fixture) VisitorTeam() *Team {
 	return f.VisitorTeamData.Data
 }
 
-// FixtureByID fetches a Fixture resource by ID.
-// Use the includes slice of string to enrich the response data.
+// FixtureByID fetches a Fixture resource by ID. Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) FixtureByID(ctx context.Context, id int, includes []string, filters map[string][]int) (*Fixture, *Meta, error) {
 	path := fmt.Sprintf(fixturesURI+"/%d", id)
 
@@ -229,8 +228,7 @@ func (c *HTTPClient) FixtureByID(ctx context.Context, id int, includes []string,
 	return response.Data, response.Meta, err
 }
 
-// FixturesByID fetches multiple Fixture resources by their IDS.
-// Use the includes slice of string to enrich the response data.
+// FixturesByID fetches multiple Fixture resources by their IDS. Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) FixturesByID(ctx context.Context, ids []int, includes []string, filters map[string][]int) ([]Fixture, *Meta, error) {
 	str := strings.Trim(strings.Join(strings.Fields(fmt.Sprint(ids)), ","), "[]")
 
@@ -239,38 +237,36 @@ func (c *HTTPClient) FixturesByID(ctx context.Context, ids []int, includes []str
 	return multipleFixtureResponse(ctx, c, path, includes, filters)
 }
 
-// FixturesByDate fetches multiple Fixture resources for a given date.
-// Use the includes slice of string to enrich the response data.
+// FixturesByDate fetches multiple Fixture resources for a given date. Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) FixturesByDate(ctx context.Context, date time.Time, includes []string, filters map[string][]int) ([]Fixture, *Meta, error) {
 	path := fmt.Sprintf(fixturesDateURI + "/" + date.Format("2006-01-02"))
 
 	return multipleFixtureResponse(ctx, c, path, includes, filters)
 }
 
-// FixturesBetween fetches multiple Fixture resources for between two dates.
-// Use the includes slice of string to enrich the response data.
+// FixturesBetween fetches multiple Fixture resources for between two dates. Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) FixturesBetween(ctx context.Context, from, to time.Time, includes []string, filters map[string][]int) ([]Fixture, *Meta, error) {
 	path := fmt.Sprintf(fixturesBetweenURI+"/%s/%s", from.Format(dateFormat), to.Format(dateFormat))
 
 	return multipleFixtureResponse(ctx, c, path, includes, filters)
 }
 
-// FixturesBetweenForTeam fetches multiple Fixture resources for between two dates for a given team ID.
-// Use the includes slice of string to enrich the response data.
+// FixturesBetweenForTeam fetches multiple Fixture resources for between two dates for a given team ID. Use the includes slice of string
+// to enrich the response data.
 func (c *HTTPClient) FixturesBetweenForTeam(ctx context.Context, from, to time.Time, teamID int, includes []string, filters map[string][]int) ([]Fixture, *Meta, error) {
 	path := fmt.Sprintf(fixturesBetweenURI+"/%s/%s/%d", from.Format(dateFormat), to.Format(dateFormat), teamID)
 
 	return multipleFixtureResponse(ctx, c, path, includes, filters)
 }
 
-// FixturesLastUpdated fetches multiple Fixture resources of fixtures that were most recently updated.
-// Use the includes slice of string to enrich the response data.
+// FixturesLastUpdated fetches multiple Fixture resources of fixtures that were most recently updated. Use the includes slice of string
+// to enrich the response data.
 func (c *HTTPClient) FixturesLastUpdated(ctx context.Context, includes []string, filters map[string][]int) ([]Fixture, *Meta, error) {
 	return multipleFixtureResponse(ctx, c, fixturesLastUpdatedURI, includes, filters)
 }
 
-// HeadToHead fetches multiple Fixture resources of results between two teams.
-// Use the includes slice of string to enrich the response data.
+// HeadToHead fetches multiple Fixture resources of results between two teams. Use the includes slice of string to enrich
+// the response data.
 func (c *HTTPClient) HeadToHead(ctx context.Context, idOne, idTwo int, includes []string) ([]Fixture, *Meta, error) {
 	path := fmt.Sprintf(headToHeadURI+"/%d/%d", idOne, idTwo)
 

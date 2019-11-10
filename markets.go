@@ -6,13 +6,13 @@ import (
 	"net/url"
 )
 
-// Market provides a struct representation of a Market resource
+// Market provides a struct representation of a Market resource.
 type Market struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
 }
 
-// Markets fetches Market resources
+// Markets fetches Market resources.
 func (c *HTTPClient) Markets(ctx context.Context) ([]Market, *Meta, error) {
 	response := struct {
 		Data []Market `json:"data"`

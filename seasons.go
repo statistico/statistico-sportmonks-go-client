@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-// Season provides a struct representation of a Season resource
+// Season provides a struct representation of a Season resource.
 type Season struct {
 	ID                         int                        `json:"id"`
 	Name                       string                     `json:"name"`
@@ -98,8 +98,7 @@ func (s *Season) UpcomingFixtures() []Fixture {
 
 // Seasons fetches Season resources. The endpoint used within this method is paginated, to select the required
 // page use the 'page' method argument. Page information including current page and total page are included
-// within the Meta response.
-// Use the includes slice of string to enrich the response data.
+// within the Meta response. Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) Seasons(ctx context.Context, page int, includes []string) ([]Season, *Meta, error) {
 	values := url.Values{
 		"page":    {strconv.Itoa(page)},
@@ -120,8 +119,7 @@ func (c *HTTPClient) Seasons(ctx context.Context, page int, includes []string) (
 	return response.Data, response.Meta, err
 }
 
-// SeasonByID fetches a Season resource by ID.
-// Use the includes slice of string to enrich the response data.
+// SeasonByID fetches a Season resource by ID. Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) SeasonByID(ctx context.Context, id int, includes []string) (*Season, *Meta, error) {
 	path := fmt.Sprintf(seasonsURI+"/%d", id)
 

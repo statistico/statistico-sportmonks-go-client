@@ -7,7 +7,7 @@ import (
 )
 
 type (
-	// MatchOdds provides a struct representation of a MatchOdds resource
+	// MatchOdds provides a struct representation of a MatchOdds resource.
 	MatchOdds struct {
 		ID                int               `json:"id"`
 		Name              string            `json:"name"`
@@ -15,14 +15,14 @@ type (
 		BookmakerOddsData bookmakerOddsData `json:"bookmaker"`
 	}
 
-	// BookmakerOdds provides a struct representation of a BookmakerOdds resource
+	// BookmakerOdds provides a struct representation of a BookmakerOdds resource.
 	BookmakerOdds struct {
 		ID       int      `json:"id"`
 		Name     string   `json:"name"`
 		OddsData oddsData `json:"odds"`
 	}
 
-	// Odds provides a struct representation of a Odds resource
+	// Odds provides a struct representation of a Odds resource.
 	Odds struct {
 		Value            string   `json:"value"`
 		Handicap         *string  `json:"handicap"`
@@ -39,12 +39,12 @@ type (
 	}
 )
 
-// BookmakerOdds returns bookmaker specific odds for a match
+// BookmakerOdds returns bookmaker specific odds for a match.
 func (m *MatchOdds) BookmakerOdds() []BookmakerOdds {
 	return m.BookmakerOddsData.Data
 }
 
-// Odds returns odds data for a specific bookmaker
+// Odds returns odds data for a specific bookmaker.
 func (b *BookmakerOdds) Odds() []Odds {
 	return b.OddsData.Data
 }

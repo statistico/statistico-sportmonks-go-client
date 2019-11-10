@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// Player provides a struct representation of a Player resource
+// Player provides a struct representation of a Player resource.
 type Player struct {
 	ID            int                   `json:"player_id"`
 	TeamID        int                   `json:"team_id"`
@@ -74,8 +74,7 @@ func (p *Player) Trophies() []Trophy {
 	return p.TrophyData.Data
 }
 
-// PlayerByID fetches a Player resource by ID.
-// Use the includes slice of string to enrich the response data.
+// PlayerByID fetches a Player resource by ID. Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) PlayerByID(ctx context.Context, id int, includes []string) (*Player, *Meta, error) {
 	path := fmt.Sprintf(playersURI+"/%d", id)
 

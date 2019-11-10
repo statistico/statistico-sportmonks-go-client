@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// Standings provides a struct representation of a Standings resource
+// Standings provides a struct representation of a Standings resource.
 type Standings struct {
 	Name               string             `json:"name"`
 	LeagueID           int                `json:"league_id"`
@@ -21,12 +21,12 @@ type Standings struct {
 	LeagueStandingData leagueStandingData `json:"standings"`
 }
 
-// LeagueStandings returns league standing resources describing team specific league information
+// LeagueStandings returns league standing resources describing team specific league information.
 func (s *Standings) LeagueStandings() []LeagueStanding {
 	return s.LeagueStandingData.Data
 }
 
-// LeagueStanding provides a struct representation of a LeagueStanding resource
+// LeagueStanding provides a struct representation of a LeagueStanding resource.
 type LeagueStanding struct {
 	Position   int                  `json:"position"`
 	TeamID     int                  `json:"team_id"`
@@ -76,8 +76,7 @@ func (s *LeagueStanding) Team() *Team {
 	return s.TeamData.Data
 }
 
-// StandingsBySeasonID fetches a Standings resource for a Season ID.
-// Use the includes slice to enrich the response data.
+// StandingsBySeasonID fetches a Standings resource for a Season ID. Use the includes slice to enrich the response data.
 func (c *HTTPClient) StandingsBySeasonID(ctx context.Context, seasonID int, includes []string, filters map[string][]int) ([]Standings, *Meta, error) {
 	path := fmt.Sprintf(leagueStandingsURI+"/%d", seasonID)
 
@@ -101,8 +100,8 @@ func (c *HTTPClient) StandingsBySeasonID(ctx context.Context, seasonID int, incl
 	return response.Data, response.Meta, err
 }
 
-// LiveStandingsBySeasonID fetches a Standings resource for a Season ID for present moment standings.
-// Use the includes slice to enrich the response data.
+// LiveStandingsBySeasonID fetches a Standings resource for a Season ID for present moment standings. Use the includes slice to enrich
+// the response data.
 func (c *HTTPClient) LiveStandingsBySeasonID(ctx context.Context, seasonID int, filters map[string][]int) ([]LiveStandings, *Meta, error) {
 	path := fmt.Sprintf(liveLeagueStandingsURI+"/%d", seasonID)
 

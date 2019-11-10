@@ -47,7 +47,7 @@ const (
 	videoHighlightsURI     = "/highlights"
 )
 
-// HTTPClient is a HTTP request builder and sender
+// HTTPClient is a HTTP request builder and sender.
 type HTTPClient struct {
 	HTTPClient *http.Client
 	BaseURL    string

@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-// League provides a struct representation of a League resource
+// League provides a struct representation of a League resource.
 type League struct {
 	ID              int            `json:"id"`
 	Active          bool           `json:"active"`
@@ -28,25 +28,24 @@ type League struct {
 	Seasons         seasonsData    `json:"seasons,omitempty"`
 }
 
-// CountryData returns a Country struct associated to a League
+// CountryData returns a Country struct associated to a League.
 func (l *League) CountryData() *Country {
 	return l.Country.Data
 }
 
-// SeasonData returns the current Season struct associated to a League
+// SeasonData returns the current Season struct associated to a League.
 func (l *League) SeasonData() *Season {
 	return l.Season.Data
 }
 
-// SeasonsData returns a slice of Season struct associated to a League
+// SeasonsData returns a slice of Season struct associated to a League.
 func (l *League) SeasonsData() []Season {
 	return l.Seasons.Data
 }
 
 // Leagues fetches League resources. The endpoint used within this method is paginated, to select the required
 // page use the 'page' method argument. Page information including current page and total page are included
-// within the Meta response.
-// Use the includes slice of string to enrich the response data.
+// within the Meta response. Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) Leagues(ctx context.Context, page int, includes []string) ([]League, *Meta, error) {
 	values := url.Values{
 		"page":    {strconv.Itoa(page)},
@@ -67,8 +66,7 @@ func (c *HTTPClient) Leagues(ctx context.Context, page int, includes []string) (
 	return response.Data, response.Meta, err
 }
 
-// LeagueByID fetches League resources by ID.
-// Use the includes slice of string to enrich the response data.
+// LeagueByID fetches League resources by ID. Use the includes slice of string to enrich the response data.
 func (c *HTTPClient) LeagueByID(ctx context.Context, id int, includes []string) (*League, *Meta, error) {
 	path := fmt.Sprintf(leaguesURI+"/%d", id)
 

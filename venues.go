@@ -6,7 +6,7 @@ import (
 	"net/url"
 )
 
-// Venue provides a struct representation of a Venue resource
+// Venue provides a struct representation of a Venue resource.
 type Venue struct {
 	ID          int     `json:"id"`
 	Name        string  `json:"name"`

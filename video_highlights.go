@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// VideoHighlights provides a struct representation of a VideoHighlights resource
+// VideoHighlights provides a struct representation of a VideoHighlights resource.
 type VideoHighlights struct {
 	FixtureID   int         `json:"fixture_id"`
 	EventID     *int        `json:"event_id"`
@@ -24,8 +24,7 @@ func (v *VideoHighlights) Fixture() *Fixture {
 
 // VideoHighlights fetches VideoHighlight resources. The endpoint used within this method is paginated,
 // to select the required page use the 'page' method argument. Page information including current page and total
-// page are included within the Meta response.
-// Use the includes slice to enrich the response data.
+// page are included within the Meta response. Use the includes slice to enrich the response data.
 func (c *HTTPClient) VideoHighlights(ctx context.Context, page int, includes []string) ([]VideoHighlights, *Meta, error) {
 	values := url.Values{
 		"page":    {strconv.Itoa(page)},
