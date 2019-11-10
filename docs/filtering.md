@@ -1,6 +1,7 @@
 The SportMonks API provides the functionality to add 'filter' parameters to filter the data returned
-by specific endpoint. Below is an example of retrieving a fixture by a specific but reducing the returned
-data to specifc leagues
+by a specific endpoint. 
+
+Below is an example of retrieving fixtures by a specific date but reducing the returned data to specific leagues:
 
 ```go
 package main

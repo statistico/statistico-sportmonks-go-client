@@ -1,6 +1,8 @@
 The SportMonks API provides the functionality to add 'includes' parameters to enrich the data but also
-limit the includes data. Below is an example of adding fixture data to the season endpoint but limiting
-the fixtures to specific IDs
+limit the includes data. 
+
+Below is an example of adding fixture data to the season endpoint but limiting the number of fixtures and adding
+pagination:
 
 ```go
 package main

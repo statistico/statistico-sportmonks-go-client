@@ -1,6 +1,8 @@
 The SportMonks API provides the functionality to add 'includes' parameters to enrich the data returned
-by specific endpoint but also allows nested includes. Below is an example of retrieving a fixture by ID 
-with added includes data for home team and away team including team specific venue data 
+by a specific endpoint but also allows nested includes. 
+
+Below is an example of retrieving a fixture by ID  with added includes data for home team and away team including team 
+specific venue data for each team:
 
 ```go
 package main
