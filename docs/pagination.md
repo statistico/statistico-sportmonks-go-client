@@ -1,5 +1,7 @@
-// Some of the endpoints provided are paginated and the Meta struct needs to be utilised to fetch all available
-// data. Below is an example of fetching paginated country data and looping over all available pages
+Some of the endpoints provided are paginated and the Meta struct needs to be utilised to fetch all available
+data. 
+
+Below is an example of fetching paginated country data and looping over all available pages:
 
 ```go
 package main

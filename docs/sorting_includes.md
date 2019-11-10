@@ -1,6 +1,8 @@
 The SportMonks API provides the functionality to add 'includes' parameters to enrich the data but also
-sort the includes data. Below is an example of adding fixture data to the season endpoint but sorting
-the fixtures by created data ascending
+sort the includes data. 
+
+Below is an example of adding fixture data to the season endpoint but sorting the fixtures by created at in 
+ascending order:
 
 ```go
 package main

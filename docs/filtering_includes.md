@@ -1,6 +1,7 @@
 The SportMonks API provides the functionality to add 'includes' parameters to enrich the data but also
-provides additional filters for the enriched data. Below is an example of adding odds data to the live
-scores endpoint but filtering the odds data to Bookmaker with ID = 2
+provides additional filters for the enriched data. 
+
+Below is an example of adding odds data to the livescores endpoint but filtering the odds data to Bookmaker with ID number 2:
 
 ```go
 package main
