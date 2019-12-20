@@ -30,7 +30,7 @@ func main() {
     league, _, err := client.LeagueByID(context.Background(), 10, []string{}) 
 
     if err != nil {
-        fmt.Printf("%s\n", err)
+        fmt.Printf("%s\n", err.Error())
         return
     }
 
