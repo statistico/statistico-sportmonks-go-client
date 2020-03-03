@@ -173,7 +173,7 @@ var fixtureResponse = `{
 					"passes": {
 						"total": 313,
 						"accurate": 230,
-						"percentage": 0
+						"percentage": 83
 					},
 					"attacks": {
 						"attacks": 104,
@@ -1028,7 +1028,7 @@ func assertTeamStats(t *testing.T, stats *TeamStats) {
 	assert.Nil(t, stats.Shots.Blocked)
 	assert.Equal(t, 313, int(*stats.Passes.Total))
 	assert.Equal(t, 230, int(*stats.Passes.Accurate))
-	assert.Equal(t, 0, int(*stats.Passes.Percentage))
+	assert.Equal(t, float32(83.0), *stats.Passes.Percentage)
 	assert.Equal(t, 104, int(*stats.Attacks.Total))
 	assert.Equal(t, 52, int(*stats.Attacks.Dangerous))
 	assert.Equal(t, 13, *stats.Fouls)
