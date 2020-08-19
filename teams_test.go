@@ -108,7 +108,7 @@ var teamIncludesResponse = `{
 				"current_stage_id": 77444845,
 				"live_standings": true,
 				"coverage": {
-				  "predictions": 1,
+				  "predictions": true,
 				  "topscorer_goals": true,
 				  "topscorer_assists": true,
 				  "topscorer_cards": true
@@ -136,7 +136,7 @@ var teamsResponse = `{
 	]
 }`
 
-var teamsIncludesReponse = `{
+var teamsIncludesResponse = `{
 	"data": [
 		{
 			"id": 1,
@@ -223,7 +223,7 @@ var teamsIncludesReponse = `{
 					"current_stage_id": 77444845,
 					"live_standings": true,
 					"coverage": {
-					  "predictions": 1,
+					  "predictions": true,
 					  "topscorer_goals": true,
 					  "topscorer_assists": true,
 					  "topscorer_cards": true
@@ -334,7 +334,7 @@ func TestTeamsBySeasonID(t *testing.T) {
 	t.Run("returns a slice of Team struct with includes data", func(t *testing.T) {
 		url := defaultBaseURL + "/teams/season/12962?api_token=api-key&include=squad%2Cleague&page=1"
 
-		server := mockResponseServer(t, teamsIncludesReponse, 200, url)
+		server := mockResponseServer(t, teamsIncludesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 

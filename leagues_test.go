@@ -22,7 +22,7 @@ var leaguesResponse = `{
 			"current_stage_id": 77444845,
 			"live_standings": true,
 			"coverage": {
-			  "predictions": 1,
+			  "predictions": true,
 			  "topscorer_goals": true,
 			  "topscorer_assists": true,
 			  "topscorer_cards": true
@@ -47,7 +47,7 @@ var leaguesIncludesResponse = `{
 			"current_stage_id": 77444845,
 			"live_standings": true,
 			"coverage": {
-			  "predictions": 1,
+			  "predictions": true,
 			  "topscorer_goals": true,
 			  "topscorer_assists": true,
 			  "topscorer_cards": true
@@ -110,7 +110,7 @@ var leagueResponse = `{
 		"current_stage_id": 77444845,
 		"live_standings": true,
 		"coverage": {
-		  "predictions": 1,
+		  "predictions": true,
 		  "topscorer_goals": true,
 		  "topscorer_assists": true,
 		  "topscorer_cards": true
@@ -133,7 +133,7 @@ var leagueIncludesResponse = `{
 		"current_stage_id": 77444845,
 		"live_standings": true,
 		"coverage": {
-		  "predictions": 1,
+		  "predictions": true,
 		  "topscorer_goals": true,
 		  "topscorer_assists": true,
 		  "topscorer_cards": true
@@ -299,7 +299,7 @@ func assertLeague(t *testing.T, league *League) {
 	assert.Equal(t, 174546, league.CurrentRoundID)
 	assert.Equal(t, 77444845, league.CurrentStageID)
 	assert.Equal(t, true, league.LiveStandings)
-	assert.Equal(t, 1, league.Coverage.Predictions)
+	assert.Equal(t, true, league.Coverage.Predictions)
 	assert.Equal(t, true, league.Coverage.TopScorerGoals)
 	assert.Equal(t, true, league.Coverage.TopScorerAssists)
 	assert.Equal(t, true, league.Coverage.TopScorerCards)
