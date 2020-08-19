@@ -166,7 +166,7 @@ type (
 
 	// LeagueCoverage explains the coverage the API covers for a league.
 	LeagueCoverage struct {
-		Predictions      int  `json:"predictions"`
+		Predictions      bool `json:"predictions"`
 		TopScorerGoals   bool `json:"topscorer_goals"`
 		TopScorerAssists bool `json:"topscorer_assists"`
 		TopScorerCards   bool `json:"topscorer_cards"`

@@ -42,7 +42,7 @@ var roundIncludesResponse = `{
 				"current_stage_id": 77444845,
 				"live_standings": true,
 				"coverage": {
-				  "predictions": 1,
+				  "predictions": true,
 				  "topscorer_goals": true,
 				  "topscorer_assists": true,
 				  "topscorer_cards": true
@@ -307,7 +307,7 @@ var roundsSeasonIncludesResponse = `{
 					"current_stage_id": 77444845,
 					"live_standings": true,
 					"coverage": {
-					  "predictions": 1,
+					  "predictions": true,
 					  "topscorer_goals": true,
 					  "topscorer_assists": true,
 					  "topscorer_cards": true
