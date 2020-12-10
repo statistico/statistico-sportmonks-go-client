@@ -6,7 +6,6 @@ type (
 		Pagination   *Pagination   `json:"pagination,omitempty"`
 		Plan         *Plan         `json:"plan,omitempty"`
 		Sports       *Sports       `json:"sports,omitempty"`
-		Subscription *Subscription `json:"subscription,omitempty"`
 	}
 
 	// Pagination struct.
@@ -30,13 +29,6 @@ type (
 		ID      int    `json:"id"`
 		Name    string `json:"name"`
 		Current bool   `json:"current"`
-	}
-
-	// Subscription struct.
-	Subscription struct {
-		StartAt     DateTime `json:"started_at,omitempty"`
-		EndsAt      DateTime `json:"ends_at,omitempty"`
-		TrialEndsAt DateTime `json:"trial_ends_at,omitempty"`
 	}
 
 	// DateTime struct.
