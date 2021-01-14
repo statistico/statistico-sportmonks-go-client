@@ -193,7 +193,7 @@ func TestSeasons(t *testing.T) {
 
 func TestSeasonByID(t *testing.T) {
 	t.Run("returns a single Season struct", func(t *testing.T) {
-		url := defaultBaseURL + "/seasons/55?api_token=api-key&include="
+		url := defaultBaseURL + "/seasons/55?api_token=api-key&deleted=1&include="
 
 		server := mockResponseServer(t, seasonResponse, 200, url)
 
@@ -209,7 +209,7 @@ func TestSeasonByID(t *testing.T) {
 	})
 
 	t.Run("returns a single Season struct with includes data", func(t *testing.T) {
-		url := defaultBaseURL + "/seasons/55?api_token=api-key&include=groups%2Cgoalscorers%2Crounds"
+		url := defaultBaseURL + "/seasons/55?api_token=api-key&deleted=1&include=groups%2Cgoalscorers%2Crounds"
 
 		server := mockResponseServer(t, seasonIncludesResponse, 200, url)
 
@@ -228,7 +228,7 @@ func TestSeasonByID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseURL + "/seasons/55?api_token=api-key&include="
+		url := defaultBaseURL + "/seasons/55?api_token=api-key&deleted=1&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 

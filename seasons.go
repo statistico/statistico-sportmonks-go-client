@@ -125,6 +125,7 @@ func (c *HTTPClient) SeasonByID(ctx context.Context, id int, includes []string) 
 
 	values := url.Values{
 		"include": {strings.Join(includes, ",")},
+		"deleted": []string{"1"},
 	}
 
 	response := struct {
