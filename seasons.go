@@ -78,7 +78,7 @@ func (s *Season) League() *League {
 
 // Results returns all completed fixture data.
 func (s *Season) Results() []Fixture {
-	return s.FixturesData.Data
+	return s.ResultsData.Data
 }
 
 // Rounds returns all round data.
