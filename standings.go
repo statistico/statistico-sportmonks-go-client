@@ -18,7 +18,7 @@ type Standings struct {
 	StageID            int                `json:"stage_id"`
 	StageName          string             `json:"stage_name"`
 	Resource           string             `json:"resource"`
-	LeagueStandingData leagueStandingData `json:"standings"`
+	LeagueStandingData LeagueStandingData `json:"standings"`
 }
 
 // LeagueStandings returns league standing resources describing team specific league information.
@@ -44,11 +44,11 @@ type LeagueStanding struct {
 	RecentForm string               `json:"recent_form"`
 	Status     string               `json:"status"`
 
-	LeagueData leagueData `json:"league"`
-	RoundData  roundData  `json:"round"`
-	SeasonData seasonData `json:"season"`
-	StagesData stagesData `json:"stages"`
-	TeamData   teamData   `json:"team"`
+	LeagueData LeagueData `json:"league"`
+	RoundData  RoundData  `json:"round"`
+	SeasonData SeasonData `json:"season"`
+	StagesData StagesData `json:"stages"`
+	TeamData   TeamData   `json:"team"`
 }
 
 // League returns league data.

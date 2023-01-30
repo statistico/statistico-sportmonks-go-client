@@ -6,191 +6,191 @@ import (
 )
 
 type (
-	aggregatedAssistScorerData struct {
+	AggregatedAssistScorerData struct {
 		Data []AssistScorer `json:"data"`
 	}
 
-	aggregatedCardScorerData struct {
+	AggregatedCardScorerData struct {
 		Data []CardScorer `json:"data"`
 	}
 
-	aggregatedGoalScorerData struct {
+	AggregatedGoalScorerData struct {
 		Data []GoalScorer `json:"data"`
 	}
 
-	aggregatedMatchOddsData struct {
+	AggregatedMatchOddsData struct {
 		Data []MatchOdds `json:"data"`
 	}
 
-	assistScorerData struct {
+	AssistScorerData struct {
 		Data []AssistScorer `json:"data"`
 	}
 
-	bookmakerOddsData struct {
+	BookmakerOddsData struct {
 		Data []BookmakerOdds `json:"data"`
 	}
 
-	cardEventsData struct {
+	CardEventsData struct {
 		Data []CardEvent `json:"data"`
 	}
 
-	cardScorerData struct {
+	CardScorerData struct {
 		Data []CardScorer `json:"data"`
 	}
 
-	coachData struct {
+	CoachData struct {
 		Data *Coach `json:"data"`
 	}
 
-	cornerEventsData struct {
+	CornerEventsData struct {
 		Data []CornerEvent `json:"data"`
 	}
 
-	countryData struct {
+	CountryData struct {
 		Data *Country `json:"data"`
 	}
 
-	countriesData struct {
+	CountriesData struct {
 		Data []Country `json:"data"`
 	}
 
-	continentData struct {
+	ContinentData struct {
 		Data *Continent `json:"data"`
 	}
 
-	fixtureData struct {
+	FixtureData struct {
 		Data *Fixture `json:"data"`
 	}
 
-	fixturesData struct {
+	FixturesData struct {
 		Data []Fixture `json:"data"`
 	}
 
-	goalEventsData struct {
+	GoalEventsData struct {
 		Data []GoalEvent `json:"data"`
 	}
 
-	goalScorerData struct {
+	GoalScorerData struct {
 		Data []GoalScorer `json:"data"`
 	}
 
-	groupsData struct {
+	GroupsData struct {
 		Data []Group `json:"data"`
 	}
 
-	leagueData struct {
+	LeagueData struct {
 		Data *League `json:"data"`
 	}
 
-	leaguesData struct {
+	LeaguesData struct {
 		Data []League `json:"data"`
 	}
 
-	leagueStandingData struct {
+	LeagueStandingData struct {
 		Data []LeagueStanding `json:"data"`
 	}
 
-	matchCommentaryData struct {
+	MatchCommentaryData struct {
 		Data []Commentary `json:"data"`
 	}
 
-	matchHighlightsData struct {
+	MatchHighlightsData struct {
 		Data []VideoHighlights `json:"data"`
 	}
 
-	matchEventsData struct {
+	MatchEventsData struct {
 		Data []MatchEvent `json:"data"`
 	}
 
-	matchOfficialData struct {
+	MatchOfficialData struct {
 		Data *MatchOfficial `json:"data"`
 	}
 
-	matchTVStationsData struct {
+	MatchTVStationsData struct {
 		Data []TVStation `json:"data"`
 	}
 
-	oddsData struct {
+	OddsData struct {
 		Data []Odds `json:"data"`
 	}
 
-	playerData struct {
+	PlayerData struct {
 		Data *Player `json:"data"`
 	}
 
-	playerLineupData struct {
+	PlayerLineupData struct {
 		Data []PlayerStats `json:"data"`
 	}
 
-	playerSeasonStatsData struct {
+	PlayerSeasonStatsData struct {
 		Data []PlayerSeasonStats `json:"data"`
 	}
 
-	positionData struct {
+	PositionData struct {
 		Data *Position `json:"data"`
 	}
 
-	rankingData struct {
+	RankingData struct {
 		Data *Ranking `json:"data"`
 	}
 
-	roundData struct {
+	RoundData struct {
 		Data *Round `json:"data"`
 	}
 
-	roundsData struct {
+	RoundsData struct {
 		Data []Round `json:"data"`
 	}
 
-	seasonData struct {
+	SeasonData struct {
 		Data *Season `json:"data"`
 	}
 
-	seasonsData struct {
+	SeasonsData struct {
 		Data []Season `json:"data"`
 	}
 
-	sidelinedData struct {
+	SidelinedData struct {
 		Data []Sidelined `json:"data"`
 	}
 
-	squadPlayerData struct {
+	SquadPlayerData struct {
 		Data []SquadPlayer `json:"data"`
 	}
 
-	stageData struct {
+	StageData struct {
 		Data *Stage `json:"data"`
 	}
 
-	stagesData struct {
+	StagesData struct {
 		Data []Stage `json:"data"`
 	}
 
-	substitutionEventsData struct {
+	SubstitutionEventsData struct {
 		Data []SubstitutionEvent `json:"data"`
 	}
 
-	teamData struct {
+	TeamData struct {
 		Data *Team `json:"data"`
 	}
 
-	teamSeasonStatsData struct {
+	TeamSeasonStatsData struct {
 		Data *TeamSeasonStats `json:"data"`
 	}
 
-	teamsStatsData struct {
+	TeamsStatsData struct {
 		Data []TeamStats `json:"data"`
 	}
 
-	transfersData struct {
+	TransfersData struct {
 		Data []Transfer `json:"data"`
 	}
 
-	trophyData struct {
+	TrophyData struct {
 		Data []Trophy `json:"data"`
 	}
 
-	venueData struct {
+	VenueData struct {
 		Data *Venue `json:"data"`
 	}
 )

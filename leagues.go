@@ -23,9 +23,9 @@ type League struct {
 	CurrentStageID  int            `json:"current_stage_id"`
 	LiveStandings   bool           `json:"live_standings"`
 	Coverage        LeagueCoverage `json:"coverage"`
-	Country         countryData    `json:"country,omitempty"`
-	Season          seasonData     `json:"season,omitempty"`
-	Seasons         seasonsData    `json:"seasons,omitempty"`
+	Country         CountryData    `json:"country,omitempty"`
+	Season          SeasonData     `json:"season,omitempty"`
+	Seasons         SeasonsData    `json:"seasons,omitempty"`
 }
 
 // CountryData returns a Country struct associated to a League.

@@ -3,9 +3,9 @@ package sportmonks
 type (
 	// Meta struct.
 	Meta struct {
-		Pagination   *Pagination   `json:"pagination,omitempty"`
-		Plan         *Plan         `json:"plan,omitempty"`
-		Sports       *Sports       `json:"sports,omitempty"`
+		Pagination *Pagination `json:"pagination,omitempty"`
+		Plan       *Plan       `json:"plan,omitempty"`
+		Sports     *Sports     `json:"sports,omitempty"`
 	}
 
 	// Pagination struct.

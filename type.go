@@ -307,7 +307,7 @@ type (
 		Duels              Duels      `json:"duels"`
 		Passes             Passes     `json:"passes"`
 		Penalties          Penalties  `json:"penalties"`
-		PlayerData         playerData `json:"player,omitempty"`
+		PlayerData         PlayerData `json:"player,omitempty"`
 	}
 
 	// Position provides position data for a player.
@@ -548,7 +548,7 @@ type (
 		Times    int         `json:"times"`
 		League   string      `json:"league"`
 		LeagueID int         `json:"league_id"`
-		Seasons  seasonsData `json:"seasons"`
+		Seasons  SeasonsData `json:"seasons"`
 	}
 
 	// WeatherReport provides weather data for a fixture.

@@ -16,10 +16,10 @@ type Stage struct {
 	SeasonID     int          `json:"season_id"`
 	SortOrder    *string      `json:"sort_order"`
 	HasStandings *bool        `json:"has_standings"`
-	FixturesData fixturesData `json:"fixtures,omitempty"`
-	LeagueData   leagueData   `json:"league,omitempty"`
-	ResultsData  fixturesData `json:"results,omitempty"`
-	SeasonData   seasonData   `json:"season,omitempty"`
+	FixturesData FixturesData `json:"fixtures,omitempty"`
+	LeagueData   LeagueData   `json:"league,omitempty"`
+	ResultsData  FixturesData `json:"results,omitempty"`
+	SeasonData   SeasonData   `json:"season,omitempty"`
 }
 
 // Fixtures returns fixture data.
