@@ -14,7 +14,7 @@ type VideoHighlights struct {
 	Location    string      `json:"location"`
 	Type        string      `json:"type"`
 	CreatedAt   DateTime    `json:"created_at"`
-	FixtureData fixtureData `json:"fixture,omitempty"`
+	FixtureData FixtureData `json:"fixture,omitempty"`
 }
 
 // Fixture returns associated fixture data.

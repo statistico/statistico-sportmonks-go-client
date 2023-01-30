@@ -15,9 +15,9 @@ type TopScorers struct {
 	IsCurrentSeason  bool             `json:"is_current_season"`
 	CurrentRoundID   *int             `json:"current_round_id"`
 	CurrentStageID   *int             `json:"current_stage_id"`
-	AssistScorerData assistScorerData `json:"assistscorers"`
-	CardScorerData   cardScorerData   `json:"cardscorers"`
-	GoalScorerData   goalScorerData   `json:"goalscorers"`
+	AssistScorerData AssistScorerData `json:"assistscorers"`
+	CardScorerData   CardScorerData   `json:"cardscorers"`
+	GoalScorerData   GoalScorerData   `json:"goalscorers"`
 }
 
 // AssistScorers returns assist scorer data.
@@ -43,9 +43,9 @@ type AggregatedTopScorers struct {
 	IsCurrentSeason  bool             `json:"is_current_season"`
 	CurrentRoundID   *int             `json:"current_round_id"`
 	CurrentStageID   *int             `json:"current_stage_id"`
-	AssistScorerData assistScorerData `json:"aggregatedAssistscorers"`
-	CardScorerData   cardScorerData   `json:"aggregatedCardscorers"`
-	GoalScorerData   goalScorerData   `json:"aggregatedGoalscorers"`
+	AssistScorerData AssistScorerData `json:"aggregatedAssistscorers"`
+	CardScorerData   CardScorerData   `json:"aggregatedCardscorers"`
+	GoalScorerData   GoalScorerData   `json:"aggregatedGoalscorers"`
 }
 
 // AssistScorers returns aggregated assist scorer data.
@@ -72,8 +72,8 @@ type AssistScorer struct {
 	StageID    int        `json:"stage_id"`
 	Assists    int        `json:"assists"`
 	Type       string     `json:"type"`
-	PlayerData playerData `json:"player"`
-	TeamData   teamData   `json:"team"`
+	PlayerData PlayerData `json:"player"`
+	TeamData   TeamData   `json:"team"`
 }
 
 // Player returns the player data associated to an assist scorer record.
@@ -96,8 +96,8 @@ type CardScorer struct {
 	YellowCards int        `json:"yellowcards"`
 	RedCards    int        `json:"redcards"`
 	Type        string     `json:"type"`
-	PlayerData  playerData `json:"player"`
-	TeamData    teamData   `json:"team"`
+	PlayerData  PlayerData `json:"player"`
+	TeamData    TeamData   `json:"team"`
 }
 
 // Player returns the player data associated to an card scorer record.
@@ -120,16 +120,16 @@ type GoalScorer struct {
 	Goals        int        `json:"goals"`
 	PenaltyGoals int        `json:"penalty_goals"`
 	Type         string     `json:"type"`
-	PlayerData   playerData `json:"player"`
-	TeamData     teamData   `json:"team"`
+	PlayerData   PlayerData `json:"player"`
+	TeamData     TeamData   `json:"team"`
 }
 
-// Player returns the player data associated to an goal scorer record.
+// Player returns the player data associated to a goalscorer record.
 func (g *GoalScorer) Player() *Player {
 	return g.PlayerData.Data
 }
 
-// Team returns the team data associated to an goal scorer record.
+// Team returns the team data associated to a goalscorer record.
 func (g *GoalScorer) Team() *Team {
 	return g.TeamData.Data
 }

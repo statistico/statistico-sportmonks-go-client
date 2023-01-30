@@ -16,10 +16,10 @@ type Round struct {
 	StageID      int          `json:"stage_id"`
 	Start        string       `json:"start"`
 	End          string       `json:"end"`
-	FixturesData fixturesData `json:"fixtures,omitempty"`
-	LeagueData   leagueData   `json:"league"`
-	ResultsData  fixturesData `json:"results,omitempty"`
-	SeasonData   seasonData   `json:"season"`
+	FixturesData FixturesData `json:"fixtures,omitempty"`
+	LeagueData   LeagueData   `json:"league"`
+	ResultsData  FixturesData `json:"results,omitempty"`
+	SeasonData   SeasonData   `json:"season"`
 }
 
 // Fixtures returns a slice of Fixture struct associated to a Round.

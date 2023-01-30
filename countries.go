@@ -13,8 +13,8 @@ type Country struct {
 	ID            int           `json:"id"`
 	Name          string        `json:"name"`
 	Extra         CountryExtra  `json:"extra"`
-	ContinentData continentData `json:"continent,omitempty"`
-	LeaguesData   leaguesData   `json:"leagues,omitempty"`
+	ContinentData ContinentData `json:"continent,omitempty"`
+	LeaguesData   LeaguesData   `json:"leagues,omitempty"`
 }
 
 // Continent returns a Continent struct associated to a Country.

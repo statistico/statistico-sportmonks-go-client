@@ -38,7 +38,7 @@ type SquadPlayer struct {
 	Duels              Duels      `json:"duels"`
 	Passes             Passes     `json:"passes"`
 	Penalties          Penalties  `json:"penalties"`
-	PlayerData         playerData `json:"player"`
+	PlayerData         PlayerData `json:"player"`
 }
 
 // Player returns the player specific data.

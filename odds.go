@@ -12,14 +12,14 @@ type (
 		ID                int               `json:"id"`
 		Name              string            `json:"name"`
 		Suspended         bool              `json:"suspended"`
-		BookmakerOddsData bookmakerOddsData `json:"bookmaker"`
+		BookmakerOddsData BookmakerOddsData `json:"bookmaker"`
 	}
 
 	// BookmakerOdds provides a struct representation of a BookmakerOdds resource.
 	BookmakerOdds struct {
 		ID       int      `json:"id"`
 		Name     string   `json:"name"`
-		OddsData oddsData `json:"odds"`
+		OddsData OddsData `json:"odds"`
 	}
 
 	// Odds provides a struct representation of a Odds resource.
