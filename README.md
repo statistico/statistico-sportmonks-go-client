@@ -1,7 +1,7 @@
 # Statistico SportMonks Go Client 
 
 [![Documentation](https://godoc.org/github.com/statistico/statistico-sportmonks-go-client?status.svg)](http://godoc.org/github.com/statistico/statistico-sportmonks-go-client)
-[![CircleCI](https://circleci.com/gh/statistico/statistico-sportmonks-go-client/tree/master.svg?style=shield)](https://circleci.com/gh/statistico/statistico-sportmonks-go-client/tree/master)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/statistico/statistico-sportmonks-go-client/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/statistico/statistico-sportmonks-go-client/tree/master)
 
 This library is a Golang wrapper around version 2.0 of the SportMonks soccer API. Full documentation and API reference can be found here:
 
