@@ -22,9 +22,9 @@ type (
 		OddsData OddsData `json:"odds"`
 	}
 
-	// Odds provides a struct representation of a Odds resource.
+	// Odds provides a struct representation of an Odds resource.
 	Odds struct {
-		Value            string   `json:"value"`
+		Value            float32  `json:"value"`
 		Handicap         *string  `json:"handicap"`
 		Total            string   `json:"total"`
 		Label            string   `json:"label"`
@@ -34,7 +34,7 @@ type (
 		Fractional       *string  `json:"factional"`
 		Winning          *string  `json:"winning"`
 		Stop             bool     `json:"stop"`
-		BookmakerEventID string   `json:"bookmaker_event_id"`
+		BookmakerEventID int      `json:"bookmaker_event_id"`
 		LastUpdate       DateTime `json:"last_update"`
 	}
 )

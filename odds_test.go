@@ -20,7 +20,7 @@ var oddsResponse = `{
 						"odds": {
 							"data": [
 								{
-									"value": "1.91",
+									"value": 1.91,
 									"handicap": null,
 									"total": "1.5",
 									"label": "Over",
@@ -30,7 +30,7 @@ var oddsResponse = `{
 									"factional": null,
 									"winning": null,
 									"stop": true,
-									"bookmaker_event_id": "40054117",
+									"bookmaker_event_id": 40054117,
 									"last_update": {
 										"date": "2019-10-05 13:01:00.227530",
 										"timezone_type": 3,
@@ -214,7 +214,7 @@ func assertBookmakerOdds(t *testing.T, odds *BookmakerOdds) {
 }
 
 func assertOdds(t *testing.T, odds *Odds) {
-	assert.Equal(t, "1.91", odds.Value)
+	assert.Equal(t, float32(1.91), odds.Value)
 	assert.Nil(t, odds.Handicap)
 	assert.Equal(t, "1.5", odds.Total)
 	assert.Equal(t, "Over", odds.Label)
@@ -224,7 +224,7 @@ func assertOdds(t *testing.T, odds *Odds) {
 	assert.Nil(t, odds.Fractional)
 	assert.Nil(t, odds.Winning)
 	assert.Equal(t, true, odds.Stop)
-	assert.Equal(t, "40054117", odds.BookmakerEventID)
+	assert.Equal(t, 40054117, odds.BookmakerEventID)
 	assert.Equal(t, "2019-10-05 13:01:00.227530", odds.LastUpdate.Date)
 	assert.Equal(t, 3, odds.LastUpdate.TimezoneType)
 	assert.Equal(t, "UTC", odds.LastUpdate.Timezone)
