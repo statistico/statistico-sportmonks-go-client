@@ -36,6 +36,24 @@ var oddsResponse = `{
 										"timezone_type": 3,
 										"timezone": "UTC"
 									}
+								},
+								{
+									"value": "2.91",
+									"handicap": null,
+									"total": "1.5",
+									"label": "Under",
+									"probability": "52.36%",
+									"dp3": "2.910",
+									"american": -210,
+									"factional": null,
+									"winning": null,
+									"stop": true,
+									"bookmaker_event_id": 40054117,
+									"last_update": {
+										"date": "2019-10-05 13:01:00.227530",
+										"timezone_type": 3,
+										"timezone": "UTC"
+									}
 								}
 							]
 						}
@@ -214,7 +232,7 @@ func assertBookmakerOdds(t *testing.T, odds *BookmakerOdds) {
 }
 
 func assertOdds(t *testing.T, odds *Odds) {
-	assert.Equal(t, float32(1.91), odds.Value)
+	assert.Equal(t, float32(1.91), float32(*odds.Value))
 	assert.Nil(t, odds.Handicap)
 	assert.Equal(t, "1.5", odds.Total)
 	assert.Equal(t, "Over", odds.Label)

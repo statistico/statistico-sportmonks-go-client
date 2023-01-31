@@ -195,8 +195,30 @@ type (
 	}
 )
 
+// A FlexFloat is a float that can be un marshalled from a JSON field that has either a number or a string value.
+// E.g. if the json field contains a string "4.2", the FlexFloat value will be 4.2.
+type FlexFloat float32
+
+// UnmarshalJSON implements the json.Unmarshaler interface, which allows values of any json type as an int
+// and run our custom conversion
+func (fi *FlexFloat) UnmarshalJSON(b []byte) error {
+	if b[0] != '"' {
+		return json.Unmarshal(b, (*float32)(fi))
+	}
+	var s string
+	if err := json.Unmarshal(b, &s); err != nil {
+		return err
+	}
+	i, err := strconv.ParseFloat(s, 32)
+	if err != nil {
+		return err
+	}
+	*fi = FlexFloat(i)
+	return nil
+}
+
 // A FlexInt is an int that can be un marshalled from a JSON field that has either a number or a string value.
-// E.g. if the json field contains a string "42", the FlexInt value will be "42".
+// E.g. if the json field contains a string "42", the FlexInt value will be 42.
 type FlexInt int
 
 // UnmarshalJSON implements the json.Unmarshaler interface, which allows values of any json type as an int

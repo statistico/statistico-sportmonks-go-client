@@ -24,18 +24,18 @@ type (
 
 	// Odds provides a struct representation of an Odds resource.
 	Odds struct {
-		Value            float32  `json:"value"`
-		Handicap         *string  `json:"handicap"`
-		Total            string   `json:"total"`
-		Label            string   `json:"label"`
-		Probability      string   `json:"probability"`
-		Dp3              string   `json:"dp3"`
-		American         int      `json:"american"`
-		Fractional       *string  `json:"factional"`
-		Winning          *string  `json:"winning"`
-		Stop             bool     `json:"stop"`
-		BookmakerEventID int      `json:"bookmaker_event_id"`
-		LastUpdate       DateTime `json:"last_update"`
+		Value            *FlexFloat `json:"value"`
+		Handicap         *string    `json:"handicap"`
+		Total            string     `json:"total"`
+		Label            string     `json:"label"`
+		Probability      string     `json:"probability"`
+		Dp3              string     `json:"dp3"`
+		American         int        `json:"american"`
+		Fractional       *string    `json:"factional"`
+		Winning          *string    `json:"winning"`
+		Stop             bool       `json:"stop"`
+		BookmakerEventID int        `json:"bookmaker_event_id"`
+		LastUpdate       DateTime   `json:"last_update"`
 	}
 )
 
