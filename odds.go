@@ -34,7 +34,7 @@ type (
 		Fractional       *string    `json:"factional"`
 		Winning          *string    `json:"winning"`
 		Stop             bool       `json:"stop"`
-		BookmakerEventID int        `json:"bookmaker_event_id"`
+		BookmakerEventID *FlexInt   `json:"bookmaker_event_id"`
 		LastUpdate       DateTime   `json:"last_update"`
 	}
 )
