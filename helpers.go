@@ -196,7 +196,7 @@ type (
 )
 
 // A FlexInt is an int that can be un marshalled from a JSON field that has either a number or a string value.
-// E.g. if the json field contains an string "42", the FlexInt value will be "42".
+// E.g. if the json field contains a string "42", the FlexInt value will be "42".
 type FlexInt int
 
 // UnmarshalJSON implements the json.Unmarshaler interface, which allows values of any json type as an int
