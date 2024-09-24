@@ -10,32 +10,18 @@ import (
 
 // League provides a struct representation of a League resource.
 type League struct {
-	ID              int            `json:"id"`
-	Active          bool           `json:"active"`
-	Type            string         `json:"type"`
-	LegacyID        int            `json:"legacy_id"`
-	CountryID       int            `json:"country_id"`
-	LogoPath        string         `json:"logo_path"`
-	Name            string         `json:"name"`
-	IsCup           bool           `json:"is_cup"`
-	CurrentSeasonID int            `json:"current_season_id"`
-	CurrentRoundID  int            `json:"current_round_id"`
-	CurrentStageID  int            `json:"current_stage_id"`
-	LiveStandings   bool           `json:"live_standings"`
-	Coverage        LeagueCoverage `json:"coverage"`
-	Country         *Country       `json:"country,omitempty"`
-	Season          SeasonData     `json:"season,omitempty"`
-	Seasons         SeasonsData    `json:"seasons,omitempty"`
-}
-
-// SeasonData returns the current Season struct associated to a League.
-func (l *League) SeasonData() *Season {
-	return l.Season.Data
-}
-
-// SeasonsData returns a slice of Season struct associated to a League.
-func (l *League) SeasonsData() []Season {
-	return l.Seasons.Data
+	ID           int    `json:"id"`
+	SportID      int    `json:"sport_id"`
+	CountryID    int    `json:"country_id"`
+	Name         string `json:"name"`
+	Active       bool   `json:"active"`
+	ShortCode    string `json:"short_code"`
+	ImagePath    string `json:"image_path"`
+	Type         string `json:"type"`
+	SubType      string `json:"sub_type"`
+	LastPlayedAt string `json:"last_played_at"`
+	Category     int    `json:"category"`
+	HasJerseys   bool   `json:"has_jerseys"`
 }
 
 // Leagues fetches League resources. The endpoint used within this method is paginated, to select the required
@@ -44,7 +30,7 @@ func (l *League) SeasonsData() []Season {
 func (c *HTTPClient) Leagues(ctx context.Context, page int, includes []string) ([]League, *Meta, error) {
 	values := url.Values{
 		"page":    {strconv.Itoa(page)},
-		"include": {strings.Join(includes, ",")},
+		"include": {strings.Join(includes, ";")},
 	}
 
 	response := struct {
@@ -66,7 +52,7 @@ func (c *HTTPClient) LeagueByID(ctx context.Context, id int, includes []string) 
 	path := fmt.Sprintf(leaguesURI+"/%d", id)
 
 	values := url.Values{
-		"include": {strings.Join(includes, ",")},
+		"include": {strings.Join(includes, ";")},
 	}
 
 	response := struct {

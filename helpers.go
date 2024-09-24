@@ -18,16 +18,8 @@ type (
 		Data []GoalScorer `json:"data"`
 	}
 
-	AggregatedMatchOddsData struct {
-		Data []MatchOdds `json:"data"`
-	}
-
 	AssistScorerData struct {
 		Data []AssistScorer `json:"data"`
-	}
-
-	BookmakerOddsData struct {
-		Data []BookmakerOdds `json:"data"`
 	}
 
 	CardEventsData struct {
@@ -90,10 +82,6 @@ type (
 		Data []Commentary `json:"data"`
 	}
 
-	MatchHighlightsData struct {
-		Data []VideoHighlights `json:"data"`
-	}
-
 	MatchEventsData struct {
 		Data []MatchEvent `json:"data"`
 	}
@@ -104,10 +92,6 @@ type (
 
 	MatchTVStationsData struct {
 		Data []TVStation `json:"data"`
-	}
-
-	OddsData struct {
-		Data []Odds `json:"data"`
 	}
 
 	PlayerData struct {
