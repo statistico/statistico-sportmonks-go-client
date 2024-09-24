@@ -31,6 +31,7 @@ type Fixture struct {
 	HasOdds             bool    `json:"has_odds"`
 	HasPremiumOdds      bool    `json:"has_premium_odds"`
 	StartingAtTimestamp int64   `json:"starting_at_timestamp"`
+	Round               *Round  `json:"round,omitempty"`
 }
 
 // FixtureByID fetches a Fixture resource by ID. Use the includes slice of string to enrich the response data.
