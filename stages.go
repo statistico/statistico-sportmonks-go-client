@@ -9,37 +9,19 @@ import (
 
 // Stage provides a struct representation of a Stage resource.
 type Stage struct {
-	ID           int          `json:"id"`
-	Name         string       `json:"name"`
-	Type         *string      `json:"type"`
-	LeagueID     int          `json:"league_id"`
-	SeasonID     int          `json:"season_id"`
-	SortOrder    *string      `json:"sort_order"`
-	HasStandings *bool        `json:"has_standings"`
-	FixturesData FixturesData `json:"fixtures,omitempty"`
-	LeagueData   LeagueData   `json:"league,omitempty"`
-	ResultsData  FixturesData `json:"results,omitempty"`
-	SeasonData   SeasonData   `json:"season,omitempty"`
-}
-
-// Fixtures returns fixture data.
-func (s *Stage) Fixtures() []Fixture {
-	return s.FixturesData.Data
-}
-
-// League returns league data.
-func (s *Stage) League() *League {
-	return s.LeagueData.Data
-}
-
-// Results returns completed fixture data.
-func (s *Stage) Results() []Fixture {
-	return s.ResultsData.Data
-}
-
-// Season returns a season data.
-func (s *Stage) Season() *Season {
-	return s.SeasonData.Data
+	ID                 int    `json:"id"`
+	SportID            int    `json:"sport_id"`
+	LeagueID           int    `json:"league_id"`
+	SeasonID           int    `json:"season_id"`
+	TypeID             int    `json:"type_id"`
+	Name               string `json:"name"`
+	SortOrder          int    `json:"sort_order"`
+	Finished           bool   `json:"finished"`
+	IsCurrent          bool   `json:"is_current"`
+	StartingAt         string `json:"starting_at"`
+	EndingAt           string `json:"ending_at"`
+	GamesInCurrentWeek bool   `json:"games_in_current_week"`
+	TieBreakerRuleID   *int   `json:"tie_breaker_rule_id"` // Using pointer to handle null value
 }
 
 // StageByID fetches a Stage resource by ID. Use the includes slice of string to enrich the response data.
@@ -47,7 +29,7 @@ func (c *HTTPClient) StageByID(ctx context.Context, id int, includes []string) (
 	path := fmt.Sprintf(stagesURI+"/%d", id)
 
 	values := url.Values{
-		"include": {strings.Join(includes, ",")},
+		"include": {strings.Join(includes, ";")},
 	}
 
 	response := struct {
@@ -69,7 +51,7 @@ func (c *HTTPClient) StagesBySeasonID(ctx context.Context, id int, includes []st
 	path := fmt.Sprintf(stagesSeasonURI+"/%d", id)
 
 	values := url.Values{
-		"include": {strings.Join(includes, ",")},
+		"include": {strings.Join(includes, ";")},
 	}
 
 	response := struct {

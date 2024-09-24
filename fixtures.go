@@ -10,198 +10,27 @@ import (
 
 const dateFormat = "2006-01-02"
 
-// Fixture provides a struct representation of a Fixture resource.
 type Fixture struct {
-	ID                    int                     `json:"id"`
-	LeagueID              int                     `json:"league_id"`
-	SeasonID              int                     `json:"season_id"`
-	StageID               *int                    `json:"stage_id"`
-	RoundID               *int                    `json:"round_id"`
-	GroupID               *int                    `json:"group_id"`
-	AggregateID           *int                    `json:"aggregate_id"`
-	VenueID               *int                    `json:"venue_id"`
-	RefereeID             *int                    `json:"referee_id"`
-	LocalTeamID           int                     `json:"localteam_id"`
-	VisitorTeamID         int                     `json:"visitorteam_id"`
-	WinnerTeamID          *int                    `json:"winner_team_id"`
-	WeatherReport         *WeatherReport          `json:"weather_report,omitempty"`
-	Commentaries          *bool                   `json:"commentaries"`
-	Attendance            *int                    `json:"attendance"`
-	Pitch                 *string                 `json:"pitch"`
-	Details               *string                 `json:"details"`
-	NeutralVenue          *bool                   `json:"neutral_venue"`
-	WinningOddsCalculated bool                    `json:"winning_odds_calculated"`
-	Formations            Formations              `json:"formations"`
-	Scores                Scores                  `json:"scores"`
-	Time                  FixtureTime             `json:"time"`
-	Coaches               Coaches                 `json:"coaches"`
-	Standings             TeamStandings           `json:"standings"`
-	Assistants            Assistants              `json:"assistants"`
-	Leg                   *string                 `json:"leg"`
-	Colors                *TeamColors             `json:"colors,omitempty"`
-	Deleted               bool                    `json:"deleted"`
-	CardEvents            CardEventsData          `json:"cards"`
-	CornerEvents          CornerEventsData        `json:"corners"`
-	GoalEvents            GoalEventsData          `json:"goals"`
-	MatchEvents           MatchEventsData         `json:"events"`
-	LineupData            PlayerLineupData        `json:"lineup"`
-	BenchData             PlayerLineupData        `json:"bench"`
-	LocalTeamData         TeamData                `json:"localTeam,omitempty"`
-	VisitorTeamData       TeamData                `json:"visitorTeam,omitempty"`
-	SubstitutionData      SubstitutionEventsData  `json:"substitutions"`
-	SidelinedData         SidelinedData           `json:"sidelined"`
-	CommentsData          MatchCommentaryData     `json:"comments,omitempty"`
-	TVStationData         MatchTVStationsData     `json:"tvstations"`
-	HighlightData         MatchHighlightsData     `json:"highlights,omitempty"`
-	LeagueData            LeagueData              `json:"league,omitempty"`
-	RoundData             RoundData               `json:"round,omitempty"`
-	StageData             StageData               `json:"stage,omitempty"`
-	RefereeData           MatchOfficialData       `json:"referee,omitempty"`
-	FirstAssistantData    MatchOfficialData       `json:"firstAssistant,omitempty"`
-	SecondAssistantData   MatchOfficialData       `json:"secondAssistant,omitempty"`
-	FourthOfficialData    MatchOfficialData       `json:"fourthOfficial,omitempty"`
-	VenueData             VenueData               `json:"venue,omitempty"`
-	OddsData              AggregatedMatchOddsData `json:"odds,omitempty"`
-	InPlayOddsData        AggregatedMatchOddsData `json:"inplayOdds,omitempty"`
-	FlatOddsData          AggregatedMatchOddsData `json:"flatOdds,omitempty"`
-	LocalCoachData        CoachData               `json:"localCoach,omitempty"`
-	VisitorCoachData      CoachData               `json:"visitorCoach,omitempty"`
-	TeamStatsData         TeamsStatsData          `json:"stats,omitempty"`
-}
-
-// Bench returns PlayerStats data for players on the bench for a fixture.
-func (f *Fixture) Bench() []PlayerStats {
-	return f.BenchData.Data
-}
-
-// Cards returns CardEvents for a fixture.
-func (f *Fixture) Cards() []CardEvent {
-	return f.CardEvents.Data
-}
-
-// Commentary returns Commentary data for a fixture.
-func (f *Fixture) Commentary() []Commentary {
-	return f.CommentsData.Data
-}
-
-// Corners returns CornerEvents for a fixture.
-func (f *Fixture) Corners() []CornerEvent {
-	return f.CornerEvents.Data
-}
-
-// Events returns all events for a fixture.
-func (f *Fixture) Events() []MatchEvent {
-	return f.MatchEvents.Data
-}
-
-// FirstAssistant return first assistant data for a fixture.
-func (f *Fixture) FirstAssistant() *MatchOfficial {
-	return f.FirstAssistantData.Data
-}
-
-// FlatOdds returns flat odds data for a fixture.
-func (f *Fixture) FlatOdds() []MatchOdds {
-	return f.FlatOddsData.Data
-}
-
-// FourthOfficial return fourth official data for a fixture.
-func (f *Fixture) FourthOfficial() *MatchOfficial {
-	return f.FourthOfficialData.Data
-}
-
-// Goals returns GoalEvents for a fixture.
-func (f *Fixture) Goals() []GoalEvent {
-	return f.GoalEvents.Data
-}
-
-// Highlights returns video highlights data for a fixture.
-func (f *Fixture) Highlights() []VideoHighlights {
-	return f.HighlightData.Data
-}
-
-// InPlayOdds returns in play odds data for a fixture.
-func (f *Fixture) InPlayOdds() []MatchOdds {
-	return f.InPlayOddsData.Data
-}
-
-// League returns league data for a fixture.
-func (f *Fixture) League() *League {
-	return f.LeagueData.Data
-}
-
-// Lineups returns PlayerStats data for starting players for a fixture.
-func (f *Fixture) Lineups() []PlayerStats {
-	return f.LineupData.Data
-}
-
-// LocalCoach returns coach data for the home team.
-func (f *Fixture) LocalCoach() *Coach {
-	return f.LocalCoachData.Data
-}
-
-// LocalTeam return team data for the home team.
-func (f *Fixture) LocalTeam() *Team {
-	return f.LocalTeamData.Data
-}
-
-// Odds returns bookmaker odds data for a fixture.
-func (f *Fixture) Odds() []MatchOdds {
-	return f.OddsData.Data
-}
-
-// Referee returns referee data for a fixture.
-func (f *Fixture) Referee() *MatchOfficial {
-	return f.RefereeData.Data
-}
-
-// Round returns round data for a fixture.
-func (f *Fixture) Round() *Round {
-	return f.RoundData.Data
-}
-
-// SecondAssistant return second assistant data for a fixture.
-func (f *Fixture) SecondAssistant() *MatchOfficial {
-	return f.SecondAssistantData.Data
-}
-
-// Sidelined returns player data for injured players.
-func (f *Fixture) Sidelined() []Sidelined {
-	return f.SidelinedData.Data
-}
-
-// Stage returns round stage for a fixture.
-func (f *Fixture) Stage() *Stage {
-	return f.StageData.Data
-}
-
-// Substitutions returns SubstitutionEvents for a fixture.
-func (f *Fixture) Substitutions() []SubstitutionEvent {
-	return f.SubstitutionData.Data
-}
-
-// TeamStats returns stats data for home and away teams.
-func (f *Fixture) TeamStats() []TeamStats {
-	return f.TeamStatsData.Data
-}
-
-// TVStations return tv station data for a fixture.
-func (f *Fixture) TVStations() []TVStation {
-	return f.TVStationData.Data
-}
-
-// Venue returns round venue for a fixture.
-func (f *Fixture) Venue() *Venue {
-	return f.VenueData.Data
-}
-
-// VisitorCoach returns coach data for the away team.
-func (f *Fixture) VisitorCoach() *Coach {
-	return f.VisitorCoachData.Data
-}
-
-// VisitorTeam return teams data for the away team.
-func (f *Fixture) VisitorTeam() *Team {
-	return f.VisitorTeamData.Data
+	ID                  int     `json:"id"`
+	SportID             int     `json:"sport_id"`
+	LeagueID            int     `json:"league_id"`
+	SeasonID            int     `json:"season_id"`
+	StageID             int     `json:"stage_id"`
+	GroupID             *int    `json:"group_id"`
+	AggregateID         *int    `json:"aggregate_id"`
+	RoundID             int     `json:"round_id"`
+	StateID             int     `json:"state_id"`
+	VenueID             int     `json:"venue_id"`
+	Name                string  `json:"name"`
+	StartingAt          string  `json:"starting_at"`
+	ResultInfo          string  `json:"result_info"`
+	Leg                 string  `json:"leg"`
+	Details             *string `json:"details"`
+	Length              int     `json:"length"`
+	Placeholder         bool    `json:"placeholder"`
+	HasOdds             bool    `json:"has_odds"`
+	HasPremiumOdds      bool    `json:"has_premium_odds"`
+	StartingAtTimestamp int64   `json:"starting_at_timestamp"`
 }
 
 // FixtureByID fetches a Fixture resource by ID. Use the includes slice of string to enrich the response data.
@@ -209,7 +38,7 @@ func (c *HTTPClient) FixtureByID(ctx context.Context, id int, includes []string,
 	path := fmt.Sprintf(fixturesURI+"/%d", id)
 
 	values := url.Values{
-		"include": {strings.Join(includes, ",")},
+		"include": {strings.Join(includes, ";")},
 	}
 
 	formatFilters(&values, filters)
@@ -259,12 +88,6 @@ func (c *HTTPClient) FixturesBetweenForTeam(ctx context.Context, from, to time.T
 	return multipleFixtureResponse(ctx, c, path, includes, filters)
 }
 
-// FixturesLastUpdated fetches multiple Fixture resources of fixtures that were most recently updated. Use the includes slice of string
-// to enrich the response data.
-func (c *HTTPClient) FixturesLastUpdated(ctx context.Context, includes []string, filters map[string][]int) ([]Fixture, *Meta, error) {
-	return multipleFixtureResponse(ctx, c, fixturesLastUpdatedURI, includes, filters)
-}
-
 // HeadToHead fetches multiple Fixture resources of results between two teams. Use the includes slice of string to enrich
 // the response data.
 func (c *HTTPClient) HeadToHead(ctx context.Context, idOne, idTwo int, includes []string) ([]Fixture, *Meta, error) {
@@ -275,7 +98,7 @@ func (c *HTTPClient) HeadToHead(ctx context.Context, idOne, idTwo int, includes 
 
 func multipleFixtureResponse(ctx context.Context, client *HTTPClient, path string, includes []string, filters map[string][]int) ([]Fixture, *Meta, error) {
 	values := url.Values{
-		"include": {strings.Join(includes, ",")},
+		"include": {strings.Join(includes, ";")},
 	}
 
 	formatFilters(&values, filters)

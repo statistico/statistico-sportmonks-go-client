@@ -9,15 +9,19 @@ import (
 var tvStationsResponse = `{
 	"data": [
 		{
-		  "fixture_id": 11867285,
-		  "tvstation": "CANAL+"
+		  "id": 33,
+		  "name": "Star+",
+		  "url": "https://www.starplus.com/",
+		  "image_path": "https://cdn.sportmonks.com/images/core/tvstations/1/33.png",
+		  "type": "tv",
+		  "related_id": null
 		}
 	]
 }`
 
 func TestTVStationsByFixtureID(t *testing.T) {
 	t.Run("returns a slice of TVStation struct", func(t *testing.T) {
-		url := defaultBaseURL + "/tvstations/fixture/11867285?api_token=api-key"
+		url := defaultBaseURL + "/football/tv-stations/fixtures/11867285?api_token=api-key"
 
 		server := mockResponseServer(t, tvStationsResponse, 200, url)
 
@@ -33,7 +37,7 @@ func TestTVStationsByFixtureID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseURL + "/tvstations/fixture/11867285?api_token=api-key"
+		url := defaultBaseURL + "/football/tv-stations/fixtures/11867285?api_token=api-key"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -50,6 +54,10 @@ func TestTVStationsByFixtureID(t *testing.T) {
 }
 
 func assertTVStation(t *testing.T, tv *TVStation) {
-	assert.Equal(t, 11867285, tv.FixtureID)
-	assert.Equal(t, "CANAL+", tv.TVStation)
+	assert.Equal(t, 33, tv.ID)
+	assert.Equal(t, "Star+", tv.Name)
+	assert.Equal(t, "https://www.starplus.com/", tv.URL)
+	assert.Equal(t, "https://cdn.sportmonks.com/images/core/tvstations/1/33.png", tv.ImagePath)
+	assert.Equal(t, "tv", tv.Type)
+	assert.Nil(t, tv.RelatedID)
 }
