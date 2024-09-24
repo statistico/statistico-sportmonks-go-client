@@ -94,20 +94,76 @@ type (
 		Won   *int `json:"won"`
 	}
 
-	// FixtureTime in depth time data for a fixture.
-	FixtureTime struct {
-		Status     string `json:"status"`
-		StartingAt struct {
-			DateTime  string `json:"date_time"`
-			Date      string `json:"date"`
-			Time      string `json:"time"`
-			Timestamp int    `json:"timestamp"`
-			Timezone  string `json:"timezone"`
-		} `json:"starting_at"`
-		Minute      int  `json:"minute"`
-		AddedTime   *int `json:"added_time"`
-		ExtraMinute *int `json:"extra_minute"`
-		InjuryTime  *int `json:"injury_time"`
+	FixtureEvent struct {
+		ID                int               `json:"id"`
+		FixtureID         int               `json:"fixture_id"`
+		PeriodID          int               `json:"period_id"`
+		ParticipantID     int               `json:"participant_id"`
+		TypeID            int               `json:"type_id"`
+		Section           string            `json:"section"`
+		PlayerID          int               `json:"player_id"`
+		RelatedPlayerID   int               `json:"related_player_id"`
+		PlayerName        string            `json:"player_name"`
+		RelatedPlayerName string            `json:"related_player_name"`
+		Result            string            `json:"result"`
+		Info              string            `json:"info"`
+		Addition          string            `json:"addition"`
+		Minute            int               `json:"minute"`
+		ExtraMinute       *int              `json:"extra_minute"`
+		Injured           *bool             `json:"injured"`
+		OnBench           bool              `json:"on_bench"`
+		CoachID           *int              `json:"coach_id"`
+		SubTypeID         *int              `json:"sub_type_id"`
+		SortOrder         int               `json:"sort_order"`
+		Type              *FixtureEventType `json:"type"`
+	}
+
+	FixtureEventType struct {
+		ID            int     `json:"id"`
+		Name          string  `json:"name"`
+		Code          string  `json:"code"`
+		DeveloperName string  `json:"developer_name"`
+		ModelType     string  `json:"model_type"`
+		StatGroup     *string `json:"stat_group"`
+	}
+
+	FixtureStat struct {
+		ID            int       `json:"id"`
+		FixtureID     int       `json:"fixture_id"`
+		TypeID        int       `json:"type_id"`
+		ParticipantID int       `json:"participant_id"`
+		Data          StatData  `json:"data"`
+		Location      string    `json:"location"`
+		Type          *StatType `json:"type,omitempty"`
+	}
+
+	Formation struct {
+		ID            int    `json:"id"`
+		FixtureID     int    `json:"fixture_id"`
+		ParticipantID int    `json:"participant_id"`
+		Formation     string `json:"formation"`
+		Location      string `json:"location"`
+	}
+
+	StatData struct {
+		Value int `json:"value"`
+	}
+
+	StatType struct {
+		ID            int    `json:"id"`
+		Name          string `json:"name"`
+		Code          string `json:"code"`
+		DeveloperName string `json:"developer_name"`
+		ModelType     string `json:"model_type"`
+		StatGroup     string `json:"stat_group"`
+	}
+
+	FixtureState struct {
+		ID            int    `json:"id"`
+		State         string `json:"state"`
+		Name          string `json:"name"`
+		ShortName     string `json:"short_name"`
+		DeveloperName string `json:"developer_name"`
 	}
 
 	// Formations provides formation information for home and away teams for a fixture.
@@ -170,6 +226,21 @@ type (
 		TopScorerGoals   bool `json:"topscorer_goals"`
 		TopScorerAssists bool `json:"topscorer_assists"`
 		TopScorerCards   bool `json:"topscorer_cards"`
+	}
+
+	// LineupPlayer provides information for a player of a team for a fixture.
+	LineupPlayer struct {
+		ID                int     `json:"id"`
+		SportID           int     `json:"sport_id"`
+		FixtureID         int     `json:"fixture_id"`
+		PlayerID          int     `json:"player_id"`
+		TeamID            int     `json:"team_id"`
+		PositionID        int     `json:"position_id"`
+		FormationField    *string `json:"formation_field"`
+		TypeID            int     `json:"type_id"`
+		FormationPosition int     `json:"formation_position"`
+		PlayerName        string  `json:"player_name"`
+		JerseyNumber      int     `json:"jersey_number"`
 	}
 
 	// LiveStandings provides league standing information for a team.
@@ -255,6 +326,30 @@ type (
 		PositionY          *int             `json:"posy"`
 		Captain            bool             `json:"captain"`
 		Stats              PlayerMatchStats `json:"stats"`
+	}
+
+	Score struct {
+		ID            int          `json:"id"`
+		FixtureID     int          `json:"fixture_id"`
+		TypeID        int          `json:"type_id"`
+		ParticipantID int          `json:"participant_id"`
+		ScoreData     ScoreDetails `json:"score"`
+		Description   string       `json:"description"`
+		Type          *ScoreType   `json:"type,omitempty"`
+	}
+
+	ScoreDetails struct {
+		Goals       int    `json:"goals"`
+		Participant string `json:"participant"`
+	}
+
+	ScoreType struct {
+		ID            int     `json:"id"`
+		Name          string  `json:"name"`
+		Code          string  `json:"code"`
+		DeveloperName string  `json:"developer_name"`
+		ModelType     string  `json:"model_type"`
+		StatGroup     *string `json:"stat_group"`
 	}
 
 	// Shots explains shot stat data for a player.
@@ -570,28 +665,31 @@ type (
 
 	// WeatherReport provides weather data for a fixture.
 	WeatherReport struct {
-		Code        string `json:"code"`
-		Type        string `json:"type"`
-		Icon        string `json:"icon"`
-		Temperature struct {
-			Temp float64 `json:"temp"`
-			Unit string  `json:"unit"`
-		} `json:"temperature"`
-		TemperatureCelcius struct {
-			Temp float64 `json:"temp"`
-			Unit string  `json:"unit"`
-		} `json:"temperature_celcius"`
-		Clouds   string   `json:"clouds"`
-		Humidity string   `json:"humidity"`
-		Pressure *float64 `json:"pressure"`
-		Wind     struct {
-			Speed  string   `json:"speed"`
-			Degree *float64 `json:"degree"`
-		} `json:"wind"`
-		Coordinates struct {
-			Lat *float64 `json:"lat"`
-			Lon *float64 `json:"lon"`
-		}
-		UpdatedAt *string `json:"updated_at"`
+		ID          int             `json:"id"`
+		FixtureID   int             `json:"fixture_id"`
+		VenueID     int             `json:"venue_id"`
+		Temperature TemperatureData `json:"temperature"`
+		FeelsLike   TemperatureData `json:"feels_like"`
+		Wind        WindData        `json:"wind"`
+		Humidity    string          `json:"humidity"`
+		Pressure    int             `json:"pressure"`
+		Clouds      string          `json:"clouds"`
+		Description string          `json:"description"`
+		Icon        string          `json:"icon"`
+		Type        string          `json:"type"`
+		Metric      string          `json:"metric"`
+		Current     *interface{}    `json:"current"` // Use *interface{} to handle null values
+	}
+
+	TemperatureData struct {
+		Day     float64 `json:"day"`
+		Morning float64 `json:"morning"`
+		Evening float64 `json:"evening"`
+		Night   float64 `json:"night"`
+	}
+
+	WindData struct {
+		Speed     float64 `json:"speed"`
+		Direction int     `json:"direction"`
 	}
 )
