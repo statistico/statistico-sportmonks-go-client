@@ -43,6 +43,7 @@ type Fixture struct {
 	Events              []FixtureEvent `json:"events,omitempty"`
 	Statistics          []FixtureStat  `json:"statistics,omitempty"`
 	Formations          []Formation    `json:"formations,omitempty"`
+	Participants        []Team         `json:"participants,omitempty"`
 }
 
 // FixtureByID fetches a Fixture resource by ID. Use the includes slice of string to enrich the response data.

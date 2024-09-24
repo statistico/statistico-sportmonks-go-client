@@ -493,6 +493,12 @@ type (
 		Injured       *bool  `json:"injuried"`
 	}
 
+	TeamFixtureMeta struct {
+		Location string `json:"location"`
+		Winner   bool   `json:"winner"`
+		Position int    `json:"position"`
+	}
+
 	// TeamLeagueStats provides basic league stat data for a team.
 	TeamLeagueStats struct {
 		GamesPlayed  int `json:"games_played"`
