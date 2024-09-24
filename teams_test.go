@@ -8,130 +8,68 @@ import (
 
 var teamResponse = `{
 	"data": {
-		"id": 1,
-		"legacy_id": 377,
-		"name": "West Ham United",
-		"short_code": "WHU",
-		"twitter": "@WestHamUtd",
-		"country_id": 462,
-		"national_team": false,
-		"founded": 1895,
-		"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/teams\/1\/1.png",
-		"venue_id": 214,
-		"current_season_id": 16036
-	}
+      "id": 1,
+      "sport_id": 1,
+      "country_id": 462,
+      "venue_id": 214,
+      "gender": "male",
+      "name": "West Ham United",
+      "short_code": "WHU",
+      "image_path": "https://cdn.sportmonks.com/images/soccer/teams/1/1.png",
+      "founded": 1895,
+      "type": "domestic",
+      "placeholder": false,
+      "last_played_at": "2024-09-21 11:30:00"
+    }
 }`
 
 var teamIncludesResponse = `{
 	"data": {
-		"id": 1,
-		"legacy_id": 377,
-		"name": "West Ham United",
-		"short_code": "WHU",
-		"twitter": "@WestHamUtd",
-		"country_id": 462,
-		"national_team": false,
-		"founded": 1895,
-		"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/teams\/1\/1.png",
-		"venue_id": 214,
-		"current_season_id": 16036,
-		"squad": {
-			"data": [
-				{
-					  "player_id": 219591,
-					  "position_id": 2,
-					  "number": 4,
-					  "captain": 0,
-					  "injured": false,
-					  "minutes": 90,
-					  "appearences": 2,
-					  "lineups": 1,
-					  "substitute_in": 1,
-					  "substitute_out": 0,
-					  "substitutes_on_bench": 7,
-					  "goals": 0,
-					  "assists": 0,
-					  "saves": null,
-					  "inside_box_saves": null,
-					  "dispossesed": null,
-					  "interceptions": null,
-					  "yellowcards": 1,
-					  "yellowred": 0,
-					  "redcards": 0,
-					  "tackles": null,
-					  "blocks": null,
-					  "hit_post": null,
-					  "fouls": {
-						"committed": 2,
-						"drawn": null
-					  },
-					  "crosses": {
-						"total": null,
-						"accurate": null
-					  },
-					  "dribbles": {
-						"attempts": null,
-						"success": null,
-						"dribbled_past": null
-					  },
-					  "duels": {
-						"total": null,
-						"won": null
-					  },
-					  "passes": {
-						"total": 30,
-						"accuracy": 75,
-						"key_passes": null
-					  },
-					  "penalties": {
-						"won": null,
-						"scores": null,
-						"missed": null,
-						"committed": null,
-						"saves": null
-					  }
-				}
-			]
-		},
-		"league": {
-			"data": {
-				"id": 82,
-				"active": true,
-				"type": "domestic",
-				"legacy_id": 4,
-				"country_id": 11,
-				"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/leagues\/82.png",
-				"name": "Bundesliga",
-				"is_cup": false,
-				"current_season_id": 16264,
-				"current_round_id": 174546,
-				"current_stage_id": 77444845,
-				"live_standings": true,
-				"coverage": {
-				  "predictions": true,
-				  "topscorer_goals": true,
-				  "topscorer_assists": true,
-				  "topscorer_cards": true
-				}
-			}
-		}
+		  "id": 1,
+		  "sport_id": 1,
+		  "country_id": 462,
+		  "venue_id": 214,
+		  "gender": "male",
+		  "name": "West Ham United",
+		  "short_code": "WHU",
+		  "image_path": "https://cdn.sportmonks.com/images/soccer/teams/1/1.png",
+		  "founded": 1895,
+		  "type": "domestic",
+		  "placeholder": false,
+		  "last_played_at": "2024-09-21 11:30:00",
+		  "venue":  {
+			"id": 214,
+			"country_id": 462,
+			"city_id": 51663,
+			"name": "London Stadium",
+			"address": "Marshgate Lane, Stratford",
+			"zipcode": null,
+			"latitude": "51.538611",
+			"longitude": "-0.016389",
+			"capacity": 60000,
+			"image_path": "https://cdn.sportmonks.com/images/soccer/venues/22/214.png",
+			"city_name": "London",
+			"surface": "grass",
+			"national_team": false
+		  }
 	}
 }`
 
 var teamsResponse = `{
 	"data": [
 		{
-			"id": 1,
-			"legacy_id": 377,
-			"name": "West Ham United",
-			"short_code": "WHU",
-			"twitter": "@WestHamUtd",
-			"country_id": 462,
-			"national_team": false,
-			"founded": 1895,
-			"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/teams\/1\/1.png",
-			"venue_id": 214,
-			"current_season_id": 16036
+		  "id": 1,
+		  "sport_id": 1,
+		  "country_id": 462,
+		  "venue_id": 214,
+		  "gender": "male",
+		  "name": "West Ham United",
+		  "short_code": "WHU",
+		  "image_path": "https://cdn.sportmonks.com/images/soccer/teams/1/1.png",
+		  "founded": 1895,
+		  "type": "domestic",
+		  "placeholder": false,
+		  "last_played_at": "2024-09-21 11:30:00"
 		}
 	]
 }`
@@ -139,104 +77,40 @@ var teamsResponse = `{
 var teamsIncludesResponse = `{
 	"data": [
 		{
-			"id": 1,
-			"legacy_id": 377,
-			"name": "West Ham United",
-			"short_code": "WHU",
-			"twitter": "@WestHamUtd",
+		  "id": 1,
+		  "sport_id": 1,
+		  "country_id": 462,
+		  "venue_id": 214,
+		  "gender": "male",
+		  "name": "West Ham United",
+		  "short_code": "WHU",
+		  "image_path": "https://cdn.sportmonks.com/images/soccer/teams/1/1.png",
+		  "founded": 1895,
+		  "type": "domestic",
+		  "placeholder": false,
+		  "last_played_at": "2024-09-21 11:30:00",
+		  "venue":  {
+			"id": 214,
 			"country_id": 462,
-			"national_team": false,
-			"founded": 1895,
-			"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/teams\/1\/1.png",
-			"venue_id": 214,
-			"current_season_id": 16036,
-			"squad": {
-				"data": [
-					{
-						  "player_id": 219591,
-						  "position_id": 2,
-						  "number": 4,
-						  "captain": 0,
-						  "injured": false,
-						  "minutes": 90,
-						  "appearences": 2,
-						  "lineups": 1,
-						  "substitute_in": 1,
-						  "substitute_out": 0,
-						  "substitutes_on_bench": 7,
-						  "goals": 0,
-						  "assists": 0,
-						  "saves": null,
-						  "inside_box_saves": null,
-						  "dispossesed": null,
-						  "interceptions": null,
-						  "yellowcards": 1,
-						  "yellowred": 0,
-						  "redcards": 0,
-						  "tackles": null,
-						  "blocks": null,
-						  "hit_post": null,
-						  "fouls": {
-							"committed": 2,
-							"drawn": null
-						  },
-						  "crosses": {
-							"total": null,
-							"accurate": null
-						  },
-						  "dribbles": {
-							"attempts": null,
-							"success": null,
-							"dribbled_past": null
-						  },
-						  "duels": {
-							"total": null,
-							"won": null
-						  },
-						  "passes": {
-							"total": 30,
-							"accuracy": 75,
-							"key_passes": null
-						  },
-						  "penalties": {
-							"won": null,
-							"scores": null,
-							"missed": null,
-							"committed": null,
-							"saves": null
-						  }
-					}
-				]
-			},
-			"league": {
-				"data": {
-					"id": 82,
-					"active": true,
-					"type": "domestic",
-					"legacy_id": 4,
-					"country_id": 11,
-					"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/leagues\/82.png",
-					"name": "Bundesliga",
-					"is_cup": false,
-					"current_season_id": 16264,
-					"current_round_id": 174546,
-					"current_stage_id": 77444845,
-					"live_standings": true,
-					"coverage": {
-					  "predictions": true,
-					  "topscorer_goals": true,
-					  "topscorer_assists": true,
-					  "topscorer_cards": true
-					}
-				}
-			}
+			"city_id": 51663,
+			"name": "London Stadium",
+			"address": "Marshgate Lane, Stratford",
+			"zipcode": null,
+			"latitude": "51.538611",
+			"longitude": "-0.016389",
+			"capacity": 60000,
+			"image_path": "https://cdn.sportmonks.com/images/soccer/venues/22/214.png",
+			"city_name": "London",
+			"surface": "grass",
+			"national_team": false
+		  }
 		}
 	]
 }`
 
 func TestTeamByID(t *testing.T) {
 	t.Run("returns a single Team struct", func(t *testing.T) {
-		url := defaultBaseURL + "/teams/1?api_token=api-key&include="
+		url := defaultBaseURL + "/football/teams/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, teamResponse, 200, url)
 
@@ -252,7 +126,7 @@ func TestTeamByID(t *testing.T) {
 	})
 
 	t.Run("returns a single Team struct with includes data", func(t *testing.T) {
-		url := defaultBaseURL + "/teams/1?api_token=api-key&include=squad%2Cleague"
+		url := defaultBaseURL + "/football/teams/1?api_token=api-key&include=squad%3Bleague"
 
 		server := mockResponseServer(t, teamIncludesResponse, 200, url)
 
@@ -265,12 +139,10 @@ func TestTeamByID(t *testing.T) {
 		}
 
 		assertTeam(t, team)
-		assertSquadPlayer(t, &team.Squad()[0])
-		assertLeague(t, team.League())
 	})
 
 	t.Run("returns a single Team struct with includes data and filter parameters", func(t *testing.T) {
-		url := defaultBaseURL + "/teams/1?api_token=api-key&include=squad%2Cleague&seasons=4%2C56"
+		url := defaultBaseURL + "/football/teams/1?api_token=api-key&include=squad%3Bleague&seasons=4%2C56"
 
 		server := mockResponseServer(t, teamIncludesResponse, 200, url)
 
@@ -293,12 +165,10 @@ func TestTeamByID(t *testing.T) {
 		}
 
 		assertTeam(t, team)
-		assertSquadPlayer(t, &team.Squad()[0])
-		assertLeague(t, team.League())
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseURL + "/teams/1?api_token=api-key&include="
+		url := defaultBaseURL + "/football/teams/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -316,7 +186,7 @@ func TestTeamByID(t *testing.T) {
 
 func TestTeamsBySeasonID(t *testing.T) {
 	t.Run("returns a slice of Team struct", func(t *testing.T) {
-		url := defaultBaseURL + "/teams/season/12962?api_token=api-key&include=&page=1"
+		url := defaultBaseURL + "/football/teams/seasons/12962?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, teamsResponse, 200, url)
 
@@ -332,7 +202,7 @@ func TestTeamsBySeasonID(t *testing.T) {
 	})
 
 	t.Run("returns a slice of Team struct with includes data", func(t *testing.T) {
-		url := defaultBaseURL + "/teams/season/12962?api_token=api-key&include=squad%2Cleague&page=1"
+		url := defaultBaseURL + "/football/teams/seasons/12962?api_token=api-key&include=squad%3Bleague&page=1"
 
 		server := mockResponseServer(t, teamsIncludesResponse, 200, url)
 
@@ -350,12 +220,10 @@ func TestTeamsBySeasonID(t *testing.T) {
 		}
 
 		assertTeam(t, &teams[0])
-		assertSquadPlayer(t, &teams[0].Squad()[0])
-		assertLeague(t, teams[0].League())
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseURL + "/teams/season/12962?api_token=api-key&include=&page=1"
+		url := defaultBaseURL + "/football/teams/seasons/12962?api_token=api-key&include=&page=1"
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -373,16 +241,13 @@ func TestTeamsBySeasonID(t *testing.T) {
 
 func assertTeam(t *testing.T, team *Team) {
 	assert.Equal(t, 1, team.ID)
-	assert.Equal(t, 377, team.LegacyID)
 	assert.Equal(t, "West Ham United", team.Name)
 	assert.Equal(t, "WHU", team.ShortCode)
-	assert.Equal(t, "@WestHamUtd", *team.Twitter)
 	assert.Equal(t, 462, team.CountryID)
-	assert.Equal(t, false, team.NationalTeam)
+	assert.Equal(t, false, team.Placeholder)
 	assert.Equal(t, 1895, team.Founded)
-	assert.Equal(t, "https://cdn.sportmonks.com/images/soccer/teams/1/1.png", *team.LogoPath)
+	assert.Equal(t, "https://cdn.sportmonks.com/images/soccer/teams/1/1.png", team.ImagePath)
 	assert.Equal(t, 214, team.VenueID)
-	assert.Equal(t, 16036, team.CurrentSeasonID)
 }
 
 func assertSquadPlayer(t *testing.T, player *SquadPlayer) {

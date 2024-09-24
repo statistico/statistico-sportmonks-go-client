@@ -38,12 +38,12 @@ const (
 	stagesURI              = "/stages"
 	stagesSeasonURI        = "/stages/season"
 	teamSquadURI           = "/squad/season"
-	teamsURI               = "/teams"
-	teamsSeasonURI         = "/teams/season"
-	topScorersSeasonURI    = "/topscorers/season"
+	teamsURI               = "/football/teams"
+	teamsSeasonURI         = "/football/teams/seasons"
+	topScorersSeasonURI    = "/football/topscorers/seasons"
 	tvStationsURI          = "/tvstations/fixture"
-	venuesURI              = "/venues"
-	venuesSeasonURI        = "/venues/season"
+	venuesURI              = "/football/venues"
+	venuesSeasonURI        = "/football/venues/seasons"
 	videoHighlightsURI     = "/highlights"
 )
 

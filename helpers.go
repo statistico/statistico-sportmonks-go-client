@@ -86,10 +86,6 @@ type (
 		Data []League `json:"data"`
 	}
 
-	LeagueStandingData struct {
-		Data []LeagueStanding `json:"data"`
-	}
-
 	MatchCommentaryData struct {
 		Data []Commentary `json:"data"`
 	}

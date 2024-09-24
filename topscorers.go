@@ -7,60 +7,16 @@ import (
 	"strings"
 )
 
-// TopScorers provides a struct representation of a TopScorers resource.
-type TopScorers struct {
-	ID               int              `json:"id"`
-	Name             string           `json:"name"`
-	LeagueID         int              `json:"league_id"`
-	IsCurrentSeason  bool             `json:"is_current_season"`
-	CurrentRoundID   *int             `json:"current_round_id"`
-	CurrentStageID   *int             `json:"current_stage_id"`
-	AssistScorerData AssistScorerData `json:"assistscorers"`
-	CardScorerData   CardScorerData   `json:"cardscorers"`
-	GoalScorerData   GoalScorerData   `json:"goalscorers"`
-}
-
-// AssistScorers returns assist scorer data.
-func (t *TopScorers) AssistScorers() []AssistScorer {
-	return t.AssistScorerData.Data
-}
-
-// CardScorers returns card scorer data.
-func (t *TopScorers) CardScorers() []CardScorer {
-	return t.CardScorerData.Data
-}
-
-// GoalScorers returns goal scorer data.
-func (t *TopScorers) GoalScorers() []GoalScorer {
-	return t.GoalScorerData.Data
-}
-
-// AggregatedTopScorers provides a struct representation of a AggregatedTopScorers resource.
-type AggregatedTopScorers struct {
-	ID               int              `json:"id"`
-	Name             string           `json:"name"`
-	LeagueID         int              `json:"league_id"`
-	IsCurrentSeason  bool             `json:"is_current_season"`
-	CurrentRoundID   *int             `json:"current_round_id"`
-	CurrentStageID   *int             `json:"current_stage_id"`
-	AssistScorerData AssistScorerData `json:"aggregatedAssistscorers"`
-	CardScorerData   CardScorerData   `json:"aggregatedCardscorers"`
-	GoalScorerData   GoalScorerData   `json:"aggregatedGoalscorers"`
-}
-
-// AssistScorers returns aggregated assist scorer data.
-func (a *AggregatedTopScorers) AssistScorers() []AssistScorer {
-	return a.AssistScorerData.Data
-}
-
-// CardScorers returns aggregated card scorer data.
-func (a *AggregatedTopScorers) CardScorers() []CardScorer {
-	return a.CardScorerData.Data
-}
-
-// GoalScorers returns aggregated goal scorer data.
-func (a *AggregatedTopScorers) GoalScorers() []GoalScorer {
-	return a.GoalScorerData.Data
+// TopScorer provides a struct representation of a TopScorer resource.
+type TopScorer struct {
+	ID            int `json:"id"`
+	SeasonID      int `json:"season_id"`
+	PlayerID      int `json:"player_id"`
+	TypeID        int `json:"type_id"`
+	Position      int `json:"position"`
+	Total         int `json:"total"`
+	ParticipantID int `json:"participant_id"`
+	//Season        *Season `json:"season,omitempty"`
 }
 
 // AssistScorer provides a struct representation of a AssistScorer resource
@@ -135,41 +91,18 @@ func (g *GoalScorer) Team() *Team {
 }
 
 // TopScorersBySeasonID fetches a TopScorers resource for a season by ID. Use the includes slice of string to enrich the response data.
-func (c *HTTPClient) TopScorersBySeasonID(ctx context.Context, seasonID int, includes []string, filters map[string][]int) (*TopScorers, *Meta, error) {
+func (c *HTTPClient) TopScorersBySeasonID(ctx context.Context, seasonID int, includes []string, filters map[string][]int) ([]TopScorer, *Meta, error) {
 	path := fmt.Sprintf(topScorersSeasonURI+"/%d", seasonID)
 
 	values := url.Values{
-		"include": {strings.Join(includes, ",")},
+		"include": {strings.Join(includes, ";")},
 	}
 
 	formatFilters(&values, filters)
 
 	response := struct {
-		Data *TopScorers `json:"data"`
+		Data []TopScorer `json:"data"`
 		Meta *Meta       `json:"meta"`
-	}{}
-
-	err := c.getResource(ctx, path, values, &response)
-
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return response.Data, response.Meta, err
-}
-
-// AggregatedTopScorersBySeasonID fetches an AggregatedTopScorers resource for a season by ID. Use the includes slice of string to enrich
-// the response data.
-func (c *HTTPClient) AggregatedTopScorersBySeasonID(ctx context.Context, seasonID int, includes []string) (*AggregatedTopScorers, *Meta, error) {
-	path := fmt.Sprintf(topScorersSeasonURI+"/%d/aggregated", seasonID)
-
-	values := url.Values{
-		"include": {strings.Join(includes, ",")},
-	}
-
-	response := struct {
-		Data *AggregatedTopScorers `json:"data"`
-		Meta *Meta                 `json:"meta"`
 	}{}
 
 	err := c.getResource(ctx, path, values, &response)

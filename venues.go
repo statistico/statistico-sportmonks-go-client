@@ -6,16 +6,20 @@ import (
 	"net/url"
 )
 
-// Venue provides a struct representation of a Venue resource.
 type Venue struct {
-	ID          int     `json:"id"`
-	Name        string  `json:"name"`
-	Surface     string  `json:"surface"`
-	Address     *string `json:"address"`
-	City        string  `json:"city"`
-	Capacity    int     `json:"capacity"`
-	ImagePath   string  `json:"image_path"`
-	Coordinates *string `json:"coordinates"`
+	ID           int     `json:"id"`
+	CountryID    int     `json:"country_id"`
+	CityID       int     `json:"city_id"`
+	Name         string  `json:"name"`
+	Address      string  `json:"address"`
+	Zipcode      *string `json:"zipcode"`
+	Latitude     string  `json:"latitude"`
+	Longitude    string  `json:"longitude"`
+	Capacity     int     `json:"capacity"`
+	ImagePath    string  `json:"image_path"`
+	CityName     string  `json:"city_name"`
+	Surface      string  `json:"surface"`
+	NationalTeam bool    `json:"national_team"`
 }
 
 // VenueByID fetches a Venue resource by ID.
