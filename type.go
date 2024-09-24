@@ -145,19 +145,6 @@ type (
 		Location      string `json:"location"`
 	}
 
-	StatData struct {
-		Value int `json:"value"`
-	}
-
-	StatType struct {
-		ID            int    `json:"id"`
-		Name          string `json:"name"`
-		Code          string `json:"code"`
-		DeveloperName string `json:"developer_name"`
-		ModelType     string `json:"model_type"`
-		StatGroup     string `json:"stat_group"`
-	}
-
 	FixtureState struct {
 		ID            int    `json:"id"`
 		State         string `json:"state"`
@@ -476,6 +463,19 @@ type (
 		ID      int    `json:"id"`
 		Name    string `json:"name"`
 		Current bool   `json:"current"`
+	}
+
+	StatData struct {
+		Value int `json:"value"`
+	}
+
+	StatType struct {
+		ID            int    `json:"id"`
+		Name          string `json:"name"`
+		Code          string `json:"code"`
+		DeveloperName string `json:"developer_name"`
+		ModelType     string `json:"model_type"`
+		StatGroup     string `json:"stat_group"`
 	}
 
 	// SubstitutionEvent provides details of a substitution event.
