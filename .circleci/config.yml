@@ -1,13 +1,13 @@
 version: 2.1
 
 executors:
-  go-executor:
+  go_executor:
     docker:
-      - image: cimg/go:1.23.1
+      - image: cimg/go:1.22.6
 
 jobs:
   build:
-    executor: go-executor
+    executor: go_executor
     steps:
       - checkout
       - run:
