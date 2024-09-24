@@ -145,19 +145,6 @@ type (
 		Location      string `json:"location"`
 	}
 
-	StatData struct {
-		Value int `json:"value"`
-	}
-
-	StatType struct {
-		ID            int    `json:"id"`
-		Name          string `json:"name"`
-		Code          string `json:"code"`
-		DeveloperName string `json:"developer_name"`
-		ModelType     string `json:"model_type"`
-		StatGroup     string `json:"stat_group"`
-	}
-
 	FixtureState struct {
 		ID            int    `json:"id"`
 		State         string `json:"state"`
@@ -230,17 +217,29 @@ type (
 
 	// LineupPlayer provides information for a player of a team for a fixture.
 	LineupPlayer struct {
-		ID                int     `json:"id"`
-		SportID           int     `json:"sport_id"`
-		FixtureID         int     `json:"fixture_id"`
-		PlayerID          int     `json:"player_id"`
-		TeamID            int     `json:"team_id"`
-		PositionID        int     `json:"position_id"`
-		FormationField    *string `json:"formation_field"`
-		TypeID            int     `json:"type_id"`
-		FormationPosition int     `json:"formation_position"`
-		PlayerName        string  `json:"player_name"`
-		JerseyNumber      int     `json:"jersey_number"`
+		ID                int           `json:"id"`
+		SportID           int           `json:"sport_id"`
+		FixtureID         int           `json:"fixture_id"`
+		PlayerID          int           `json:"player_id"`
+		TeamID            int           `json:"team_id"`
+		PositionID        int           `json:"position_id"`
+		FormationField    *string       `json:"formation_field"`
+		TypeID            int           `json:"type_id"`
+		FormationPosition int           `json:"formation_position"`
+		PlayerName        string        `json:"player_name"`
+		JerseyNumber      int           `json:"jersey_number"`
+		Details           *LineupDetail `json:"details,omitempty"`
+	}
+
+	LineupDetail struct {
+		ID        int       `json:"id"`
+		FixtureID int       `json:"fixture_id"`
+		PlayerID  int       `json:"player_id"`
+		TeamID    int       `json:"team_id"`
+		LineupID  int       `json:"lineup_id"`
+		TypeID    int       `json:"type_id"`
+		Data      StatData  `json:"data"`
+		Type      *StatType `json:"type,omitempty"`
 	}
 
 	// LiveStandings provides league standing information for a team.
@@ -464,6 +463,19 @@ type (
 		ID      int    `json:"id"`
 		Name    string `json:"name"`
 		Current bool   `json:"current"`
+	}
+
+	StatData struct {
+		Value int `json:"value"`
+	}
+
+	StatType struct {
+		ID            int    `json:"id"`
+		Name          string `json:"name"`
+		Code          string `json:"code"`
+		DeveloperName string `json:"developer_name"`
+		ModelType     string `json:"model_type"`
+		StatGroup     string `json:"stat_group"`
 	}
 
 	// SubstitutionEvent provides details of a substitution event.
