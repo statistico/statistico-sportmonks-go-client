@@ -10,21 +10,19 @@ import (
 
 // Country provides a struct representation of a Country resource.
 type Country struct {
-	ID            int           `json:"id"`
-	Name          string        `json:"name"`
-	Extra         CountryExtra  `json:"extra"`
-	ContinentData ContinentData `json:"continent,omitempty"`
-	LeaguesData   LeaguesData   `json:"leagues,omitempty"`
-}
-
-// Continent returns a Continent struct associated to a Country.
-func (c *Country) Continent() *Continent {
-	return c.ContinentData.Data
-}
-
-// Leagues returns a League struct slice associated to a Country.
-func (c *Country) Leagues() []League {
-	return c.LeaguesData.Data
+	ID           int        `json:"id"`
+	ContinentID  int        `json:"continent_id"`
+	Name         string     `json:"name"`
+	OfficialName string     `json:"official_name"`
+	FifaName     string     `json:"fifa_name"`
+	Iso2         string     `json:"iso2"`
+	Iso3         string     `json:"iso3"`
+	Latitude     string     `json:"latitude"`
+	Longitude    string     `json:"longitude"`
+	Borders      []string   `json:"borders"`
+	ImagePath    string     `json:"image_path"`
+	Continent    *Continent `json:"continent,omitempty"`
+	//Leagues      []League  `json:"leagues,omitempty"`
 }
 
 // Countries fetches Country resources. The endpoint used within this method is paginated, to select the required
@@ -33,7 +31,7 @@ func (c *Country) Leagues() []League {
 func (c *HTTPClient) Countries(ctx context.Context, page int, includes []string) ([]Country, *Meta, error) {
 	values := url.Values{
 		"page":    {strconv.Itoa(page)},
-		"include": {strings.Join(includes, ",")},
+		"include": {strings.Join(includes, ";")},
 	}
 
 	response := struct {
@@ -55,7 +53,7 @@ func (c *HTTPClient) CountryByID(ctx context.Context, id int, includes []string)
 	path := fmt.Sprintf(countriesURI+"/%d", id)
 
 	values := url.Values{
-		"include": {strings.Join(includes, ",")},
+		"include": {strings.Join(includes, ";")},
 	}
 
 	response := struct {

@@ -70,12 +70,12 @@ func assertCoach(t *testing.T, coach *Coach) {
 	assert.Equal(t, "D. Unsworth", coach.CommonName)
 	assert.Equal(t, "David", coach.FirstName)
 	assert.Equal(t, "Unsworth", coach.LastName)
-	assert.Equal(t, "David Unsworth", coach.Name)        // Assuming you want to assert the full name
-	assert.Equal(t, "David Unsworth", coach.DisplayName) // Assuming this is to check display name
-	assert.Nil(t, coach.CityID)                          // Updated to check for CityID being nil
-	assert.Equal(t, "1973-10-16", coach.DateOfBirth)     // Match the new date format
+	assert.Equal(t, "David Unsworth", coach.Name)
+	assert.Equal(t, "David Unsworth", coach.DisplayName)
+	assert.Nil(t, coach.CityID)
+	assert.Equal(t, "1973-10-16", coach.DateOfBirth)
 	assert.Equal(t, "male", coach.Gender)
-	assert.Nil(t, coach.Height)                                                                  // Assuming height is now nil
-	assert.Nil(t, coach.Weight)                                                                  // Assuming weight is now nil
-	assert.Equal(t, "https://cdn.sportmonks.com/images/soccer/placeholder.png", coach.ImagePath) // Updated image URL
+	assert.Nil(t, coach.Height)
+	assert.Nil(t, coach.Weight)
+	assert.Equal(t, "https://cdn.sportmonks.com/images/soccer/placeholder.png", coach.ImagePath)
 }

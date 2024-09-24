@@ -13,7 +13,7 @@ type Coach struct {
 	SportID       int    `json:"sport_id"`
 	CountryID     int    `json:"country_id"`
 	NationalityID int    `json:"nationality_id"`
-	CityID        *int   `json:"city_id"` // Use a pointer to handle null values
+	CityID        *int   `json:"city_id"`
 	CommonName    string `json:"common_name"`
 	FirstName     string `json:"firstname"`
 	LastName      string `json:"lastname"`
@@ -22,7 +22,7 @@ type Coach struct {
 	ImagePath     string `json:"image_path"`
 	Height        *int   `json:"height"`
 	Weight        *int   `json:"weight"`
-	DateOfBirth   string `json:"date_of_birth"` // Consider using time.Time for better date handling
+	DateOfBirth   string `json:"date_of_birth"`
 	Gender        string `json:"gender"`
 }
 

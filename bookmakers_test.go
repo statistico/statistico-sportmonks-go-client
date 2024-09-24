@@ -32,7 +32,7 @@ var bookmakerResponse = `{
 `
 
 func TestBookmakers(t *testing.T) {
-	url := defaultBaseURL + "/bookmakers?api_token=api-key"
+	url := defaultBaseURL + "/odds/bookmakers?api_token=api-key"
 
 	t.Run("returns bookmaker struct slice", func(t *testing.T) {
 		server := mockResponseServer(t, bookmakersResponse, 200, url)
@@ -68,7 +68,7 @@ func TestBookmakers(t *testing.T) {
 }
 
 func TestBookMakerByID(t *testing.T) {
-	url := defaultBaseURL + "/bookmakers/1?api_token=api-key"
+	url := defaultBaseURL + "/odds/bookmakers/1?api_token=api-key"
 
 	t.Run("returns a single bookmaker struct", func(t *testing.T) {
 		server := mockResponseServer(t, bookmakerResponse, 200, url)
@@ -106,5 +106,5 @@ func TestBookMakerByID(t *testing.T) {
 func assertBookmaker(t *testing.T, bookmaker *Bookmaker) {
 	assert.Equal(t, 1, bookmaker.ID)
 	assert.Equal(t, "10Bet", bookmaker.Name)
-	assert.Nil(t, bookmaker.LegacyID)
+	assert.Equal(t, 1, bookmaker.LegacyID)
 }

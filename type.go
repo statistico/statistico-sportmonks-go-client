@@ -338,6 +338,23 @@ type (
 		PSScore             *string `json:"ps_score"`
 	}
 
+	SeasonStatistic struct {
+		ID         int             `json:"id"`
+		ModelID    int             `json:"model_id"`
+		TypeID     int             `json:"type_id"`
+		RelationID int             `json:"relation_id"`
+		Value      SeasonStatValue `json:"value"`
+		Type       string          `json:"type"`
+	}
+
+	SeasonStatValue struct {
+		Count               int     `json:"count"`
+		Percentage          float64 `json:"percentage"`
+		AvgPerMatch         float64 `json:"avg_per_match"`
+		TeamMostCornersID   int     `json:"team_most_corners_id"`
+		TeamMostCornersName string  `json:"team_most_corners_name"`
+	}
+
 	// Sidelined provides injury data for a player.
 	Sidelined struct {
 		PlayerID    int    `json:"player_id"`

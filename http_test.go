@@ -20,7 +20,7 @@ func TestNewHTTPClient(t *testing.T) {
 	t.Run("instantiates with default properties", func(t *testing.T) {
 		client := NewDefaultHTTPClient("api-key")
 
-		assert.Equal(t, "https://soccer.sportmonks.com/api/v2.0", client.BaseURL)
+		assert.Equal(t, "https://api.sportmonks.com/v3", client.BaseURL)
 		assert.Equal(t, "api-key", client.Key)
 	})
 
@@ -40,7 +40,7 @@ func TestNewHTTPClient(t *testing.T) {
 			assert.Equal(
 				t,
 				req.URL.String(),
-				"https://soccer.sportmonks.com/api/v2.0/continents/10?api_token=api-key&include=countries",
+				"https://api.sportmonks.com/v3/core/continents/10?api_token=api-key&include=countries",
 			)
 
 			return &http.Response{
