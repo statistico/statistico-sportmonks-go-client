@@ -11,12 +11,12 @@ var bookmakersResponse = `{
 		{
 		  "id": 1,
 		  "name": "10Bet",
-		  "logo": null
+		  "legacy_id": 1
 		},
 		{
 		  "id": 2,
 		  "name": "bet365",
-		  "logo": null
+		  "legacy_id": 2
 		}
 	]
 }
@@ -26,7 +26,7 @@ var bookmakerResponse = `{
 	"data": {
 		"id": 1,
     	"name": "10Bet",
-    	"logo": null
+    	"legacy_id": 1
 	}
 }
 `
@@ -106,5 +106,5 @@ func TestBookMakerByID(t *testing.T) {
 func assertBookmaker(t *testing.T, bookmaker *Bookmaker) {
 	assert.Equal(t, 1, bookmaker.ID)
 	assert.Equal(t, "10Bet", bookmaker.Name)
-	assert.Nil(t, bookmaker.Logo)
+	assert.Nil(t, bookmaker.LegacyID)
 }

@@ -12,8 +12,8 @@ import (
 
 const (
 	defaultBaseURL         = "https://api.sportmonks.com/v3"
-	bookmakersURI          = "/bookmakers"
-	coachesURI             = "/coaches"
+	bookmakersURI          = "/odds/bookmakers"
+	coachesURI             = "/football/coaches"
 	commentariesFixtureURI = "/commentaries/fixture"
 	continentsURI          = "/continents"
 	countriesURI           = "/countries"
