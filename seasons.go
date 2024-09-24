@@ -10,18 +10,22 @@ import (
 
 // Season provides a struct representation of a Season resource.
 type Season struct {
-	ID                      int    `json:"id"`
-	SportID                 int    `json:"sport_id"`
-	LeagueID                int    `json:"league_id"`
-	TieBreakerRuleID        int    `json:"tie_breaker_rule_id"`
-	Name                    string `json:"name"`
-	Finished                bool   `json:"finished"`
-	Pending                 bool   `json:"pending"`
-	IsCurrent               bool   `json:"is_current"`
-	StartingAt              string `json:"starting_at"`
-	EndingAt                string `json:"ending_at"`
-	StandingsRecalculatedAt string `json:"standings_recalculated_at"`
-	GamesInCurrentWeek      bool   `json:"games_in_current_week"`
+	ID                      int       `json:"id"`
+	SportID                 int       `json:"sport_id"`
+	LeagueID                int       `json:"league_id"`
+	TieBreakerRuleID        int       `json:"tie_breaker_rule_id"`
+	Name                    string    `json:"name"`
+	Finished                bool      `json:"finished"`
+	Pending                 bool      `json:"pending"`
+	IsCurrent               bool      `json:"is_current"`
+	StartingAt              string    `json:"starting_at"`
+	EndingAt                string    `json:"ending_at"`
+	StandingsRecalculatedAt string    `json:"standings_recalculated_at"`
+	GamesInCurrentWeek      bool      `json:"games_in_current_week"`
+	League                  *League   `json:"league,omitempty"`
+	Teams                   []Team    `json:"teams,omitempty"`
+	Stages                  []Stage   `json:"stages,omitempty"`
+	Fixtures                []Fixture `json:"fixtures,omitempty"`
 }
 
 // Seasons fetches Season resources. The endpoint used within this method is paginated, to select the required
