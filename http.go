@@ -11,12 +11,12 @@ import (
 )
 
 const (
-	defaultBaseURL         = "https://soccer.sportmonks.com/api/v2.0"
-	bookmakersURI          = "/bookmakers"
-	coachesURI             = "/coaches"
+	defaultBaseURL         = "https://api.sportmonks.com/v3"
+	bookmakersURI          = "/odds/bookmakers"
+	coachesURI             = "/football/coaches"
 	commentariesFixtureURI = "/commentaries/fixture"
-	continentsURI          = "/continents"
-	countriesURI           = "/countries"
+	continentsURI          = "/core/continents"
+	countriesURI           = "/core/countries"
 	fixturesURI            = "/fixtures"
 	fixturesDateURI        = "/fixtures/date"
 	fixturesBetweenURI     = "/fixtures/between"
@@ -85,6 +85,8 @@ func (c *HTTPClient) getResource(ctx context.Context, url string, query url.Valu
 	query.Set("api_token", c.Key)
 
 	req.URL.RawQuery = query.Encode()
+
+	fmt.Println(req.URL)
 
 	return c.do(ctx, req, response)
 }

@@ -10,14 +10,10 @@ import (
 
 // Continent provides a struct representation of a Continent resource.
 type Continent struct {
-	ID            int           `json:"id"`
-	Name          string        `json:"name"`
-	CountriesData CountriesData `json:"countries,omitempty"`
-}
-
-// Countries returns a Country struct slice associated to a Continent.
-func (c *Continent) Countries() []Country {
-	return c.CountriesData.Data
+	ID        int       `json:"id"`
+	Name      string    `json:"name"`
+	Code      string    `json:"code"`
+	Countries []Country `json:"countries,omitempty"`
 }
 
 // Continents fetches Continent resources. The endpoint used within this method is paginated, to select the required
@@ -26,7 +22,7 @@ func (c *Continent) Countries() []Country {
 func (c *HTTPClient) Continents(ctx context.Context, page int, includes []string) ([]Continent, *Meta, error) {
 	values := url.Values{
 		"page":    {strconv.Itoa(page)},
-		"include": {strings.Join(includes, ",")},
+		"include": {strings.Join(includes, ";")},
 	}
 
 	response := struct {
@@ -48,7 +44,7 @@ func (c *HTTPClient) ContinentByID(ctx context.Context, id int, includes []strin
 	path := fmt.Sprintf(continentsURI+"/%d", id)
 
 	values := url.Values{
-		"include": {strings.Join(includes, ",")},
+		"include": {strings.Join(includes, ";")},
 	}
 
 	response := struct {

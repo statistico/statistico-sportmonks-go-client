@@ -8,23 +8,27 @@ import (
 
 var coachResponse = `{
 	"data": {
-		"coach_id": 2,
-		"team_id": 1238,
-		"country_id": 462,
-		"common_name": "R. Fowler",
-		"fullname": "R. Fowler",
-		"firstname": "Robbie",
-		"lastname": "Fowler",
-		"nationality": "England",
-		"birthdate": "09\/04\/1975",
-		"birthcountry": "England",
-		"birthplace": null,
-		"image_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/players\/2\/2.png"
-  	}
+      "id": 24,
+      "player_id": 24,
+      "sport_id": 1,
+      "country_id": 462,
+      "nationality_id": 462,
+      "city_id": null,
+      "common_name": "D. Unsworth",
+      "firstname": "David",
+      "lastname": "Unsworth",
+      "name": "David Unsworth",
+      "display_name": "David Unsworth",
+      "image_path": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+      "height": null,
+      "weight": null,
+      "date_of_birth": "1973-10-16",
+      "gender": "male"
+    }
 }`
 
 func TestCoachByID(t *testing.T) {
-	url := defaultBaseURL + "/coaches/2?api_token=api-key"
+	url := defaultBaseURL + "/football/coaches/2?api_token=api-key"
 
 	t.Run("returns a single coach struct", func(t *testing.T) {
 		server := mockResponseServer(t, coachResponse, 200, url)
@@ -60,15 +64,18 @@ func TestCoachByID(t *testing.T) {
 }
 
 func assertCoach(t *testing.T, coach *Coach) {
-	assert.Equal(t, 2, coach.ID)
-	assert.Equal(t, 1238, coach.TeamID)
+	assert.Equal(t, 24, coach.ID)
+	assert.Equal(t, 24, coach.PlayerID) // Updated from TeamID to PlayerID
 	assert.Equal(t, 462, coach.CountryID)
-	assert.Equal(t, "R. Fowler", coach.CommonName)
-	assert.Equal(t, "Robbie", coach.FirstName)
-	assert.Equal(t, "Fowler", coach.LastName)
-	assert.Equal(t, "England", coach.Nationality)
-	assert.Equal(t, "09/04/1975", coach.BirthDate)
-	assert.Equal(t, "England", coach.BirthCountry)
-	assert.Nil(t, coach.BirthPlace)
-	assert.Equal(t, "https://cdn.sportmonks.com/images/soccer/players/2/2.png", coach.ImagePath)
+	assert.Equal(t, "D. Unsworth", coach.CommonName)
+	assert.Equal(t, "David", coach.FirstName)
+	assert.Equal(t, "Unsworth", coach.LastName)
+	assert.Equal(t, "David Unsworth", coach.Name)
+	assert.Equal(t, "David Unsworth", coach.DisplayName)
+	assert.Nil(t, coach.CityID)
+	assert.Equal(t, "1973-10-16", coach.DateOfBirth)
+	assert.Equal(t, "male", coach.Gender)
+	assert.Nil(t, coach.Height)
+	assert.Nil(t, coach.Weight)
+	assert.Equal(t, "https://cdn.sportmonks.com/images/soccer/placeholder.png", coach.ImagePath)
 }

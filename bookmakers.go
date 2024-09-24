@@ -8,9 +8,9 @@ import (
 
 // Bookmaker provides a struct representation of a Bookmaker resource
 type Bookmaker struct {
-	ID   int     `json:"id"`
-	Name string  `json:"name"`
-	Logo *string `json:"logo"`
+	ID       int    `json:"id"`
+	Name     string `json:"name"`
+	LegacyID int    `json:"legacy_id"`
 }
 
 // Bookmakers fetches a slice of Bookmaker resource struct.

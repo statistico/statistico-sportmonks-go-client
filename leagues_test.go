@@ -53,21 +53,25 @@ var leaguesIncludesResponse = `{
 			  "topscorer_cards": true
 			},
 			"country": {
-				"data": {
-					"id": 11,
-					"name": "Germany",
-					"extra": {
-						"continent": "Europe",
-						"sub_region": "Western Europe",
-						"world_region": "EMEA",
-						"fifa": "GER",
-						"iso": "DEU",
-						"iso2": "DE",
-						"longitude": "19.37775993347168",
-						"latitude": "52.147850036621094",
-						"flag": "http:\/\/www.w3.org\/2000\/svg"
-					}
-				}
+              "id": 2,
+			  "continent_id": 1,
+			  "name": "Poland",
+			  "official_name": "Republic of Poland",
+			  "fifa_name": "POL",
+			  "iso2": "PL",
+			  "iso3": "POL",
+			  "latitude": "52.147850036621094",
+			  "longitude": "19.37775993347168",
+			  "borders": [
+				"BLR",
+				"CZE",
+				"DEU",
+				"LTU",
+				"RUS",
+				"SVK",
+				"UKR"
+			  ],
+			  "image_path": "https://cdn.sportmonks.com/images/countries/png/short/pl.png"
 			},
 			"season": {
 				"data": {
@@ -139,21 +143,25 @@ var leagueIncludesResponse = `{
 		  "topscorer_cards": true
 		},
 		"country": {
-			"data": {
-				"id": 11,
-				"name": "Germany",
-				"extra": {
-					"continent": "Europe",
-					"sub_region": "Western Europe",
-					"world_region": "EMEA",
-					"fifa": "GER",
-					"iso": "DEU",
-					"iso2": "DE",
-					"longitude": "19.37775993347168",
-					"latitude": "52.147850036621094",
-					"flag": "http:\/\/www.w3.org\/2000\/svg"
-				}
-			}
+          "id": 2,
+		  "continent_id": 1,
+		  "name": "Poland",
+		  "official_name": "Republic of Poland",
+		  "fifa_name": "POL",
+		  "iso2": "PL",
+		  "iso3": "POL",
+		  "latitude": "52.147850036621094",
+		  "longitude": "19.37775993347168",
+		  "borders": [
+			"BLR",
+			"CZE",
+			"DEU",
+			"LTU",
+			"RUS",
+			"SVK",
+			"UKR"
+		  ],
+		  "image_path": "https://cdn.sportmonks.com/images/countries/png/short/pl.png"
 		},
 		"season": {
 			"data": {
@@ -211,7 +219,7 @@ func TestLeagues(t *testing.T) {
 		}
 
 		assertLeague(t, &leagues[0])
-		assertCountry(t, leagues[0].CountryData())
+		assertCountry(t, leagues[0].Country)
 		assertSeason(t, leagues[0].SeasonData())
 		assertSeason(t, &leagues[0].SeasonsData()[0])
 	})
@@ -264,7 +272,7 @@ func TestLeagueByID(t *testing.T) {
 		}
 
 		assertLeague(t, league)
-		assertCountry(t, league.CountryData())
+		assertCountry(t, league.Country)
 		assertSeason(t, league.SeasonData())
 		assertSeason(t, &league.SeasonsData()[0])
 	})
