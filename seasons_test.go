@@ -39,7 +39,21 @@ var seasonsIncludesResponse = `{
 		  "starting_at": "2010-08-14",
 		  "ending_at": "2011-05-22",
 		  "standings_recalculated_at": "2023-05-24 08:28:07",
-		  "games_in_current_week": false
+		  "games_in_current_week": false,
+		  "league": {
+			  "id": 8,
+			  "sport_id": 1,
+			  "country_id": 462,
+			  "name": "Premier League",
+			  "active": true,
+			  "short_code": "UK PL",
+			  "image_path": "https://cdn.sportmonks.com/images/soccer/leagues/8/8.png",
+			  "type": "league",
+			  "sub_type": "domestic",
+			  "last_played_at": "2024-09-22 15:30:00",
+			  "category": 1,
+			  "has_jerseys": false
+          }
 		}
 	]
 }`
@@ -74,7 +88,21 @@ var seasonIncludesResponse = `{
       "starting_at": "2010-08-14",
       "ending_at": "2011-05-22",
       "standings_recalculated_at": "2023-05-24 08:28:07",
-      "games_in_current_week": false
+      "games_in_current_week": false,
+	  "league": {
+		  "id": 8,
+		  "sport_id": 1,
+		  "country_id": 462,
+		  "name": "Premier League",
+		  "active": true,
+		  "short_code": "UK PL",
+		  "image_path": "https://cdn.sportmonks.com/images/soccer/leagues/8/8.png",
+		  "type": "league",
+		  "sub_type": "domestic",
+		  "last_played_at": "2024-09-22 15:30:00",
+		  "category": 1,
+		  "has_jerseys": false
+	  }
     }
 }`
 
@@ -96,19 +124,20 @@ func TestSeasons(t *testing.T) {
 	})
 
 	t.Run("returns a slice of Season struct with includes data", func(t *testing.T) {
-		url := defaultBaseURL + "/football/seasons?api_token=api-key&include=groups%3Bgoalscorers%3Brounds&page=1"
+		url := defaultBaseURL + "/football/seasons?api_token=api-key&include=league%3Bgoalscorers%3Brounds&page=1"
 
 		server := mockResponseServer(t, seasonsIncludesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		seasons, _, err := client.Seasons(context.Background(), 1, []string{"groups", "goalscorers", "rounds"})
+		seasons, _, err := client.Seasons(context.Background(), 1, []string{"league", "goalscorers", "rounds"})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
 		}
 
 		assertSeason(t, &seasons[0])
+		assertLeague(t, seasons[0].League)
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
@@ -146,19 +175,20 @@ func TestSeasonByID(t *testing.T) {
 	})
 
 	t.Run("returns a single Season struct with includes data", func(t *testing.T) {
-		url := defaultBaseURL + "/football/seasons/55?api_token=api-key&deleted=1&include=groups%3Bgoalscorers%3Brounds%3Bresults"
+		url := defaultBaseURL + "/football/seasons/55?api_token=api-key&deleted=1&include=league%3Bgoalscorers%3Brounds%3Bresults"
 
 		server := mockResponseServer(t, seasonIncludesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		season, _, err := client.SeasonByID(context.Background(), 55, []string{"groups", "goalscorers", "rounds", "results"})
+		season, _, err := client.SeasonByID(context.Background(), 55, []string{"league", "goalscorers", "rounds", "results"})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
 		}
 
 		assertSeason(t, season)
+		assertLeague(t, season.League)
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
