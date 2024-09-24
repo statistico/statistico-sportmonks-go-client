@@ -7,284 +7,36 @@ import (
 )
 
 var topScorersResponse = `{
-	"data": {
-		"id": 12962,
-		"name": "2018\/2019",
-		"league_id": 8,
-		"is_current_season": false,
-		"current_round_id": null,
-		"current_stage_id": null,
-		"goalscorers": {
-			"data": [
-				{
-					"position": 1,
-					"season_id": 7907,
-					"player_id": 210173,
-					"team_id": 579,
-					"stage_id": 56494,
-					"goals": 3,
-					"penalty_goals": 0,
-					"type": "goals"
-				}
-			]
-		},
-		"assistscorers": {
-			"data": [
-				{
-					"position": 1,
-					"season_id": 12962,
-					"player_id": 1331,
-					"team_id": 18,
-					"stage_id": 7456626,
-					"assists": 15,
-					"type": "assists"
-				}
-			]
-		},
-		"cardscorers": {
-			"data": [
-				{
-					"position": 1,
-					"season_id": 12962,
-					"player_id": 1276,
-					"team_id": 25,
-					"stage_id": 7456626,
-					"yellowcards": 14,
-					"redcards": 1,
-					"type": "cards"
-				}
-			]
+	"data": [
+		{
+		  "id": 1540266,
+		  "season_id": 19734,
+		  "player_id": 159700,
+		  "type_id": 83,
+		  "position": 1,
+		  "total": 2,
+		  "participant_id": 14
 		}
-	}
+	]
 }`
 
 var topScorersIncludesResponse = `{
-	"data": {
-		"id": 12962,
-		"name": "2018\/2019",
-		"league_id": 8,
-		"is_current_season": false,
-		"current_round_id": null,
-		"current_stage_id": null,
-		"goalscorers": {
-			"data": [
-				{
-					"position": 1,
-					"season_id": 7907,
-					"player_id": 210173,
-					"team_id": 579,
-					"stage_id": 56494,
-					"goals": 3,
-					"penalty_goals": 0,
-					"type": "goals",
-					"team": {
-						"data": {
-							"id": 1,
-							"legacy_id": 377,
-							"name": "West Ham United",
-							"short_code": "WHU",
-							"twitter": "@WestHamUtd",
-							"country_id": 462,
-							"national_team": false,
-							"founded": 1895,
-							"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/teams\/1\/1.png",
-							"venue_id": 214,
-							"current_season_id": 16036
-						}
-					}
-				}
-			]
-		},
-		"assistscorers": {
-			"data": [
-				{
-					"position": 1,
-					"season_id": 12962,
-					"player_id": 1331,
-					"team_id": 18,
-					"stage_id": 7456626,
-					"assists": 15,
-					"type": "assists"
-				}
-			]
-		},
-		"cardscorers": {
-			"data": [
-				{
-					"position": 1,
-					"season_id": 12962,
-					"player_id": 1276,
-					"team_id": 25,
-					"stage_id": 7456626,
-					"yellowcards": 14,
-					"redcards": 1,
-					"type": "cards",
-					"player": {
-						"data": {
-							"player_id": 219591,
-							"team_id": 1,
-							"country_id": 1190,
-							"position_id": 2,
-							"common_name": "F. Balbuena",
-							"fullname": "F. Balbuena",
-							"firstname": "Fabián Cornelio",
-							"lastname": "Balbuena González",
-							"nationality": "Paraguay",
-							"birthdate": "23\/08\/1991",
-							"birthcountry": "Paraguay",
-							"birthplace": "Ciudad del Este",
-							"height": "188 cm",
-							"weight": "82 kg",
-							"image_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/players\/7\/219591.png"
-						}
-					}
-				}
-			]
+	"data": [
+		{
+		  "id": 1540266,
+		  "season_id": 19734,
+		  "player_id": 159700,
+		  "type_id": 83,
+		  "position": 1,
+		  "total": 2,
+		  "participant_id": 14
 		}
-	}
-}`
-
-var aggregatedTopScorersResponse = `{
-	"data": {
-		"id": 12962,
-		"name": "2018\/2019",
-		"league_id": 8,
-		"is_current_season": false,
-		"current_round_id": null,
-		"current_stage_id": null,
-		"aggregatedGoalscorers": {
-			"data": [
-				{
-					"position": 1,
-					"season_id": 7907,
-					"player_id": 210173,
-					"team_id": 579,
-					"stage_id": 56494,
-					"goals": 3,
-					"penalty_goals": 0,
-					"type": "goals"
-				}
-			]
-		},
-		"aggregatedAssistscorers": {
-			"data": [
-				{
-					"position": 1,
-					"season_id": 12962,
-					"player_id": 1331,
-					"team_id": 18,
-					"stage_id": 7456626,
-					"assists": 15,
-					"type": "assists"
-				}
-			]
-		},
-		"aggregatedCardscorers": {
-			"data": [
-				{
-					"position": 1,
-					"season_id": 12962,
-					"player_id": 1276,
-					"team_id": 25,
-					"stage_id": 7456626,
-					"yellowcards": 14,
-					"redcards": 1,
-					"type": "cards"
-				}
-			]
-		}
-	}
-}`
-
-var aggregatedTopScorersIncludesResponse = `{
-	"data": {
-		"id": 12962,
-		"name": "2018\/2019",
-		"league_id": 8,
-		"is_current_season": false,
-		"current_round_id": null,
-		"current_stage_id": null,
-		"aggregatedGoalscorers": {
-			"data": [
-				{
-					"position": 1,
-					"season_id": 7907,
-					"player_id": 210173,
-					"team_id": 579,
-					"stage_id": 56494,
-					"goals": 3,
-					"penalty_goals": 0,
-					"type": "goals"
-				}
-			]
-		},
-		"aggregatedAssistscorers": {
-			"data": [
-				{
-					"position": 1,
-					"season_id": 12962,
-					"player_id": 1331,
-					"team_id": 18,
-					"stage_id": 7456626,
-					"assists": 15,
-					"type": "assists",
-					"player": {
-						"data": {
-							"player_id": 219591,
-							"team_id": 1,
-							"country_id": 1190,
-							"position_id": 2,
-							"common_name": "F. Balbuena",
-							"fullname": "F. Balbuena",
-							"firstname": "Fabián Cornelio",
-							"lastname": "Balbuena González",
-							"nationality": "Paraguay",
-							"birthdate": "23\/08\/1991",
-							"birthcountry": "Paraguay",
-							"birthplace": "Ciudad del Este",
-							"height": "188 cm",
-							"weight": "82 kg",
-							"image_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/players\/7\/219591.png"
-						}
-					}
-				}
-			]
-		},
-		"aggregatedCardscorers": {
-			"data": [
-				{
-					"position": 1,
-					"season_id": 12962,
-					"player_id": 1276,
-					"team_id": 25,
-					"stage_id": 7456626,
-					"yellowcards": 14,
-					"redcards": 1,
-					"type": "cards",
-					"team": {
-						"data": {
-							"id": 1,
-							"legacy_id": 377,
-							"name": "West Ham United",
-							"short_code": "WHU",
-							"twitter": "@WestHamUtd",
-							"country_id": 462,
-							"national_team": false,
-							"founded": 1895,
-							"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/teams\/1\/1.png",
-							"venue_id": 214,
-							"current_season_id": 16036
-						}
-					}
-				}
-			]
-		}
-	}
+	]
 }`
 
 func TestTopScorersBySeasonID(t *testing.T) {
 	t.Run("returns a TopScorers struct", func(t *testing.T) {
-		url := defaultBaseURL + "/topscorers/season/12962?api_token=api-key&include="
+		url := defaultBaseURL + "/football/topscorers/seasons/12962?api_token=api-key&include="
 
 		server := mockResponseServer(t, topScorersResponse, 200, url)
 
@@ -296,18 +48,11 @@ func TestTopScorersBySeasonID(t *testing.T) {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
 		}
 
-		goalscorers := topscorers.GoalScorers()
-		assists := topscorers.AssistScorers()
-		cards := topscorers.CardScorers()
-
-		assertTopScorers(t, topscorers)
-		assertGoalScorer(t, &goalscorers[0])
-		assertAssistScorer(t, &assists[0])
-		assertCardScorer(t, &cards[0])
+		assertTopScorer(t, topscorers[0])
 	})
 
 	t.Run("returns a TopScorers struct with includes data", func(t *testing.T) {
-		url := defaultBaseURL + "/topscorers/season/12962?api_token=api-key&include=goalscorers.team%2Ccardscorers.player"
+		url := defaultBaseURL + "/football/topscorers/seasons/12962?api_token=api-key&include=goalscorers.team%3Bcardscorers.player"
 
 		server := mockResponseServer(t, topScorersIncludesResponse, 200, url)
 
@@ -324,20 +69,11 @@ func TestTopScorersBySeasonID(t *testing.T) {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
 		}
 
-		goalscorers := topscorers.GoalScorers()
-		assists := topscorers.AssistScorers()
-		cards := topscorers.CardScorers()
-
-		assertTopScorers(t, topscorers)
-		assertGoalScorer(t, &goalscorers[0])
-		assertTeam(t, goalscorers[0].Team())
-		assertAssistScorer(t, &assists[0])
-		assertCardScorer(t, &cards[0])
-		assertPlayer(t, cards[0].Player())
+		assertTopScorer(t, topscorers[0])
 	})
 
 	t.Run("returns a TopScorers struct with includes data and filter parameters", func(t *testing.T) {
-		url := defaultBaseURL + "/topscorers/season/12962?api_token=api-key&include=goalscorers.team%2Ccardscorers.player&stage_ids=4%2C33"
+		url := defaultBaseURL + "/football/topscorers/seasons/12962?api_token=api-key&include=goalscorers.team%3Bcardscorers.player&stage_ids=4%2C33"
 
 		server := mockResponseServer(t, topScorersIncludesResponse, 200, url)
 
@@ -359,20 +95,11 @@ func TestTopScorersBySeasonID(t *testing.T) {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
 		}
 
-		goalscorers := topscorers.GoalScorers()
-		assists := topscorers.AssistScorers()
-		cards := topscorers.CardScorers()
-
-		assertTopScorers(t, topscorers)
-		assertGoalScorer(t, &goalscorers[0])
-		assertTeam(t, goalscorers[0].Team())
-		assertAssistScorer(t, &assists[0])
-		assertCardScorer(t, &cards[0])
-		assertPlayer(t, cards[0].Player())
+		assertTopScorer(t, topscorers[0])
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseURL + "/topscorers/season/12962?api_token=api-key&include="
+		url := defaultBaseURL + "/football/topscorers/seasons/12962?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
@@ -388,76 +115,14 @@ func TestTopScorersBySeasonID(t *testing.T) {
 	})
 }
 
-func TestAggregatedTopScorersBySeasonID(t *testing.T) {
-	t.Run("returns an AggregatedTopScorers struct", func(t *testing.T) {
-		url := defaultBaseURL + "/topscorers/season/12962/aggregated?api_token=api-key&include="
-
-		server := mockResponseServer(t, aggregatedTopScorersResponse, 200, url)
-
-		client := newTestHTTPClient(server)
-
-		topscorers, _, err := client.AggregatedTopScorersBySeasonID(context.Background(), 12962, []string{})
-
-		if err != nil {
-			t.Fatalf("Test failed, expected nil, got %s", err.Error())
-		}
-
-		goalscorers := topscorers.GoalScorers()
-		assists := topscorers.AssistScorers()
-		cards := topscorers.CardScorers()
-
-		assertAggregatedTopScorer(t, topscorers)
-		assertGoalScorer(t, &goalscorers[0])
-		assertAssistScorer(t, &assists[0])
-		assertCardScorer(t, &cards[0])
-	})
-
-	t.Run("returns a AggregatedTopScorers struct with includes data", func(t *testing.T) {
-		url := defaultBaseURL + "/topscorers/season/12962/aggregated?api_token=api-key&include=assistscorers.player%2Ccardscorers.team"
-
-		server := mockResponseServer(t, aggregatedTopScorersIncludesResponse, 200, url)
-
-		client := newTestHTTPClient(server)
-
-		topscorers, _, err := client.AggregatedTopScorersBySeasonID(
-			context.Background(),
-			12962,
-			[]string{"assistscorers.player", "cardscorers.team"},
-		)
-
-		if err != nil {
-			t.Fatalf("Test failed, expected nil, got %s", err.Error())
-		}
-
-		goalscorers := topscorers.GoalScorers()
-		assists := topscorers.AssistScorers()
-		cards := topscorers.CardScorers()
-
-		assertAggregatedTopScorer(t, topscorers)
-		assertGoalScorer(t, &goalscorers[0])
-		assertTeam(t, cards[0].Team())
-		assertAssistScorer(t, &assists[0])
-		assertCardScorer(t, &cards[0])
-		assertPlayer(t, assists[0].Player())
-	})
-}
-
-func assertTopScorers(t *testing.T, scorer *TopScorers) {
-	assert.Equal(t, 12962, scorer.ID)
-	assert.Equal(t, "2018/2019", scorer.Name)
-	assert.Equal(t, 8, scorer.LeagueID)
-	assert.Equal(t, false, scorer.IsCurrentSeason)
-	assert.Nil(t, scorer.CurrentRoundID)
-	assert.Nil(t, scorer.CurrentStageID)
-}
-
-func assertAggregatedTopScorer(t *testing.T, scorer *AggregatedTopScorers) {
-	assert.Equal(t, 12962, scorer.ID)
-	assert.Equal(t, "2018/2019", scorer.Name)
-	assert.Equal(t, 8, scorer.LeagueID)
-	assert.Equal(t, false, scorer.IsCurrentSeason)
-	assert.Nil(t, scorer.CurrentRoundID)
-	assert.Nil(t, scorer.CurrentStageID)
+func assertTopScorer(t *testing.T, scorer TopScorer) {
+	assert.Equal(t, 1540266, scorer.ID)
+	assert.Equal(t, 19734, scorer.SeasonID)  // Assuming SeasonID is meant to represent the season
+	assert.Equal(t, 159700, scorer.PlayerID) // Add PlayerID assertion if needed
+	assert.Equal(t, 83, scorer.TypeID)       // Assuming TypeID is relevant
+	assert.Equal(t, 1, scorer.Position)
+	assert.Equal(t, 2, scorer.Total)
+	assert.Equal(t, 14, scorer.ParticipantID) // Add ParticipantID assertion if needed
 }
 
 func assertGoalScorer(t *testing.T, scorer *GoalScorer) {
