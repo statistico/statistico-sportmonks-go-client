@@ -3,7 +3,7 @@ version: 2
 executors:
   go-executor:
     docker:
-      - image: cimg/go:1.22.5
+      - image: cimg/go:1.23.1
 
 jobs:
   build:
