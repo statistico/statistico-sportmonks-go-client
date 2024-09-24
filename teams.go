@@ -10,19 +10,22 @@ import (
 
 // Team provides a struct representation of a Team resource.
 type Team struct {
-	ID           int    `json:"id"`
-	SportID      int    `json:"sport_id"`
-	CountryID    int    `json:"country_id"`
-	VenueID      int    `json:"venue_id"`
-	Gender       string `json:"gender"`
-	Name         string `json:"name"`
-	ShortCode    string `json:"short_code"`
-	ImagePath    string `json:"image_path"`
-	Founded      int    `json:"founded"`
-	Type         string `json:"type"`
-	Placeholder  bool   `json:"placeholder"`
-	LastPlayedAt string `json:"last_played_at"`
-	Venue        *Venue `json:"venue,omitempty"`
+	ID           int      `json:"id"`
+	SportID      int      `json:"sport_id"`
+	CountryID    int      `json:"country_id"`
+	VenueID      int      `json:"venue_id"`
+	Gender       string   `json:"gender"`
+	Name         string   `json:"name"`
+	ShortCode    string   `json:"short_code"`
+	ImagePath    string   `json:"image_path"`
+	Founded      int      `json:"founded"`
+	Type         string   `json:"type"`
+	Placeholder  bool     `json:"placeholder"`
+	LastPlayedAt string   `json:"last_played_at"`
+	Venue        *Venue   `json:"venue,omitempty"`
+	Country      *Country `json:"country,omitempty"`
+	Coaches      []Coach  `json:"coaches,omitempty"`
+	Seasons      []Season `json:"seasons,omitempty"`
 }
 
 // TeamByID fetches a Team resource by ID. Use the includes slice of string to enrich the response data.
