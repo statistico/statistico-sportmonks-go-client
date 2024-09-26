@@ -28,6 +28,7 @@ const (
 	seasonsURI             = "/football/seasons"
 	stagesURI              = "/football/stages"
 	stagesSeasonURI        = "/football/stages/seasons"
+	teamSquadURI           = "/football/squads/teams"
 	teamSeasonSquadURI     = "/football/squads/seasons"
 	teamsURI               = "/football/teams"
 	teamsSeasonURI         = "/football/teams/seasons"

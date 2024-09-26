@@ -34,7 +34,23 @@ var teamSquadsIncludesResponse = `{
 		  "start": "2020-01-31",
 		  "end": "2030-06-30",
 		  "captain": true,
-		  "jersey_number": 20
+		  "jersey_number": 20,
+          "position": {
+				"id": 27,
+				"name": "Attacker",
+				"code": "attacker",
+				"developer_name": "ATTACKER",
+				"model_type": "position",
+				"stat_group": null
+			},
+		  "detailedposition": {
+				"id": 156,
+				"name": "Right Wing",
+				"code": "right-wing",
+				"developer_name": "RIGHT_WING",
+				"model_type": "position",
+				"stat_group": null
+		  }
 		}
 	]
 }`

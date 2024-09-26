@@ -81,6 +81,15 @@ type (
 		Accurate *int `json:"accurate"`
 	}
 
+	DetailedPosition struct {
+		ID            int     `json:"id"`
+		Name          string  `json:"name"`
+		Code          string  `json:"code"`
+		DeveloperName string  `json:"developer_name"`
+		ModelType     string  `json:"model_type"`
+		StatGroup     *string `json:"stat_group"`
+	}
+
 	// Dribbles explains dribble stat data for a player.
 	Dribbles struct {
 		Attempts     *int `json:"attempts"`
@@ -406,8 +415,12 @@ type (
 
 	// Position provides position data for a player.
 	Position struct {
-		ID   int    `json:"id"`
-		Name string `json:"name"`
+		ID            int     `json:"id"`
+		Name          string  `json:"name"`
+		Code          string  `json:"code"`
+		DeveloperName string  `json:"developer_name"`
+		ModelType     string  `json:"model_type"`
+		StatGroup     *string `json:"stat_group"` // Use a pointer to allow null
 	}
 
 	// Ranking provides ranking data for a team.
