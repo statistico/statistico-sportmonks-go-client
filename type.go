@@ -110,13 +110,13 @@ type (
 		ParticipantID     int               `json:"participant_id"`
 		TypeID            int               `json:"type_id"`
 		Section           string            `json:"section"`
-		PlayerID          int               `json:"player_id"`
-		RelatedPlayerID   int               `json:"related_player_id"`
+		PlayerID          *int              `json:"player_id"`
+		RelatedPlayerID   *int              `json:"related_player_id"`
 		PlayerName        string            `json:"player_name"`
-		RelatedPlayerName string            `json:"related_player_name"`
-		Result            string            `json:"result"`
-		Info              string            `json:"info"`
-		Addition          string            `json:"addition"`
+		RelatedPlayerName *string           `json:"related_player_name"`
+		Result            *string           `json:"result"`
+		Info              *string           `json:"info"`
+		Addition          *string           `json:"addition"`
 		Minute            int               `json:"minute"`
 		ExtraMinute       *int              `json:"extra_minute"`
 		Injured           *bool             `json:"injured"`
