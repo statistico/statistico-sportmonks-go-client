@@ -226,18 +226,19 @@ type (
 
 	// LineupPlayer provides information for a player of a team for a fixture.
 	LineupPlayer struct {
-		ID                int           `json:"id"`
-		SportID           int           `json:"sport_id"`
-		FixtureID         int           `json:"fixture_id"`
-		PlayerID          int           `json:"player_id"`
-		TeamID            int           `json:"team_id"`
-		PositionID        int           `json:"position_id"`
-		FormationField    *string       `json:"formation_field"`
-		TypeID            int           `json:"type_id"`
-		FormationPosition int           `json:"formation_position"`
-		PlayerName        string        `json:"player_name"`
-		JerseyNumber      int           `json:"jersey_number"`
-		Details           *LineupDetail `json:"details,omitempty"`
+		ID                int            `json:"id"`
+		SportID           int            `json:"sport_id"`
+		FixtureID         int            `json:"fixture_id"`
+		PlayerID          int            `json:"player_id"`
+		TeamID            int            `json:"team_id"`
+		PositionID        int            `json:"position_id"`
+		FormationField    *string        `json:"formation_field"`
+		TypeID            int            `json:"type_id"`
+		FormationPosition int            `json:"formation_position"`
+		PlayerName        string         `json:"player_name"`
+		JerseyNumber      int            `json:"jersey_number"`
+		Details           []LineupDetail `json:"details,omitempty"`
+		Position          *Position      `json:"position,omitempty"`
 	}
 
 	LineupDetail struct {
@@ -420,7 +421,7 @@ type (
 		Code          string  `json:"code"`
 		DeveloperName string  `json:"developer_name"`
 		ModelType     string  `json:"model_type"`
-		StatGroup     *string `json:"stat_group"` // Use a pointer to allow null
+		StatGroup     *string `json:"stat_group"`
 	}
 
 	// Ranking provides ranking data for a team.
