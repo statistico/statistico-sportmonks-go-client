@@ -22,7 +22,32 @@ var leaguesResponse = `{
 		  "category": 1,
 		  "has_jerseys": false
 		}
-   ]
+   ],
+	"pagination": {
+		"count": 2,
+		"per_page": 25,
+		"current_page": 1,
+		"next_page": null,
+		"has_more": false
+	},
+	"subscription": [
+		{
+			"meta": {
+				"trial_ends_at": null,
+				"ends_at": "2024-10-26 12:06:34",
+				"current_timestamp": 1728317818
+			},
+			"plans": [
+				{
+					"plan": "Joe Sweeny Custom Plan",
+					"sport": "Football",
+					"category": "Advanced"
+				}
+			],
+			"add_ons": [],
+			"widgets": []
+		}
+	]
 }`
 
 var leaguesIncludesResponse = `{
@@ -86,7 +111,7 @@ func TestLeagues(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		leagues, _, err := client.Leagues(context.Background(), 1, []string{})
+		leagues, _, _, err := client.Leagues(context.Background(), 1, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -102,7 +127,7 @@ func TestLeagues(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		leagues, _, err := client.Leagues(context.Background(), 1, []string{"country", "season", "seasons"})
+		leagues, _, _, err := client.Leagues(context.Background(), 1, []string{"country", "season", "seasons"})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -118,13 +143,41 @@ func TestLeagues(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		leagues, _, err := client.Leagues(context.Background(), 1, []string{})
+		leagues, _, _, err := client.Leagues(context.Background(), 1, []string{})
 
 		if leagues != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", leagues)
 		}
 
 		assertError(t, err)
+	})
+
+	t.Run("can handle paginated response", func(t *testing.T) {
+		t.Helper()
+
+		url := defaultBaseURL + "/football/leagues?api_token=api-key&include=country%3Bseason%3Bseasons&page=1"
+
+		server := mockResponseServer(t, leaguesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, pagination, _, _ := client.Leagues(context.Background(), 1, []string{"country", "season", "seasons"})
+
+		assertPagination(t, pagination)
+	})
+
+	t.Run("can handle subscription response", func(t *testing.T) {
+		t.Helper()
+
+		url := defaultBaseURL + "/football/leagues?api_token=api-key&include=country%3Bseason%3Bseasons&page=1"
+
+		server := mockResponseServer(t, leaguesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, _, sub, _ := client.Leagues(context.Background(), 1, []string{"country", "season", "seasons"})
+
+		assertSubscription(t, sub[0])
 	})
 }
 
@@ -136,7 +189,7 @@ func TestLeagueByID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		league, _, err := client.LeagueByID(context.Background(), 82, []string{})
+		league, _, _, err := client.LeagueByID(context.Background(), 82, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -152,7 +205,7 @@ func TestLeagueByID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		league, _, err := client.LeagueByID(context.Background(), 82, []string{"country", "season", "seasons"})
+		league, _, _, err := client.LeagueByID(context.Background(), 82, []string{"country", "season", "seasons"})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -168,7 +221,7 @@ func TestLeagueByID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		league, _, err := client.LeagueByID(context.Background(), 82, []string{})
+		league, _, _, err := client.LeagueByID(context.Background(), 82, []string{})
 
 		if league != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", league)
@@ -191,4 +244,15 @@ func assertLeague(t *testing.T, league *League) {
 	assert.Equal(t, "2024-09-22 15:30:00", league.LastPlayedAt)
 	assert.Equal(t, 1, league.Category)
 	assert.Equal(t, false, league.HasJerseys)
+}
+
+func assertSubscription(t *testing.T, sub Subscription) {
+	assert.Nil(t, sub.Meta.TrialEndsAt)
+	assert.Equal(t, "2024-10-26 12:06:34", sub.Meta.EndsAt)
+	assert.Equal(t, int64(1728317818), sub.Meta.CurrentTimestamp)
+
+	assert.Equal(t, 1, len(sub.Plans))
+	assert.Equal(t, "Joe Sweeny Custom Plan", sub.Plans[0].Plan)
+	assert.Equal(t, "Football", sub.Plans[0].Sport)
+	assert.Equal(t, "Advanced", sub.Plans[0].Category)
 }

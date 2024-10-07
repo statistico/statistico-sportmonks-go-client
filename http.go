@@ -54,14 +54,14 @@ func NewDefaultHTTPClient(key string) *HTTPClient {
 	}
 }
 
-// SetHTTPClient provides functionality to over ride the default HTTPClient property.
+// SetHTTPClient provides functionality to override the default HTTPClient property.
 func (c *HTTPClient) SetHTTPClient(h *http.Client) {
 	if h != nil {
 		c.HTTPClient = h
 	}
 }
 
-// SetBaseURL provides functionality to over ride the default BaseURL property.
+// SetBaseURL provides functionality to override the default BaseURL property.
 func (c *HTTPClient) SetBaseURL(url string) {
 	c.BaseURL = url
 }
@@ -76,8 +76,6 @@ func (c *HTTPClient) getResource(ctx context.Context, url string, query url.Valu
 	query.Set("api_token", c.Key)
 
 	req.URL.RawQuery = query.Encode()
-
-	fmt.Println(req.URL)
 
 	return c.do(ctx, req, response)
 }

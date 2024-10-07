@@ -186,16 +186,31 @@ var countriesPaginatedResponse = `{
 		  "image_path": "https://cdn.sportmonks.com/images/countries/png/short/pl.png"
 		}
 	],
-	"meta": {
-		"pagination": {
-			"total": 2,
-			"count": 2,
-			"per_page": 100,
-			"current_page": 1,
-			"total_pages": 1,
-			"links": []
+	"pagination": {
+		"count": 2,
+		"per_page": 25,
+		"current_page": 1,
+		"next_page": null,
+		"has_more": false
+	},
+	"subscription": [
+		{
+			"meta": {
+				"trial_ends_at": null,
+				"ends_at": "2024-10-26 12:06:34",
+				"current_timestamp": 1728317818
+			},
+			"plans": [
+				{
+					"plan": "Joe Sweeny Custom Plan",
+					"sport": "Football",
+					"category": "Advanced"
+				}
+			],
+			"add_ons": [],
+			"widgets": []
 		}
-	}
+	]
 }`
 
 func TestCountries(t *testing.T) {
@@ -206,7 +221,7 @@ func TestCountries(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		countries, _, err := client.Countries(context.Background(), 1, []string{})
+		countries, _, _, err := client.Countries(context.Background(), 1, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -224,7 +239,7 @@ func TestCountries(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		countries, _, err := client.Countries(context.Background(), 1, []string{"continent", "leagues"})
+		countries, _, _, err := client.Countries(context.Background(), 1, []string{"continent", "leagues"})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -245,7 +260,7 @@ func TestCountries(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		countries, _, err := client.Countries(context.Background(), 1, []string{})
+		countries, _, _, err := client.Countries(context.Background(), 1, []string{})
 
 		if countries != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", countries)
@@ -261,9 +276,9 @@ func TestCountries(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		_, meta, _ := client.Countries(context.Background(), 1, []string{"continent", "leagues"})
+		_, pagination, _, _ := client.Countries(context.Background(), 1, []string{"continent", "leagues"})
 
-		assertPagination(t, meta.Pagination)
+		assertPagination(t, pagination)
 	})
 }
 
@@ -275,7 +290,7 @@ func TestCountryByID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		country, _, err := client.CountryByID(context.Background(), 1, []string{})
+		country, _, _, err := client.CountryByID(context.Background(), 1, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -293,7 +308,7 @@ func TestCountryByID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		country, _, err := client.CountryByID(context.Background(), 11, []string{"continent", "leagues"})
+		country, _, _, err := client.CountryByID(context.Background(), 11, []string{"continent", "leagues"})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -314,7 +329,7 @@ func TestCountryByID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		country, _, err := client.CountryByID(context.Background(), 11, []string{"continent", "leagues"})
+		country, _, _, err := client.CountryByID(context.Background(), 11, []string{"continent", "leagues"})
 
 		if country != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", country)
@@ -338,9 +353,9 @@ func assertCountry(t *testing.T, country *Country) {
 }
 
 func assertPagination(t *testing.T, p *Pagination) {
-	assert.Equal(t, 2, p.Total)
 	assert.Equal(t, 2, p.Count)
-	assert.Equal(t, 100, p.PerPage)
+	assert.Equal(t, 25, p.PerPage)
 	assert.Equal(t, 1, p.CurrentPage)
-	assert.Equal(t, 1, p.TotalPages)
+	assert.Nil(t, p.NextPage)
+	assert.False(t, p.HasMore)
 }

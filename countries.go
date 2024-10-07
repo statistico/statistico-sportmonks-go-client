@@ -28,28 +28,29 @@ type Country struct {
 // Countries fetches Country resources. The endpoint used within this method is paginated, to select the required
 // page use the 'page' method argument. Page information including current page and total page are included within
 // the Meta struct. Use the includes slice of string to enrich the response data.
-func (c *HTTPClient) Countries(ctx context.Context, page int, includes []string) ([]Country, *Meta, error) {
+func (c *HTTPClient) Countries(ctx context.Context, page int, includes []string) ([]Country, *Pagination, []Subscription, error) {
 	values := url.Values{
 		"page":    {strconv.Itoa(page)},
 		"include": {strings.Join(includes, ";")},
 	}
 
 	response := struct {
-		Data []Country `json:"data"`
-		Meta *Meta     `json:"meta"`
+		Data         []Country      `json:"data"`
+		Pagination   *Pagination    `json:"pagination"`
+		Subscription []Subscription `json:"subscription"`
 	}{}
 
 	err := c.getResource(ctx, countriesURI, values, &response)
 
 	if err != nil {
-		return nil, nil, err
+		return nil, nil, nil, err
 	}
 
-	return response.Data, response.Meta, err
+	return response.Data, response.Pagination, response.Subscription, err
 }
 
 // CountryByID fetches a Country resource by ID. Use the includes slice of string to enrich the response data.
-func (c *HTTPClient) CountryByID(ctx context.Context, id int, includes []string) (*Country, *Meta, error) {
+func (c *HTTPClient) CountryByID(ctx context.Context, id int, includes []string) (*Country, *Pagination, []Subscription, error) {
 	path := fmt.Sprintf(countriesURI+"/%d", id)
 
 	values := url.Values{
@@ -57,15 +58,16 @@ func (c *HTTPClient) CountryByID(ctx context.Context, id int, includes []string)
 	}
 
 	response := struct {
-		Data *Country `json:"data"`
-		Meta *Meta    `json:"meta"`
+		Data         *Country       `json:"data"`
+		Pagination   *Pagination    `json:"pagination"`
+		Subscription []Subscription `json:"subscription"`
 	}{}
 
 	err := c.getResource(ctx, path, values, &response)
 
 	if err != nil {
-		return nil, nil, err
+		return nil, nil, nil, err
 	}
 
-	return response.Data, response.Meta, err
+	return response.Data, response.Pagination, response.Subscription, err
 }
