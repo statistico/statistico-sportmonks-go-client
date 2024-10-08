@@ -22,7 +22,38 @@ var seasonsResponse = `{
 		  "standings_recalculated_at": "2023-05-24 08:28:07",
 		  "games_in_current_week": false
 		}
-	]
+	],
+	"pagination": {
+		"count": 2,
+		"per_page": 25,
+		"current_page": 1,
+		"next_page": null,
+		"has_more": false
+	},
+	"subscription": [
+		{
+			"meta": {
+				"trial_ends_at": null,
+				"ends_at": "2024-10-26 12:06:34",
+				"current_timestamp": 1728372666
+			},
+			"plans": [
+				{
+					"plan": "Joe Sweeny Custom Plan",
+					"sport": "Football",
+					"category": "Advanced"
+				}
+			],
+			"add_ons": [],
+			"widgets": []
+		}
+	],
+	"rate_limit": {
+		"resets_in_seconds": 3386,
+		"remaining": 2997,
+		"requested_entity": "Season"
+	},
+	"timezone": "UTC"
 }`
 
 var seasonsIncludesResponse = `{
@@ -72,7 +103,31 @@ var seasonResponse = `{
 		  "ending_at": "2011-05-22",
 		  "standings_recalculated_at": "2023-05-24 08:28:07",
 		  "games_in_current_week": false
-    }
+    },
+	"subscription": [
+		{
+			"meta": {
+				"trial_ends_at": null,
+				"ends_at": "2024-10-26 12:06:34",
+				"current_timestamp": 1728372666
+			},
+			"plans": [
+				{
+					"plan": "Joe Sweeny Custom Plan",
+					"sport": "Football",
+					"category": "Advanced"
+				}
+			],
+			"add_ons": [],
+			"widgets": []
+		}
+	],
+	"rate_limit": {
+		"resets_in_seconds": 3386,
+		"remaining": 2997,
+		"requested_entity": "Season"
+	},
+	"timezone": "UTC"
 }`
 
 var seasonIncludesResponse = `{
@@ -155,6 +210,18 @@ func TestSeasons(t *testing.T) {
 
 		assertError(t, err)
 	})
+
+	t.Run("can handle response details", func(t *testing.T) {
+		url := defaultBaseURL + "/football/seasons?api_token=api-key&include=&page=1"
+
+		server := mockResponseServer(t, seasonsResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, details, _ := client.Seasons(context.Background(), 1, []string{})
+
+		assertResponseDetails(t, details, "Season")
+	})
 }
 
 func TestSeasonByID(t *testing.T) {
@@ -205,6 +272,18 @@ func TestSeasonByID(t *testing.T) {
 		}
 
 		assertError(t, err)
+	})
+
+	t.Run("can handle response details response", func(t *testing.T) {
+		url := defaultBaseURL + "/football/seasons/55?api_token=api-key&deleted=1&include="
+
+		server := mockResponseServer(t, seasonResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, details, _ := client.SeasonByID(context.Background(), 55, []string{})
+
+		assertResponseDetails(t, details, "Season")
 	})
 }
 
