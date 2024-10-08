@@ -21,7 +21,31 @@ var venueResponse = `{
         "city_name": "London",
         "surface": "grass",
         "national_team": false
-      }
+	},
+	"subscription": [
+		{
+			"meta": {
+				"trial_ends_at": null,
+				"ends_at": "2024-10-26 12:06:34",
+				"current_timestamp": 1728372666
+			},
+			"plans": [
+				{
+					"plan": "Joe Sweeny Custom Plan",
+					"sport": "Football",
+					"category": "Advanced"
+				}
+			],
+			"add_ons": [],
+			"widgets": []
+		}
+	],
+	"rate_limit": {
+		"resets_in_seconds": 3386,
+		"remaining": 2997,
+		"requested_entity": "Venue"
+	},
+	"timezone": "UTC"
 }`
 
 var venueSeasonResponse = `{
@@ -41,7 +65,31 @@ var venueSeasonResponse = `{
 			"surface": "grass",
 			"national_team": false
 		}
-	]
+	],
+	"subscription": [
+		{
+			"meta": {
+				"trial_ends_at": null,
+				"ends_at": "2024-10-26 12:06:34",
+				"current_timestamp": 1728372666
+			},
+			"plans": [
+				{
+					"plan": "Joe Sweeny Custom Plan",
+					"sport": "Football",
+					"category": "Advanced"
+				}
+			],
+			"add_ons": [],
+			"widgets": []
+		}
+	],
+	"rate_limit": {
+		"resets_in_seconds": 3386,
+		"remaining": 2997,
+		"requested_entity": "Venue"
+	},
+	"timezone": "UTC"
 }`
 
 func TestVenueByID(t *testing.T) {
@@ -76,6 +124,18 @@ func TestVenueByID(t *testing.T) {
 
 		assertError(t, err)
 	})
+
+	t.Run("can handle response details response", func(t *testing.T) {
+		url := defaultBaseURL + "/football/venues/200?api_token=api-key"
+
+		server := mockResponseServer(t, venueResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, details, _ := client.VenueByID(context.Background(), 200)
+
+		assertResponseDetails(t, details, "Venue")
+	})
 }
 
 func TestVenueBySeasonID(t *testing.T) {
@@ -109,6 +169,18 @@ func TestVenueBySeasonID(t *testing.T) {
 		}
 
 		assertError(t, err)
+	})
+
+	t.Run("can handle response details response", func(t *testing.T) {
+		url := defaultBaseURL + "/football/venues/seasons/12962?api_token=api-key"
+
+		server := mockResponseServer(t, venueSeasonResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, details, _ := client.VenuesBySeasonID(context.Background(), 12962)
+
+		assertResponseDetails(t, details, "Venue")
 	})
 }
 

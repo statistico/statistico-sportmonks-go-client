@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"net/url"
-	"strconv"
 	"strings"
 )
 
@@ -30,7 +29,7 @@ type Team struct {
 }
 
 // TeamByID fetches a Team resource by ID. Use the includes slice of string to enrich the response data.
-func (c *HTTPClient) TeamByID(ctx context.Context, id int, includes []string, filters map[string][]int) (*Team, *Meta, error) {
+func (c *HTTPClient) TeamByID(ctx context.Context, id int, includes []string, filters map[string][]int) (*Team, *ResponseDetails, error) {
 	path := fmt.Sprintf(teamsURI+"/%d", id)
 
 	values := url.Values{
@@ -40,8 +39,10 @@ func (c *HTTPClient) TeamByID(ctx context.Context, id int, includes []string, fi
 	formatFilters(&values, filters)
 
 	response := struct {
-		Data *Team `json:"data"`
-		Meta *Meta `json:"meta"`
+		Data         *Team          `json:"data"`
+		Subscription []Subscription `json:"subscription"`
+		RateLimit    RateLimit      `json:"rate_limit"`
+		TimeZone     string         `json:"timezone"`
 	}{}
 
 	err := c.getResource(ctx, path, values, &response)
@@ -50,23 +51,26 @@ func (c *HTTPClient) TeamByID(ctx context.Context, id int, includes []string, fi
 		return nil, nil, err
 	}
 
-	return response.Data, response.Meta, err
+	return response.Data, &ResponseDetails{
+		Subscription: response.Subscription,
+		RateLimit:    response.RateLimit,
+		TimeZone:     response.TimeZone,
+	}, err
 }
 
-// TeamsBySeasonID fetches Team resources associated to a season ID. The endpoint used within this method is paginated,
-// to select the required page use the 'page' method argument. Page information including current page and total page
-// are included within the Meta response. Use the includes slice of string to enrich the response data.
-func (c *HTTPClient) TeamsBySeasonID(ctx context.Context, seasonID, page int, includes []string) ([]Team, *Meta, error) {
+// TeamsBySeasonID fetches Team resources associated to a Season ID. Use the includes slice of string to enrich the response data.
+func (c *HTTPClient) TeamsBySeasonID(ctx context.Context, seasonID int, includes []string) ([]Team, *ResponseDetails, error) {
 	path := fmt.Sprintf(teamsSeasonURI+"/%d", seasonID)
 
 	values := url.Values{
 		"include": {strings.Join(includes, ";")},
-		"page":    {strconv.Itoa(page)},
 	}
 
 	response := struct {
-		Data []Team `json:"data"`
-		Meta *Meta  `json:"meta"`
+		Data         []Team         `json:"data"`
+		Subscription []Subscription `json:"subscription"`
+		RateLimit    RateLimit      `json:"rate_limit"`
+		TimeZone     string         `json:"timezone"`
 	}{}
 
 	err := c.getResource(ctx, path, values, &response)
@@ -75,5 +79,9 @@ func (c *HTTPClient) TeamsBySeasonID(ctx context.Context, seasonID, page int, in
 		return nil, nil, err
 	}
 
-	return response.Data, response.Meta, err
+	return response.Data, &ResponseDetails{
+		Subscription: response.Subscription,
+		RateLimit:    response.RateLimit,
+		TimeZone:     response.TimeZone,
+	}, err
 }

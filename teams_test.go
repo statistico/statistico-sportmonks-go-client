@@ -20,7 +20,31 @@ var teamResponse = `{
       "type": "domestic",
       "placeholder": false,
       "last_played_at": "2024-09-21 11:30:00"
-    }
+    },
+	"subscription": [
+		{
+			"meta": {
+				"trial_ends_at": null,
+				"ends_at": "2024-10-26 12:06:34",
+				"current_timestamp": 1728372666
+			},
+			"plans": [
+				{
+					"plan": "Joe Sweeny Custom Plan",
+					"sport": "Football",
+					"category": "Advanced"
+				}
+			],
+			"add_ons": [],
+			"widgets": []
+		}
+	],
+	"rate_limit": {
+		"resets_in_seconds": 3386,
+		"remaining": 2997,
+		"requested_entity": "Team"
+	},
+	"timezone": "UTC"
 }`
 
 var teamIncludesResponse = `{
@@ -71,7 +95,31 @@ var teamsResponse = `{
 		  "placeholder": false,
 		  "last_played_at": "2024-09-21 11:30:00"
 		}
-	]
+	],
+	"subscription": [
+		{
+			"meta": {
+				"trial_ends_at": null,
+				"ends_at": "2024-10-26 12:06:34",
+				"current_timestamp": 1728372666
+			},
+			"plans": [
+				{
+					"plan": "Joe Sweeny Custom Plan",
+					"sport": "Football",
+					"category": "Advanced"
+				}
+			],
+			"add_ons": [],
+			"widgets": []
+		}
+	],
+	"rate_limit": {
+		"resets_in_seconds": 3386,
+		"remaining": 2997,
+		"requested_entity": "Team"
+	},
+	"timezone": "UTC"
 }`
 
 var teamsIncludesResponse = `{
@@ -182,17 +230,29 @@ func TestTeamByID(t *testing.T) {
 
 		assertError(t, err)
 	})
+
+	t.Run("can handle response details response", func(t *testing.T) {
+		url := defaultBaseURL + "/football/teams/1?api_token=api-key&include="
+
+		server := mockResponseServer(t, teamResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, details, _ := client.TeamByID(context.Background(), 1, []string{}, map[string][]int{})
+
+		assertResponseDetails(t, details, "Team")
+	})
 }
 
 func TestTeamsBySeasonID(t *testing.T) {
 	t.Run("returns a slice of Team struct", func(t *testing.T) {
-		url := defaultBaseURL + "/football/teams/seasons/12962?api_token=api-key&include=&page=1"
+		url := defaultBaseURL + "/football/teams/seasons/12962?api_token=api-key&include="
 
 		server := mockResponseServer(t, teamsResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		teams, _, err := client.TeamsBySeasonID(context.Background(), 12962, 1, []string{})
+		teams, _, err := client.TeamsBySeasonID(context.Background(), 12962, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -202,7 +262,7 @@ func TestTeamsBySeasonID(t *testing.T) {
 	})
 
 	t.Run("returns a slice of Team struct with includes data", func(t *testing.T) {
-		url := defaultBaseURL + "/football/teams/seasons/12962?api_token=api-key&include=squad%3Bleague&page=1"
+		url := defaultBaseURL + "/football/teams/seasons/12962?api_token=api-key&include=squad%3Bleague"
 
 		server := mockResponseServer(t, teamsIncludesResponse, 200, url)
 
@@ -211,7 +271,6 @@ func TestTeamsBySeasonID(t *testing.T) {
 		teams, _, err := client.TeamsBySeasonID(
 			context.Background(),
 			12962,
-			1,
 			[]string{"squad", "league"},
 		)
 
@@ -223,19 +282,31 @@ func TestTeamsBySeasonID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseURL + "/football/teams/seasons/12962?api_token=api-key&include=&page=1"
+		url := defaultBaseURL + "/football/teams/seasons/12962?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		teams, _, err := client.TeamsBySeasonID(context.Background(), 12962, 1, []string{})
+		teams, _, err := client.TeamsBySeasonID(context.Background(), 12962, []string{})
 
 		if teams != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", teams)
 		}
 
 		assertError(t, err)
+	})
+
+	t.Run("can handle response details response", func(t *testing.T) {
+		url := defaultBaseURL + "/football/teams/seasons/12962?api_token=api-key&include="
+
+		server := mockResponseServer(t, teamsResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, details, _ := client.TeamsBySeasonID(context.Background(), 12962, []string{})
+
+		assertResponseDetails(t, details, "Team")
 	})
 }
 
