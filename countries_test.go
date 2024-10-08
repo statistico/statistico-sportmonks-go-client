@@ -163,13 +163,6 @@ var countryResponse = `{
 	  ],
 	  "image_path": "https://cdn.sportmonks.com/images/countries/png/short/pl.png"
 	},
-	"pagination": {
-		"count": 2,
-		"per_page": 25,
-		"current_page": 1,
-		"next_page": null,
-		"has_more": false
-	},
 	"subscription": [
 		{
 			"meta": {

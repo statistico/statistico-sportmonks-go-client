@@ -23,12 +23,14 @@ type Venue struct {
 }
 
 // VenueByID fetches a Venue resource by ID.
-func (c *HTTPClient) VenueByID(ctx context.Context, id int) (*Venue, *Meta, error) {
+func (c *HTTPClient) VenueByID(ctx context.Context, id int) (*Venue, *ResponseDetails, error) {
 	path := fmt.Sprintf(venuesURI+"/%d", id)
 
 	response := struct {
-		Data *Venue `json:"data"`
-		Meta *Meta  `json:"meta"`
+		Data         *Venue         `json:"data"`
+		Subscription []Subscription `json:"subscription"`
+		RateLimit    RateLimit      `json:"rate_limit"`
+		TimeZone     string         `json:"timezone"`
 	}{}
 
 	err := c.getResource(ctx, path, url.Values{}, &response)
@@ -37,16 +39,22 @@ func (c *HTTPClient) VenueByID(ctx context.Context, id int) (*Venue, *Meta, erro
 		return nil, nil, err
 	}
 
-	return response.Data, response.Meta, err
+	return response.Data, &ResponseDetails{
+		Subscription: response.Subscription,
+		RateLimit:    response.RateLimit,
+		TimeZone:     response.TimeZone,
+	}, err
 }
 
 // VenuesBySeasonID fetches a Venue resource by season ID.
-func (c *HTTPClient) VenuesBySeasonID(ctx context.Context, id int) ([]Venue, *Meta, error) {
+func (c *HTTPClient) VenuesBySeasonID(ctx context.Context, id int) ([]Venue, *ResponseDetails, error) {
 	path := fmt.Sprintf(venuesSeasonURI+"/%d", id)
 
 	response := struct {
-		Data []Venue `json:"data"`
-		Meta *Meta   `json:"meta"`
+		Data         []Venue        `json:"data"`
+		Subscription []Subscription `json:"subscription"`
+		RateLimit    RateLimit      `json:"rate_limit"`
+		TimeZone     string         `json:"timezone"`
 	}{}
 
 	err := c.getResource(ctx, path, url.Values{}, &response)
@@ -55,5 +63,9 @@ func (c *HTTPClient) VenuesBySeasonID(ctx context.Context, id int) ([]Venue, *Me
 		return nil, nil, err
 	}
 
-	return response.Data, response.Meta, err
+	return response.Data, &ResponseDetails{
+		Subscription: response.Subscription,
+		RateLimit:    response.RateLimit,
+		TimeZone:     response.TimeZone,
+	}, err
 }
