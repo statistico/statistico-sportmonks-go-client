@@ -1,3 +1,11 @@
+### Note
+```
+This library is currently being updated to support version 3 of the Sportmonks APIs. Version v0.1.7 is the last
+version of this library that supports version 2 of the Sportsmonks Football API. This library will continue to be a work
+in progress with incremental releases until feature complete.
+```
+
+
 # Statistico SportMonks Go Client 
 
 [![Documentation](https://godoc.org/github.com/statistico/statistico-sportmonks-go-client?status.svg)](http://godoc.org/github.com/statistico/statistico-sportmonks-go-client)

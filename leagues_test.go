@@ -22,7 +22,38 @@ var leaguesResponse = `{
 		  "category": 1,
 		  "has_jerseys": false
 		}
-   ]
+   ],
+	"pagination": {
+		"count": 2,
+		"per_page": 25,
+		"current_page": 1,
+		"next_page": null,
+		"has_more": false
+	},
+	"subscription": [
+		{
+			"meta": {
+				"trial_ends_at": null,
+				"ends_at": "2024-10-26 12:06:34",
+				"current_timestamp": 1728372666
+			},
+			"plans": [
+				{
+					"plan": "Joe Sweeny Custom Plan",
+					"sport": "Football",
+					"category": "Advanced"
+				}
+			],
+			"add_ons": [],
+			"widgets": []
+		}
+	],
+	"rate_limit": {
+		"resets_in_seconds": 3386,
+		"remaining": 2997,
+		"requested_entity": "League"
+	},
+	"timezone": "UTC"
 }`
 
 var leaguesIncludesResponse = `{
@@ -58,7 +89,38 @@ var leagueResponse = `{
       "last_played_at": "2024-09-22 15:30:00",
       "category": 1,
       "has_jerseys": false
-    }
+    },
+	"pagination": {
+		"count": 2,
+		"per_page": 25,
+		"current_page": 1,
+		"next_page": null,
+		"has_more": false
+	},
+	"subscription": [
+		{
+			"meta": {
+				"trial_ends_at": null,
+				"ends_at": "2024-10-26 12:06:34",
+				"current_timestamp": 1728372666
+			},
+			"plans": [
+				{
+					"plan": "Joe Sweeny Custom Plan",
+					"sport": "Football",
+					"category": "Advanced"
+				}
+			],
+			"add_ons": [],
+			"widgets": []
+		}
+	],
+	"rate_limit": {
+		"resets_in_seconds": 3386,
+		"remaining": 2997,
+		"requested_entity": "League"
+	},
+	"timezone": "UTC"
 }`
 
 var leagueIncludesResponse = `{
@@ -126,6 +188,20 @@ func TestLeagues(t *testing.T) {
 
 		assertError(t, err)
 	})
+
+	t.Run("can handle response details", func(t *testing.T) {
+		t.Helper()
+
+		url := defaultBaseURL + "/football/leagues?api_token=api-key&include=country%3Bseason%3Bseasons&page=1"
+
+		server := mockResponseServer(t, leaguesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, details, _ := client.Leagues(context.Background(), 1, []string{"country", "season", "seasons"})
+
+		assertResponseDetails(t, details, "League")
+	})
 }
 
 func TestLeagueByID(t *testing.T) {
@@ -176,6 +252,18 @@ func TestLeagueByID(t *testing.T) {
 
 		assertError(t, err)
 	})
+
+	t.Run("can handle response details response", func(t *testing.T) {
+		url := defaultBaseURL + "/football/leagues/82?api_token=api-key&include="
+
+		server := mockResponseServer(t, leagueResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, details, _ := client.LeagueByID(context.Background(), 82, []string{})
+
+		assertResponseDetails(t, details, "League")
+	})
 }
 
 func assertLeague(t *testing.T, league *League) {
@@ -191,4 +279,15 @@ func assertLeague(t *testing.T, league *League) {
 	assert.Equal(t, "2024-09-22 15:30:00", league.LastPlayedAt)
 	assert.Equal(t, 1, league.Category)
 	assert.Equal(t, false, league.HasJerseys)
+}
+
+func assertSubscription(t *testing.T, sub Subscription) {
+	assert.Nil(t, sub.Meta.TrialEndsAt)
+	assert.Equal(t, "2024-10-26 12:06:34", sub.Meta.EndsAt)
+	assert.Equal(t, int64(1728317818), sub.Meta.CurrentTimestamp)
+
+	assert.Equal(t, 1, len(sub.Plans))
+	assert.Equal(t, "Joe Sweeny Custom Plan", sub.Plans[0].Plan)
+	assert.Equal(t, "Football", sub.Plans[0].Sport)
+	assert.Equal(t, "Advanced", sub.Plans[0].Category)
 }

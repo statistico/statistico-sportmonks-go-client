@@ -29,7 +29,38 @@ var countriesResponse = `{
 		  ],
 		  "image_path": "https://cdn.sportmonks.com/images/countries/png/short/pl.png"
     	}
-	]
+	],
+	"pagination": {
+		"count": 2,
+		"per_page": 25,
+		"current_page": 1,
+		"next_page": null,
+		"has_more": false
+	},
+	"subscription": [
+		{
+			"meta": {
+				"trial_ends_at": null,
+				"ends_at": "2024-10-26 12:06:34",
+				"current_timestamp": 1728372666
+			},
+			"plans": [
+				{
+					"plan": "Joe Sweeny Custom Plan",
+					"sport": "Football",
+					"category": "Advanced"
+				}
+			],
+			"add_ons": [],
+			"widgets": []
+		}
+	],
+	"rate_limit": {
+		"resets_in_seconds": 3386,
+		"remaining": 2997,
+		"requested_entity": "Country"
+	},
+	"timezone": "UTC"
 }`
 
 var countriesIncludesResponse = `{
@@ -61,28 +92,53 @@ var countriesIncludesResponse = `{
 			},
 			"leagues": [
 				{
-					"id": 82,
+					"id": 8,
+					"sport_id": 1,
+					"country_id": 462,
+					"name": "Premier League",
 					"active": true,
-					"type": "domestic",
-					"legacy_id": 4,
-					"country_id": 11,
-					"logo_path": "https://cdn.sportmonks.com/images/soccer/leagues/82.png",
-					"name": "Bundesliga",
-					"is_cup": false,
-					"current_season_id": 16264,
-					"current_round_id": 174546,
-					"current_stage_id": 77444845,
-					"live_standings": true,
-					"coverage": {
-						"predictions": true,
-						"topscorer_goals": true,
-						"topscorer_assists": true,
-						"topscorer_cards": true
-					}
+					"short_code": "UK PL",
+					"image_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/leagues\/8\/8.png",
+					"type": "league",
+					"sub_type": "domestic",
+					"last_played_at": "2024-09-22 15:30:00",
+					"category": 1,
+					"has_jerseys": false
 				}
 			]
 		}
-	]
+	],
+	"pagination": {
+		"count": 2,
+		"per_page": 25,
+		"current_page": 1,
+		"next_page": null,
+		"has_more": false
+	},
+	"subscription": [
+		{
+			"meta": {
+				"trial_ends_at": null,
+				"ends_at": "2024-10-26 12:06:34",
+				"current_timestamp": 1728372666
+			},
+			"plans": [
+				{
+					"plan": "Joe Sweeny Custom Plan",
+					"sport": "Football",
+					"category": "Advanced"
+				}
+			],
+			"add_ons": [],
+			"widgets": []
+		}
+	],
+	"rate_limit": {
+		"resets_in_seconds": 3386,
+		"remaining": 2997,
+		"requested_entity": "Country"
+	},
+	"timezone": "UTC"
 }`
 
 var countryResponse = `{
@@ -106,7 +162,38 @@ var countryResponse = `{
 		"UKR"
 	  ],
 	  "image_path": "https://cdn.sportmonks.com/images/countries/png/short/pl.png"
-	}
+	},
+	"pagination": {
+		"count": 2,
+		"per_page": 25,
+		"current_page": 1,
+		"next_page": null,
+		"has_more": false
+	},
+	"subscription": [
+		{
+			"meta": {
+				"trial_ends_at": null,
+				"ends_at": "2024-10-26 12:06:34",
+				"current_timestamp": 1728372666
+			},
+			"plans": [
+				{
+					"plan": "Joe Sweeny Custom Plan",
+					"sport": "Football",
+					"category": "Advanced"
+				}
+			],
+			"add_ons": [],
+			"widgets": []
+		}
+	],
+	"rate_limit": {
+		"resets_in_seconds": 3386,
+		"remaining": 2997,
+		"requested_entity": "Country"
+	},
+	"timezone": "UTC"
 }
 `
 
@@ -131,70 +218,27 @@ var countryIncludesResponse = `{
 		"UKR"
 	  ],
 	  "image_path": "https://cdn.sportmonks.com/images/countries/png/short/pl.png",
-		"continent": {
+      "continent": {
 		  "id": 1,
 		  "name": "Europe",
 		  "code": "EU"
-		},
-		"leagues": [
-				{
-					"id": 82,
-					"active": true,
-					"type": "domestic",
-					"legacy_id": 4,
-					"country_id": 11,
-					"logo_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/leagues\/82.png",
-					"name": "Bundesliga",
-					"is_cup": false,
-					"current_season_id": 16264,
-					"current_round_id": 174546,
-					"current_stage_id": 77444845,
-					"live_standings": true,
-					"coverage": {
-					  "predictions": true,
-					  "topscorer_goals": true,
-					  "topscorer_assists": true,
-					  "topscorer_cards": true
-					}
-				}
-		   ]
-		}
-	}
-}`
-
-var countriesPaginatedResponse = `{
-	"data": [
-		{
-          "id": 2,
-		  "continent_id": 1,
-		  "name": "Poland",
-		  "official_name": "Republic of Poland",
-		  "fifa_name": "POL",
-		  "iso2": "PL",
-		  "iso3": "POL",
-		  "latitude": "52.147850036621094",
-		  "longitude": "19.37775993347168",
-		  "borders": [
-			"BLR",
-			"CZE",
-			"DEU",
-			"LTU",
-			"RUS",
-			"SVK",
-			"UKR"
-		  ],
-		  "image_path": "https://cdn.sportmonks.com/images/countries/png/short/pl.png"
-		}
-	],
-	"meta": {
-		"pagination": {
-			"total": 2,
-			"count": 2,
-			"per_page": 100,
-			"current_page": 1,
-			"total_pages": 1,
-			"links": []
-		}
+      },
+      "leagues": [
+			{
+				"id": 8,
+				"sport_id": 1,
+				"country_id": 462,
+				"name": "Premier League",
+				"active": true,
+				"short_code": "UK PL",
+				"image_path": "https:\/\/cdn.sportmonks.com\/images\/soccer\/leagues\/8\/8.png",
+				"type": "league",
+				"sub_type": "domestic",
+				"last_played_at": "2024-09-22 15:30:00",
+				"category": 1,
+				"has_jerseys": false
+			}
+	   ]
 	}
 }`
 
@@ -214,7 +258,7 @@ func TestCountries(t *testing.T) {
 
 		assertCountry(t, &countries[0])
 		assert.Nil(t, countries[0].Continent)
-		//assert.Nil(t, countries[0].Leagues)
+		assert.Equal(t, 0, len(countries[0].Leagues))
 	})
 
 	t.Run("returns Country struct slice with includes data", func(t *testing.T) {
@@ -231,11 +275,11 @@ func TestCountries(t *testing.T) {
 		}
 
 		continent := countries[0].Continent
-		//league := countries[0].Leagues()[0]
+		league := countries[0].Leagues[0]
 
 		assertCountry(t, &countries[0])
 		assertContinent(t, continent)
-		//assertLeague(t, &league)
+		assertLeague(t, &league)
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
@@ -254,16 +298,16 @@ func TestCountries(t *testing.T) {
 		assertError(t, err)
 	})
 
-	t.Run("can handle paginated response", func(t *testing.T) {
+	t.Run("can handle response details", func(t *testing.T) {
 		url := defaultBaseURL + "/core/countries?api_token=api-key&include=continent%3Bleagues&page=1"
 
-		server := mockResponseServer(t, countriesPaginatedResponse, 200, url)
+		server := mockResponseServer(t, countriesResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		_, meta, _ := client.Countries(context.Background(), 1, []string{"continent", "leagues"})
+		_, details, _ := client.Countries(context.Background(), 1, []string{"continent", "leagues"})
 
-		assertPagination(t, meta.Pagination)
+		assertResponseDetails(t, details, "Country")
 	})
 }
 
@@ -283,7 +327,7 @@ func TestCountryByID(t *testing.T) {
 
 		assertCountry(t, country)
 		assert.Nil(t, country.Continent)
-		//assert.Nil(t, country.Leagues())
+		assert.Equal(t, 0, len(country.Leagues))
 	})
 
 	t.Run("returns Country struct with country includes data", func(t *testing.T) {
@@ -300,11 +344,11 @@ func TestCountryByID(t *testing.T) {
 		}
 
 		continent := country.Continent
-		//league := country.Leagues()[0]
+		league := country.Leagues[0]
 
 		assertCountry(t, country)
 		assertContinent(t, continent)
-		//assertLeague(t, &league)
+		assertLeague(t, &league)
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
@@ -322,6 +366,18 @@ func TestCountryByID(t *testing.T) {
 
 		assertError(t, err)
 	})
+
+	t.Run("can handle response details response", func(t *testing.T) {
+		url := defaultBaseURL + "/core/countries/11?api_token=api-key&include=continent%3Bleagues"
+
+		server := mockResponseServer(t, countryResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, details, _ := client.CountryByID(context.Background(), 11, []string{"continent", "leagues"})
+
+		assertResponseDetails(t, details, "Country")
+	})
 }
 
 func assertCountry(t *testing.T, country *Country) {
@@ -337,10 +393,33 @@ func assertCountry(t *testing.T, country *Country) {
 	assert.ElementsMatch(t, []string{"BLR", "CZE", "DEU", "LTU", "RUS", "SVK", "UKR"}, country.Borders)
 }
 
-func assertPagination(t *testing.T, p *Pagination) {
-	assert.Equal(t, 2, p.Total)
-	assert.Equal(t, 2, p.Count)
-	assert.Equal(t, 100, p.PerPage)
-	assert.Equal(t, 1, p.CurrentPage)
-	assert.Equal(t, 1, p.TotalPages)
+func assertResponseDetails(t *testing.T, d *ResponseDetails, entity string) {
+	p := d.Pagination
+
+	if p != nil {
+		assert.Equal(t, 2, p.Count)
+		assert.Equal(t, 25, p.PerPage)
+		assert.Equal(t, 1, p.CurrentPage)
+		assert.Nil(t, p.NextPage)
+		assert.False(t, p.HasMore)
+	}
+
+	s := d.Subscription[0]
+
+	assert.Nil(t, s.Meta.TrialEndsAt)
+	assert.Equal(t, "2024-10-26 12:06:34", s.Meta.EndsAt)
+	assert.Equal(t, int64(1728372666), s.Meta.CurrentTimestamp)
+
+	assert.Equal(t, 1, len(s.Plans))
+	assert.Equal(t, "Joe Sweeny Custom Plan", s.Plans[0].Plan)
+	assert.Equal(t, "Football", s.Plans[0].Sport)
+	assert.Equal(t, "Advanced", s.Plans[0].Category)
+
+	r := d.RateLimit
+
+	assert.Equal(t, 3386, r.ResetsInSeconds)
+	assert.Equal(t, 2997, r.Remaining)
+	assert.Equal(t, entity, r.RequestedEntity)
+
+	assert.Equal(t, "UTC", d.TimeZone)
 }
