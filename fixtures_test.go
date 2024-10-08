@@ -42,7 +42,31 @@ var fixtureResponse = `{
 		  "ending_at": "2010-08-16",
 		  "games_in_current_week": false
       }
-    }
+    },
+	"subscription": [
+		{
+			"meta": {
+				"trial_ends_at": null,
+				"ends_at": "2024-10-26 12:06:34",
+				"current_timestamp": 1728372666
+			},
+			"plans": [
+				{
+					"plan": "Joe Sweeny Custom Plan",
+					"sport": "Football",
+					"category": "Advanced"
+				}
+			],
+			"add_ons": [],
+			"widgets": []
+		}
+	],
+	"rate_limit": {
+		"resets_in_seconds": 3386,
+		"remaining": 2997,
+		"requested_entity": "Fixture"
+	},
+	"timezone": "UTC"
 }`
 
 var fixturesResponse = `{
@@ -82,7 +106,38 @@ var fixturesResponse = `{
 				  "games_in_current_week": false
 			  }
 		}
-	]
+	],
+	"pagination": {
+		"count": 2,
+		"per_page": 25,
+		"current_page": 1,
+		"next_page": null,
+		"has_more": false
+	},
+	"subscription": [
+		{
+			"meta": {
+				"trial_ends_at": null,
+				"ends_at": "2024-10-26 12:06:34",
+				"current_timestamp": 1728372666
+			},
+			"plans": [
+				{
+					"plan": "Joe Sweeny Custom Plan",
+					"sport": "Football",
+					"category": "Advanced"
+				}
+			],
+			"add_ons": [],
+			"widgets": []
+		}
+	],
+	"rate_limit": {
+		"resets_in_seconds": 3386,
+		"remaining": 2997,
+		"requested_entity": "Fixture"
+	},
+	"timezone": "UTC"
 }`
 
 func TestFixtureByID(t *testing.T) {
@@ -165,6 +220,18 @@ func TestFixtureByID(t *testing.T) {
 		}
 
 		assertError(t, err)
+	})
+
+	t.Run("can handle response details response", func(t *testing.T) {
+		url := defaultBaseURL + "/football/fixtures/11867285?api_token=api-key&include="
+
+		server := mockResponseServer(t, fixtureResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, details, _ := client.FixtureByID(context.Background(), 11867285, []string{}, map[string][]int{})
+
+		assertResponseDetails(t, details, "Fixture")
 	})
 }
 
@@ -253,6 +320,23 @@ func TestFixturesByID(t *testing.T) {
 		}
 
 		assertError(t, err)
+	})
+
+	t.Run("can handle response details response", func(t *testing.T) {
+		url := defaultBaseURL + "/football/fixtures/multi/11867285,555?api_token=api-key&include="
+
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, details, _ := client.FixturesByID(
+			context.Background(),
+			[]int{11867285, 555},
+			[]string{},
+			map[string][]int{},
+		)
+
+		assertResponseDetails(t, details, "Fixture")
 	})
 }
 
@@ -343,6 +427,18 @@ func TestFixturesByDate(t *testing.T) {
 		}
 
 		assertError(t, err)
+	})
+
+	t.Run("can handle response details response", func(t *testing.T) {
+		url := defaultBaseURL + "/football/fixtures/date/2014-11-12?api_token=api-key&include="
+
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, details, _ := client.FixturesByDate(context.Background(), d, []string{}, map[string][]int{})
+
+		assertResponseDetails(t, details, "Fixture")
 	})
 }
 
@@ -440,6 +536,18 @@ func TestFixturesBetween(t *testing.T) {
 		}
 
 		assertError(t, err)
+	})
+
+	t.Run("can handle response details response", func(t *testing.T) {
+		url := defaultBaseURL + "/football/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include="
+
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, details, _ := client.FixturesBetween(context.Background(), dateFrom, dateTo, []string{}, map[string][]int{})
+
+		assertResponseDetails(t, details, "Fixture")
 	})
 }
 
@@ -553,6 +661,18 @@ func TestFixturesBetweenForTeam(t *testing.T) {
 		}
 
 		assertError(t, err)
+	})
+
+	t.Run("can handle response details response", func(t *testing.T) {
+		url := defaultBaseURL + "/football/fixtures/between/2014-11-12/2014-12-12?api_token=api-key&include="
+
+		server := mockResponseServer(t, fixturesResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, details, _ := client.FixturesBetween(context.Background(), dateFrom, dateTo, []string{}, map[string][]int{})
+
+		assertResponseDetails(t, details, "Fixture")
 	})
 }
 
