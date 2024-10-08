@@ -22,13 +22,13 @@ type Country struct {
 	Borders      []string   `json:"borders"`
 	ImagePath    string     `json:"image_path"`
 	Continent    *Continent `json:"continent,omitempty"`
-	//Leagues      []League  `json:"leagues,omitempty"`
+	Leagues      []League   `json:"leagues,omitempty"`
 }
 
 // Countries fetches Country resources. The endpoint used within this method is paginated, to select the required
-// page use the 'page' method argument. Page information including current page and total page are included within
-// the Meta struct. Use the includes slice of string to enrich the response data.
-func (c *HTTPClient) Countries(ctx context.Context, page int, includes []string) ([]Country, *Pagination, []Subscription, error) {
+// page use the 'page' method argument. Pagination information including current page and count are included within
+// the Pagination struct with the ResponseDetails struct. Use the includes slice of string to enrich the response data.
+func (c *HTTPClient) Countries(ctx context.Context, page int, includes []string) ([]Country, *ResponseDetails, error) {
 	values := url.Values{
 		"page":    {strconv.Itoa(page)},
 		"include": {strings.Join(includes, ";")},
@@ -36,21 +36,28 @@ func (c *HTTPClient) Countries(ctx context.Context, page int, includes []string)
 
 	response := struct {
 		Data         []Country      `json:"data"`
-		Pagination   *Pagination    `json:"pagination"`
+		Pagination   Pagination     `json:"pagination"`
 		Subscription []Subscription `json:"subscription"`
+		RateLimit    RateLimit      `json:"rate_limit"`
+		TimeZone     string         `json:"timezone"`
 	}{}
 
 	err := c.getResource(ctx, countriesURI, values, &response)
 
 	if err != nil {
-		return nil, nil, nil, err
+		return nil, nil, err
 	}
 
-	return response.Data, response.Pagination, response.Subscription, err
+	return response.Data, &ResponseDetails{
+		Pagination:   &response.Pagination,
+		Subscription: response.Subscription,
+		RateLimit:    response.RateLimit,
+		TimeZone:     response.TimeZone,
+	}, err
 }
 
 // CountryByID fetches a Country resource by ID. Use the includes slice of string to enrich the response data.
-func (c *HTTPClient) CountryByID(ctx context.Context, id int, includes []string) (*Country, *Pagination, []Subscription, error) {
+func (c *HTTPClient) CountryByID(ctx context.Context, id int, includes []string) (*Country, *ResponseDetails, error) {
 	path := fmt.Sprintf(countriesURI+"/%d", id)
 
 	values := url.Values{
@@ -59,15 +66,20 @@ func (c *HTTPClient) CountryByID(ctx context.Context, id int, includes []string)
 
 	response := struct {
 		Data         *Country       `json:"data"`
-		Pagination   *Pagination    `json:"pagination"`
 		Subscription []Subscription `json:"subscription"`
+		RateLimit    RateLimit      `json:"rate_limit"`
+		TimeZone     string         `json:"timezone"`
 	}{}
 
 	err := c.getResource(ctx, path, values, &response)
 
 	if err != nil {
-		return nil, nil, nil, err
+		return nil, nil, err
 	}
 
-	return response.Data, response.Pagination, response.Subscription, err
+	return response.Data, &ResponseDetails{
+		Subscription: response.Subscription,
+		RateLimit:    response.RateLimit,
+		TimeZone:     response.TimeZone,
+	}, err
 }

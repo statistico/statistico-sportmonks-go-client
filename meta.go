@@ -27,10 +27,9 @@ type (
 		Category string `json:"category"`
 	}
 
-	// DateTime struct.
-	DateTime struct {
-		Date         string `json:"date"`
-		TimezoneType int    `json:"timezone_type"`
-		Timezone     string `json:"timezone"`
+	RateLimit struct {
+		ResetsInSeconds int    `json:"resets_in_seconds"`
+		Remaining       int    `json:"remaining"`
+		RequestedEntity string `json:"requested_entity"`
 	}
 )

@@ -35,7 +35,7 @@ var leaguesResponse = `{
 			"meta": {
 				"trial_ends_at": null,
 				"ends_at": "2024-10-26 12:06:34",
-				"current_timestamp": 1728317818
+				"current_timestamp": 1728372666
 			},
 			"plans": [
 				{
@@ -47,7 +47,13 @@ var leaguesResponse = `{
 			"add_ons": [],
 			"widgets": []
 		}
-	]
+	],
+	"rate_limit": {
+		"resets_in_seconds": 3386,
+		"remaining": 2997,
+		"requested_entity": "League"
+	},
+	"timezone": "UTC"
 }`
 
 var leaguesIncludesResponse = `{
@@ -83,7 +89,38 @@ var leagueResponse = `{
       "last_played_at": "2024-09-22 15:30:00",
       "category": 1,
       "has_jerseys": false
-    }
+    },
+	"pagination": {
+		"count": 2,
+		"per_page": 25,
+		"current_page": 1,
+		"next_page": null,
+		"has_more": false
+	},
+	"subscription": [
+		{
+			"meta": {
+				"trial_ends_at": null,
+				"ends_at": "2024-10-26 12:06:34",
+				"current_timestamp": 1728372666
+			},
+			"plans": [
+				{
+					"plan": "Joe Sweeny Custom Plan",
+					"sport": "Football",
+					"category": "Advanced"
+				}
+			],
+			"add_ons": [],
+			"widgets": []
+		}
+	],
+	"rate_limit": {
+		"resets_in_seconds": 3386,
+		"remaining": 2997,
+		"requested_entity": "League"
+	},
+	"timezone": "UTC"
 }`
 
 var leagueIncludesResponse = `{
@@ -111,7 +148,7 @@ func TestLeagues(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		leagues, _, _, err := client.Leagues(context.Background(), 1, []string{})
+		leagues, _, err := client.Leagues(context.Background(), 1, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -127,7 +164,7 @@ func TestLeagues(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		leagues, _, _, err := client.Leagues(context.Background(), 1, []string{"country", "season", "seasons"})
+		leagues, _, err := client.Leagues(context.Background(), 1, []string{"country", "season", "seasons"})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -143,7 +180,7 @@ func TestLeagues(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		leagues, _, _, err := client.Leagues(context.Background(), 1, []string{})
+		leagues, _, err := client.Leagues(context.Background(), 1, []string{})
 
 		if leagues != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", leagues)
@@ -152,7 +189,7 @@ func TestLeagues(t *testing.T) {
 		assertError(t, err)
 	})
 
-	t.Run("can handle paginated response", func(t *testing.T) {
+	t.Run("can handle response details", func(t *testing.T) {
 		t.Helper()
 
 		url := defaultBaseURL + "/football/leagues?api_token=api-key&include=country%3Bseason%3Bseasons&page=1"
@@ -161,23 +198,9 @@ func TestLeagues(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		_, pagination, _, _ := client.Leagues(context.Background(), 1, []string{"country", "season", "seasons"})
+		_, details, _ := client.Leagues(context.Background(), 1, []string{"country", "season", "seasons"})
 
-		assertPagination(t, pagination)
-	})
-
-	t.Run("can handle subscription response", func(t *testing.T) {
-		t.Helper()
-
-		url := defaultBaseURL + "/football/leagues?api_token=api-key&include=country%3Bseason%3Bseasons&page=1"
-
-		server := mockResponseServer(t, leaguesResponse, 200, url)
-
-		client := newTestHTTPClient(server)
-
-		_, _, sub, _ := client.Leagues(context.Background(), 1, []string{"country", "season", "seasons"})
-
-		assertSubscription(t, sub[0])
+		assertResponseDetails(t, details, "League")
 	})
 }
 
@@ -189,7 +212,7 @@ func TestLeagueByID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		league, _, _, err := client.LeagueByID(context.Background(), 82, []string{})
+		league, _, err := client.LeagueByID(context.Background(), 82, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -205,7 +228,7 @@ func TestLeagueByID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		league, _, _, err := client.LeagueByID(context.Background(), 82, []string{"country", "season", "seasons"})
+		league, _, err := client.LeagueByID(context.Background(), 82, []string{"country", "season", "seasons"})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -221,13 +244,25 @@ func TestLeagueByID(t *testing.T) {
 
 		client := newTestHTTPClient(server)
 
-		league, _, _, err := client.LeagueByID(context.Background(), 82, []string{})
+		league, _, err := client.LeagueByID(context.Background(), 82, []string{})
 
 		if league != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", league)
 		}
 
 		assertError(t, err)
+	})
+
+	t.Run("can handle response details response", func(t *testing.T) {
+		url := defaultBaseURL + "/football/leagues/82?api_token=api-key&include="
+
+		server := mockResponseServer(t, leagueResponse, 200, url)
+
+		client := newTestHTTPClient(server)
+
+		_, details, _ := client.LeagueByID(context.Background(), 82, []string{})
+
+		assertResponseDetails(t, details, "League")
 	})
 }
 
