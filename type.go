@@ -480,7 +480,7 @@ type (
 	}
 
 	StatData struct {
-		Value int `json:"value"`
+		Value interface{} `json:"value"`
 	}
 
 	StatType struct {
