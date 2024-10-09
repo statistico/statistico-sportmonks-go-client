@@ -42,6 +42,7 @@ type Fixture struct {
 	Lineups             []LineupPlayer `json:"lineups,omitempty"`
 	Events              []FixtureEvent `json:"events,omitempty"`
 	Statistics          []FixtureStat  `json:"statistics,omitempty"`
+	Scores              []Score        `json:"scores,omitempty"`
 	Formations          []Formation    `json:"formations,omitempty"`
 	Participants        []Team         `json:"participants,omitempty"`
 }

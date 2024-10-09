@@ -41,7 +41,20 @@ var fixtureResponse = `{
 		  "starting_at": "2010-08-14",
 		  "ending_at": "2010-08-16",
 		  "games_in_current_week": false
-      }
+      },
+      "scores": [
+		{
+			"id": 14902138,
+			"fixture_id": 19134492,
+			"type_id": 1525,
+			"participant_id": 1,
+			"score": {
+				"goals": 0,
+				"participant": "home"
+			},
+			"description": "CURRENT"
+		}
+      ]
     },
 	"subscription": [
 		{
@@ -158,7 +171,7 @@ func TestFixtureByID(t *testing.T) {
 	})
 
 	t.Run("returns a single Fixture struct with includes data", func(t *testing.T) {
-		url := defaultBaseURL + "/football/fixtures/11867285?api_token=api-key&include=round"
+		url := defaultBaseURL + "/football/fixtures/11867285?api_token=api-key&include=round%3Bscores"
 
 		server := mockResponseServer(t, fixtureResponse, 200, url)
 
@@ -167,7 +180,7 @@ func TestFixtureByID(t *testing.T) {
 		fixture, _, err := client.FixtureByID(
 			context.Background(),
 			11867285,
-			[]string{"round"},
+			[]string{"round", "scores"},
 			map[string][]int{},
 		)
 
@@ -177,6 +190,7 @@ func TestFixtureByID(t *testing.T) {
 
 		assertFixture(t, fixture)
 		assertRound(t, fixture.Round)
+		assertScore(t, fixture.Scores[0])
 	})
 
 	t.Run("returns a single Fixture struct with includes data and filter parameters", func(t *testing.T) {
@@ -697,4 +711,14 @@ func assertFixture(t *testing.T, fixture *Fixture) {
 	assert.Equal(t, false, fixture.HasOdds)
 	assert.Equal(t, false, fixture.HasPremiumOdds)
 	assert.Equal(t, int64(1281786300), fixture.StartingAtTimestamp)
+}
+
+func assertScore(t *testing.T, score Score) {
+	assert.Equal(t, 14902138, score.ID)
+	assert.Equal(t, 19134492, score.FixtureID)
+	assert.Equal(t, 1525, score.TypeID)
+	assert.Equal(t, 1, score.ParticipantID)
+	assert.Equal(t, 0, score.ScoreData.Goals)
+	assert.Equal(t, "home", score.ScoreData.Participant)
+	assert.Equal(t, "CURRENT", score.Description)
 }
