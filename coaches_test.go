@@ -55,11 +55,7 @@ func TestCoachByID(t *testing.T) {
 			t.Fatalf("Test failed, expected nil, got %+v", coach)
 		}
 
-		assert.Equal(
-			t,
-			"Request failed with message: The requested endpoint does not exists!, code: 404",
-			err.Error(),
-		)
+		assertError(t, err)
 	})
 }
 

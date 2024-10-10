@@ -10,10 +10,13 @@ import (
 )
 
 var errorResponse = `{
-	"error": {
-		"message": "The requested endpoint does not exists!",
-		"code": 404
-	}
+	"message": "The requested endpoint does not exist"
+}`
+
+var rateLimitErrorResponse = `{
+	"message": "You have reached your rate limit",
+	"link": "https:\/\/docs.sportmonks.com\/football\/api\/response-codes\/other-exceptions",
+	"reset_code": "c9920a03f111f49848fad06608df63ed"
 }`
 
 func TestNewHTTPClient(t *testing.T) {
@@ -53,12 +56,28 @@ func TestNewHTTPClient(t *testing.T) {
 
 		_, _, _ = client.ContinentByID(context.Background(), 10, []string{"countries"})
 	})
+
+	t.Run("returns a rate limit error", func(t *testing.T) {
+		url := "https://api.sportmonks.com/v3/football/coaches/2?api_token=api-key"
+
+		server := mockResponseServer(t, rateLimitErrorResponse, 429, url)
+
+		client := newTestHTTPClient(server)
+
+		_, _, err := client.CoachByID(context.Background(), 2)
+
+		assert.Equal(
+			t,
+			"Request failed with the message: 'You have reached your rate limit', link: 'https://docs.sportmonks.com/football/api/response-codes/other-exceptions', reset code: 'c9920a03f111f49848fad06608df63ed'",
+			err.Error(),
+		)
+	})
 }
 
 func assertError(t *testing.T, err error) {
 	assert.Equal(
 		t,
-		"Request failed with message: The requested endpoint does not exists!, code: 404",
+		"Request failed with the message: The requested endpoint does not exist",
 		err.Error(),
 	)
 }

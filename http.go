@@ -98,6 +98,18 @@ func (c *HTTPClient) do(ctx context.Context, req *http.Request, intf interface{}
 }
 
 func checkStatusCode(resp *http.Response) error {
+	if resp.StatusCode == http.StatusTooManyRequests {
+		err := new(ErrRateLimit)
+
+		e := parseJSONResponseBody(resp.Body, &err)
+
+		if e != nil {
+			return e
+		}
+
+		return err
+	}
+	
 	if resp.StatusCode != http.StatusOK {
 		err := new(ErrBadStatusCode)
 
