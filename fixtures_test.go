@@ -18,7 +18,7 @@ var fixtureResponse = `{
       "aggregate_id": null,
       "round_id": 43,
       "state_id": 5,
-      "venue_id": 209,
+      "venue_id": null,
       "name": "Tottenham Hotspur vs Manchester City",
       "starting_at": "2010-08-14 11:45:00",
       "result_info": "Game ended in draw.",
@@ -94,7 +94,7 @@ var fixturesResponse = `{
 			  "aggregate_id": null,
 			  "round_id": 43,
 			  "state_id": 5,
-			  "venue_id": 209,
+			  "venue_id": null,
 			  "name": "Tottenham Hotspur vs Manchester City",
 			  "starting_at": "2010-08-14 11:45:00",
 			  "result_info": "Game ended in draw.",
@@ -700,7 +700,7 @@ func assertFixture(t *testing.T, fixture *Fixture) {
 	assert.Nil(t, fixture.AggregateID)
 	assert.Equal(t, 43, fixture.RoundID)
 	assert.Equal(t, 5, fixture.StateID)
-	assert.Equal(t, 209, fixture.VenueID)
+	assert.Nil(t, fixture.VenueID)
 	assert.Equal(t, "Tottenham Hotspur vs Manchester City", fixture.Name)
 	assert.Equal(t, "2010-08-14 11:45:00", fixture.StartingAt)
 	assert.Equal(t, "Game ended in draw.", fixture.ResultInfo)
