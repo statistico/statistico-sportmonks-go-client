@@ -20,7 +20,7 @@ type Fixture struct {
 	AggregateID         *int           `json:"aggregate_id"`
 	RoundID             int            `json:"round_id"`
 	StateID             int            `json:"state_id"`
-	VenueID             int            `json:"venue_id"`
+	VenueID             *int           `json:"venue_id"`
 	Name                string         `json:"name"`
 	StartingAt          string         `json:"starting_at"`
 	ResultInfo          string         `json:"result_info"`
