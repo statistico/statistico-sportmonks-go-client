@@ -239,6 +239,7 @@ type (
 		JerseyNumber      int            `json:"jersey_number"`
 		Details           []LineupDetail `json:"details,omitempty"`
 		Position          *Position      `json:"position,omitempty"`
+		Player            *Player        `json:"player,omitempty"`
 	}
 
 	LineupDetail struct {
