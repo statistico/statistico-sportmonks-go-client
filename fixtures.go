@@ -39,7 +39,7 @@ type Fixture struct {
 	Venues              *Venue         `json:"venues,omitempty"`
 	FixtureState        *FixtureState  `json:"state,omitempty"`
 	WeatherReport       *WeatherReport `json:"weatherReport,omitempty"`
-	Lineups             []LineupPlayer `json:"lineups,omitempty"`
+	Lineups             []LineupPlayer `json:"lineups"`
 	Events              []FixtureEvent `json:"events,omitempty"`
 	Statistics          []FixtureStat  `json:"statistics,omitempty"`
 	Scores              []Score        `json:"scores,omitempty"`
