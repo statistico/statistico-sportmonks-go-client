@@ -12,6 +12,7 @@ import (
 
 const (
 	defaultBaseURL         = "https://api.sportmonks.com/v3"
+	bookmakersURI          = "/odds/bookmakers"
 	coachesURI             = "/football/coaches"
 	commentariesFixtureURI = "/commentaries/fixture"
 	continentsURI          = "/core/continents"
@@ -22,6 +23,7 @@ const (
 	fixturesMultiURI       = "/football/fixtures/multi"
 	headToHeadURI          = "/football/fixtures/head-to-head"
 	leaguesURI             = "/football/leagues"
+	oddsFixtureURI         = "/football/odds/pre-match/fixtures"
 	playersURI             = "/football/players"
 	roundsURI              = "/football/rounds"
 	roundsSeasonURI        = "/football/rounds/seasons"
@@ -109,7 +111,7 @@ func checkStatusCode(resp *http.Response) error {
 
 		return err
 	}
-	
+
 	if resp.StatusCode != http.StatusOK {
 		err := new(ErrBadStatusCode)
 
