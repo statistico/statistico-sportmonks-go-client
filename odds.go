@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/url"
+	"strings"
 	"time"
 )
 
@@ -37,15 +38,19 @@ type (
 )
 
 // OddsByFixtureID fetches MatchOdds resources associated to a fixture.
-func (c *HTTPClient) OddsByFixtureID(ctx context.Context, fixtureID int) ([]Odds, *Meta, error) {
+func (c *HTTPClient) OddsByFixtureID(ctx context.Context, fixtureID int, includes []string) ([]Odds, *Meta, error) {
 	path := fmt.Sprintf(oddsFixtureURI+"/%d", fixtureID)
+
+	values := url.Values{
+		"include": {strings.Join(includes, ";")},
+	}
 
 	response := struct {
 		Data []Odds `json:"data"`
 		Meta *Meta  `json:"meta"`
 	}{}
 
-	err := c.getResource(ctx, path, url.Values{}, &response)
+	err := c.getResource(ctx, path, values, &response)
 
 	if err != nil {
 		return nil, nil, err
@@ -55,15 +60,19 @@ func (c *HTTPClient) OddsByFixtureID(ctx context.Context, fixtureID int) ([]Odds
 }
 
 // OddsByFixtureAndBookmaker fetches MatchOdds resources associated to a fixture and bookmaker.
-func (c *HTTPClient) OddsByFixtureAndBookmaker(ctx context.Context, fixtureID, bookmakerID int) ([]Odds, *Meta, error) {
+func (c *HTTPClient) OddsByFixtureAndBookmaker(ctx context.Context, fixtureID, bookmakerID int, includes []string) ([]Odds, *Meta, error) {
 	path := fmt.Sprintf(oddsFixtureURI+"/%d/bookmakers/%d", fixtureID, bookmakerID)
+
+	values := url.Values{
+		"include": {strings.Join(includes, ";")},
+	}
 
 	response := struct {
 		Data []Odds `json:"data"`
 		Meta *Meta  `json:"meta"`
 	}{}
 
-	err := c.getResource(ctx, path, url.Values{}, &response)
+	err := c.getResource(ctx, path, values, &response)
 
 	if err != nil {
 		return nil, nil, err
@@ -73,15 +82,19 @@ func (c *HTTPClient) OddsByFixtureAndBookmaker(ctx context.Context, fixtureID, b
 }
 
 // OddsByFixtureAndMarket fetches MatchOdds resources associated to a fixture and market.
-func (c *HTTPClient) OddsByFixtureAndMarket(ctx context.Context, fixtureID, marketID int) ([]Odds, *Meta, error) {
+func (c *HTTPClient) OddsByFixtureAndMarket(ctx context.Context, fixtureID, marketID int, includes []string) ([]Odds, *Meta, error) {
 	path := fmt.Sprintf(oddsFixtureURI+"/%d/markets/%d", fixtureID, marketID)
+
+	values := url.Values{
+		"include": {strings.Join(includes, ";")},
+	}
 
 	response := struct {
 		Data []Odds `json:"data"`
 		Meta *Meta  `json:"meta"`
 	}{}
 
-	err := c.getResource(ctx, path, url.Values{}, &response)
+	err := c.getResource(ctx, path, values, &response)
 
 	if err != nil {
 		return nil, nil, err
