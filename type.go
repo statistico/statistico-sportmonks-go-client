@@ -271,6 +271,15 @@ type (
 		FairPlayPointsLose int    `json:"fairplay_points_lose"`
 	}
 
+	// Market provides information for a specific betting market.
+	Market struct {
+		ID                     int    `json:"id"`
+		LegacyID               int    `json:"legacy_id"`
+		Name                   string `json:"name"`
+		DeveloperName          string `json:"developer_name"`
+		HasWinningCalculations bool   `json:"has_winning_calculations"`
+	}
+
 	// MatchEvent provides generic information for a match event.
 	MatchEvent struct {
 		ID                int64   `json:"id"`
