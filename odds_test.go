@@ -48,13 +48,13 @@ var oddsResponse = `{
 
 func TestOddsByFixtureID(t *testing.T) {
 	t.Run("returns a slice of MatchOdds struct", func(t *testing.T) {
-		url := defaultBaseURL + "/football/odds/pre-match/fixtures/11867285?api_token=api-key"
+		url := defaultBaseURL + "/football/odds/pre-match/fixtures/11867285?api_token=api-key&include=market"
 
 		server := mockResponseServer(t, oddsResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		odds, _, err := client.OddsByFixtureID(context.Background(), 11867285)
+		odds, _, err := client.OddsByFixtureID(context.Background(), 11867285, []string{"market"})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -64,13 +64,13 @@ func TestOddsByFixtureID(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseURL + "/football/odds/pre-match/fixtures/11867285?api_token=api-key"
+		url := defaultBaseURL + "/football/odds/pre-match/fixtures/11867285?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		odds, _, err := client.OddsByFixtureID(context.Background(), 11867285)
+		odds, _, err := client.OddsByFixtureID(context.Background(), 11867285, []string{})
 
 		if odds != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", odds)
@@ -82,13 +82,13 @@ func TestOddsByFixtureID(t *testing.T) {
 
 func TestOddsByFixtureAndBookmaker(t *testing.T) {
 	t.Run("returns a slice of MatchOdds struct", func(t *testing.T) {
-		url := defaultBaseURL + "/football/odds/pre-match/fixtures/11867285/bookmakers/1?api_token=api-key"
+		url := defaultBaseURL + "/football/odds/pre-match/fixtures/11867285/bookmakers/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, oddsResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		odds, _, err := client.OddsByFixtureAndBookmaker(context.Background(), 11867285, 1)
+		odds, _, err := client.OddsByFixtureAndBookmaker(context.Background(), 11867285, 1, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -98,13 +98,13 @@ func TestOddsByFixtureAndBookmaker(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseURL + "/football/odds/pre-match/fixtures/11867285/bookmakers/1?api_token=api-key"
+		url := defaultBaseURL + "/football/odds/pre-match/fixtures/11867285/bookmakers/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		odds, _, err := client.OddsByFixtureAndBookmaker(context.Background(), 11867285, 1)
+		odds, _, err := client.OddsByFixtureAndBookmaker(context.Background(), 11867285, 1, []string{})
 
 		if odds != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", odds)
@@ -116,13 +116,13 @@ func TestOddsByFixtureAndBookmaker(t *testing.T) {
 
 func TestOddsByFixtureAndMarket(t *testing.T) {
 	t.Run("returns a slice of MatchOdds struct", func(t *testing.T) {
-		url := defaultBaseURL + "/football/odds/pre-match/fixtures/11867285/markets/1?api_token=api-key"
+		url := defaultBaseURL + "/football/odds/pre-match/fixtures/11867285/markets/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, oddsResponse, 200, url)
 
 		client := newTestHTTPClient(server)
 
-		odds, _, err := client.OddsByFixtureAndMarket(context.Background(), 11867285, 1)
+		odds, _, err := client.OddsByFixtureAndMarket(context.Background(), 11867285, 1, []string{})
 
 		if err != nil {
 			t.Fatalf("Test failed, expected nil, got %s", err.Error())
@@ -132,13 +132,13 @@ func TestOddsByFixtureAndMarket(t *testing.T) {
 	})
 
 	t.Run("returns bad status code error", func(t *testing.T) {
-		url := defaultBaseURL + "/football/odds/pre-match/fixtures/11867285/markets/1?api_token=api-key"
+		url := defaultBaseURL + "/football/odds/pre-match/fixtures/11867285/markets/1?api_token=api-key&include="
 
 		server := mockResponseServer(t, errorResponse, 400, url)
 
 		client := newTestHTTPClient(server)
 
-		odds, _, err := client.OddsByFixtureAndMarket(context.Background(), 11867285, 1)
+		odds, _, err := client.OddsByFixtureAndMarket(context.Background(), 11867285, 1, []string{})
 
 		if odds != nil {
 			t.Fatalf("Test failed, expected nil, got %+v", odds)
